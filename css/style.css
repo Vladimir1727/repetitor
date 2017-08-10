@@ -46,10 +46,10 @@ div.main-header {
       div.main-header > div a:first-child:hover {
         background: #24a385; }
     div.main-header > div a:last-child {
-      background: #e4834e;
-      border: 1px #e4834e solid; }
+      background: #FF5C39;
+      border: 1px #FF5C39 solid; }
       div.main-header > div a:last-child:hover {
-        background: #ffa570; }
+        background: #ff7e5b; }
 
 nav.main-menu {
   background-color: #222f3b;
@@ -93,7 +93,7 @@ nav.main-menu {
   nav.main-menu li.active > a {
     z-index: 1;
     background-color: inherit;
-    color: #e4834e; }
+    color: #FF5C39; }
   nav.main-menu li.active > span.icon {
     z-index: 2;
     position: absolute;
@@ -192,7 +192,7 @@ section.one {
     text-decoration: none;
     width: 295px;
     height: 60px;
-    background: #e4834e;
+    background: #FF5C39;
     border: none;
     color: #fff;
     text-align: right;
@@ -202,7 +202,7 @@ section.one {
     line-height: 2;
     margin: 0 auto; }
   section.one a:hover {
-    background: #ffa570; }
+    background: #ff7e5b; }
 
 section.start {
   box-shadow: inset 0 5px 10px #777;
@@ -358,7 +358,7 @@ section.comfort {
     text-decoration: none;
     width: 295px;
     height: 60px;
-    background: #e4834e;
+    background: #FF5C39;
     border: none;
     color: #fff;
     text-align: right;
@@ -368,7 +368,7 @@ section.comfort {
     line-height: 2;
     margin: 0 auto 20px auto; }
   section.comfort a:hover {
-    background: #ffa570; }
+    background: #ff7e5b; }
 
 section.light2 {
   font-family: "Arial Regular", Arial, sans-serif;
@@ -572,9 +572,9 @@ main.filter {
           display: block;
           width: 100px;
           height: 20px;
-          border: 1px #e4834e solid;
+          border: 1px #FF5C39 solid;
           font-size: 13px;
-          color: #e4834e;
+          color: #FF5C39;
           padding: 1px; }
           main.filter section.result aside div.info a.favorites span {
             display: inline-block;
@@ -624,9 +624,9 @@ main.filter {
           main.filter section.result aside div.info a.sh:hover {
             background: #29ecbc; }
         main.filter section.result aside div.info a.message {
-          background: #e4834e; }
+          background: #FF5C39; }
           main.filter section.result aside div.info a.message:hover {
-            background: #ffa570; }
+            background: #ff7e5b; }
         main.filter section.result aside div.info a.lesson {
           background: #028163; }
           main.filter section.result aside div.info a.lesson:hover {
@@ -807,9 +807,9 @@ main.rep-info {
           display: block;
           width: 100px;
           height: 20px;
-          border: 1px #e4834e solid;
+          border: 1px #FF5C39 solid;
           font-size: 13px;
-          color: #e4834e;
+          color: #FF5C39;
           padding: 1px; }
           main.rep-info section.result aside div.info a.favorites span {
             display: inline-block;
@@ -859,9 +859,9 @@ main.rep-info {
           main.rep-info section.result aside div.info a.sh:hover {
             background: #29ecbc; }
         main.rep-info section.result aside div.info a.message {
-          background: #e4834e; }
+          background: #FF5C39; }
           main.rep-info section.result aside div.info a.message:hover {
-            background: #ffa570; }
+            background: #ff7e5b; }
         main.rep-info section.result aside div.info a.lesson {
           background: #028163; }
           main.rep-info section.result aside div.info a.lesson:hover {
@@ -1065,11 +1065,11 @@ section.reg {
       font-size: 16px;
       width: 170px;
       height: 30px;
-      background: #e4834e;
+      background: #FF5C39;
       color: #fff;
       border: none; }
       section.reg form input[type="submit"]:hover {
-        background: #ffa570; }
+        background: #ff7e5b; }
 
 section.up {
   background-color: #00CC99;
@@ -1289,9 +1289,9 @@ form.rlogin {
     color: #fff;
     display: block;
     margin: 20px auto;
-    background: #e4834e; }
+    background: #FF5C39; }
     form.rlogin input[type='submit']:hover {
-      background: #ffa570; }
+      background: #ff7e5b; }
   form.rlogin p {
     margin: 0 auto 10px auto;
     text-align: center;
@@ -1374,9 +1374,9 @@ form.slogin {
     color: #fff;
     display: block;
     margin: 20px auto;
-    background: #e4834e; }
+    background: #FF5C39; }
     form.slogin input[type='submit']:hover {
-      background: #ffa570; }
+      background: #ff7e5b; }
   form.slogin p {
     margin: 0 auto 10px auto;
     text-align: center;
