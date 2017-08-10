@@ -27,6 +27,7 @@ class Test extends CI_Controller {
 	public function test()
 	{
 		$this->load->view('test');
+		//meke changes
 	}
 
 	public function single()
