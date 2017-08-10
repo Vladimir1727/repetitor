@@ -1888,6 +1888,54 @@ section.lang{
 }
 //end start
 
+// start student registration
+form.sreg{
+	margin: 25px auto 75px auto;
+	text-align: center;
+	font-family: "Arial Regular", Arial, sans-serif;
+	width: 300px;
+	h1{
+		color: $color_dblue;
+		font-size: 22px;
+		margin: 0 auto;
+	}
+	h2{
+		margin: 5px auto 10px auto;
+		color: $color_dblue;
+		font-size: 14px;
+	}
+	input[type="text"], input[type="password"]{
+		width: 230px;
+		height: 35px;
+		background: 1px #ddd solid;
+		font-size: 16px;
+		display: block;
+		margin: 20px auto 0 auto;
+		padding-left: 10px;
+	}
+	input[type='submit']{
+		width: 230px;
+		height: 35px;
+		border: none;
+		font-size: 16px;
+		color: #fff;
+		display: block;
+		margin: 0 auto;
+		background: $color_orange;
+		&:hover{
+			background: $color_orange + $hover;
+		}
+	}
+	p{
+		width: 230px;
+		margin: 15px auto 30px auto;
+		text-align: center;
+		font-size: 12px;
+		color: #666;
+	}
+}
+//end student regisstration
+
 @media screen and (max-width: 1200px) {
 	section.filter{
 		>div.row{

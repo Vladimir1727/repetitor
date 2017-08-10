@@ -1512,6 +1512,45 @@ section.lang {
     section.lang a.rus span {
       background: url("../img/russian.png"); }
 
+form.sreg {
+  margin: 25px auto 75px auto;
+  text-align: center;
+  font-family: "Arial Regular", Arial, sans-serif;
+  width: 300px; }
+  form.sreg h1 {
+    color: #12232F;
+    font-size: 22px;
+    margin: 0 auto; }
+  form.sreg h2 {
+    margin: 5px auto 10px auto;
+    color: #12232F;
+    font-size: 14px; }
+  form.sreg input[type="text"], form.sreg input[type="password"] {
+    width: 230px;
+    height: 35px;
+    background: 1px #ddd solid;
+    font-size: 16px;
+    display: block;
+    margin: 20px auto 0 auto;
+    padding-left: 10px; }
+  form.sreg input[type='submit'] {
+    width: 230px;
+    height: 35px;
+    border: none;
+    font-size: 16px;
+    color: #fff;
+    display: block;
+    margin: 0 auto;
+    background: #FF5C39; }
+    form.sreg input[type='submit']:hover {
+      background: #ff7e5b; }
+  form.sreg p {
+    width: 230px;
+    margin: 15px auto 30px auto;
+    text-align: center;
+    font-size: 12px;
+    color: #666; }
+
 @media screen and (max-width: 1200px) {
   section.filter > div.row {
     max-width: 410px;
