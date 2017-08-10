@@ -1,0 +1,112 @@
+$color_dgreen : #028163;
+$color_green : #05a983;
+$color_orange : #e4834e;
+$color_dblue : #12232F;
+$color_grey : #9A9A9A;
+$color_green2 : #00CC99;
+$color_green3 : #008261;
+$color_green4 : #07CA9A;
+$hover : #222;
+
+body{
+	background-color: #E8E8E8;
+}
+
+form{
+	margin: 25px auto 75px auto;
+	text-align: center;
+	font-family: "Arial Regular", Arial, sans-serif;
+	width: 300px;
+	h1{
+		color: #222f3b;
+		font-size: 22px;
+		margin: 0 auto;
+	}
+	h2{
+		margin: 5px auto 10px auto;
+		color: #222f3b;
+		font-size: 14px;
+	}
+	input[type="text"], input[type="password"]{
+		width: 230px;
+		height: 35px;
+		border: 1px #ddd solid;
+		font-size: 16px;
+		display: block;
+		margin: 20px auto 0 auto;
+		padding-left: 10px;
+	}
+	input[type='submit']{
+		width: 100px;
+		height: 35px;
+		border: none;
+		font-size: 16px;
+		color: #fff;
+		display: block;
+		margin: 20px auto;
+		background: $color_orange;
+		&:hover{
+			background: $color_orange + $hover;
+		}
+	}
+	p{
+		margin: 0 auto 10px auto;
+		text-align: center;
+		font-size: 14px;
+		color: #222f3b;
+	}
+	>a, a:visited{
+		display: block;
+		margin: 0 auto 10px auto;
+		width: 270px;
+		height: 30px;
+		text-align: center;
+		background: #00CC99;
+		color: #fff;
+		text-decoration: none;
+		font-size: 16px;
+		line-height: 1.9;
+		&:hover{
+			text-decoration: none;
+			background: #00CC99 + $hover;
+		}
+	}
+	div{
+		margin: 10px auto 0 auto;
+		label{
+			font-size: 12px;
+			font-weight: 500;
+			line-height: 1;
+			color: #666;
+			input{
+				display: none;
+			}
+			input+span{
+				display: inline-block;
+				width: 19px;
+				height: 20px;
+				background: url('../img/check_out.png');
+				background-position: left bottom;
+				background-repeat: no-repeat;
+				margin-bottom: -5px;
+			}
+			input:checked+span{
+				background: url('../img/check_in.png');
+			}
+		}
+		a.forgot, a.forgot:visited{
+			display: inline-block;
+			width: 100px; height: 20px;
+			text-decoration: none;
+			color: #666;
+			border: 1px #666 solid;
+			background: #E8E8E8;
+			font-size: 12px;
+			padding: 2px;
+			margin-left: 10px;
+			&:hover{
+				background: #E8E8E8 + $hover;
+			}
+		}
+	}
+}
