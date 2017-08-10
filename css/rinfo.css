@@ -214,7 +214,7 @@ main {
             text-align: center;
             border: 1px #fff solid; }
             main section.result aside.sh table tbody tr td.free:after {
-              content: '╨б╨▓╨╛╨▒╨╛╨┤╨╡╨╜'; }
+              content: 'Свободен'; }
           main section.result aside.sh table tbody tr td:first-of-type {
             text-align: center;
             border: none;
@@ -359,6 +359,6 @@ main {
     main section.result aside.sh table thead tr th {
       text-align: center; }
   main section.result aside.sh table tbody tr td.free:after {
-    content: '╨б╨Т.'; } }
+    content: 'Св.'; } }
 
 /*# sourceMappingURL=rinfo.css.map */
