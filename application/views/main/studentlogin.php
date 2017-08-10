@@ -1,13 +1,12 @@
 
 <?php $this->load->view('main/header'); ?>
-<link rel="stylesheet" href="<?php echo base_url(); ?>css/slogin.css">
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.min.css">
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
 <title>Репетиторы по разным языкам. Вход ученика</title>
 </head>
 <body>
 <?php $this->load->view('main/header_menu'); ?>
-<form id="logform" action="index.html" method="post">
+<form id="logform" action="index.html" method="post" class="slogin">
 	<p>Впервые на сайте?</p>
 	<a href="#">Регистрация нового ученика</a>
 	<h1>Вход для Ученика</h1>

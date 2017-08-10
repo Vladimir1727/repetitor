@@ -1,6 +1,5 @@
 
 <?php $this->load->view('main/header'); ?>
-<link rel="stylesheet" href="<?php echo base_url(); ?>css/filter.css">
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.min.css">
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
 <script src="<?php echo base_url(); ?>js/datepicker-ru.js"></script>
@@ -134,7 +133,7 @@
 	</p>
 	<button>Показать Репетиторов</button>
 </section>
-<main>
+<main class="filter">
 	<section class="result">
 		<aside>
 			<div class="avatar">

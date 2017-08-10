@@ -1,0 +1,364 @@
+@charset "UTF-8";
+@font-face {
+  font-family: 'OpenSans Regular';
+  src: url("OpenSans-Regular.ttf"); }
+body {
+  background: #E8EAEB; }
+
+main {
+  max-width: 1200px;
+  margin: 30px auto 50px auto; }
+  main:after {
+    content: '';
+    display: block;
+    clear: both; }
+  main section.result {
+    max-width: 885px;
+    float: left; }
+    main section.result aside {
+      background: #fff;
+      margin: 0 0 10px 0; }
+      main section.result aside:after {
+        content: '';
+        display: block;
+        clear: both; }
+      main section.result aside h2 {
+        font-family: "Arial Regular", Arial, sans-serif;
+        font-size: 18px;
+        color: #222f3b;
+        margin: 0;
+        padding: 0; }
+        main section.result aside h2 span.switch-up {
+          width: 17px;
+          height: 15px;
+          display: inline-block;
+          background: url("../img/up.png");
+          margin-right: 10px;
+          cursor: pointer; }
+        main section.result aside h2 span.switch-down {
+          width: 17px;
+          height: 15px;
+          display: inline-block;
+          background: url("../img/down.png");
+          margin-right: 10px;
+          cursor: pointer; }
+      main section.result aside div.avatar {
+        height: 100%;
+        float: left;
+        width: 215px; }
+        main section.result aside div.avatar div.img {
+          width: 185px;
+          height: 185px;
+          margin: 45px auto 25px auto;
+          border: 1px #E6E6E6 solid;
+          border-radius: 50%; }
+          main section.result aside div.avatar div.img img {
+            width: 185px; }
+        main section.result aside div.avatar div.rzone {
+          font-family: "Open Sans Regular", "Arial Narrow", sans-serif;
+          font-size: 14px;
+          display: block;
+          width: 170px;
+          height: 30px;
+          border: 1px #666 solid;
+          color: #666;
+          margin: 0 auto;
+          line-height: 1.5;
+          position: relative;
+          padding: 4px 19px; }
+      main section.result aside div.info {
+        float: left;
+        padding: 25px 10px 28px 0;
+        max-width: 670px;
+        position: relative; }
+        main section.result aside div.info h2 {
+          font-size: 24px;
+          font-family: "Arial Regular", Arial, sans-serif;
+          color: #222f3b; }
+          main section.result aside div.info h2 span {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border: 1px #028163 solid;
+            border-radius: 50%;
+            margin-right: 10px;
+            margin-bottom: 2px; }
+          main section.result aside div.info h2 span.active {
+            background: #07CA9A; }
+        main section.result aside div.info p {
+          color: #333333;
+          font-size: 16px; }
+          main section.result aside div.info p strong {
+            font-size: 18px;
+            font-weight: normal;
+            color: #666; }
+        main section.result aside div.info a, main section.result aside div.info a:visited {
+          text-decoration: none; }
+        main section.result aside div.info a.favorites {
+          position: absolute;
+          right: 30%;
+          top: 40px;
+          display: block;
+          width: 100px;
+          height: 20px;
+          border: 1px #e4834e solid;
+          font-size: 13px;
+          color: #e4834e;
+          padding: 1px; }
+          main section.result aside div.info a.favorites span {
+            display: inline-block;
+            width: 14px;
+            height: 12px;
+            background: url("../img/heart.png"); }
+          main section.result aside div.info a.favorites:hover {
+            background: #eee; }
+        main section.result aside div.info div.price {
+          font-size: 24px;
+          position: absolute;
+          top: 25px;
+          right: 22px;
+          font-family: "Arial Regular", Arial, sans-serif; }
+          main section.result aside div.info div.price small {
+            font-family: "Arial Narrow", Arial, sans-serif;
+            color: #9A9A9A;
+            font-size: 20px; }
+        main section.result aside div.info div.stars {
+          position: absolute;
+          width: 123px;
+          height: 20px;
+          top: 60px;
+          right: 20px; }
+          main section.result aside div.info div.stars span {
+            display: inline-block;
+            width: 22px;
+            height: 21px; }
+          main section.result aside div.info div.stars span.star1 {
+            background: url("../img/star1.png"); }
+          main section.result aside div.info div.stars span.star0 {
+            background: url("../img/star0.png"); }
+        main section.result aside div.info a.sh, main section.result aside div.info a.message, main section.result aside div.info a.lesson {
+          font-family: "OpenSans Regular", Arial, sans-serif;
+          display: inline-block;
+          width: 170px;
+          height: 30px;
+          color: #fff;
+          font-size: 14px;
+          text-align: center;
+          margin-right: 15px;
+          text-shadow: 0.5px 0.866px 1px rgba(0, 0, 0, 0.34);
+          padding: 5px;
+          float: right; }
+        main section.result aside div.info a.sh {
+          background: #07CA9A; }
+          main section.result aside div.info a.sh:hover {
+            background: #29ecbc; }
+        main section.result aside div.info a.message {
+          background: #e4834e; }
+          main section.result aside div.info a.message:hover {
+            background: #ffa570; }
+        main section.result aside div.info a.lesson {
+          background: #028163; }
+          main section.result aside div.info a.lesson:hover {
+            background: #24a385; }
+    main section.result aside.sh {
+      padding: 15px 15px 40px 15px; }
+      main section.result aside.sh header {
+        margin: 0 0 5px 0; }
+        main section.result aside.sh header:after {
+          content: '';
+          display: block;
+          clear: both; }
+        main section.result aside.sh header h2, main section.result aside.sh header div.tzone {
+          float: left; }
+        main section.result aside.sh header h2 {
+          width: 45%; }
+        main section.result aside.sh header div.pagg {
+          float: right;
+          font-family: "Open Sans Regular", "Arial Narrow", sans-serif;
+          font-size: 14px;
+          color: #666; }
+          main section.result aside.sh header div.pagg a, main section.result aside.sh header div.pagg a:visited {
+            text-decoration: none; }
+        main section.result aside.sh header div.tzone {
+          font-family: "Open Sans Regular", "Arial Narrow", sans-serif;
+          font-size: 14px;
+          display: block;
+          width: 170px;
+          height: 30px;
+          border: 1px #666 solid;
+          color: #666;
+          margin: 0 auto;
+          line-height: 1.5;
+          position: relative;
+          padding: 4px 19px; }
+      main section.result aside.sh table {
+        width: 100%; }
+        main section.result aside.sh table thead tr th {
+          font-family: "Arial Narrow", sans-serif;
+          font-size: 14px;
+          color: #222f3b;
+          text-align: left;
+          width: 110px;
+          height: 18px;
+          font-weight: 500; }
+          main section.result aside.sh table thead tr th:first-of-type {
+            text-align: center;
+            width: 85px; }
+        main section.result aside.sh table tbody tr td {
+          border: 1px #9C9C9C solid;
+          font-family: "Arial Regular", Arial, sans-serif;
+          font-size: 14px;
+          color: #fff; }
+          main section.result aside.sh table tbody tr td.free {
+            background: #00CC99;
+            text-align: center;
+            border: 1px #fff solid; }
+            main section.result aside.sh table tbody tr td.free:after {
+              content: 'Свободен'; }
+          main section.result aside.sh table tbody tr td:first-of-type {
+            text-align: center;
+            border: none;
+            color: #666;
+            font-size: 16px; }
+    main section.result aside.video {
+      position: relative;
+      padding-bottom: 56.25%;
+      /* ╨╖╨░╨┤╨░╤С╤В ╨▓╤Л╤Б╨╛╤В╤Г ╨║╨╛╨╜╤В╨╡╨╣╨╜╨╡╤А╨░ ╨┤╨╗╤П 16:9 (╨╡╤Б╨╗╨╕ 4:3 тАФ ╨┐╨╛╤Б╤В╨░╨▓╤М╤В╨╡ 75%) */
+      padding-top: 30px;
+      height: 0;
+      overflow: hidden; }
+      main section.result aside.video iframe {
+        border: none;
+        width: 885px;
+        height: 490px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%; }
+    main section.result aside.exp, main section.result aside.docs, main section.result aside.feeds {
+      padding: 20px 15px 15px 15px; }
+      main section.result aside.exp h2, main section.result aside.docs h2, main section.result aside.feeds h2 {
+        margin-bottom: 10px; }
+    main section.result aside.docs img {
+      width: 285px;
+      margin-right: 15px; }
+    main section.result aside.exp p {
+      font-family: "Arial Narrow", Arial, sans-serif;
+      font-size: 16px;
+      color: #333; }
+      main section.result aside.exp p strong {
+        font-size: 18px;
+        color: #666;
+        font-weight: 500; }
+    main section.result aside.feeds div.feed {
+      position: relative; }
+      main section.result aside.feeds div.feed h3 {
+        font-family: "Arial Regular", Arial, sans-serif;
+        font-size: 16px;
+        color: #222f3b; }
+      main section.result aside.feeds div.feed p {
+        font-family: "Arial Narrow", Arial, sans-serif;
+        color: #666;
+        font-size: 16px; }
+      main section.result aside.feeds div.feed div.stars {
+        position: absolute;
+        width: 123px;
+        height: 20px;
+        top: 0px;
+        right: 0px; }
+        main section.result aside.feeds div.feed div.stars span {
+          display: inline-block;
+          width: 22px;
+          height: 21px; }
+        main section.result aside.feeds div.feed div.stars span.star1 {
+          background: url("../img/star1.png"); }
+        main section.result aside.feeds div.feed div.stars span.star0 {
+          background: url("../img/star0.png"); }
+    main section.result > a.lesson {
+      font-family: "OpenSans Regular", Arial, sans-serif;
+      display: block;
+      margin: 30px auto 50px auto;
+      width: 170px;
+      height: 30px;
+      color: #fff;
+      font-size: 14px;
+      text-align: center;
+      text-shadow: 0.5px 0.866px 1px rgba(0, 0, 0, 0.34);
+      padding: 5px;
+      background: #028163;
+      text-decoration: none; }
+      main section.result > a.lesson:hover {
+        background: #24a385;
+        text-decoration: none; }
+  main section.info {
+    margin-left: 30px;
+    padding: 25px 15px 30px 15px;
+    background: #fff;
+    float: left;
+    max-width: 285px; }
+    main section.info:after {
+      content: '';
+      display: block;
+      clear: both; }
+    main section.info h3 {
+      font-family: "Arial Regular", Arial, sans-serif;
+      text-align: center;
+      font-size: 22px;
+      color: #07CA9A; }
+    main section.info ol {
+      font-family: "Arial Regular", Arial, sans-serif;
+      margin: 0;
+      padding-left: 10px;
+      color: #07CA9A;
+      font-size: 18px; }
+      main section.info ol span {
+        font-family: "Arial Narrow", Arial, sans-serif;
+        color: #9A9A9A;
+        font-weight: 400; }
+      main section.info ol li {
+        margin-bottom: 15px; }
+
+@media screen and (max-width: 1200px) {
+  main section.result {
+    margin: 0 auto;
+    float: none; }
+  main section.info {
+    display: none; } }
+@media screen and (max-width: 991px) {
+  main section.result aside > div.avatar {
+    float: none;
+    margin: 0 auto;
+    padding-top: 5px; }
+    main section.result aside > div.avatar > img {
+      padding-top: 10px; }
+  main section.result aside > div.info {
+    float: none;
+    margin: 0 auto;
+    padding-left: 10px; }
+    main section.result aside > div.info a.favorites {
+      top: 10px;
+      left: 50%;
+      margin-left: -48px; }
+  main section.result aside.sh header h2, main section.result aside.sh header div.tzone, main section.result aside.sh header div.pagg {
+    float: none;
+    margin: 5px auto;
+    text-align: center; } }
+@media screen and (max-width: 575px) {
+  main section.result aside > div.info div.stars {
+    position: static;
+    margin: 10px auto; }
+  main section.result aside > div.info a.lesson, main section.result aside > div.info a.message, main section.result aside > div.info a.sh {
+    float: none;
+    display: block;
+    margin: 5px auto; }
+  main section.result aside.sh table span.hide {
+    display: none; }
+  main section.result aside.sh table thead tr {
+    text-align: center; }
+    main section.result aside.sh table thead tr th {
+      text-align: center; }
+  main section.result aside.sh table tbody tr td.free:after {
+    content: 'Св.'; } }
+
+/*# sourceMappingURL=rinfo.css.map */

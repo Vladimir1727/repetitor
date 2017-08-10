@@ -1,6 +1,5 @@
 
 <?php $this->load->view('main/header'); ?>
-<link rel="stylesheet" href="<?php echo base_url(); ?>css/about.css">
 <title>Репетиторы по разным языкам. О нас</title>
 </head>
 <body>

@@ -1,13 +1,12 @@
 
 <?php $this->load->view('main/header'); ?>
-<link rel="stylesheet" href="<?php echo base_url(); ?>css/repreg.css">
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.min.css">
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
 <title>Репетиторы по разным языкам. О нас</title>
 </head>
 <body>
 <?php $this->load->view('main/header_menu'); ?>
-<section class="one">
+<section class="one-rep">
 	<h1>НАШИ ПРЕИМУЩЕСТВА - ВАШ УСПЕХ</h1>
 	<h2>Платформа  Real Language Club - лучшее место <br> для встречи Ученика и Репетитора!</h2>
 	<h2>
@@ -38,7 +37,7 @@
 		А мы обеспечим Вас постоянным потоком потенциальных учеников!
 	</h2>
 </section>
-<section  class="start">
+<section  class="start-rep">
 	<h2>НАЧАТЬ РАБОТАТЬ С НАМИ БЫСТРО И ПРОСТО</h2>
 	<h3>3 простых шага</h3>
 	<aside>

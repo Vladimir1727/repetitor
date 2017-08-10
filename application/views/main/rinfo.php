@@ -1,6 +1,5 @@
 
 <?php $this->load->view('main/header'); ?>
-<link rel="stylesheet" href="<?php echo base_url(); ?>css/rinfo.css">
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.min.css">
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
 <script src="<?php echo base_url(); ?>js/datepicker-ru.js"></script>
@@ -8,7 +7,7 @@
 </head>
 <body>
 <?php $this->load->view('main/header_menu'); ?>
-<main>
+<main class="rep-info">
 	<section class="result">
 		<aside>
 			<div class="avatar">
