@@ -8,14 +8,17 @@
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
 <h1 class="text-center">Добро пожаловать в тест</h1>
 
-<?php echo form_open_multipart('main/upload2');?>
-    <input type="file" name="userfile" size="20" />
-    <input type="submit" name="" value="отправить">
+<?php echo form_open_multipart('main/upload2', array('id' => 'file_form' ));?>
+    <input type="file" name="userfile" size="20" id="add-file" class="hidden">
+    <!-- <input type="submit" name="" value="отправить"> -->
 </form>
-<?php echo form_open('main/formtest');?>
+<!-- <?php echo form_open('main/formtest');?>
     <input type="text" name="name" placeholder="name...">
     <input type="submit" name="" value="отправить">
-</form>
+</form> -->
+<a href="#" id="add-photo-but">Добавить документ</a>
+<ul class="photos">
+</ul>
 
 
 

@@ -703,7 +703,8 @@ ul.pagg {
   background: #07CA9A !important; }
 
 .ui-widget-content {
-  color: #fff !important; }
+  color: #fff !important;
+  background: #9A9A9A !important; }
 
 .ui-widget-content a {
   color: #eee !important; }
@@ -920,7 +921,7 @@ main.rep-info {
             text-align: center;
             border: 1px #fff solid; }
             main.rep-info section.result aside.sh table tbody tr td.free:after {
-              content: 'Свободен'; }
+              content: '╨б╨▓╨╛╨▒╨╛╨┤╨╡╨╜'; }
           main.rep-info section.result aside.sh table tbody tr td:first-of-type {
             text-align: center;
             border: none;
@@ -929,7 +930,7 @@ main.rep-info {
     main.rep-info section.result aside.video {
       position: relative;
       padding-bottom: 56.25%;
-      /* задаёт высоту контейнера для 16:9 (если 4:3 — поставьте 75%) */
+      /* ╨╖╨░╨┤╨░╤С╤В ╨▓╤Л╤Б╨╛╤В╤Г ╨║╨╛╨╜╤В╨╡╨╣╨╜╨╡╤А╨░ ╨┤╨╗╤П 16:9 (╨╡╤Б╨╗╨╕ 4:3 тАФ ╨┐╨╛╤Б╤В╨░╨▓╤М╤В╨╡ 75%) */
       padding-top: 30px;
       height: 0;
       overflow: hidden; }
@@ -1751,7 +1752,7 @@ form.sreg {
     main.rep-info section.result aside.sh table thead tr th {
       text-align: center; }
   main.rep-info section.result aside.sh table tbody tr td.free:after {
-    content: 'СВ.'; } }
+    content: '╨б╨Т.'; } }
 @media screen and (max-width: 416px) {
   section.lang {
     max-width: 300px; }

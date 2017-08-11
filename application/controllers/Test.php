@@ -22,10 +22,12 @@ class Test extends CI_Controller {
 	 function __construct(){
 		 parent::__construct();
 		 $this->load->helper(array('form', 'url'));
+		 $this->load->library('session');
 	 }
 
 	public function test()
 	{
+		$this->session->set_userdata('repetitor_id', 1);
 		$this->load->view('test');
 		//meke changes
 	}
@@ -43,4 +45,44 @@ class Test extends CI_Controller {
 		echo 'ajax test OK';
 	}
 
+	function upload()
+	{
+		$config['upload_path']          = './images/';
+		$config['allowed_types']        = 'gif|jpg|png';
+		$config['max_size']             = 1000;
+		$config['max_width']            = 1024;
+		$config['max_height']           = 768;
+		$this->load->library('upload', $config);
+			if ( ! $this->upload->do_upload(0))
+			{
+				//$error = $this->upload->display_errors();
+				throw new Exception($this->upload->display_errors());
+			}
+			else
+			{
+				$img = $this->upload->data();
+				$path = 'images/'.$img["file_name"];
+				$config['image_library'] = 'gd2';
+				$config['source_image'] = $path;
+				$config['create_thumb'] = TRUE;
+				$config['maintain_ratio'] = TRUE;
+				$config['width']         = 75;
+				$config['height']       = 50;
+				$this->load->library('image_lib', $config);
+				$this->image_lib->resize();
+				$data =  $this->upload->data();
+				$f = $data['file_path'].$data['raw_name'].'_thumb'.$data['file_ext'];
+				exit($f);
+			}
+	}
+
+	public function adddoc()
+	{
+		try {
+			$this->upload();
+		} catch (Exception $e) {
+			throw new Exception($e->getMessage());
+		}
+
+	}
 }

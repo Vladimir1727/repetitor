@@ -102,7 +102,7 @@ class Main extends CI_Controller {
 
 	public function upload2()
 	{
-		echo 'start upload 2 <br>';
+		//echo 'start upload 2 <br>';
 		$config['upload_path']          = './images/';
         $config['allowed_types']        = 'gif|jpg|png';
         $config['max_size']             = 100;
@@ -131,8 +131,8 @@ class Main extends CI_Controller {
 				$this->image_lib->resize();
 				echo $this->image_lib->display_errors();
                 $data = array('upload_data' => $this->upload->data());
-				//var_dump($this->upload->data());
-                echo 'upload complite';
+				var_dump($this->upload->data());
+                //echo 'upload complite';
             }
 	}
 
