@@ -21,6 +21,7 @@ class Main extends CI_Controller {
 		 parent::__construct();
 		 $this->load->helper(array('form', 'url'));
 		 $this->load->model('MainModel');
+		 $this->load->library('session');
 	 }
 
 	public function index()
@@ -76,8 +77,6 @@ class Main extends CI_Controller {
 		echo $t;
 		//$this->load->view('test');
 	}
-
-
 
 	public function upload()
 	{

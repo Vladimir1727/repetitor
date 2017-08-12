@@ -22,6 +22,7 @@ class Repetitor extends CI_Controller {
 		 parent::__construct();
 		 $this->load->helper(array('form', 'url'));
 		 $this->load->model('RepetitorModel');
+		 $this->load->model('MainModel');
 	 }
 
 	public function newRepetitor()
@@ -56,6 +57,20 @@ class Repetitor extends CI_Controller {
 			  }
 			  exit("0");
 		  }
+	}
+
+	public function profile(){
+		$this->session->set_userdata('repetitor_id', 1);//будет задаваться при авторизации / регистрации //позже удалить
+		$data=array(
+			'subjects'=>$this->MainModel->getAll('subjects'),
+			'ages'=>$this->MainModel->getAll('ages'),
+			'specializations'=>$this->MainModel->getAll('specializations'),
+			'languages'=>$this->MainModel->getAll('languages'),
+			'levels'=>$this->MainModel->getAll('levels'),
+			'tzones'=>$this->MainModel->getAll('timezones'),
+		);
+		//echo 'rep profile';
+		$this->load->view('repetitor/profile', $data);
 	}
 
 }
