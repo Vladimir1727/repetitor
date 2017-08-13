@@ -2036,7 +2036,7 @@ div.rep-header{
 					@include o-reg;
 					font-size: 16px;
 					margin: 0;
-					text-align: center;
+					text-align: left;
 					>li{
 						float: left;
 						display: block;
@@ -2228,7 +2228,7 @@ main.rep-profile{
 					height: 30px;
 					border: 1px $color_gray2 solid;
 					color: $color_gray2;
-					@include f-it;
+					@include f-n;
 					font-size: 12px;
 					margin: 0 0 40px 0;
 					text-indent: 10px;

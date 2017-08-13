@@ -7,7 +7,7 @@
 			<div class="img">
 				<img src="<?php echo base_url(); ?>img/avatar2.png" alt="avatar">
 			</div>
-			<div class="switch on"></div>
+			<div class="switch on" id="rep-online"></div>
 			<h3>Анна</h3>
 			<h4>0000001</h4>
 		</div>
@@ -19,8 +19,8 @@
 				<li><a href="#">Запросы на уроки</a></li>
 				<li><a href="#">Расписание</a></li>
 				<li><a href="#">Уроки</a></li>
-				<li class="mail"><a href="#">почта</a></li>
 				<li><a href="#">Свободные заявки</a></li>
+				<li class="mail"><a href="#">почта</a></li>
 				<li id="slide">
 					<a href="#">
 						<span class="s"></span>
@@ -31,12 +31,13 @@
 						<li><a href="#">Запросы на уроки</a></li>
 						<li><a href="#">Расписание</a></li>
 						<li><a href="#">Уроки</a></li>
-						<li class="mail"><a href="#">почта</a></li>
 						<li><a href="#">Свободные заявки</a></li>
+						<li class="mail"><a href="#">почта</a></li>
 						<li><a href="#">История уроков</a></li>
 						<li><a href="#">Баланс</a></li>
 						<li><a href="#">Настройки Профиля</a></li>
-						<li><a href="#">Поддержка</a></li>
+						<li><a href="#">Инструкция для репетитора</a></li>
+						<li><a href="#">Связаться с администратором</a></li>
 						<li><a href="#">Выйти</a></li>
 					</ul>
 				</li>
