@@ -1,9 +1,10 @@
 (function($){$(function(){
 
-console.log('repetitor profile 2');
-$('#slide').click(function(){
+console.log('repetitor profile 4');
+
+/*$('#slide').click(function(){
     $('#slide ul').slideToggle();
-});
+});*/
 
 $('#rep-online').click(function(){
     var s = $('#rep-online');

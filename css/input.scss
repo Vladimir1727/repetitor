@@ -2003,9 +2003,6 @@ div.rep-header{
 							margin-top: 6px;
 						}
 					}
-					ul{
-						display: none;
-					}
 				}
 			}
 			li.mail{
@@ -2026,11 +2023,13 @@ div.rep-header{
 			li#slide{
 				margin-right: 0;
 				position: relative;
+
 				ul{
+					display: none;
 					z-index: 1;
 					position: absolute;
 					right: 0;
-					top: 40px;
+					top: 30px;
 					list-style: none;
 					color: $color_gray2;
 					@include o-reg;
@@ -2041,7 +2040,7 @@ div.rep-header{
 						float: left;
 						display: block;
 						list-style: none;
-						margin-bottom: 2px;
+						margin-bottom: 0px;
 						>a{
 							display: block;
 							min-height: 30px;
@@ -2075,6 +2074,9 @@ div.rep-header{
 							}
 						}
 					}
+				}
+				&:hover ul{
+					display: block;
 				}
 			}
 		}
@@ -2229,7 +2231,7 @@ main.rep-profile{
 					border: 1px $color_gray2 solid;
 					color: $color_gray2;
 					@include f-n;
-					font-size: 12px;
+					font-size: 16px;
 					margin: 0 0 40px 0;
 					text-indent: 10px;
 					&:focus{
@@ -2788,6 +2790,14 @@ a.send-rep-profile{
 					position: absolute;
 					top: -70px;
 					left: -20px;
+					>ul{
+						>li#slide{
+							ul{
+								right: auto;
+								left: -40px;
+							}
+						}
+					}
 				}
 			}
 		}

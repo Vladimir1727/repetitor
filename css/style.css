@@ -924,7 +924,7 @@ main.rep-info {
             text-align: center;
             border: 1px #fff solid; }
             main.rep-info section.result aside.sh table tbody tr td.free:after {
-              content: '╨б╨▓╨╛╨▒╨╛╨┤╨╡╨╜'; }
+              content: 'Свободен'; }
           main.rep-info section.result aside.sh table tbody tr td:first-of-type {
             text-align: center;
             border: none;
@@ -933,7 +933,7 @@ main.rep-info {
     main.rep-info section.result aside.video {
       position: relative;
       padding-bottom: 56.25%;
-      /* ╨╖╨░╨┤╨░╤С╤В ╨▓╤Л╤Б╨╛╤В╤Г ╨║╨╛╨╜╤В╨╡╨╣╨╜╨╡╤А╨░ ╨┤╨╗╤П 16:9 (╨╡╤Б╨╗╨╕ 4:3 тАФ ╨┐╨╛╤Б╤В╨░╨▓╤М╤В╨╡ 75%) */
+      /* задаёт высоту контейнера для 16:9 (если 4:3 — поставьте 75%) */
       padding-top: 30px;
       height: 0;
       overflow: hidden; }
@@ -1602,8 +1602,6 @@ div.rep-header {
           margin-bottom: 3px; }
           div.rep-header section div.menu > ul > li span.s:first-of-type {
             margin-top: 6px; }
-        div.rep-header section div.menu > ul > li ul {
-          display: none; }
     div.rep-header section div.menu li.mail {
       background: url("../img/mail.png");
       background-position: center;
@@ -1619,10 +1617,11 @@ div.rep-header {
       margin-right: 0;
       position: relative; }
       div.rep-header section div.menu li#slide ul {
+        display: none;
         z-index: 1;
         position: absolute;
         right: 0;
-        top: 40px;
+        top: 30px;
         list-style: none;
         color: #999;
         font-family: "OpenSans Regular", Arial, sans-serif;
@@ -1633,7 +1632,7 @@ div.rep-header {
           float: left;
           display: block;
           list-style: none;
-          margin-bottom: 2px; }
+          margin-bottom: 0px; }
           div.rep-header section div.menu li#slide ul > li > a {
             display: block;
             min-height: 30px;
@@ -1659,6 +1658,8 @@ div.rep-header {
               background: #eee; }
             div.rep-header section div.menu li#slide ul > li.mail > a:hover {
               background: url("../img/mail.png") center no-repeat; }
+      div.rep-header section div.menu li#slide:hover ul {
+        display: block; }
     div.rep-header section div.balance p {
       margin: 20px 0 0 0;
       color: #FF5C39;
@@ -1788,7 +1789,7 @@ main.rep-profile {
           border: 1px #999 solid;
           color: #999;
           font-family: "Arial Narrow", Arial, sans-serif;
-          font-size: 12px;
+          font-size: 16px;
           margin: 0 0 40px 0;
           text-indent: 10px; }
           main.rep-profile section.warp form > div input:focus, main.rep-profile section.warp form > div select:focus {
@@ -2056,7 +2057,7 @@ a.send-rep-profile {
     main.rep-info section.result aside.sh table thead tr th {
       text-align: center; }
   main.rep-info section.result aside.sh table tbody tr td.free:after {
-    content: '╨б╨Т.'; } }
+    content: 'СВ.'; } }
 @media screen and (max-width: 493px) {
   div.rep-header {
     position: relative; }
@@ -2071,7 +2072,10 @@ a.send-rep-profile {
       float: none;
       position: absolute;
       top: -70px;
-      left: -20px; } }
+      left: -20px; }
+      div.rep-header section > div.menu > ul > li#slide ul {
+        right: auto;
+        left: -40px; } }
 @media screen and (max-width: 416px) {
   section.lang {
     max-width: 300px; }
