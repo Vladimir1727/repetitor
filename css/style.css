@@ -1793,7 +1793,8 @@ main.rep-profile {
           margin: 0 0 40px 0;
           text-indent: 10px; }
           main.rep-profile section.warp form > div input:focus, main.rep-profile section.warp form > div select:focus {
-            outline: 1px #008261 solid; }
+            outline: 1px #008261 solid;
+            color: #5d666f; }
       main.rep-profile section.warp form button {
         display: block;
         margin: 0 auto;
