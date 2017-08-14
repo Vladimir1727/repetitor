@@ -1733,11 +1733,9 @@ main.rep-profile {
     content: '';
     display: block;
     clear: both; }
-  main.rep-profile section {
-    float: left; }
   main.rep-profile section.menu {
-    max-width: 200px;
-    width: 16.6%;
+    float: left;
+    width: 200px;
     padding: 0 15px 0 0; }
     main.rep-profile section.menu ul {
       margin: 0;
@@ -1765,15 +1763,69 @@ main.rep-profile {
           main.rep-profile section.menu ul li a.active:hover, main.rep-profile section.menu ul li a.active:visited:hover {
             background: #22a483; }
   main.rep-profile section.warp {
-    max-width: 1000px;
-    margin: 0;
-    width: 83%;
+    margin: 0 0 0 200px;
     background: #fff;
     min-height: 354px; }
+    main.rep-profile section.warp aside#present {
+      display: none;
+      padding: 15px; }
+      main.rep-profile section.warp aside#present:after {
+        content: '';
+        display: block;
+        clear: both; }
+      main.rep-profile section.warp aside#present p {
+        font-family: "Arial Narrow", Arial, sans-serif;
+        font-size: 16px;
+        color: #222f3b; }
+      main.rep-profile section.warp aside#present button {
+        font-family: "Arial Regular", Arial, sans-serif;
+        font-size: 16px;
+        width: 100%;
+        height: 30px;
+        background: #FF5C39;
+        color: #fff;
+        border: none; }
+        main.rep-profile section.warp aside#present button:hover {
+          background: #ff7e5b; }
+      main.rep-profile section.warp aside#present div.avatar {
+        float: left;
+        width: 185px;
+        padding-top: 20px;
+        margin-right: 15px; }
+        main.rep-profile section.warp aside#present div.avatar div.img {
+          width: 183px;
+          height: 183px;
+          border: 1px #999 solid;
+          border-radius: 50%;
+          overflow: hidden; }
+          main.rep-profile section.warp aside#present div.avatar div.img img {
+            width: 185px; }
+        main.rep-profile section.warp aside#present div.avatar p {
+          font-size: 12px;
+          padding: 10px 0; }
+      main.rep-profile section.warp aside#present div.info {
+        margin: 10px 15px 10px 200px; }
+        main.rep-profile section.warp aside#present div.info button {
+          display: block;
+          width: 170px;
+          margin: 35px auto 10px auto; }
+      main.rep-profile section.warp aside#present textarea, main.rep-profile section.warp aside#present input {
+        font-size: 16px;
+        width: 100%;
+        height: 100px;
+        color: #999;
+        border: 1px #999 solid;
+        padding: 5px 10px;
+        resize: none; }
+        main.rep-profile section.warp aside#present textarea:focus, main.rep-profile section.warp aside#present input:focus {
+          outline: 1px #008261 solid;
+          color: #5d666f; }
+      main.rep-profile section.warp aside#present input {
+        height: 30px; }
     main.rep-profile section.warp form {
       max-width: 600px;
       margin: 30px auto 0 auto;
-      padding: 15px 5px; }
+      padding: 30px 10px; }
       main.rep-profile section.warp form:after {
         content: '';
         display: block;
@@ -2016,11 +2068,16 @@ a.send-rep-profile {
   main.rep-profile section.menu {
     width: 140px; }
   main.rep-profile section.warp {
-    width: auto; }
+    margin-left: 145px; }
     main.rep-profile section.warp aside#personal form > div {
       float: none;
       margin: 0 auto;
-      width: 100%; } }
+      width: 100%; }
+    main.rep-profile section.warp aside#present div.avatar {
+      float: none;
+      margin: 0 auto; }
+    main.rep-profile section.warp aside#present div.info {
+      margin: 0 auto; } }
 @media screen and (max-width: 694px) {
   section.start aside {
     max-width: 225px; }
@@ -2058,7 +2115,15 @@ a.send-rep-profile {
     main.rep-info section.result aside.sh table thead tr th {
       text-align: center; }
   main.rep-info section.result aside.sh table tbody tr td.free:after {
-    content: 'СВ.'; } }
+    content: 'СВ.'; }
+
+  main.rep-profile section.warp aside#present div.avatar {
+    width: 150px; }
+    main.rep-profile section.warp aside#present div.avatar div.img {
+      width: 150px;
+      height: 150px; }
+      main.rep-profile section.warp aside#present div.avatar div.img img {
+        width: 150px; } }
 @media screen and (max-width: 493px) {
   div.rep-header {
     position: relative; }

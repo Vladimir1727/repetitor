@@ -18,11 +18,11 @@
 <main class="rep-profile">
     <section class="menu">
         <ul>
-            <li><a href="#" class="active">Личные данные</a></li>
+            <li><a href="#" class="active" id="personal-but">Личные данные</a></li>
             <li><a href="#">Предмет</a></li>
             <li><a href="#">Образование и опыт</a></li>
             <li><a href="#">Документы</a></li>
-            <li><a href="#">Презентация</a></li>
+            <li><a href="#" id="present-but">Презентация</a></li>
             <li><a href="#">Реквизиты</a></li>
             <li><a href="#">Состояние профиля</a></li>
         </ul>
@@ -53,6 +53,29 @@
                 </div>
                 <button type="submit" name="button">Сохранить</button>
             </form>
+        </aside>
+        <aside id="present">
+            <div class="avatar">
+                <div class="img">
+                    <img src="<?php echo base_url(); ?>img/avatar3.png" alt="empty avarat" style="padding-top: 30px">
+                </div>
+                <p>
+                    *Загрузите вашу фотографию* (JPG, PNG, не менее 200*200 px.)
+                </p>
+                <button type="button" name="button">Загрузить фото</button>
+            </div>
+            <div class="info">
+                <p>
+                    Напишите кратко основную информацию о себе*<br>
+                    (презентация отображается посетителям сайта)
+                </p>
+                <textarea name="name" placeholder="До 400 символов"></textarea>
+                <p>
+                    Разместите ссылку на вашу видео-презентацию.(1-3 минуты)
+                </p>
+                <input type="text" placeholder="https://www.youtube.com/...">
+                <button type="submit" name="button">Сохранить</button>
+            </div>
         </aside>
     </section>
 </main>

@@ -6,6 +6,7 @@ $color_green4 : #07CA9A;
 //$color_orange : #e4834e;
 $color_orange : #FF5C39;
 $color_dblue : #12232F;
+$color_dblue2 : #222f3b;
 $color_grey : #9A9A9A;
 $color_gray : #9A9A9A;
 $color_gray2 : #999;
@@ -123,7 +124,7 @@ div.main-header{
 }
 
 nav.main-menu{
-	background-color: #222f3b;
+	background-color: $color_dblue2;
     margin: 0 auto;
     float: none;
 	min-height: 50px;
@@ -593,7 +594,7 @@ section.filter{
 	max-width: 1200px;
 	background: #fff;
 	margin: 30px auto;
-	color: #222f3b;
+	color: $color_dblue2;
 	padding-bottom: 10px;
 	h5{
 		font-size: 14px;
@@ -723,7 +724,7 @@ main.filter{
 				h2{
 					font-size: 24px;
 					@include f-reg;
-					color: #222f3b;
+					color: $color_dblue2;
 					span{
 						display: inline-block;
 						width: 12px;
@@ -1608,13 +1609,13 @@ form.rlogin{
 	font-family: "Arial Regular", Arial, sans-serif;
 	width: 300px;
 	h1{
-		color: #222f3b;
+		color: $color_dblue2;
 		font-size: 22px;
 		margin: 0 auto;
 	}
 	h2{
 		margin: 5px auto 10px auto;
-		color: #222f3b;
+		color: $color_dblue2;
 		font-size: 14px;
 	}
 	input[type="text"], input[type="password"]{
@@ -1643,7 +1644,7 @@ form.rlogin{
 		margin: 0 auto 10px auto;
 		text-align: center;
 		font-size: 14px;
-		color: #222f3b;
+		color: $color_dblue2;
 	}
 	>a, a:visited{
 		display: block;
@@ -1710,13 +1711,13 @@ form.slogin{
 	font-family: "Arial Regular", Arial, sans-serif;
 	width: 300px;
 	h1{
-		color: #222f3b;
+		color: $color_dblue2;
 		font-size: 22px;
 		margin: 0 auto;
 	}
 	h2{
 		margin: 5px auto 10px auto;
-		color: #222f3b;
+		color: $color_dblue2;
 		font-size: 14px;
 	}
 	input[type="text"], input[type="password"]{
@@ -1745,7 +1746,7 @@ form.slogin{
 		margin: 0 auto 10px auto;
 		text-align: center;
 		font-size: 14px;
-		color: #222f3b;
+		color: $color_dblue2;
 	}
 	>a, a:visited{
 		display: block;
@@ -2169,11 +2170,13 @@ main.rep-profile{
 	max-width: 1200px;
 	@include end;
 	section{
-		float: left;
+		//float: left;
 	}
 	section.menu{
-		max-width: 200px;
-		width: 16.6%;
+		float: left;
+		//max-width: 200px;
+		//width: 16.6%;
+		width: 200px;
 		padding: 0 15px 0 0;
 		ul{
 			margin: 0;
@@ -2210,16 +2213,86 @@ main.rep-profile{
 		}
 	}
 	section.warp{
-		max-width: 1000px;
-		margin: 0;
-		width: 83%;
+		//max-width: 1000px;
+		margin: 0 0 0 200px;
+		//width: 83%;
 		background: #fff;
 		min-height: 354px;
+		aside#present{
+			@include end;
+			display: none;
+			padding: 15px;
+			p{
+				@include f-n;
+				font-size: 16px;
+				color: $color_dblue2;
+			}
+			>div{
+				//float: left;
+			}
+			button{
+				@include f-reg;
+				font-size: 16px;
+				width: 100%;
+				height: 30px;
+				background: $color_orange;
+				color: #fff;
+				border: none;
+				&:hover{
+					background: $color_orange + $hover;
+				}
+			}
+			div.avatar{
+				float: left;
+				width: 185px;
+				padding-top: 20px;
+				margin-right: 15px;
+				div.img{
+					width: 183px;
+					height: 183px;
+					border: 1px $color_gray2 solid;
+					border-radius: 50%;
+					overflow: hidden;
+					img{
+						width: 185px;
+					}
+				}
+				p{
+					font-size: 12px;
+					padding: 10px 0;
+				}
+
+			}
+			div.info{
+				margin: 10px 15px 10px 200px;
+				button{
+					display: block;
+					width: 170px;
+					margin: 35px auto 10px auto;
+				}
+			}
+			textarea, input{
+				font-size: 16px;
+				width: 100%;
+				height: 100px;
+				color: $color_gray2;
+				border: 1px $color_gray2 solid;
+				padding: 5px 10px;
+				resize: none;
+				&:focus{
+					outline: 1px $color_green3 solid;
+					color: #5d666f;
+				}
+			}
+			input{
+				height: 30px;
+			}
+		}
 		form{
 			max-width: 600px;
 			margin: 30px auto 0 auto;
 			@include end;
-			padding: 15px 5px;
+			padding: 30px 10px;
 			>div{
 				float: left;
 				max-width: 200px;
@@ -2648,7 +2721,8 @@ a.send-rep-profile{
 			width: 140px;
 		}
 		section.warp{
-			width: auto;
+			//width: auto;
+			margin-left: 145px;
 			aside#personal{
 				form{
 					>div{
@@ -2656,6 +2730,15 @@ a.send-rep-profile{
 						margin: 0 auto;
 						width: 100%;
 					}
+				}
+			}
+			aside#present{
+				div.avatar{
+					float: none;
+					margin: 0 auto;
+				}
+				div.info{
+					margin: 0 auto;
 				}
 			}
 		}
@@ -2769,6 +2852,26 @@ a.send-rep-profile{
 			}
 		}
 
+	}
+	main.rep-profile{
+		section.warp{
+			aside#present{
+				$w : 150px;
+				div.avatar{
+					width: $w;
+					div.img{
+						width: $w;
+						height: $w;
+						img{
+							width: $w;
+						}
+					}
+				}
+				div.info{
+					//width: 100%;
+				}
+			}
+		}
 	}
 }
 
