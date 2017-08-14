@@ -283,6 +283,7 @@ class AdminModel extends CI_Model{
 		$this->dbforge->add_key('id', TRUE);
 		$this->dbforge->create_table('levels', TRUE);
 		$insert = array(
+			array('level'=> 'Начинающий'),
 			array('level'=> 'Средний'),
 			array('level'=> 'Выше среднего'),
 			array('level'=> 'Продвинутый'),
