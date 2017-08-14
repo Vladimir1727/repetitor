@@ -3,6 +3,8 @@ $color_green : #05a983;
 $color_green2 : #00CC99;
 $color_green3 : #008261;
 $color_green4 : #07CA9A;
+//$color_green5 : #24705C;
+$color_green5 : rgb(2, 129, 99);
 //$color_orange : #e4834e;
 $color_orange : #FF5C39;
 $color_dblue : #12232F;
@@ -1986,11 +1988,12 @@ div.rep-header{
 						display: block;
 						height: 30px;
 						padding: 2px 10px;
-						color: $color_gray2;
+						color: #666;
 						text-decoration: none;
-						border: 1px $color_gray2 solid;
+						border: 1px #666 solid;
 						&:hover{
-							background-color: #eee;
+							color: $color_green5;
+							border-color: $color_green5;
 							text-decoration: none;
 						}
 					}
@@ -1998,7 +2001,7 @@ div.rep-header{
 						display: block;
 						width: 18px;
 						height: 2px;
-						background:  $color_gray2;
+						background:  #666;
 						margin-bottom: 3px;
 						&:first-of-type{
 							margin-top: 6px;
@@ -2015,10 +2018,11 @@ div.rep-header{
 					color: transparent;
 				}
 				&:hover{
-					background: #eee;
+
 				}
 				a:hover{
-					background: url('../img/mail.png') center no-repeat;
+					color: transparent;
+					background: url('../img/mail_green.png') center no-repeat;
 				}
 			}
 			li#slide{
@@ -2032,7 +2036,7 @@ div.rep-header{
 					right: 0;
 					top: 30px;
 					list-style: none;
-					color: $color_gray2;
+					color: #666;
 					@include o-reg;
 					font-size: 16px;
 					margin: 0;
@@ -2047,13 +2051,14 @@ div.rep-header{
 							min-height: 30px;
 							width: 170px;
 							padding: 2px 10px;
-							color: $color_gray2;
+							color: #666;
 							text-decoration: none;
-							border: 1px $color_gray2 solid;
+							border: 1px #666 solid;
 							background: #fff;
 							&:hover{
-								background-color: #eee;
 								text-decoration: none;
+								color: $color_green5;
+								border-color: $color_green5;
 							}
 						}
 						&:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5){
@@ -2068,16 +2073,20 @@ div.rep-header{
 								background-repeat: no-repeat;
 							}
 							&:hover{
-								background: #eee;
+
 							}
 							>a:hover{
-								background: url('../img/mail.png') center no-repeat;
+								color: transparent;
+								background: url('../img/mail_green.png') center no-repeat;
 							}
 						}
 					}
 				}
 				&:hover ul{
 					display: block;
+				}
+				&:hover>a>span{
+					background-color : $color_green5;
 				}
 			}
 		}
@@ -2188,7 +2197,6 @@ main.rep-profile{
 					@include o-reg;
 					font-size: 14px;
 					text-align: center;
-					//line-height: 2.5;
 					padding: 10px 5px;
 					color: $color_green3;
 					text-decoration: none;
@@ -2208,7 +2216,9 @@ main.rep-profile{
 						background: $color_green3 + $hover;
 					}
 				}
-
+                &:last-child{
+                    margin-bottom: 0;
+                }
 			}
 		}
 	}
@@ -2217,7 +2227,7 @@ main.rep-profile{
 		margin: 0 0 0 200px;
 		//width: 83%;
 		background: #fff;
-		min-height: 354px;
+		//min-height: 354px;
 		aside#present{
 			@include end;
 			display: none;
@@ -2275,13 +2285,12 @@ main.rep-profile{
 				font-size: 16px;
 				width: 100%;
 				height: 100px;
-				color: $color_gray2;
+				color: $color_dblue2;
 				border: 1px $color_gray2 solid;
 				padding: 5px 10px;
 				resize: none;
 				&:focus{
 					outline: 1px $color_green3 solid;
-					color: #5d666f;
 				}
 			}
 			input{
@@ -2302,14 +2311,14 @@ main.rep-profile{
 					width: 170px;
 					height: 30px;
 					border: 1px $color_gray2 solid;
-					color: $color_gray2;
+					color: $color_dblue2;
 					@include f-n;
 					font-size: 16px;
 					margin: 0 0 40px 0;
 					text-indent: 10px;
 					&:focus{
 						outline: 1px $color_green3 solid;
-						color: #5d666f;
+
 					}
 				}
 				&:last-of-type{
@@ -2332,7 +2341,110 @@ main.rep-profile{
 				}
 			}
 		}
-	}
+        aside#subject{
+            display: none;
+            padding: 20px 15px;
+            color: $color_dblue2;
+            font-size: 18px;
+            @include f-n;
+            @include end;
+            h2{
+                margin: 0 auto;
+                font-size: 18px;
+                small{
+                    color: $color_dblue2;
+                    font-size: 12px;
+                }
+            }
+            label{
+                font-size: 14px;
+                font-weight: normal;
+                display: block;
+                margin: 0;
+                input{
+                    display: none;
+                }
+                input+span{
+                    display: inline-block;
+                    width: 19px;
+                    height: 20px;
+                    background: url('../img/check_out.png');
+                    background-position: left bottom;
+                    background-repeat: no-repeat;
+                    margin-bottom: -3px;
+                }
+                input:checked+span{
+                    background: url('../img/check_in.png');
+                }
+            }
+            input, select{
+                padding: 5px 5px;
+                font-size: 14px;
+                color: $color_dblue2;
+                border: 1px $color_gray2 solid;
+                height: 30px;
+            }
+            >div{
+                @include end;
+            }
+            >div>div{
+                float: left;
+                &:nth-child(1){
+                    width: 300px;
+                    select{
+                        width: 170px;
+                        margin-bottom: 15px;
+                    }
+                    button{
+                        border: none;
+                        width: 19px;
+                        height: 19px;
+                        background: url("../img/plus.png");
+                    }
+                    h2{
+                        margin-bottom: 15px;
+                    }
+                }
+                &:nth-child(2){
+                    width: 300px;
+                    h2:last-of-type{
+                        margin-top: 45px;
+                        margin-bottom: 15px;
+                    }
+                    input{
+                        width: 85px;
+                        color: $color_dblue2;
+                    }
+                }
+                &:nth-child(3){
+                    width: 370px;
+                    >div{
+                        float: left;
+                        width: 50%;
+                        label{
+                            padding-left: 23px;
+                            text-indent: -23px;
+                        }
+                    }
+                }
+            }
+            >button{
+                display: block;
+                margin: 0 auto;
+                background: $color_orange;
+                border: none;
+                width: 170px;
+                height: 30px;
+                color: #fff;
+                @include o-reg;
+                font-size: 16px;
+                text-align: center;
+                &:hover{
+                    background: $color_orange + $hover;
+                }
+            }
+        }
+    }
 }
 a.send-rep-profile{
 	display: block;
@@ -2408,6 +2520,33 @@ a.send-rep-profile{
 			}
 		}
 	}
+    main.rep-profile{
+        section.warp{
+            aside#subject{
+                >div{
+                    margin: 10px auto;
+                    >div{
+                        float: none;
+                        margin: 0 auto 20px auto;
+                    }
+                    >div:nth-child(1), >div:nth-child(2), >div:nth-child(3),{
+                        width: 370px;
+                    }
+                    >div:nth-child(1){
+                        select{
+                            width: 250px;
+                        }
+                    }
+                    >div:nth-child(2){
+                        input{
+                            width: 100px;
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
 }
 
 @media screen and (max-width: 1163px) {
@@ -2873,6 +3012,39 @@ a.send-rep-profile{
 			}
 		}
 	}
+     main.rep-profile{
+        section.warp{
+            aside#subject{
+                >div{
+                    margin: 10px auto;
+                    >div{
+                        float: none;
+                        margin: 0 auto 20px auto;
+                    }
+                    >div:nth-child(1), >div:nth-child(2), >div:nth-child(3),{
+                        width: 100%;
+                    }
+                    >div:nth-child(1){
+                        select{
+                            width: 80%;
+                        }
+                    }
+                    >div:nth-child(2){
+                        input{
+                            width: 25%;
+                        }
+                    }
+                    >div:nth-child(3){
+                        >div{
+                            float: none;
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
 }
 
 @media screen and (max-width: 493px) {

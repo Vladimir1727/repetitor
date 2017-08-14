@@ -19,7 +19,7 @@
     <section class="menu">
         <ul>
             <li><a href="#" class="active" id="personal-but">Личные данные</a></li>
-            <li><a href="#">Предмет</a></li>
+            <li><a href="#" id="subject-but">Предмет</a></li>
             <li><a href="#">Образование и опыт</a></li>
             <li><a href="#">Документы</a></li>
             <li><a href="#" id="present-but">Презентация</a></li>
@@ -76,6 +76,80 @@
                 <input type="text" placeholder="https://www.youtube.com/...">
                 <button type="submit" name="button">Сохранить</button>
             </div>
+        </aside>
+        <aside id="subject">
+            <div>
+                <div>
+                    <select name="">
+                        <option value="0">Предмет*</option>
+                        <?php
+                            foreach ($subjects as $option) {
+                                echo '<option value="'.$option['id'].'">'.$option['subject'].'</option>';
+                            }
+                        ?>
+                    </select>
+                    <button></button>
+                    <select name="" id="">
+                        <option value="0">Родной язык*</option>
+                        <?php
+                        foreach ($subjects as $option) {
+                                echo '<option value="'.$option['id'].'">'.$option['subject'].'</option>';
+                            }
+                        ?>
+                    </select>
+                    <h2>Возрастные группы*<small>(выберите минимум 1 пункт)</small></h2>
+                        <?php
+                        foreach ($ages as $inp) {
+                            echo '<label>';
+                                echo '<input value="'.$inp['id'].'" name="age[]" type="checkbox">';
+                                echo '<span></span> ';
+                                echo $inp['age'];
+                                echo "</label>";
+                            }
+                        ?>
+                </div>
+                <div>
+                    <h2>Уровень владения языка учеником*<br><small>(выберите минимум 1 пункт)</small></h2>
+                        <?php
+                        foreach ($levels as $inp) {
+                                echo '<label>';
+                                echo '<input value="'.$inp['id'].'" name="level[]" type="checkbox">';
+                                echo '<span></span> ';
+                                echo $inp['level'];
+                                echo "</label>";
+                            }
+                        ?>
+                    <h2>Ваша цена за 1 час (50 мин.) в $*</h2>
+                    <div>
+                        <input type="text" placeholder="Ваша сумма">
+                        + наш % =
+                        <input type="text" placeholder="Для ученика">
+                    </div>
+                </div>
+                <div>
+                    <h2>Специализация*<small>(выберите минимум 1 пункт)</small></h2>
+                        <div>
+                         <?php
+                        for ($i=0; $i < 8; $i++) { 
+                            echo '<label>';
+                            echo '<input value="'.$specializations[$i]['id'].'" name="specialization[]" type="checkbox">';
+                            echo '<span></span> ';
+                            echo $specializations[$i]['specialization'];
+                            echo "</label>";
+                        }
+                        echo '</div><div>';
+                        for ($i=8; $i < count($specializations); $i++) { 
+                            echo '<label>';
+                            echo '<input value="'.$specializations[$i]['id'].'" name="specialization[]" type="checkbox">';
+                            echo '<span></span> ';
+                            echo $specializations[$i]['specialization'];
+                            echo "</label>";
+                        }
+                        ?>
+                        </div>
+                </div>
+            </div>
+                        <button type="submit" name="button">Сохранить</button>
         </aside>
     </section>
 </main>

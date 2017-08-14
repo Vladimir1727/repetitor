@@ -1,6 +1,6 @@
 (function($){$(function(){
 
-console.log('repetitor profile 6');
+console.log('repetitor profile 7');
 
 /*$('#slide').click(function(){
     $('#slide ul').slideToggle();
@@ -35,6 +35,11 @@ $('#present-but').click(function(){
 
 $('#personal-but').click(function(){
     warp('#personal');
+    return false;
+});
+
+$('#subject-but').click(function(){
+    warp('#subject');
     return false;
 });
 

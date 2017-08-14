@@ -17,8 +17,8 @@
 		<div class="menu">
 			<ul>
 				<li><a href="#">Запросы на уроки</a></li>
-				<li><a href="#">Расписание</a></li>
 				<li><a href="#">Уроки</a></li>
+				<li><a href="#">Расписание</a></li>
 				<li><a href="#">Свободные заявки</a></li>
 				<li class="mail"><a href="#">почта</a></li>
 				<li id="slide">
@@ -29,8 +29,8 @@
 					</a>
 					<ul>
 						<li><a href="#">Запросы на уроки</a></li>
-						<li><a href="#">Расписание</a></li>
 						<li><a href="#">Уроки</a></li>
+						<li><a href="#">Расписание</a></li>
 						<li><a href="#">Свободные заявки</a></li>
 						<li class="mail"><a href="#">почта</a></li>
 						<li><a href="#">История уроков</a></li>

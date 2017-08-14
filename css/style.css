@@ -1588,17 +1588,18 @@ div.rep-header {
           display: block;
           height: 30px;
           padding: 2px 10px;
-          color: #999;
+          color: #666;
           text-decoration: none;
-          border: 1px #999 solid; }
+          border: 1px #666 solid; }
           div.rep-header section div.menu > ul > li > a:hover {
-            background-color: #eee;
+            color: #028163;
+            border-color: #028163;
             text-decoration: none; }
         div.rep-header section div.menu > ul > li span.s {
           display: block;
           width: 18px;
           height: 2px;
-          background: #999;
+          background: #666;
           margin-bottom: 3px; }
           div.rep-header section div.menu > ul > li span.s:first-of-type {
             margin-top: 6px; }
@@ -1609,10 +1610,9 @@ div.rep-header {
       div.rep-header section div.menu li.mail a {
         width: 54px;
         color: transparent; }
-      div.rep-header section div.menu li.mail:hover {
-        background: #eee; }
       div.rep-header section div.menu li.mail a:hover {
-        background: url("../img/mail.png") center no-repeat; }
+        color: transparent;
+        background: url("../img/mail_green.png") center no-repeat; }
     div.rep-header section div.menu li#slide {
       margin-right: 0;
       position: relative; }
@@ -1623,7 +1623,7 @@ div.rep-header {
         right: 0;
         top: 30px;
         list-style: none;
-        color: #999;
+        color: #666;
         font-family: "OpenSans Regular", Arial, sans-serif;
         font-size: 16px;
         margin: 0;
@@ -1638,13 +1638,14 @@ div.rep-header {
             min-height: 30px;
             width: 170px;
             padding: 2px 10px;
-            color: #999;
+            color: #666;
             text-decoration: none;
-            border: 1px #999 solid;
+            border: 1px #666 solid;
             background: #fff; }
             div.rep-header section div.menu li#slide ul > li > a:hover {
-              background-color: #eee;
-              text-decoration: none; }
+              text-decoration: none;
+              color: #028163;
+              border-color: #028163; }
           div.rep-header section div.menu li#slide ul > li:nth-child(1), div.rep-header section div.menu li#slide ul > li:nth-child(2), div.rep-header section div.menu li#slide ul > li:nth-child(3), div.rep-header section div.menu li#slide ul > li:nth-child(4), div.rep-header section div.menu li#slide ul > li:nth-child(5) {
             display: none; }
           div.rep-header section div.menu li#slide ul > li.mail {
@@ -1654,12 +1655,13 @@ div.rep-header {
               background: url("../img/mail.png");
               background-position: center;
               background-repeat: no-repeat; }
-            div.rep-header section div.menu li#slide ul > li.mail:hover {
-              background: #eee; }
             div.rep-header section div.menu li#slide ul > li.mail > a:hover {
-              background: url("../img/mail.png") center no-repeat; }
+              color: transparent;
+              background: url("../img/mail_green.png") center no-repeat; }
       div.rep-header section div.menu li#slide:hover ul {
         display: block; }
+      div.rep-header section div.menu li#slide:hover > a > span {
+        background-color: #028163; }
     div.rep-header section div.balance p {
       margin: 20px 0 0 0;
       color: #FF5C39;
@@ -1762,10 +1764,11 @@ main.rep-profile {
           background: #008261; }
           main.rep-profile section.menu ul li a.active:hover, main.rep-profile section.menu ul li a.active:visited:hover {
             background: #22a483; }
+        main.rep-profile section.menu ul li:last-child {
+          margin-bottom: 0; }
   main.rep-profile section.warp {
     margin: 0 0 0 200px;
-    background: #fff;
-    min-height: 354px; }
+    background: #fff; }
     main.rep-profile section.warp aside#present {
       display: none;
       padding: 15px; }
@@ -1813,13 +1816,12 @@ main.rep-profile {
         font-size: 16px;
         width: 100%;
         height: 100px;
-        color: #999;
+        color: #222f3b;
         border: 1px #999 solid;
         padding: 5px 10px;
         resize: none; }
         main.rep-profile section.warp aside#present textarea:focus, main.rep-profile section.warp aside#present input:focus {
-          outline: 1px #008261 solid;
-          color: #5d666f; }
+          outline: 1px #008261 solid; }
       main.rep-profile section.warp aside#present input {
         height: 30px; }
     main.rep-profile section.warp form {
@@ -1839,14 +1841,13 @@ main.rep-profile {
           width: 170px;
           height: 30px;
           border: 1px #999 solid;
-          color: #999;
+          color: #222f3b;
           font-family: "Arial Narrow", Arial, sans-serif;
           font-size: 16px;
           margin: 0 0 40px 0;
           text-indent: 10px; }
           main.rep-profile section.warp form > div input:focus, main.rep-profile section.warp form > div select:focus {
-            outline: 1px #008261 solid;
-            color: #5d666f; }
+            outline: 1px #008261 solid; }
       main.rep-profile section.warp form button {
         display: block;
         margin: 0 auto;
@@ -1859,6 +1860,92 @@ main.rep-profile {
         font-size: 16px;
         text-align: center; }
         main.rep-profile section.warp form button:hover {
+          background: #ff7e5b; }
+    main.rep-profile section.warp aside#subject {
+      display: none;
+      padding: 20px 15px;
+      color: #222f3b;
+      font-size: 18px;
+      font-family: "Arial Narrow", Arial, sans-serif; }
+      main.rep-profile section.warp aside#subject:after {
+        content: '';
+        display: block;
+        clear: both; }
+      main.rep-profile section.warp aside#subject h2 {
+        margin: 0 auto;
+        font-size: 18px; }
+        main.rep-profile section.warp aside#subject h2 small {
+          color: #222f3b;
+          font-size: 12px; }
+      main.rep-profile section.warp aside#subject label {
+        font-size: 14px;
+        font-weight: normal;
+        display: block;
+        margin: 0; }
+        main.rep-profile section.warp aside#subject label input {
+          display: none; }
+        main.rep-profile section.warp aside#subject label input + span {
+          display: inline-block;
+          width: 19px;
+          height: 20px;
+          background: url("../img/check_out.png");
+          background-position: left bottom;
+          background-repeat: no-repeat;
+          margin-bottom: -3px; }
+        main.rep-profile section.warp aside#subject label input:checked + span {
+          background: url("../img/check_in.png"); }
+      main.rep-profile section.warp aside#subject input, main.rep-profile section.warp aside#subject select {
+        padding: 5px 5px;
+        font-size: 14px;
+        color: #222f3b;
+        border: 1px #999 solid;
+        height: 30px; }
+      main.rep-profile section.warp aside#subject > div:after {
+        content: '';
+        display: block;
+        clear: both; }
+      main.rep-profile section.warp aside#subject > div > div {
+        float: left; }
+        main.rep-profile section.warp aside#subject > div > div:nth-child(1) {
+          width: 300px; }
+          main.rep-profile section.warp aside#subject > div > div:nth-child(1) select {
+            width: 170px;
+            margin-bottom: 15px; }
+          main.rep-profile section.warp aside#subject > div > div:nth-child(1) button {
+            border: none;
+            width: 19px;
+            height: 19px;
+            background: url("../img/plus.png"); }
+          main.rep-profile section.warp aside#subject > div > div:nth-child(1) h2 {
+            margin-bottom: 15px; }
+        main.rep-profile section.warp aside#subject > div > div:nth-child(2) {
+          width: 300px; }
+          main.rep-profile section.warp aside#subject > div > div:nth-child(2) h2:last-of-type {
+            margin-top: 45px;
+            margin-bottom: 15px; }
+          main.rep-profile section.warp aside#subject > div > div:nth-child(2) input {
+            width: 85px;
+            color: #222f3b; }
+        main.rep-profile section.warp aside#subject > div > div:nth-child(3) {
+          width: 370px; }
+          main.rep-profile section.warp aside#subject > div > div:nth-child(3) > div {
+            float: left;
+            width: 50%; }
+            main.rep-profile section.warp aside#subject > div > div:nth-child(3) > div label {
+              padding-left: 23px;
+              text-indent: -23px; }
+      main.rep-profile section.warp aside#subject > button {
+        display: block;
+        margin: 0 auto;
+        background: #FF5C39;
+        border: none;
+        width: 170px;
+        height: 30px;
+        color: #fff;
+        font-family: "OpenSans Regular", Arial, sans-serif;
+        font-size: 16px;
+        text-align: center; }
+        main.rep-profile section.warp aside#subject > button:hover {
           background: #ff7e5b; }
 
 a.send-rep-profile {
@@ -1903,7 +1990,19 @@ a.send-rep-profile {
   div.rep-header section div.menu ul li:nth-child(5) {
     display: none; }
   div.rep-header section div.menu ul li#slide ul li:nth-child(5) {
-    display: inline-block; } }
+    display: inline-block; }
+
+  main.rep-profile section.warp aside#subject > div {
+    margin: 10px auto; }
+    main.rep-profile section.warp aside#subject > div > div {
+      float: none;
+      margin: 0 auto 20px auto; }
+    main.rep-profile section.warp aside#subject > div > div:nth-child(1), main.rep-profile section.warp aside#subject > div > div:nth-child(2), main.rep-profile section.warp aside#subject > div > div:nth-child(3) {
+      width: 370px; }
+    main.rep-profile section.warp aside#subject > div > div:nth-child(1) select {
+      width: 250px; }
+    main.rep-profile section.warp aside#subject > div > div:nth-child(2) input {
+      width: 100px; } }
 @media screen and (max-width: 1163px) {
   section.comfort aside {
     max-width: 858px; } }
@@ -2123,7 +2222,22 @@ a.send-rep-profile {
       width: 150px;
       height: 150px; }
       main.rep-profile section.warp aside#present div.avatar div.img img {
-        width: 150px; } }
+        width: 150px; }
+
+  main.rep-profile section.warp aside#subject > div {
+    margin: 10px auto; }
+    main.rep-profile section.warp aside#subject > div > div {
+      float: none;
+      margin: 0 auto 20px auto; }
+    main.rep-profile section.warp aside#subject > div > div:nth-child(1), main.rep-profile section.warp aside#subject > div > div:nth-child(2), main.rep-profile section.warp aside#subject > div > div:nth-child(3) {
+      width: 100%; }
+    main.rep-profile section.warp aside#subject > div > div:nth-child(1) select {
+      width: 80%; }
+    main.rep-profile section.warp aside#subject > div > div:nth-child(2) input {
+      width: 25%; }
+    main.rep-profile section.warp aside#subject > div > div:nth-child(3) > div {
+      float: none;
+      width: 100%; } }
 @media screen and (max-width: 493px) {
   div.rep-header {
     position: relative; }
