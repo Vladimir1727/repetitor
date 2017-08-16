@@ -23,7 +23,7 @@
             <li><a href="#">Образование и опыт</a></li>
             <li><a href="#">Документы</a></li>
             <li><a href="#" id="present-but">Презентация</a></li>
-            <li><a href="#">Реквизиты</a></li>
+            <li><a href="#" id="pay-but">Реквизиты</a></li>
             <li><a href="#">Состояние профиля</a></li>
         </ul>
     </section>
@@ -92,8 +92,8 @@
                     <select name="" id="">
                         <option value="0">Родной язык*</option>
                         <?php
-                        foreach ($subjects as $option) {
-                                echo '<option value="'.$option['id'].'">'.$option['subject'].'</option>';
+                        foreach ($languages as $option) {
+                                echo '<option value="'.$option['id'].'">'.$option['language'].'</option>';
                             }
                         ?>
                     </select>
@@ -121,16 +121,16 @@
                         ?>
                     <h2>Ваша цена за 1 час (50 мин.) в $*</h2>
                     <div>
-                        <input type="text" placeholder="Ваша сумма">
+                        <input type="text" placeholder="Ваша сумма, $">
                         + наш % =
-                        <input type="text" placeholder="Для ученика">
+                        <input type="text" placeholder="Для ученика, $">
                     </div>
                 </div>
                 <div>
                     <h2>Специализация*<small>(выберите минимум 1 пункт)</small></h2>
                         <div>
                          <?php
-                        for ($i=0; $i < 8; $i++) { 
+                        for ($i=0; $i < 8; $i++) {
                             echo '<label>';
                             echo '<input value="'.$specializations[$i]['id'].'" name="specialization[]" type="checkbox">';
                             echo '<span></span> ';
@@ -138,7 +138,7 @@
                             echo "</label>";
                         }
                         echo '</div><div>';
-                        for ($i=8; $i < count($specializations); $i++) { 
+                        for ($i=8; $i < count($specializations); $i++) {
                             echo '<label>';
                             echo '<input value="'.$specializations[$i]['id'].'" name="specialization[]" type="checkbox">';
                             echo '<span></span> ';
@@ -150,6 +150,23 @@
                 </div>
             </div>
                         <button type="submit" name="button">Сохранить</button>
+        </aside>
+        <aside id="pay">
+            <div>
+                <h2>Выберите один из вариантов. На данные реквизиты будут выводиться ваши заработанные средства, по запросу.</h2>
+                <h3>(Внимательно проверьте правильность внесённых данных! Вы несёте полную ответственность за не верно внесённые персональные данные!)</h3>
+                <label>
+                    <span class="img"><img src="<?php echo base_url(); ?>img/yandex.png" alt="yandex"></span>
+                    <input type="text" placeholder="номер кошелька">
+                    <span class="check"></span>
+                </label>
+                <label>
+                    <span class="img"><img src="<?php echo base_url(); ?>img/paypal.png" alt="paypal"></span>
+                    <input type="text" placeholder="аккаунт">
+                    <span class="check"></span>
+                </label>
+            </div>
+            <button type="submit" name="button">Сохранить</button>
         </aside>
     </section>
 </main>

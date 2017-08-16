@@ -1992,6 +1992,7 @@ div.rep-header{
 						text-decoration: none;
 						border: 1px #666 solid;
 						&:hover{
+							background: #eee;
 							color: $color_green5;
 							border-color: $color_green5;
 							text-decoration: none;
@@ -2018,7 +2019,7 @@ div.rep-header{
 					color: transparent;
 				}
 				&:hover{
-
+					background: #eee;
 				}
 				a:hover{
 					color: transparent;
@@ -2056,6 +2057,7 @@ div.rep-header{
 							border: 1px #666 solid;
 							background: #fff;
 							&:hover{
+								background: #eee;
 								text-decoration: none;
 								color: $color_green5;
 								border-color: $color_green5;
@@ -2073,13 +2075,19 @@ div.rep-header{
 								background-repeat: no-repeat;
 							}
 							&:hover{
-
+								background: #eee;
 							}
 							>a:hover{
 								color: transparent;
 								background: url('../img/mail_green.png') center no-repeat;
 							}
 						}
+					}
+				}
+				&:hover{
+					background: #fff;
+					a{
+						background: #fff;
 					}
 				}
 				&:hover ul{
@@ -2444,7 +2452,81 @@ main.rep-profile{
                 }
             }
         }
-    }
+		aside#pay{
+			padding-bottom: 25px;
+			display: none;
+			div{
+				@include f-n;
+				padding: 50px 15px 10px 15px;
+			}
+			h2, h3{
+				color: #333;
+				text-align: center;
+				margin: 0;
+			}
+			h2{
+				margin-bottom: 20px;
+				font-size: 16px;
+			}
+			h3{
+				margin-bottom: 5px;
+				font-size: 12px;
+			}
+			label{
+				display: block;
+				margin: 10px auto 20px auto;
+				width: 470px;
+				padding-left: 25px;
+				position: relative;
+				span.img{
+					display: inline-block;
+					height: 53px;
+				}
+				input{
+					margin-left: 15px;
+					width: 270px;
+					height: 30px;
+					color: $color_dblue2;
+					@include f-n;
+					font-size: 16px;
+					text-indent: 10px;
+					font-weight: 500;
+				}
+				span.check{
+					position: absolute;
+					top: 10px;
+					left: 0;
+					width: 19px;
+					height: 19px;
+					background: url('../img/check.png');
+					display: none;
+				}
+				&:first-of-type{
+					span.check{
+						top: 20px;
+					}
+				}
+				input:focus+span.check{
+					display: block;
+				}
+			}
+			>button{
+                display: block;
+                margin: 0 auto;
+                background: $color_orange;
+                border: none;
+                width: 170px;
+                height: 30px;
+                color: #fff;
+                @include o-reg;
+                font-size: 16px;
+                text-align: center;
+                &:hover{
+                    background: $color_orange + $hover;
+                }
+            }
+		}
+	}
 }
 a.send-rep-profile{
 	display: block;
@@ -2544,7 +2626,7 @@ a.send-rep-profile{
                     }
                 }
             }
-            
+
         }
     }
 }
@@ -2922,6 +3004,42 @@ a.send-rep-profile{
 	}
 }
 
+@media screen and (max-width: 627px) {
+	main.rep-profile{
+		section.warp{
+			aside#pay{
+				>div{
+					>label{
+						width: 100%;
+						padding-left: 0;
+						span.img, input{
+							display: block;
+							margin: 0 auto;
+						}
+						span.img{
+							text-align: center;
+							height: initial;
+							margin-bottom: 10px;
+						}
+						span.check{
+							left: 50%;
+							margin-left: - 100px;
+						}
+						&:first-of-type{
+							>span.check{
+								top: 25px;
+							}
+						}
+						input{
+							width: 100%;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 @media screen and (max-width: 591px) {
     section.comfort{
         aside{
@@ -3042,7 +3160,7 @@ a.send-rep-profile{
                     }
                 }
             }
-            
+
         }
     }
 }

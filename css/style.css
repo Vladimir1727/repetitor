@@ -924,7 +924,7 @@ main.rep-info {
             text-align: center;
             border: 1px #fff solid; }
             main.rep-info section.result aside.sh table tbody tr td.free:after {
-              content: 'Свободен'; }
+              content: '╨б╨▓╨╛╨▒╨╛╨┤╨╡╨╜'; }
           main.rep-info section.result aside.sh table tbody tr td:first-of-type {
             text-align: center;
             border: none;
@@ -933,7 +933,7 @@ main.rep-info {
     main.rep-info section.result aside.video {
       position: relative;
       padding-bottom: 56.25%;
-      /* задаёт высоту контейнера для 16:9 (если 4:3 — поставьте 75%) */
+      /* ╨╖╨░╨┤╨░╤С╤В ╨▓╤Л╤Б╨╛╤В╤Г ╨║╨╛╨╜╤В╨╡╨╣╨╜╨╡╤А╨░ ╨┤╨╗╤П 16:9 (╨╡╤Б╨╗╨╕ 4:3 тАФ ╨┐╨╛╤Б╤В╨░╨▓╤М╤В╨╡ 75%) */
       padding-top: 30px;
       height: 0;
       overflow: hidden; }
@@ -1592,6 +1592,7 @@ div.rep-header {
           text-decoration: none;
           border: 1px #666 solid; }
           div.rep-header section div.menu > ul > li > a:hover {
+            background: #eee;
             color: #028163;
             border-color: #028163;
             text-decoration: none; }
@@ -1610,6 +1611,8 @@ div.rep-header {
       div.rep-header section div.menu li.mail a {
         width: 54px;
         color: transparent; }
+      div.rep-header section div.menu li.mail:hover {
+        background: #eee; }
       div.rep-header section div.menu li.mail a:hover {
         color: transparent;
         background: url("../img/mail_green.png") center no-repeat; }
@@ -1643,6 +1646,7 @@ div.rep-header {
             border: 1px #666 solid;
             background: #fff; }
             div.rep-header section div.menu li#slide ul > li > a:hover {
+              background: #eee;
               text-decoration: none;
               color: #028163;
               border-color: #028163; }
@@ -1655,9 +1659,15 @@ div.rep-header {
               background: url("../img/mail.png");
               background-position: center;
               background-repeat: no-repeat; }
+            div.rep-header section div.menu li#slide ul > li.mail:hover {
+              background: #eee; }
             div.rep-header section div.menu li#slide ul > li.mail > a:hover {
               color: transparent;
               background: url("../img/mail_green.png") center no-repeat; }
+      div.rep-header section div.menu li#slide:hover {
+        background: #fff; }
+        div.rep-header section div.menu li#slide:hover a {
+          background: #fff; }
       div.rep-header section div.menu li#slide:hover ul {
         display: block; }
       div.rep-header section div.menu li#slide:hover > a > span {
@@ -1947,6 +1957,65 @@ main.rep-profile {
         text-align: center; }
         main.rep-profile section.warp aside#subject > button:hover {
           background: #ff7e5b; }
+    main.rep-profile section.warp aside#pay {
+      padding-bottom: 25px;
+      display: none; }
+      main.rep-profile section.warp aside#pay div {
+        font-family: "Arial Narrow", Arial, sans-serif;
+        padding: 50px 15px 10px 15px; }
+      main.rep-profile section.warp aside#pay h2, main.rep-profile section.warp aside#pay h3 {
+        color: #333;
+        text-align: center;
+        margin: 0; }
+      main.rep-profile section.warp aside#pay h2 {
+        margin-bottom: 20px;
+        font-size: 16px; }
+      main.rep-profile section.warp aside#pay h3 {
+        margin-bottom: 5px;
+        font-size: 12px; }
+      main.rep-profile section.warp aside#pay label {
+        display: block;
+        margin: 10px auto 20px auto;
+        width: 470px;
+        padding-left: 25px;
+        position: relative; }
+        main.rep-profile section.warp aside#pay label span.img {
+          display: inline-block;
+          height: 53px; }
+        main.rep-profile section.warp aside#pay label input {
+          margin-left: 15px;
+          width: 270px;
+          height: 30px;
+          color: #222f3b;
+          font-family: "Arial Narrow", Arial, sans-serif;
+          font-size: 16px;
+          text-indent: 10px;
+          font-weight: 500; }
+        main.rep-profile section.warp aside#pay label span.check {
+          position: absolute;
+          top: 10px;
+          left: 0;
+          width: 19px;
+          height: 19px;
+          background: url("../img/check.png");
+          display: none; }
+        main.rep-profile section.warp aside#pay label:first-of-type span.check {
+          top: 20px; }
+        main.rep-profile section.warp aside#pay label input:focus + span.check {
+          display: block; }
+      main.rep-profile section.warp aside#pay > button {
+        display: block;
+        margin: 0 auto;
+        background: #FF5C39;
+        border: none;
+        width: 170px;
+        height: 30px;
+        color: #fff;
+        font-family: "OpenSans Regular", Arial, sans-serif;
+        font-size: 16px;
+        text-align: center; }
+        main.rep-profile section.warp aside#pay > button:hover {
+          background: #ff7e5b; }
 
 a.send-rep-profile {
   display: block;
@@ -2188,6 +2257,24 @@ a.send-rep-profile {
     display: none; }
   div.rep-header section div.menu ul li#slide ul li:nth-child(1) {
     display: inline-block; } }
+@media screen and (max-width: 627px) {
+  main.rep-profile section.warp aside#pay > div > label {
+    width: 100%;
+    padding-left: 0; }
+    main.rep-profile section.warp aside#pay > div > label span.img, main.rep-profile section.warp aside#pay > div > label input {
+      display: block;
+      margin: 0 auto; }
+    main.rep-profile section.warp aside#pay > div > label span.img {
+      text-align: center;
+      height: initial;
+      margin-bottom: 10px; }
+    main.rep-profile section.warp aside#pay > div > label span.check {
+      left: 50%;
+      margin-left: -100px; }
+    main.rep-profile section.warp aside#pay > div > label:first-of-type > span.check {
+      top: 25px; }
+    main.rep-profile section.warp aside#pay > div > label input {
+      width: 100%; } }
 @media screen and (max-width: 591px) {
   section.comfort aside {
     max-width: 286px; }
@@ -2214,7 +2301,7 @@ a.send-rep-profile {
     main.rep-info section.result aside.sh table thead tr th {
       text-align: center; }
   main.rep-info section.result aside.sh table tbody tr td.free:after {
-    content: 'СВ.'; }
+    content: '╨б╨Т.'; }
 
   main.rep-profile section.warp aside#present div.avatar {
     width: 150px; }

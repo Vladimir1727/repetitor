@@ -27,9 +27,14 @@ class Test extends CI_Controller {
 
 	public function test()
 	{
-		$this->session->set_userdata('repetitor_id', 1);
-		$this->load->view('test');
-		//meke changes
+		//$this->session->set_userdata('repetitor_id', 1);
+		//$this->load->view('test');
+		$a = 5;
+		$b = 5;
+		$c = sqrt($a * $a + $b*$b);
+		$p = ($a+ $b +$c)/2;
+		$s = sqrt( $p*($p-$a)*($p-$b)*($p-$c));
+		echo 's='.$s;
 	}
 
 	public function single()
