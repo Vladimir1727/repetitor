@@ -23,7 +23,22 @@ class Repetitor extends CI_Controller {
 		 $this->load->helper(array('form', 'url'));
 		 $this->load->model('RepetitorModel');
 		 $this->load->model('MainModel');
+		 $this->load->library('session');
 	 }
+
+	public function index()
+	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 redirect('/main/rlogin');
+		} else{
+			$repetitor = $this->RepetitorModel->findOne($this->session->repetitor_id);
+			if ($repetitor->repetitor['status'] == 0){
+				redirect('/repetitor/profile');
+			} else{
+				echo ' repetitor main page';
+			}
+		}
+	}
 
 	public function newRepetitor()
 	{
@@ -55,23 +70,28 @@ class Repetitor extends CI_Controller {
 			  } catch (Exception $e) {
 				  exit($e->getMessage());
 			  }
+			  $this->session->set_userdata('repetitor_id', $login);
 			  exit("0");
 		  }
 	}
 
 	public function profile(){
-		$this->session->set_userdata('repetitor_id', 1);//будет задаваться при авторизации / регистрации //позже удалить
-		$data=array(
-			'subjects'=>$this->MainModel->getAll('subjects'),
-			'ages'=>$this->MainModel->getAll('ages'),
-			'specializations'=>$this->MainModel->getAll('specializations'),
-			'languages'=>$this->MainModel->getAll('languages'),
-			'levels'=>$this->MainModel->getAll('levels'),
-			'tzones'=>$this->MainModel->getAll('timezones'),
-			'uni_degrees'=>$this->MainModel->getAll('uni_degrees'),
-		);
-		//echo 'rep profile';
-		$this->load->view('repetitor/profile', $data);
+		if (!$this->session->has_userdata('repetitor_id')){
+			 redirect('/main/rlogin');
+		} else{
+			$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
+			$data=array(
+				'repetitor'=> $rep->repetitor,
+				'subjects'=>$this->MainModel->getAll('subjects'),
+				'ages'=>$this->MainModel->getAll('ages'),
+				'specializations'=>$this->MainModel->getAll('specializations'),
+				'languages'=>$this->MainModel->getAll('languages'),
+				'levels'=>$this->MainModel->getAll('levels'),
+				'tzones'=>$this->MainModel->getAll('timezones'),
+				'uni_degrees'=>$this->MainModel->getAll('uni_degrees'),
+			);
+			$this->load->view('repetitor/profile', $data);
+		}
 	}
 
 }

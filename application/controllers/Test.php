@@ -23,18 +23,18 @@ class Test extends CI_Controller {
 		 parent::__construct();
 		 $this->load->helper(array('form', 'url'));
 		 $this->load->library('session');
+		 $this->load->model('RepetitorModel');
 	 }
 
 	public function test()
 	{
 		//$this->session->set_userdata('repetitor_id', 1);
 		//$this->load->view('test');
-		$a = 5;
-		$b = 5;
-		$c = sqrt($a * $a + $b*$b);
-		$p = ($a+ $b +$c)/2;
-		$s = sqrt( $p*($p-$a)*($p-$b)*($p-$c));
-		echo 's='.$s;
+		$rep = $this->RepetitorModel->findOne(1);
+		//var_dump($rep->repetitor);
+		echo $rep->repetitor['email'];
+		$rep->repetitor['email'] = 'dvn125@gmail.com';
+		$rep->save();
 	}
 
 	public function single()

@@ -4,6 +4,7 @@ class RepetitorModel extends CI_Model{
 		parent::__construct();
 		$this->load->database();
 		$this->load->library('session');
+		$this->repetitor = array();
 	}
 
     public function addNewRep($email, $pass)
@@ -30,7 +31,23 @@ class RepetitorModel extends CI_Model{
 			throw new Exception('неправильный логин/пароль');
 		} else{
 			$this->session->set_userdata('repetitor_id', $r[0]['id']);
-			return '0';
+			return $r[0]['id'];
 		}
+	}
+
+	public function findOne($id){
+		$q = $this->db->query('select * from repetitors where id='.$id);
+		$r = $q->result_array();
+		if (count($r)==0){
+			throw new Exception('нет такого id');
+		}
+		$this->repetitor = $r[0];
+		return $this;
+	}
+
+	public function save()
+	{
+		$this->db->replace('repetitors', $this->repetitor);
+		return 0;
 	}
 }

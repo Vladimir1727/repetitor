@@ -8,8 +8,24 @@
 				<img src="<?php echo base_url(); ?>img/avatar2.png" alt="avatar">
 			</div>
 			<div class="switch on" id="rep-online"></div>
-			<h3>Анна</h3>
-			<h4>0000001</h4>
+			<h3>
+				<?php
+				if ($repetitor['first_name'] != ''){
+					echo $repetitor['first_name'];
+				} else {
+					echo $repetitor['email'];
+				}
+				 ?>
+			</h3>
+			<h4>
+				<?php
+				$len = strlen(strval($repetitor['id']));
+				for($i = 0; $i < (7-$len); $i++){
+					echo '0';
+				}
+				echo $repetitor['id'];
+				 ?>
+			</h4>
 		</div>
 		<div class="balance">
 			<p>Баланс <span>0</span> $</p>

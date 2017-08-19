@@ -1,5 +1,5 @@
 (function($){$(function(){
-console.log('repetitor login 1');
+console.log('repetitor login 2');
 var baseUrl = '../';
 $('#logform').submit(function(){
     var form = $(this).serializeArray();
@@ -17,6 +17,7 @@ $('#logform').submit(function(){
                 console.log('data=', data);
                 if (data=='0'){
                     console.log('login');
+                    document.location = '/index.php/repetitor';
                 } else{
                     errdiag('Ошибка', data);
                 }
