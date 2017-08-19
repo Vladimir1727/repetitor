@@ -47,7 +47,17 @@ class RepetitorModel extends CI_Model{
 
 	public function save()
 	{
-		$this->db->replace('repetitors', $this->repetitor);
+		$this->db->where('id', $this->repetitor['id']);
+		$this->db->update('repetitors', $this->repetitor);
+		return 0;
+	}
+
+	public function update($arr){
+		foreach ($arr as $k => $v) {
+			$this->repetitor[$k] = $v;
+		}
+		$this->db->where('id', $this->repetitor['id']);
+		$this->db->update('repetitors', $this->repetitor);
 		return 0;
 	}
 }

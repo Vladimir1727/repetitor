@@ -33,8 +33,8 @@ class Test extends CI_Controller {
 		$rep = $this->RepetitorModel->findOne(1);
 		//var_dump($rep->repetitor);
 		echo $rep->repetitor['email'];
-		$rep->repetitor['email'] = 'dvn125@gmail.com';
-		$rep->save();
+		//$rep->repetitor['first_name'] = 'Vova';
+		echo $rep->update(array('first_name'=>'Vova', 'last_name'=>'D'));
 	}
 
 	public function single()

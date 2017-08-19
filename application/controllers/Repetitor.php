@@ -94,4 +94,11 @@ class Repetitor extends CI_Controller {
 		}
 	}
 
+	public function update()
+	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 throw new Exception('репетитор не вошёл');
+		}
+
+	}
 }
