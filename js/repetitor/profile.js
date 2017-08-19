@@ -1,6 +1,6 @@
 (function($){$(function(){
-
-console.log('repetitor profile 9');
+var baseUrl = '../';
+console.log('repetitor profile 11');
 
 /*$('#slide').click(function(){
     $('#slide ul').slideToggle();
@@ -27,6 +27,26 @@ function warp(block){
     });
     $(block+'-but').addClass('active');
 }
+
+function rUpdate(data){
+    $.ajax({
+        url: baseUrl+'repetitor/update',
+        type:'post',
+        data: 'data='+JSON.stringify(data),
+        success: function(data){
+            if (data=='0'){
+                console.log('update OK');
+            } else{
+                errdiag('Ошибка', data);
+            }
+        },
+    });
+}
+
+// rUpdate({
+//     'first_name':'Vv',
+//     'last_name':'Dd'
+// });
 
 $('#present-but').click(function(){
     warp('#present');

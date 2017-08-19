@@ -99,6 +99,9 @@ class Repetitor extends CI_Controller {
 		if (!$this->session->has_userdata('repetitor_id')){
 			 throw new Exception('репетитор не вошёл');
 		}
-
+		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
+		$arr = json_decode($this->input->post('data'), true);
+		//var_dump($arr);
+		echo $rep->update($arr);
 	}
 }
