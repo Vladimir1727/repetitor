@@ -20,11 +20,11 @@
         <ul>
             <li><a href="#" class="active" id="personal-but">Личные данные</a></li>
             <li><a href="#" id="subject-but">Предмет</a></li>
-            <li><a href="#">Образование и опыт</a></li>
-            <li><a href="#">Документы</a></li>
+            <li><a href="#" id="edu-but">Образование и опыт</a></li>
+            <li><a href="#" id="docs-but">Документы</a></li>
             <li><a href="#" id="present-but">Презентация</a></li>
             <li><a href="#" id="pay-but">Реквизиты</a></li>
-            <li><a href="#">Состояние профиля</a></li>
+            <li><a href="#" id="status-but">Состояние профиля</a></li>
         </ul>
     </section>
     <section class="warp">
@@ -167,6 +167,84 @@
                 </label>
             </div>
             <button type="submit" name="button">Сохранить</button>
+        </aside>
+        <aside id="edu">
+            <div>
+                <div class="vuz">
+                    <input type="text" name="" placeholder="ВУЗ (напишите полное название)">
+                    <input type="text" name="" value="" placeholder="Специальность">
+                </div>
+                <div class="deg">
+                    <select class="" name="">
+                        <option value="0">Ученая степень</option>
+                        <?php
+                        foreach ($uni_degrees as $option) {
+                                echo '<option value="'.$option['id'].'">'.$option['uni_degree'].'</option>';
+                            }
+                        ?>
+                    </select>
+                    <select class="" name="">
+                        <option value="0">Опыт работы репетитором (лет)</option>
+                        <?php
+                        for ($i=0;$i<=50;$i++){
+                            echo '<option value="'.$i.'">'.$i.'</option>';
+                        }
+                         ?>
+                    </select>
+                </div>
+                <div class="year">
+                    <select class="" name="">
+                        <option value="0">Год окончания</option>
+                        <?php
+                        $year = date('Y');
+                        for ($i = date('Y'); $i >= 1965; $i--){
+                            echo '<option value="'.$i.'">'.$i.'</option>';
+                        }
+                         ?>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <textarea placeholder="Опыт преподавания (до 400 символов)"></textarea>
+            </div>
+            <button type="submit" name="button">Сохранить</button>
+        </aside>
+        <aside id="docs">
+            <div class="header">
+                <h3>Загрузите скан (электронную копию) вашего диплома об образовании (JPG, PNG)</h3>
+                <h3>Загрузите скан (электронную копию) иного документа (сертификат, грамота и т.д.), подтверждающего ваши компетенции, как преподавателя (JPG, PNG)</h3>
+            </div>
+            <div class="doc">
+
+                <button id="load1">Загрузить</button>
+                <?php echo form_open_multipart('main/upload2', array('id' => 'file_form1' ));?>
+                    <input type="file" name="userfile" size="20" id="add-file1" class="hidden">
+                </form>
+                <div class="img"  id="load_block1">
+
+                </div>
+            </div>
+            <div class="doc">
+
+                <button id="load2">Загрузить</button>
+                <?php echo form_open_multipart('main/upload2', array('id' => 'file_form2' ));?>
+                    <input type="file" name="userfile" size="20" id="add-file2" class="hidden">
+                </form>
+                <div class="img" id="load_block2">
+
+                </div>
+            </div>
+            <button type="submit" name="button">Сохранить</button>
+        </aside>
+        <aside id="status">
+            <div>
+                <h3>Состояния профиля по умолчанию</h3>
+                <p><span class="check"></span>На рассмотрении</p>
+                <h3>Вы можете изменить состояние профиля</h3>
+                <label><input type="checkbox" name="" value=""><span></span> Не активен (не отображается на сайте)</label>
+                <label><input type="checkbox" name="" value=""><span></span> Удалить профиль с сайта</label>
+                <button type="submit" name="button">Сохранить</button>
+            </div>
         </aside>
     </section>
 </main>

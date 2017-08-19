@@ -1,3 +1,22 @@
+<!-- Modal login-->
+    <div id="modal_login" class="modal fade add-hotel" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+        <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <h4>Выберите ваш личный кабинет</h4>
+                    <a href="<?php echo base_url(); ?>index.php/main/rlogin">Я репетитор</a>
+                    <a href="<?php echo base_url(); ?>index.php/main/slogin">Я ученик</a>
+                </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+<!-- END MODAL login-->
 <footer>
     <div class="row">
         <div class="col-sm-0 col-md-2 col-lg-2">

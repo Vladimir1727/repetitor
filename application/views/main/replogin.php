@@ -24,7 +24,7 @@
 		</div>
 		<input type="submit" value="Войти">
 		<p>Впервые на сайте?</p>
-		<a href="#">Регистрация нового репетитора</a>
+		<a href="<?php echo base_url(); ?>index.php/main/repetitorregistration">Регистрация нового репетитора</a>
 	</form>
 
 <?php $this->load->view('main/footer'); ?>

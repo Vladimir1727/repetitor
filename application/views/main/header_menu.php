@@ -1,9 +1,9 @@
 
 <div class="main-header">
 	<div>
-		<a href="#" class="pull-left">Репетиторы</a>
+		<a href="<?php echo base_url(); ?>/main/filter" class="pull-left">Репетиторы</a>
 		<img src="<?php echo base_url(); ?>img/main_logo.png" alt="logo">
-		<a href="#" class="pull-right">Вход в личный кабинет</a>
+		<a href="#" class="pull-right" data-toggle="modal" data-target="#modal_login">Вход в личный кабинет</a>
 	</div>
 </div>
 

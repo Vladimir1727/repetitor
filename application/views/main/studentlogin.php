@@ -8,7 +8,7 @@
 <?php $this->load->view('main/header_menu'); ?>
 <form id="logform" action="index.html" method="post" class="slogin">
 	<p>Впервые на сайте?</p>
-	<a href="#">Регистрация нового ученика</a>
+	<a href="<?php echo base_url(); ?>index.php/main/studentregistration">Регистрация нового ученика</a>
 	<h1>Вход для Ученика</h1>
 	<h2>
 		Введите email и пароль, которые

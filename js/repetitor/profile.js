@@ -1,6 +1,6 @@
 (function($){$(function(){
 
-console.log('repetitor profile 8');
+console.log('repetitor profile 9');
 
 /*$('#slide').click(function(){
     $('#slide ul').slideToggle();
@@ -45,6 +45,21 @@ $('#subject-but').click(function(){
 
 $('#pay-but').click(function(){
     warp('#pay');
+    return false;
+});
+
+$('#edu-but').click(function(){
+    warp('#edu');
+    return false;
+});
+
+$('#docs-but').click(function(){
+    warp('#docs');
+    return false;
+});
+
+$('#status-but').click(function(){
+    warp('#status');
     return false;
 });
 

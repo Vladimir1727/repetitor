@@ -79,6 +79,22 @@ $hover : #222222;
 	font-family: "OpenSans Regular", Arial, sans-serif;
 }
 
+@mixin saveBut{
+	display: block;
+	margin: 0 auto;
+	background: $color_orange;
+	border: none;
+	width: 170px;
+	height: 30px;
+	color: #fff;
+	@include o-reg;
+	font-size: 16px;
+	text-align: center;
+	&:hover{
+		background: $color_orange + $hover;
+	}
+}
+
 body{
     font-family: 'Arial Narrow', sans-serif;
 	overflow-x: hidden;
@@ -930,8 +946,8 @@ ul.pagg{
 }
 
 .ui-widget-content{
-	color: #fff !important;
-	background: $color_gray !important;
+	color: #333 !important;
+	//background: $color_gray !important;
 }
 
 .ui-widget-content a {
@@ -2236,6 +2252,11 @@ main.rep-profile{
 		//width: 83%;
 		background: #fff;
 		//min-height: 354px;
+		aside{
+			height: 354px;
+			overflow-y: auto;
+			overflow-x: auto;
+		}
 		aside#present{
 			@include end;
 			display: none;
@@ -2351,7 +2372,7 @@ main.rep-profile{
 		}
         aside#subject{
             display: none;
-            padding: 20px 15px;
+            padding: 20px 5px;
             color: $color_dblue2;
             font-size: 18px;
             @include f-n;
@@ -2393,12 +2414,14 @@ main.rep-profile{
                 height: 30px;
             }
             >div{
+				width: 866px;
                 @include end;
+				margin: 0 auto;
             }
             >div>div{
                 float: left;
                 &:nth-child(1){
-                    width: 300px;
+                    width: 240px;
                     select{
                         width: 170px;
                         margin-bottom: 15px;
@@ -2414,7 +2437,7 @@ main.rep-profile{
                     }
                 }
                 &:nth-child(2){
-                    width: 300px;
+                    width: 260px;
                     h2:last-of-type{
                         margin-top: 45px;
                         margin-bottom: 15px;
@@ -2425,7 +2448,7 @@ main.rep-profile{
                     }
                 }
                 &:nth-child(3){
-                    width: 370px;
+                    width: 340px;
                     >div{
                         float: left;
                         width: 50%;
@@ -2526,6 +2549,154 @@ main.rep-profile{
                 }
             }
 		}
+		aside#edu{
+			display: none;
+			padding: 20px 0;
+			>div{
+				@include end;
+				margin: 0 auto;
+				width: 800px;
+				padding: 0 15px;
+				min-height: 120px;
+				>div{
+					float: left;
+				}
+				&:first-of-type{
+					height: 130px;
+				}
+				&:last-of-type{
+					height: 150px;
+				}
+			}
+			div.vuz, div.deg{
+				width: 300px;
+			}
+			div.year{
+				width: 170px;
+				select{
+					width: 170px;
+				}
+			}
+			textarea{
+				margin: 30px 0 15px 0;
+				width: 100%;
+				height: 96px;
+				resize: none;
+				border: 1px $color_gray2 solid;
+				color: $color_dblue2;
+				@include f-n;
+				font-size: 16px;
+				text-indent: 10px;
+				font-weight: 500;
+			}
+			input, select{
+				width: 270px;
+				height: 30px;
+				border: 1px $color_gray2 solid;
+				color: $color_dblue2;
+				@include f-n;
+				font-size: 16px;
+				text-indent: 10px;
+				font-weight: 500;
+				margin-top: 30px;
+			}
+			button{
+				@include saveBut;
+			}
+		}
+		aside#docs{
+			display: none;
+			padding: 15px 0;
+			@include end;
+			div.doc{
+				float: left;
+				width: 50%;
+			}
+			button{
+				@include saveBut;
+			}
+			h3{
+				@include f-n;
+				color: #333;
+				text-align: center;
+				margin: 0 0 10px 0;
+				font-size: 16px;
+				//height: 80px;
+				float: left;
+				width: 50%;
+				padding: 0 20px 0 0;
+			}
+			form{
+				display: none;
+			}
+			div.header{
+				@include end;
+			}
+			div.img{
+				margin: 20px auto;
+				width: 250px;
+				height: 285px;
+				overflow: hidden;
+				background: #eee;
+				img{
+					width: 100px;
+				}
+			}
+		}
+		aside#status{
+			display: none;
+			padding: 15px 10px;
+			h3{
+				@include f-n;
+				color: #333;
+				text-align: center;
+				margin: 20px 0 10px 0;
+				font-size: 22px;
+			}
+			p{
+				@include f-n;
+				color: #333;
+				text-align: left;
+				margin: 0 0 10px 0;
+				font-size: 16px;
+				span.check{
+					display: inline-block;
+					width: 19px;
+					height: 19px;
+					background: url('../img/check.png');
+					margin-right: 20px;
+				}
+			}
+			>div{
+				max-width: 360px;
+				margin: 0 auto;
+			}
+			label{
+                font-size: 16px;
+                font-weight: normal;
+                display: block;
+                margin: 0 0 10px 0;
+                input{
+                    display: none;
+                }
+                input+span{
+                    display: inline-block;
+                    width: 19px;
+                    height: 20px;
+                    background: url('../img/check_out.png');
+                    background-position: left bottom;
+                    background-repeat: no-repeat;
+                    margin-bottom: -3px;
+                }
+                input:checked+span{
+                    background: url('../img/check_in.png');
+                }
+            }
+			button{
+				@include saveBut;
+				margin-top: 20px;
+			}
+		}
 	}
 }
 a.send-rep-profile{
@@ -2545,6 +2716,52 @@ a.send-rep-profile{
 	}
 }
 //end repetitor profile
+
+//start modal login
+div#modal_login{
+	//max-width: 400px;
+	div.modal-dialog{
+		max-width: 400px;
+	}
+	div.modal-header{
+		border-bottom: 0;
+	}
+	div.modal-body{
+		padding-top: 0;
+	}
+	h4{
+		margin: 0 auto;
+		text-align: center;
+		@include o-reg;
+		font-size: 14px;
+		color: #48505b;
+	}
+	a{
+		display: block;
+		margin: 15px auto;
+		width: 230px;
+		height: 48px;
+		text-decoration: none;
+		@include f-bold;
+		color: #fff;
+		font-size: 24px;
+		text-align: center;
+		line-height: 2;
+		&:first-of-type{
+			background: $color_green2;
+			&:hover{
+				background: $color_green2 + $hover;
+			}
+		}
+		&:last-of-type{
+			background: $color_orange;
+			&:hover{
+				background: $color_orange + $hover;
+			}
+		}
+	}
+}
+//end modal login
 
 @media screen and (max-width: 1200px) {
 	section.filter{
@@ -2602,7 +2819,10 @@ a.send-rep-profile{
 			}
 		}
 	}
-    main.rep-profile{
+}
+
+@media screen and (max-width: 1060px) {
+	main.rep-profile{
         section.warp{
             aside#subject{
                 >div{
@@ -2682,6 +2902,28 @@ a.send-rep-profile{
     }
     .navbar-header {
         width: 100%;
+    }
+	div.rep-header{
+  	  section{
+  		  div.menu{
+  			  ul{
+  				  li{
+  					  &:nth-child(4){
+  						  display: none;
+  					  }
+  				  }
+  				  li#slide{
+  					  ul{
+  						  li{
+  							  &:nth-child(4){
+  								  display: inline-block;
+  							  }
+  						  }
+  					  }
+  				  }
+  			  }
+  		  }
+  	  }
     }
 }
 
@@ -2764,28 +3006,7 @@ a.send-rep-profile{
 	  }
   }
 
-  div.rep-header{
-	  section{
-		  div.menu{
-			  ul{
-				  li{
-					  &:nth-child(4){
-						  display: none;
-					  }
-				  }
-				  li#slide{
-					  ul{
-						  li{
-							  &:nth-child(4){
-								  display: inline-block;
-							  }
-						  }
-					  }
-				  }
-			  }
-		  }
-	  }
-  }
+
 }
 
 @media screen and (max-width: 890px) {
@@ -2916,6 +3137,23 @@ a.send-rep-profile{
       margin: 0 auto;
     }
   }
+  main.rep-profile{
+	  section.warp{
+		  aside#docs{
+			  div.doc{
+				  width: 100%;
+				  float: none;
+				  h3{
+					  height: auto;
+				  }
+			  }
+			  div.img{
+				  width: 100%;
+				  max-width: 250px;
+			  }
+		  }
+	  }
+  }
 }
 
 @media screen and (max-width: 760px) {
@@ -2944,6 +3182,9 @@ a.send-rep-profile{
 		section.warp{
 			//width: auto;
 			margin-left: 145px;
+			aside{
+				height: 394px;
+			}
 			aside#personal{
 				form{
 					>div{
@@ -3222,6 +3463,11 @@ a.send-rep-profile{
 			float: none;
 			width: 100%;
 			margin: 0 auto;
+		}
+		section.warp{
+			aside{
+				height: auto;
+			}
 		}
 	}
 }

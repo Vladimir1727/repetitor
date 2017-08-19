@@ -68,6 +68,7 @@ class Repetitor extends CI_Controller {
 			'languages'=>$this->MainModel->getAll('languages'),
 			'levels'=>$this->MainModel->getAll('levels'),
 			'tzones'=>$this->MainModel->getAll('timezones'),
+			'uni_degrees'=>$this->MainModel->getAll('uni_degrees'),
 		);
 		//echo 'rep profile';
 		$this->load->view('repetitor/profile', $data);
