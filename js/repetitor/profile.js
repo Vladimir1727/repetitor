@@ -1,6 +1,6 @@
 (function($){$(function(){
 var baseUrl = '../';
-console.log('repetitor profile 11');
+console.log('repetitor profile 16');
 
 /*$('#slide').click(function(){
     $('#slide ul').slideToggle();
@@ -35,7 +35,7 @@ function rUpdate(data){
         data: 'data='+JSON.stringify(data),
         success: function(data){
             if (data=='0'){
-                console.log('update OK');
+                errdiag('Сохранение', 'профиль обновлён');
             } else{
                 errdiag('Ошибка', data);
             }
@@ -80,6 +80,31 @@ $('#docs-but').click(function(){
 
 $('#status-but').click(function(){
     warp('#status');
+    return false;
+});
+
+$('#save_personal').click(function(){
+    var ver = verify([
+        ['first_name', 'name'],
+        ['last_name', 'name'],
+        ['email', 'email'],
+        ['password', 'pass'],
+        ['password2', 'pass'],
+        ['skype', 'name']
+    ]);
+    if (ver){
+        rUpdate({
+            'first_name' : $('#first_name').val().trim(),
+            'last_name' : $('#last_name').val().trim(),
+            'father_name' : $('#father_name').val().trim(),
+            'phone': $('#phone').val().trim(),
+            'tzone_id' : $('#tzone_id').val(),
+            'skype' : $('#skype').val().trim(),
+            'email' : $('#email').val().trim(),
+            'password' : $('#password').val().trim(),
+        });
+        console.log('all OK');
+    }
     return false;
 });
 

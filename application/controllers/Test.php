@@ -30,11 +30,20 @@ class Test extends CI_Controller {
 	{
 		//$this->session->set_userdata('repetitor_id', 1);
 		//$this->load->view('test');
-		$rep = $this->RepetitorModel->findOne(1);
+		//$rep = $this->RepetitorModel->findOne(1);
 		//var_dump($rep->repetitor);
-		echo $rep->repetitor['email'];
+		//echo $rep->repetitor['email'];
 		//$rep->repetitor['first_name'] = 'Vova';
-		echo $rep->update(array('first_name'=>'Vova', 'last_name'=>'D'));
+		//echo $rep->update(array('first_name'=>'Vova', 'last_name'=>'D'));
+		$this->load->library('email');
+		$this->email->from('test@dvn125.xyz', 'Сайт репетитор');
+		$this->email->to('dvn125@gmail.com');
+		$this->email->subject('Регистрация');
+		$mess = "Вы зарегистроровались на сайте 'Репетиторы' \r\n";
+		$mess .= "Ваш e-mail: \r\n";
+		$mess .= "Ваш пароль: ";
+		$this->email->message($mess);
+		echo $this->email->send();
 	}
 
 	public function single()

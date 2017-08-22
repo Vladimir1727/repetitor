@@ -55,7 +55,7 @@
 <section class="light">
 	Или <a href="#">ОСТАВЬТЕ ЗАЯВКУ</a> и репетиторы сами предложат вам свои услуги!
 </section>
-<section class="instruction">
+<section class="instruction-about">
 	<h2>КРАТКАЯ ИНСТРУКЦИЯ</h2>
 	<h3>для ученика</h3>
 	<ul>

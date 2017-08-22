@@ -1,4 +1,5 @@
 (function($){$(function(){
+    console.log('repreg 4');
 var baseUrl = '../';
 $('form.registration').each(function(){
     $(this).submit(function(){
@@ -10,13 +11,13 @@ $('form.registration').each(function(){
         if (ver == true){
             var form = $(this).serialize();
             $.ajax({
-                url: baseUrl+'repetitor/newRepetitor',
+                url: baseUrl+'repetitor/newrepetitor',
                 type:'post',
                 data: form,
                 success: function(data){
                     console.log('data=', data);
                     if (data=='0'){
-                        console.log('login');
+                        document.location = '/index.php/repetitor';
                     } else{
                         errdiag('Ошибка', data);
                     }
@@ -27,7 +28,5 @@ $('form.registration').each(function(){
         return false;
     });
 });
-
-
 
 })})(jQuery)

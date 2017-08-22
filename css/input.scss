@@ -113,7 +113,7 @@ div.main-header{
         img{
             margin-top: 10px;
         }
-        a{
+        a.but{
             font-family: 'Arial Regular', sans-serif;
             padding: 5px 0;
             margin: 53px 0 0 0;
@@ -409,7 +409,7 @@ section.light{
     }
 }
 
-section.instruction{
+section.instruction-about{
     padding: 0 10px;
     h2{
 		@include f-bold;
@@ -2255,7 +2255,6 @@ main.rep-profile{
 		aside{
 			height: 354px;
 			overflow-y: auto;
-			overflow-x: auto;
 		}
 		aside#present{
 			@include end;
@@ -2326,7 +2325,7 @@ main.rep-profile{
 				height: 30px;
 			}
 		}
-		form{
+		form.personal{
 			max-width: 600px;
 			margin: 30px auto 0 auto;
 			@include end;
@@ -2418,7 +2417,13 @@ main.rep-profile{
                 @include end;
 				margin: 0 auto;
             }
-            >div>div{
+			form{
+				width: 100%;
+				margin: 0;
+				padding: 0;
+				max-width: none;
+			}
+            form>div{
                 float: left;
                 &:nth-child(1){
                     width: 240px;
@@ -2569,12 +2574,12 @@ main.rep-profile{
 				}
 			}
 			div.vuz, div.deg{
-				width: 300px;
+				width: 255px;
 			}
 			div.year{
-				width: 170px;
+				width: 255px;
 				select{
-					width: 170px;
+					width: 240px;
 				}
 			}
 			textarea{
@@ -2590,7 +2595,7 @@ main.rep-profile{
 				font-weight: 500;
 			}
 			input, select{
-				width: 270px;
+				width: 240px;
 				height: 30px;
 				border: 1px $color_gray2 solid;
 				color: $color_dblue2;
@@ -2635,11 +2640,12 @@ main.rep-profile{
 			div.img{
 				margin: 20px auto;
 				width: 250px;
-				height: 285px;
+				height: 160px;
 				overflow: hidden;
 				background: #eee;
+				text-align: center;
 				img{
-					width: 100px;
+					height: 160px;
 				}
 			}
 		}
@@ -2821,32 +2827,45 @@ div#modal_login{
 	}
 }
 
-@media screen and (max-width: 1060px) {
+@media screen and (max-width: 1100px) {
 	main.rep-profile{
         section.warp{
             aside#subject{
                 >div{
                     margin: 10px auto;
-                    >div{
+					width: auto;
+                    >form>div{
                         float: none;
                         margin: 0 auto 20px auto;
                     }
-                    >div:nth-child(1), >div:nth-child(2), >div:nth-child(3),{
+                    >form>div:nth-child(1), >form>div:nth-child(2), >form>div:nth-child(3){
                         width: 370px;
                     }
-                    >div:nth-child(1){
+                    >form>div:nth-child(1){
                         select{
                             width: 250px;
                         }
                     }
-                    >div:nth-child(2){
+                    >form>div:nth-child(2){
                         input{
                             width: 100px;
                         }
                     }
                 }
             }
-
+			aside#edu{
+				>div{
+					width: 260px;
+					padding: 0 10px;
+					&:first-of-type{
+						height: auto;
+					}
+				}
+				div.vuz, div.deg, div.year{
+					float: none;
+					WIDTH: 100%;
+				}
+			}
         }
     }
 }
@@ -3111,7 +3130,7 @@ div#modal_login{
         height: 190px;
         div{
             position: relative;
-            a{
+            a.but{
                 margin: 0;
                 position: absolute;
                 top: 150px;
@@ -3186,7 +3205,7 @@ div#modal_login{
 				height: 394px;
 			}
 			aside#personal{
-				form{
+				form.personal{
 					>div{
 						float: none;
 						margin: 0 auto;
@@ -3376,24 +3395,24 @@ div#modal_login{
             aside#subject{
                 >div{
                     margin: 10px auto;
-                    >div{
+                    >form>div{
                         float: none;
                         margin: 0 auto 20px auto;
                     }
-                    >div:nth-child(1), >div:nth-child(2), >div:nth-child(3),{
+                    >form>div:nth-child(1), >form>div:nth-child(2), >form>div:nth-child(3),{
                         width: 100%;
                     }
-                    >div:nth-child(1){
+                    >form>div:nth-child(1){
                         select{
                             width: 80%;
                         }
                     }
-                    >div:nth-child(2){
+                    >form>div:nth-child(2){
                         input{
                             width: 25%;
                         }
                     }
-                    >div:nth-child(3){
+                    >form>div:nth-child(3){
                         >div{
                             float: none;
                             width: 100%;
@@ -3453,6 +3472,26 @@ div#modal_login{
 		a.eng, a.det, a.ita{
 
 			margin-right: 0;
+		}
+	}
+	main.rep-profile{
+		section.warp{
+			aside#edu{
+				padding: 0 5px;
+				>div{
+					width: 180px;
+					padding: 0;
+					div.vuz, div.deg, div.year{
+						width: 180px;
+						input, select{
+							width: 180px;
+						}
+					}
+					textarea{
+						width: 180px;
+					}
+				}
+			}
 		}
 	}
 }

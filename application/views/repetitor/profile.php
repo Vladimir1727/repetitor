@@ -28,29 +28,33 @@
     </section>
     <section class="warp">
         <aside id="personal">
-            <form method="post">
+            <form method="post" class="personal">
                 <div>
-                    <input type="text" name="first_name" placeholder="Имя*">
-                    <input type="text" name="last_name" placeholder="Фамилия*">
-                    <input type="text" name="father_name" placeholder="Отчество">
+                    <input type="text" name="first_name" placeholder="Имя*" id="first_name" value="<?php echo $repetitor['first_name'] ?>">
+                    <input type="text" name="last_name" placeholder="Фамилия*" id="last_name" value="<?php echo $repetitor['last_name'] ?>">
+                    <input type="text" name="father_name" placeholder="Отчество" id="father_name" value="<?php echo $repetitor['father_name'] ?>">
                 </div>
                 <div>
-                    <select name="tzone">
+                    <select name="tzone" id="tzone_id">
                         <?php
                             foreach ($tzones as $option) {
-        						echo '<option value="'.$option['id'].'">'.$option['zone_name'].'</option>';
+                                if ($option['id'] == $repetitor['tzone_id']){
+                                    echo '<option value="'.$option['id'].'" selected="selecter">'.$option['zone_name'].'</option>';
+                                } else{
+                                    echo '<option value="'.$option['id'].'">'.$option['zone_name'].'</option>';
+                                }
                             }
                         ?>
                     </select>
-                    <input type="text" name="phone" placeholder="Телефон">
-                    <input type="text" name="skype" placeholder="Логин Skype*">
+                    <input type="text" name="phone" placeholder="Телефон" id="phone" value="<?php echo $repetitor['phone'] ?>">
+                    <input type="text" name="skype" placeholder="Логин Skype*" id="skype" value="<?php echo $repetitor['skype'] ?>">
                 </div>
                 <div>
-                    <input type="text" name="email" placeholder="Email*">
-                    <input type="text" name="password" placeholder="Пароль*">
-                    <input type="text" name="password" placeholder="Подтверждение пароля*">
+                    <input type="text" name="email" placeholder="Email*" id="email" value="<?php echo $repetitor['email'] ?>">
+                    <input type="password" name="password" placeholder="Пароль*" id="password" value="<?php echo $repetitor['password'] ?>">
+                    <input type="password" name="password2" placeholder="Подтверждение пароля*" id="password2" value="<?php echo $repetitor['password'] ?>">
                 </div>
-                <button type="submit" name="button">Сохранить</button>
+                <button type="submit" name="button" id="save_personal">Сохранить</button>
             </form>
         </aside>
         <aside id="present">
@@ -78,6 +82,7 @@
         </aside>
         <aside id="subject">
             <div>
+            <form>
                 <div>
                     <select name="">
                         <option value="0">Предмет*</option>
@@ -87,7 +92,6 @@
                             }
                         ?>
                     </select>
-                    <button></button>
                     <select name="" id="">
                         <option value="0">Родной язык*</option>
                         <?php
@@ -147,6 +151,7 @@
                         ?>
                         </div>
                 </div>
+            </form>
             </div>
                         <button type="submit" name="button">Сохранить</button>
         </aside>
@@ -175,12 +180,13 @@
                 </div>
                 <div class="deg">
                     <select class="" name="">
-                        <option value="0">Ученая степень</option>
+                        <option value="0">Год окончания</option>
                         <?php
-                        foreach ($uni_degrees as $option) {
-                                echo '<option value="'.$option['id'].'">'.$option['uni_degree'].'</option>';
-                            }
-                        ?>
+                        $year = date('Y');
+                        for ($i = date('Y'); $i >= 1965; $i--){
+                            echo '<option value="'.$i.'">'.$i.'</option>';
+                        }
+                         ?>
                     </select>
                     <select class="" name="">
                         <option value="0">Опыт работы репетитором (лет)</option>
@@ -193,13 +199,12 @@
                 </div>
                 <div class="year">
                     <select class="" name="">
-                        <option value="0">Год окончания</option>
+                        <option value="0">Ученая степень</option>
                         <?php
-                        $year = date('Y');
-                        for ($i = date('Y'); $i >= 1965; $i--){
-                            echo '<option value="'.$i.'">'.$i.'</option>';
-                        }
-                         ?>
+                        foreach ($uni_degrees as $option) {
+                                echo '<option value="'.$option['id'].'">'.$option['uni_degree'].'</option>';
+                            }
+                        ?>
                     </select>
                 </div>
             </div>

@@ -521,3 +521,16 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+//mailer
+$config['protocol'] = 'smtp';
+$config['smtp_host'] = 'mail.ukraine.com.ua';
+$config['smtp_user'] = 'test@dvn125.xyz';
+$config['smtp_pass'] = 'Zx1290as';
+$config['smtp_port'] = '2525';
+$config['mailtype'] = 'text';
+$config['charset'] = 'utf-8';
+$config['wordwrap'] = 'TRUE';
+$config['wrapchars'] = '50';
+//$config['newline'] = '\r\n';
+$config['crlf'] = '\r\n';

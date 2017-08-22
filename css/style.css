@@ -33,7 +33,7 @@ div.main-header {
     text-align: center; }
     div.main-header > div img {
       margin-top: 10px; }
-    div.main-header > div a {
+    div.main-header > div a.but {
       font-family: 'Arial Regular', sans-serif;
       padding: 5px 0;
       margin: 53px 0 0 0;
@@ -268,31 +268,31 @@ section.light {
   section.light a:hover {
     color: #777; }
 
-section.instruction {
+section.instruction-about {
   padding: 0 10px; }
-  section.instruction h2 {
+  section.instruction-about h2 {
     font-family: "Arial Bold", Arial, sans-serif;
     text-align: center;
     font-size: 30px;
     font-weight: 600;
     color: #00CB9A;
     margin: 40px 0 0 0; }
-  section.instruction h3 {
+  section.instruction-about h3 {
     font-family: "Arial Narrow", Arial, sans-serif;
     font-size: 24px;
     text-align: center;
     margin: 5px 0 30px 0;
     color: #373c46; }
-  section.instruction ul {
+  section.instruction-about ul {
     max-width: 1150px;
     margin: 0 auto; }
-    section.instruction ul li {
+    section.instruction-about ul li {
       font-family: "Arial Regular", Arial, sans-serif;
       position: relative;
       list-style: none;
       font-size: 22px;
       color: #373c46; }
-      section.instruction ul li:before {
+      section.instruction-about ul li:before {
         position: absolute;
         left: -20px;
         top: 10px;
@@ -1780,8 +1780,7 @@ main.rep-profile {
     background: #fff; }
     main.rep-profile section.warp aside {
       height: 354px;
-      overflow-y: auto;
-      overflow-x: auto; }
+      overflow-y: auto; }
     main.rep-profile section.warp aside#present {
       display: none;
       padding: 15px; }
@@ -1837,20 +1836,20 @@ main.rep-profile {
           outline: 1px #008261 solid; }
       main.rep-profile section.warp aside#present input {
         height: 30px; }
-    main.rep-profile section.warp form {
+    main.rep-profile section.warp form.personal {
       max-width: 600px;
       margin: 30px auto 0 auto;
       padding: 30px 10px; }
-      main.rep-profile section.warp form:after {
+      main.rep-profile section.warp form.personal:after {
         content: '';
         display: block;
         clear: both; }
-      main.rep-profile section.warp form > div {
+      main.rep-profile section.warp form.personal > div {
         float: left;
         max-width: 200px;
         width: 33.3%;
         text-align: center; }
-        main.rep-profile section.warp form > div input, main.rep-profile section.warp form > div select {
+        main.rep-profile section.warp form.personal > div input, main.rep-profile section.warp form.personal > div select {
           width: 170px;
           height: 30px;
           border: 1px #999 solid;
@@ -1859,9 +1858,9 @@ main.rep-profile {
           font-size: 16px;
           margin: 0 0 40px 0;
           text-indent: 10px; }
-          main.rep-profile section.warp form > div input:focus, main.rep-profile section.warp form > div select:focus {
+          main.rep-profile section.warp form.personal > div input:focus, main.rep-profile section.warp form.personal > div select:focus {
             outline: 1px #008261 solid; }
-      main.rep-profile section.warp form button {
+      main.rep-profile section.warp form.personal button {
         display: block;
         margin: 0 auto;
         background: #FF5C39;
@@ -1872,7 +1871,7 @@ main.rep-profile {
         font-family: "OpenSans Regular", Arial, sans-serif;
         font-size: 16px;
         text-align: center; }
-        main.rep-profile section.warp form button:hover {
+        main.rep-profile section.warp form.personal button:hover {
           background: #ff7e5b; }
     main.rep-profile section.warp aside#subject {
       display: none;
@@ -1920,34 +1919,39 @@ main.rep-profile {
           content: '';
           display: block;
           clear: both; }
-      main.rep-profile section.warp aside#subject > div > div {
+      main.rep-profile section.warp aside#subject form {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        max-width: none; }
+      main.rep-profile section.warp aside#subject form > div {
         float: left; }
-        main.rep-profile section.warp aside#subject > div > div:nth-child(1) {
+        main.rep-profile section.warp aside#subject form > div:nth-child(1) {
           width: 240px; }
-          main.rep-profile section.warp aside#subject > div > div:nth-child(1) select {
+          main.rep-profile section.warp aside#subject form > div:nth-child(1) select {
             width: 170px;
             margin-bottom: 15px; }
-          main.rep-profile section.warp aside#subject > div > div:nth-child(1) button {
+          main.rep-profile section.warp aside#subject form > div:nth-child(1) button {
             border: none;
             width: 19px;
             height: 19px;
             background: url("../img/plus.png"); }
-          main.rep-profile section.warp aside#subject > div > div:nth-child(1) h2 {
+          main.rep-profile section.warp aside#subject form > div:nth-child(1) h2 {
             margin-bottom: 15px; }
-        main.rep-profile section.warp aside#subject > div > div:nth-child(2) {
+        main.rep-profile section.warp aside#subject form > div:nth-child(2) {
           width: 260px; }
-          main.rep-profile section.warp aside#subject > div > div:nth-child(2) h2:last-of-type {
+          main.rep-profile section.warp aside#subject form > div:nth-child(2) h2:last-of-type {
             margin-top: 45px;
             margin-bottom: 15px; }
-          main.rep-profile section.warp aside#subject > div > div:nth-child(2) input {
+          main.rep-profile section.warp aside#subject form > div:nth-child(2) input {
             width: 85px;
             color: #222f3b; }
-        main.rep-profile section.warp aside#subject > div > div:nth-child(3) {
+        main.rep-profile section.warp aside#subject form > div:nth-child(3) {
           width: 340px; }
-          main.rep-profile section.warp aside#subject > div > div:nth-child(3) > div {
+          main.rep-profile section.warp aside#subject form > div:nth-child(3) > div {
             float: left;
             width: 50%; }
-            main.rep-profile section.warp aside#subject > div > div:nth-child(3) > div label {
+            main.rep-profile section.warp aside#subject form > div:nth-child(3) > div label {
               padding-left: 23px;
               text-indent: -23px; }
       main.rep-profile section.warp aside#subject > button {
@@ -2041,11 +2045,11 @@ main.rep-profile {
         main.rep-profile section.warp aside#edu > div:last-of-type {
           height: 150px; }
       main.rep-profile section.warp aside#edu div.vuz, main.rep-profile section.warp aside#edu div.deg {
-        width: 300px; }
+        width: 255px; }
       main.rep-profile section.warp aside#edu div.year {
-        width: 170px; }
+        width: 255px; }
         main.rep-profile section.warp aside#edu div.year select {
-          width: 170px; }
+          width: 240px; }
       main.rep-profile section.warp aside#edu textarea {
         margin: 30px 0 15px 0;
         width: 100%;
@@ -2058,7 +2062,7 @@ main.rep-profile {
         text-indent: 10px;
         font-weight: 500; }
       main.rep-profile section.warp aside#edu input, main.rep-profile section.warp aside#edu select {
-        width: 270px;
+        width: 240px;
         height: 30px;
         border: 1px #999 solid;
         color: #222f3b;
@@ -2121,11 +2125,12 @@ main.rep-profile {
       main.rep-profile section.warp aside#docs div.img {
         margin: 20px auto;
         width: 250px;
-        height: 285px;
+        height: 160px;
         overflow: hidden;
-        background: #eee; }
+        background: #eee;
+        text-align: center; }
         main.rep-profile section.warp aside#docs div.img img {
-          width: 100px; }
+          height: 160px; }
     main.rep-profile section.warp aside#status {
       display: none;
       padding: 15px 10px; }
@@ -2257,18 +2262,27 @@ div#modal_login a {
     display: none; }
   div.rep-header section div.menu ul li#slide ul li:nth-child(5) {
     display: inline-block; } }
-@media screen and (max-width: 1060px) {
+@media screen and (max-width: 1100px) {
   main.rep-profile section.warp aside#subject > div {
-    margin: 10px auto; }
-    main.rep-profile section.warp aside#subject > div > div {
+    margin: 10px auto;
+    width: auto; }
+    main.rep-profile section.warp aside#subject > div > form > div {
       float: none;
       margin: 0 auto 20px auto; }
-    main.rep-profile section.warp aside#subject > div > div:nth-child(1), main.rep-profile section.warp aside#subject > div > div:nth-child(2), main.rep-profile section.warp aside#subject > div > div:nth-child(3) {
+    main.rep-profile section.warp aside#subject > div > form > div:nth-child(1), main.rep-profile section.warp aside#subject > div > form > div:nth-child(2), main.rep-profile section.warp aside#subject > div > form > div:nth-child(3) {
       width: 370px; }
-    main.rep-profile section.warp aside#subject > div > div:nth-child(1) select {
+    main.rep-profile section.warp aside#subject > div > form > div:nth-child(1) select {
       width: 250px; }
-    main.rep-profile section.warp aside#subject > div > div:nth-child(2) input {
-      width: 100px; } }
+    main.rep-profile section.warp aside#subject > div > form > div:nth-child(2) input {
+      width: 100px; }
+  main.rep-profile section.warp aside#edu > div {
+    width: 260px;
+    padding: 0 10px; }
+    main.rep-profile section.warp aside#edu > div:first-of-type {
+      height: auto; }
+  main.rep-profile section.warp aside#edu div.vuz, main.rep-profile section.warp aside#edu div.deg, main.rep-profile section.warp aside#edu div.year {
+    float: none;
+    WIDTH: 100%; } }
 @media screen and (max-width: 1163px) {
   section.comfort aside {
     max-width: 858px; } }
@@ -2404,7 +2418,7 @@ div#modal_login a {
     height: 190px; }
     div.main-header div {
       position: relative; }
-      div.main-header div a {
+      div.main-header div a.but {
         margin: 0;
         position: absolute;
         top: 150px; }
@@ -2445,7 +2459,7 @@ div#modal_login a {
     margin-left: 145px; }
     main.rep-profile section.warp aside {
       height: 394px; }
-    main.rep-profile section.warp aside#personal form > div {
+    main.rep-profile section.warp aside#personal form.personal > div {
       float: none;
       margin: 0 auto;
       width: 100%; }
@@ -2521,16 +2535,16 @@ div#modal_login a {
 
   main.rep-profile section.warp aside#subject > div {
     margin: 10px auto; }
-    main.rep-profile section.warp aside#subject > div > div {
+    main.rep-profile section.warp aside#subject > div > form > div {
       float: none;
       margin: 0 auto 20px auto; }
-    main.rep-profile section.warp aside#subject > div > div:nth-child(1), main.rep-profile section.warp aside#subject > div > div:nth-child(2), main.rep-profile section.warp aside#subject > div > div:nth-child(3) {
+    main.rep-profile section.warp aside#subject > div > form > div:nth-child(1), main.rep-profile section.warp aside#subject > div > form > div:nth-child(2), main.rep-profile section.warp aside#subject > div > form > div:nth-child(3) {
       width: 100%; }
-    main.rep-profile section.warp aside#subject > div > div:nth-child(1) select {
+    main.rep-profile section.warp aside#subject > div > form > div:nth-child(1) select {
       width: 80%; }
-    main.rep-profile section.warp aside#subject > div > div:nth-child(2) input {
+    main.rep-profile section.warp aside#subject > div > form > div:nth-child(2) input {
       width: 25%; }
-    main.rep-profile section.warp aside#subject > div > div:nth-child(3) > div {
+    main.rep-profile section.warp aside#subject > div > form > div:nth-child(3) > div {
       float: none;
       width: 100%; } }
 @media screen and (max-width: 493px) {
@@ -2561,7 +2575,19 @@ div#modal_login a {
       section.lang a span {
         margin-right: 10px; }
     section.lang a.eng, section.lang a.det, section.lang a.ita {
-      margin-right: 0; } }
+      margin-right: 0; }
+
+  main.rep-profile section.warp aside#edu {
+    padding: 0 5px; }
+    main.rep-profile section.warp aside#edu > div {
+      width: 180px;
+      padding: 0; }
+      main.rep-profile section.warp aside#edu > div div.vuz, main.rep-profile section.warp aside#edu > div div.deg, main.rep-profile section.warp aside#edu > div div.year {
+        width: 180px; }
+        main.rep-profile section.warp aside#edu > div div.vuz input, main.rep-profile section.warp aside#edu > div div.vuz select, main.rep-profile section.warp aside#edu > div div.deg input, main.rep-profile section.warp aside#edu > div div.deg select, main.rep-profile section.warp aside#edu > div div.year input, main.rep-profile section.warp aside#edu > div div.year select {
+          width: 180px; }
+      main.rep-profile section.warp aside#edu > div textarea {
+        width: 180px; } }
 @media screen and (max-width: 350px) {
   main.rep-profile section.menu, main.rep-profile section.warp {
     float: none;

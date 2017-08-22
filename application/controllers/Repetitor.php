@@ -40,7 +40,7 @@ class Repetitor extends CI_Controller {
 		}
 	}
 
-	public function newRepetitor()
+	public function newrepetitor()
 	{
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
@@ -50,6 +50,8 @@ class Repetitor extends CI_Controller {
 		  } else {
 			  try {
 			  	$this->RepetitorModel->addNewRep($this->input->post('email', TRUE), $this->input->post('pass', TRUE));
+				$login = $this->RepetitorModel->login($this->input->post('email', TRUE), $this->input->post('pass', TRUE));
+				$this->session->set_userdata('repetitor_id', $login);
 			  } catch (Exception $e) {
 				  exit($e->getMessage());
 			  }

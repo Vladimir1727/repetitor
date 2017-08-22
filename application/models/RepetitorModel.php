@@ -19,6 +19,17 @@ class RepetitorModel extends CI_Model{
 				'password'=>$pass
 			);
 			$this->db->insert('repetitors', $rep);
+			//sending e-mail
+			$this->load->library('email');
+			$this->email->from('test@dvn125.xyz', 'Сайт репетитор');
+			$this->email->to($email);
+			$this->email->subject('Регистрация');
+			$mess = "Вы зарегистроровались на сайте 'Репетиторы'\r\n";
+			$mess += "Ваш e-mail: ".$email."\r\n";
+			$mess += "Ваш пароль: ".$pass;
+			$this->email->message($mess);
+			$this->email->send();
+
 			return '0';
 		}
     }

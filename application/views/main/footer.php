@@ -24,34 +24,34 @@
         <div class="col-sx-12 col-sm-3 col-md-2  col-lg-2">
             <a href="<?php  echo base_url(); ?>index.php/main/filter">Найти репетитора</a>
             <br><br>
-            <a href="#">Как это работает</a>
+            <a href="<?php  echo base_url(); ?>index.php/main/about">Как это работает</a>
             <br><br>
-            <a href="<?php  echo base_url(); ?>index.php/main/about">О нас</a>
+            <a href="https://reallanguage.club/o-nas/">О нас</a>
             <br><br>
             <a href="<?php  echo base_url(); ?>index.php/main/repetitorregistration">Работа для репетиторов</a>
         </div>
         <div class="col-sx-12 col-sm-3 col-md-2  col-lg-2">
             Репетиторы онлайн по Skype:<br>
-            <a href="#">Репетиторы по английскому</a><br>
-            <a href="#">Репетиторы по немецкому</a><br>
-            <a href="#">Репетиторы по русскому</a><br>
-            <a href="#">Репетиторы по французскому</a><br>
-            <a href="#">Репетиторы по итальянскому</a><br>
-            <a href="#">Репетиторы по испанскому</a>
+            <a href="<?php echo base_url(); ?>index.php/main/filter?lang=end">Репетиторы по английскому</a><br>
+            <a href="<?php echo base_url(); ?>index.php/main/filter?lang=nem">Репетиторы по немецкому</a><br>
+            <a href="<?php echo base_url(); ?>index.php/main/filter?lang=rus">Репетиторы по русскому</a><br>
+            <a href="<?php echo base_url(); ?>index.php/main/filter?lang=fra">Репетиторы по французскому</a><br>
+            <a href="<?php echo base_url(); ?>index.php/main/filter?lang=ita">Репетиторы по итальянскому</a><br>
+            <a href="<?php echo base_url(); ?>index.php/main/filter?lang=isp">Репетиторы по испанскому</a>
         </div>
         <div class="col-sx-12 col-sm-3 col-md-2 col-lg-2">
             Мы в Facebook:<br>
-            <a href="#">Разговорный английский</a><br>
-            <a href="#">Разговорный немецкий</a><br>
-            <a href="#">Разговорный русский</a><br>
-            <a href="#">Разговорный французский</a><br>
-            <a href="#">Разговорный итальянский</a><br>
-            <a href="#">Разговорный испанский</a>
+            <a href="https://www.facebook.com/reallanguage.club">Разговорный английский</a><br>
+            <a href="https://www.facebook.com/reallanguage.de/">Разговорный немецкий</a><br>
+            <a href="https://www.facebook.com/reallanguage.ru/">Разговорный русский</a><br>
+            <a href="https://www.facebook.com/reallanguage.fr">Разговорный французский</a><br>
+            <a href="https://www.facebook.com/reallanguage.it/">Разговорный итальянский</a><br>
+            <a href="https://www.facebook.com/reallanguage.es/">Разговорный испанский</a>
         </div>
         <div class="col-sx-12 col-sm-3 col-md-2  col-lg-2 mess">
             <a href="#">Вопросы и ответы</a>
             <br><br>
-            <a href="#">Контакты</a>
+            <a href="https://reallanguage.club/kontakt/">Контакты</a>
             <br><br>
             Отвечаем в мессенжерах:<br>
             <a href="#"><img src="<?php  echo base_url(); ?>img/fb.png" alt="facebook"></a>
@@ -64,16 +64,16 @@
         <div class="col-sm-0 col-md-2 col-lg-2">
         </div>
         <div class="col-sx-12 col-sm-3 col-md-2 col-lg-2 big">
-            <a href="#">Английский язык</a><br>
-            <a href="#">Немецкий язык</a><br>
+            <a href="https://reallanguage.club/anglijskij-yazyk/">Английский язык</a><br>
+            <a href="https://reallanguage.club/nemeckij/">Немецкий язык</a><br>
         </div>
         <div class="col-sx-12 col-sm-3 col-md-2  col-lg-2 big">
-            <a href="#">Русский язык</a><br>
-            <a href="#">Французский язык</a><br>
+            <a href="https://reallanguage.club/russkij-yazyk/">Русский язык</a><br>
+            <a href="https://reallanguage.club/francuski-yazik/">Французский язык</a><br>
         </div>
         <div class="col-sx-12 col-sm-3 col-md-2  col-lg-2 big">
-            <a href="#">Итальянский язык</a><br>
-            <a href="#">Испанский язык</a><br>
+            <a href="https://reallanguage.club/italyanskij-yazyk/">Итальянский язык</a><br>
+            <a href="https://reallanguage.club/ispanskij/">Испанский язык</a><br>
         </div>
         <div class="col-sx-12 col-sm-3 col-md-2  col-lg-2 text-center social">
             Если вам понравилось, поделитесь с друзьями<br>

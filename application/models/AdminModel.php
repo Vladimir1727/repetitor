@@ -319,7 +319,8 @@ class AdminModel extends CI_Model{
 			activity tinyint default 0,
 			status tinyint default 0,
 			reight tinyint default 0,
-			balance int unsigned default 0
+			balance int unsigned default 0,
+			phone varchar (12) default NULL UNIQUE
 		)default charset=utf8';
 		$this->db->query($table);
 		$table = 'CREATE TABLE students(

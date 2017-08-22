@@ -179,4 +179,9 @@ class Main extends CI_Controller {
 			echo $this->email->print_debugger();
 		}
 	}
+
+	public function testajax()
+	{
+		echo "test AJAX";
+	}
 }
