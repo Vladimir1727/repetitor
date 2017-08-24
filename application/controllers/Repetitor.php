@@ -103,7 +103,127 @@ class Repetitor extends CI_Controller {
 		}
 		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
 		$arr = json_decode($this->input->post('data'), true);
-		//var_dump($arr);
 		echo $rep->update($arr);
+	}
+
+	public function updateSubject()
+	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 throw new Exception('репетитор не вошёл');
+		}
+		$age_id = $this->input->post('age_id[]');
+		$spez_id = $this->input->post('specialization_id[]');
+		$level_id = $this->input->post('level_id[]');
+		$price = $this->input->post('price');
+		$lang_id = $this->input->post('lang_id');
+		$subject_id = $this->input->post('subject_id');
+		$pos = $this->input->post('position');
+		try {
+		  $this->RepetitorModel->saveSubject($this->session->repetitor_id, $age_id, $spez_id, $level_id, $price, $lang_id, $subject_id, $pos);
+		} catch (Exception $e) {
+			exit($e->getMessage());
+		}
+		exit('0');
+	}
+
+	public function loadSubject()
+	{
+		$pos = $this->input->post('subject');
+		try {
+		  $data = $this->RepetitorModel->loadSubject($this->session->repetitor_id, $pos);
+		} catch (Exception $e) {
+			exit($e->getMessage());
+		}
+		echo json_encode($data);
+	}
+
+	function addavatar()
+	{
+		if ($handle = opendir('images')) {
+		    while (false !== ($file = readdir($handle))) {
+				$s = strpos($file, 'avatar_r'.$this->session->repetitor_id.'_');
+				if ($s !== false){
+					unlink('images/'.$file);
+				}
+		    }
+		    closedir($handle);
+		}
+		$config['upload_path']          = './images/';
+		$config['allowed_types']        = 'gif|jpg|png';
+		$config['max_size']             = 6000;
+		$config['max_width']            = 6024;
+		$config['min_width']            = 200;
+		$config['min_height']            = 200;
+		$config['max_height']           = 6024;
+		$config['file_name']             = 'avatar_r'.$this->session->repetitor_id.'_';
+		$this->load->library('upload', $config);
+			if ( ! $this->upload->do_upload(0))
+			{
+				throw new Exception($this->upload->display_errors());
+			}
+			else
+			{
+				$img = $this->upload->data();
+				$path = 'images/'.$img["file_name"];
+				$config['image_library'] = 'gd2';
+				$config['source_image'] = $path;
+				$config['create_thumb'] = TRUE;
+				$config['maintain_ratio'] = TRUE;
+				$config['width']         = 200;
+				$this->load->library('image_lib', $config);
+				$this->image_lib->resize();
+				$data =  $this->upload->data();
+				$f = $data['raw_name'].'_thumb'.$data['file_ext'];
+				$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
+				$arr = array('avatar'=>$data['raw_name'].$data['file_ext']);
+				$rep->update($arr);
+				exit($f);
+			}
+	}
+
+	function adddoc()
+	{
+		$pos = $this->input->post('pos');
+		$rid = $this->session->repetitor_id;
+		if ($handle = opendir('images')) {
+		    while (false !== ($file = readdir($handle))) {
+				$s = strpos($file, 'doc_r'.$rid.'_'.$pos.'_');
+				if ($s !== false){
+					unlink('images/'.$file);
+				}
+		    }
+		    closedir($handle);
+		}
+		$config['upload_path']          = './images/';
+		$config['allowed_types']        = 'gif|jpg|png';
+		$config['max_size']             = 6000;
+		$config['max_width']            = 6024;
+		$config['min_width']            = 200;
+		$config['min_height']            = 200;
+		$config['max_height']           = 6024;
+		$config['file_name']             = 'doc_r'.$rid.'_'.$pos.'_';
+		$this->load->library('upload', $config);
+			if ( ! $this->upload->do_upload(0))
+			{
+				throw new Exception($this->upload->display_errors());
+			}
+			else
+			{
+				$img = $this->upload->data();
+				$path = 'images/'.$img["file_name"];
+				$config['image_library'] = 'gd2';
+				$config['source_image'] = $path;
+				$config['create_thumb'] = TRUE;
+				$config['maintain_ratio'] = TRUE;
+				$config['width']         = 200;
+				$this->load->library('image_lib', $config);
+				$this->image_lib->resize();
+				$data =  $this->upload->data();
+				$f = $data['raw_name'].'_thumb'.$data['file_ext'];
+				$rep = $this->RepetitorModel->findOne($rid);
+				$arr = array('doc'.$pos => $data['raw_name'].$data['file_ext']);
+				$rep->update($arr);
+				exit($f);
+			}
 	}
 }

@@ -1,7 +1,7 @@
 (function($){$(function(){
 var baseUrl = '../';
-console.log('repetitor profile 16');
-
+console.log('repetitor profile 1');
+var proc = 0.3;
 /*$('#slide').click(function(){
     $('#slide ul').slideToggle();
 });*/
@@ -103,8 +103,308 @@ $('#save_personal').click(function(){
             'email' : $('#email').val().trim(),
             'password' : $('#password').val().trim(),
         });
-        console.log('all OK');
     }
+    return false;
+});
+
+$('#price').on('keyup',function(){
+    var v = parseInt($('#price').val());
+    if (v > 0){
+
+        $('#sprice').val(parseInt(v*(1+proc)));
+    } else{
+        $('#sprice').val('');
+    }
+});
+
+$('#save_subject').click(function(){
+    var f = $('#subject_form').serializeArray();
+    var sp = false;
+    var age = false;
+    var level = false;
+    var price = false;
+    var lang = false;
+    var sub = false;
+    for (i = 0; i < f.length; i++){
+        if (f[i].name == "specialization_id[]") sp = true;
+        if (f[i].name == "age_id[]") age = true;
+        if (f[i].name == "level_id[]") level = true;
+        if (f[i].name == "price" && parseInt(f[i].value)>0) price = true;
+        if (f[i].name == "lang_id" && parseInt(f[i].value)>0) lang = true;
+        if (f[i].name == "subject_id" && parseInt(f[i].value)>0)  sub = true;
+    }
+
+    if (sp == false || age == false || level == false || price == false || lang == false || sub == false){
+        var mess = "";
+        if (sp == false) mess += "Выберите хотя бы одну специализацию <br>";
+        if (age == false) mess += "Выберите хотя бы одну возрастную категорию <br>";
+        if (level == false) mess += "Выберите хотя бы один уровень <br>";
+        if (price == false) mess += "Цена указана неверно <br>";
+        if (lang == false) mess += "Выберите родной язык <br>";
+        if (sub == false) mess += "Выберите предмет <br>";
+        errdiag("Предупреждение", mess);
+    } else{
+        $.ajax({
+            url: baseUrl+'repetitor/updateSubject',
+            type:'post',
+            data: $('#subject_form').serialize(),
+            success: function(data){
+                if (data=='0'){
+                    errdiag('Сохранение', 'профиль обновлён');
+                } else{
+                    errdiag('Ошибка', data);
+                }
+            },
+            error: function(data){
+                console.log(data);
+            }
+        });
+    }
+    return false;
+});
+
+$('#new_sub').click(function(){
+    $('label.sradio').each(function(){
+        $(this).slideDown();
+    });
+    $('#new_sub').hide();
+    return false;
+});
+
+$('#sub1').click(function(){
+    loadSubject(1);
+});
+
+$('#sub2').click(function(){
+    loadSubject(2);
+});
+
+function loadSubject(sub){
+    $.ajax({
+        url: baseUrl+'repetitor/loadSubject',
+        type:'post',
+        data: 'subject='+sub,
+        success: function(data){
+            if (data != 'false'){
+                var d = JSON.parse(data);
+                $('#subject_id option').each(function(){
+                    if ($(this).val() == d.subject_id){
+                        $(this).attr('selected','selected');
+                    } else{
+                        $(this).removeAttr('selected');
+                    }
+                });
+                $('#lang_id option').each(function(){
+                    if ($(this).val() == d.lang_id){
+                        $(this).attr('selected','selected');
+                    } else{
+                        $(this).removeAttr('selected');
+                    }
+                });
+                //d.ages[i]
+                $('input[name="age_id[]"]').each(function(){
+                    var find = false;
+                    for(i = 0; i<d.ages.length;i++){
+                        if (d.ages[i] == $(this).val()){
+                            find = true;
+                        }
+                    }
+                    if (find){
+                        $(this).prop( "checked", true );
+                    }else{
+                        $(this).prop( "checked", false );
+                    }
+                });
+                $('input[name="specialization_id[]"]').each(function(){
+                    var find = false;
+                    for(i = 0; i<d.spec.length;i++){
+                        if (d.spec[i] == $(this).val()){
+                            find = true;
+                        }
+                    }
+                    if (find){
+                        $(this).prop( "checked", true );
+                    }else{
+                        $(this).prop( "checked", false );
+                    }
+                });
+                $('input[name="level_id[]"]').each(function(){
+                    var find = false;
+                    for(i = 0; i<d.levels.length;i++){
+                        if (d.levels[i] == $(this).val()){
+                            find = true;
+                        }
+                    }
+                    if (find){
+                        $(this).prop( "checked", true );
+                    }else{
+                        $(this).prop( "checked", false );
+                    }
+                });
+                $('#price').val(d.price);
+                $('#sprice').val(parseInt(d.price*(1+proc)));
+            } else {
+                $('#subject_id option').each(function(){
+                        $(this).removeAttr('selected');
+                });
+                $('#lang_id option').each(function(){
+                        $(this).removeAttr('selected');
+                });
+                $('input[name="age_id[]"]').each(function(){
+                            $(this).removeAttr('checked');
+                });
+                $('input[name="specialization_id[]"]').each(function(){
+                            $(this).removeAttr('checked');
+                });
+                $('input[name="level_id[]"]').each(function(){
+                            $(this).removeAttr('checked');
+                });
+                $('#price').val('');
+                $('#sprice').val('');
+            }
+        },
+        error: function(data){
+            console.log(data);
+        }
+    });
+}
+
+loadSubject(1);
+
+$('#save_present').click(function(){
+    var err = false;
+    var about = $('#about').val().trim();
+    var link = $('#link').val();
+    var mess = '';
+    if (about.length<5 || about.length>400){
+        mess += 'Текст описания должен быть более пяти и до 400 символов <br>';
+        err = true;
+    }
+    if (link.substr(0,24)!='https://www.youtube.com/'){
+        mess += 'Ссылка должна быть на youtube <br>';
+    }
+    if (err){
+        errdiag('Предупреждение', mess);
+    } else{
+        //about = about.replace(/\n/gi, '<br>');
+        rUpdate({
+            'about' : about,
+            'link' : link,
+        });
+    }
+});
+
+$('#load_avatar').click(function(){
+        $('#add-file').trigger('click');
+	return false;
+});
+
+$('#add-file').on('change',function(){//получена картинка
+	var files = this.files;
+	var data = new FormData();
+    $.each( files, function( key, value ){
+        data.append( key, value );
+    });
+    $.ajax({
+		url: baseUrl+'repetitor/addavatar',
+		type: 'POST',
+		data: data,
+        processData: false,
+        contentType: false,
+		success: function(rdata){
+            console.log(rdata);
+            var img = '<img src="../../images/'+rdata+'" alt="avarat">';
+            $('#avatar-profile').html(img);
+            $('#avatar-main').html(img);
+		},
+        error: function(xhr, ajaxOptions, thrownError){
+            var err = xhr.responseText;
+            console.log(err);
+        }
+	});
+});
+
+$('#load1').click(function(){
+        $('#add-file1').trigger('click');
+	return false;
+});
+
+$('#add-file1').on('change',function(){//получена картинка
+	var files = this.files;
+	var data = new FormData();
+    $.each( files, function( key, value ){
+        data.append( key, value );
+    });
+    data.append('pos', 1);
+    saveDoc(data, 1);
+});
+
+$('#load2').click(function(){
+        $('#add-file2').trigger('click');
+	return false;
+});
+
+$('#add-file2').on('change',function(){//получена картинка
+	var files = this.files;
+	var data = new FormData();
+    $.each( files, function( key, value ){
+        data.append( key, value );
+    });
+    data.append('pos', 2);
+    saveDoc(data, 2);
+});
+
+function saveDoc(data, pos){
+    $.ajax({
+		url: baseUrl+'repetitor/adddoc',
+		type: 'POST',
+		data: data,
+        processData: false,
+        contentType: false,
+		success: function(rdata){
+            errdiag("Сохранение", 'Документ сохранён');
+            var img = '<img src="../../images/'+rdata+'" alt="document">';
+            $('#load_block'+pos).html(img);
+		},
+        error: function(xhr, ajaxOptions, thrownError){
+            var err = xhr.responseText;
+            console.log(err);
+        }
+	});
+}
+
+$('#save_edu').click(function(){
+    var university = $('#university').val().trim();
+    var specialty = $('#specialty').val().trim();
+    var uni_year = $('#uni_year').val();
+    var experience = $('#experience').val();
+    var degree_id = $('#degree_id').val().trim();
+    var exp_comment = $('#exp_comment').val().trim();
+    var err = false;
+    var mess = '';
+    if (university.lenght<3 || university.lenght>256 ){
+        err = true;
+        mess = 'Неправильное название ВУЗа';
+    }
+
+        //errdiag("Предупреждение", mess);
+    /*} else{
+        $.ajax({
+            url: baseUrl+'repetitor/updateSubject',
+            type:'post',
+            data: $('#subject_form').serialize(),
+            success: function(data){
+                if (data=='0'){
+                    errdiag('Сохранение', 'профиль обновлён');
+                } else{
+                    errdiag('Ошибка', data);
+                }
+            },
+            error: function(data){
+                console.log(data);
+            }
+        });
+    }*/
     return false;
 });
 

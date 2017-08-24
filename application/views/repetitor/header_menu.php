@@ -4,8 +4,14 @@
 			<img src="<?php echo base_url(); ?>img/main_logo.png" alt="logo">
 		</div>
 		<div class="avatar">
-			<div class="img">
-				<img src="<?php echo base_url(); ?>img/avatar2.png" alt="avatar">
+			<div class="img" id="avatar-main">
+				<?php
+					if (is_null($repetitor['avatar'])){
+						echo '<img src="'.base_url().'img/avatar3.png" alt="empty avarat" style="padding-top: 30px">';
+					} else{
+						echo '<img src="../../images/'.$repetitor['avatar'].'" alt="avarat">';
+					}
+				?>
 			</div>
 			<div class="switch on" id="rep-online"></div>
 			<h3>
@@ -59,7 +65,5 @@
 				</li>
 			</ul>
 		</div>
-
-
 	</section>
 </div>

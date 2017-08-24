@@ -320,7 +320,13 @@ class AdminModel extends CI_Model{
 			status tinyint default 0,
 			reight tinyint default 0,
 			balance int unsigned default 0,
-			phone varchar (12) default NULL UNIQUE
+			phone varchar (12) default NULL UNIQUE,
+			subject1 int(5) unsigned default NULL,
+			subject2 int(5) unsigned default NULL,
+			doc1 varchar (256) default NULL,
+			doc2 varchar (256) default NULL,
+			foreign key (subject1) references subjects(id) on update cascade,
+			foreign key (subject2) references subjects(id) on update cascade
 		)default charset=utf8';
 		$this->db->query($table);
 		$table = 'CREATE TABLE students(

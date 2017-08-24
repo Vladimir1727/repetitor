@@ -59,40 +59,58 @@
         </aside>
         <aside id="present">
             <div class="avatar">
-                <div class="img">
-                    <img src="<?php echo base_url(); ?>img/avatar3.png" alt="empty avarat" style="padding-top: 30px">
+                <div class="img" id="avatar-profile">
+                    <?php
+                        if (is_null($repetitor['avatar'])){
+                            echo '<img src="'.base_url().'img/avatar3.png" alt="empty avarat" style="padding-top: 30px">';
+                        } else{
+                            echo '<img src="../../images/'.$repetitor['avatar'].'" alt="avarat">';
+                        }
+                    ?>
                 </div>
                 <p>
                     *Загрузите вашу фотографию* (JPG, PNG, не менее 200*200 px.)
                 </p>
-                <button type="button" name="button">Загрузить фото</button>
+                <input type="file" name="userfile" size="20" id="add-file" class="hidden">
+                <button type="button" name="button" id="load_avatar">Загрузить фото</button>
             </div>
             <div class="info">
                 <p>
                     Напишите кратко основную информацию о себе*<br>
                     (презентация отображается посетителям сайта)
                 </p>
-                <textarea name="name" placeholder="До 400 символов"></textarea>
+                <textarea id="about" placeholder="До 400 символов"><?php printf($repetitor['about']); ?></textarea>
                 <p>
                     Разместите ссылку на вашу видео-презентацию.(1-3 минуты)
                 </p>
-                <input type="text" placeholder="https://www.youtube.com/...">
-                <button type="submit" name="button">Сохранить</button>
+                <input type="text" placeholder="https://www.youtube.com/..." id="link" value="<?php echo $repetitor['link'] ?>">
+                <button type="submit" name="button" id="save_present">Сохранить</button>
             </div>
         </aside>
         <aside id="subject">
             <div>
-            <form>
+            <form id="subject_form">
                 <div>
-                    <select name="">
+                    <label class="sradio" id="sub1">
+                        <input type="radio" name="position" value="1" checked>
+                        <span></span>
+                        Предмет №1
+                    </label>
+                    <label class="sradio" id="sub2">
+                        <input type="radio" name="position" value="2">
+                        <span></span>
+                        Предмет №2
+                    </label>
+                    <select name="subject_id" id="subject_id">
                         <option value="0">Предмет*</option>
                         <?php
                             foreach ($subjects as $option) {
                                 echo '<option value="'.$option['id'].'">'.$option['subject'].'</option>';
                             }
                         ?>
-                    </select>
-                    <select name="" id="">
+                    </select> <button id="new_sub"></button>
+
+                    <select name="lang_id" id="lang_id">
                         <option value="0">Родной язык*</option>
                         <?php
                         foreach ($languages as $option) {
@@ -104,7 +122,7 @@
                         <?php
                         foreach ($ages as $inp) {
                             echo '<label>';
-                                echo '<input value="'.$inp['id'].'" name="age[]" type="checkbox">';
+                                echo '<input value="'.$inp['id'].'" name="age_id[]" type="checkbox">';
                                 echo '<span></span> ';
                                 echo $inp['age'];
                                 echo "</label>";
@@ -116,17 +134,17 @@
                         <?php
                         foreach ($levels as $inp) {
                                 echo '<label>';
-                                echo '<input value="'.$inp['id'].'" name="level[]" type="checkbox">';
+                                echo '<input value="'.$inp['id'].'" name="level_id[]" type="checkbox">';
                                 echo '<span></span> ';
                                 echo $inp['level'];
                                 echo "</label>";
                             }
                         ?>
-                    <h2>Ваша цена за 1 час (50 мин.) в $*</h2>
+                    <h2>Цена за 1 час (50 мин.) в $*</h2>
                     <div>
-                        <input type="text" placeholder="Ваша сумма, $">
+                        <input type="text" placeholder="Ваша цена $" name="price" id="price">
                         + наш % =
-                        <input type="text" placeholder="Для ученика, $">
+                        <input type="text" placeholder="Для ученика $" id="sprice">
                     </div>
                 </div>
                 <div>
@@ -135,7 +153,7 @@
                          <?php
                         for ($i=0; $i < 8; $i++) {
                             echo '<label>';
-                            echo '<input value="'.$specializations[$i]['id'].'" name="specialization[]" type="checkbox">';
+                            echo '<input value="'.$specializations[$i]['id'].'" name="specialization_id[]" type="checkbox">';
                             echo '<span></span> ';
                             echo $specializations[$i]['specialization'];
                             echo "</label>";
@@ -143,7 +161,7 @@
                         echo '</div><div>';
                         for ($i=8; $i < count($specializations); $i++) {
                             echo '<label>';
-                            echo '<input value="'.$specializations[$i]['id'].'" name="specialization[]" type="checkbox">';
+                            echo '<input value="'.$specializations[$i]['id'].'" name="specialization_id[]" type="checkbox">';
                             echo '<span></span> ';
                             echo $specializations[$i]['specialization'];
                             echo "</label>";
@@ -153,7 +171,7 @@
                 </div>
             </form>
             </div>
-                        <button type="submit" name="button">Сохранить</button>
+                        <button type="submit" name="button" id="save_subject">Сохранить</button>
         </aside>
         <aside id="pay">
             <div>
@@ -175,11 +193,11 @@
         <aside id="edu">
             <div>
                 <div class="vuz">
-                    <input type="text" name="" placeholder="ВУЗ (напишите полное название)">
-                    <input type="text" name="" value="" placeholder="Специальность">
+                    <input type="text" id="university" placeholder="ВУЗ (напишите полное название)">
+                    <input type="text" id="specialty" placeholder="Специальность">
                 </div>
                 <div class="deg">
-                    <select class="" name="">
+                    <select id="uni_year">
                         <option value="0">Год окончания</option>
                         <?php
                         $year = date('Y');
@@ -188,7 +206,7 @@
                         }
                          ?>
                     </select>
-                    <select class="" name="">
+                    <select id="experience">
                         <option value="0">Опыт работы репетитором (лет)</option>
                         <?php
                         for ($i=0;$i<=50;$i++){
@@ -198,7 +216,7 @@
                     </select>
                 </div>
                 <div class="year">
-                    <select class="" name="">
+                    <select id="degree_id">
                         <option value="0">Ученая степень</option>
                         <?php
                         foreach ($uni_degrees as $option) {
@@ -209,9 +227,9 @@
                 </div>
             </div>
             <div>
-                <textarea placeholder="Опыт преподавания (до 400 символов)"></textarea>
+                <textarea placeholder="Опыт преподавания (до 400 символов)" id="exp_comment"></textarea>
             </div>
-            <button type="submit" name="button">Сохранить</button>
+            <button type="submit" name="button" id="save_edu">Сохранить</button>
         </aside>
         <aside id="docs">
             <div class="header">
@@ -221,21 +239,25 @@
             <div class="doc">
 
                 <button id="load1">Загрузить</button>
-                <?php echo form_open_multipart('main/upload2', array('id' => 'file_form1' ));?>
-                    <input type="file" name="userfile" size="20" id="add-file1" class="hidden">
-                </form>
+                <input type="file" name="userfile" size="20" id="add-file1" class="hidden">
                 <div class="img"  id="load_block1">
-
+                    <?php
+                        if ($repetitor['doc1']){
+                            echo '<img src="../../images/'.$repetitor['doc1'].'" alt="document">';
+                        }
+                     ?>
                 </div>
             </div>
             <div class="doc">
 
                 <button id="load2">Загрузить</button>
-                <?php echo form_open_multipart('main/upload2', array('id' => 'file_form2' ));?>
-                    <input type="file" name="userfile" size="20" id="add-file2" class="hidden">
-                </form>
+                <input type="file" name="userfile" size="20" id="add-file2" class="hidden">
                 <div class="img" id="load_block2">
-
+                    <?php
+                        if ($repetitor['doc2']){
+                            echo '<img src="../../images/'.$repetitor['doc2'].'" alt="document">';
+                        }
+                     ?>
                 </div>
             </div>
             <button type="submit" name="button">Сохранить</button>
