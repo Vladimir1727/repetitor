@@ -74,7 +74,7 @@ class RepetitorModel extends CI_Model{
 
 	public function update($arr){
 		foreach ($arr as $k => $v) {
-			$this->repetitor[$k] = $v;
+			$this->repetitor[$k] = trim($v);
 		}
 		$this->db->where('id', $this->repetitor['id']);
 		$this->db->update('repetitors', $this->repetitor);
@@ -120,6 +120,9 @@ class RepetitorModel extends CI_Model{
 			return false;
 		}
 		$s = $res[0]['subject'.$pos];
+		if (!$s){
+			return false;
+		}
 		$data['subject_id'] = $s;
 		//ages
 		$q = $this->db->query('select age_id from rsa where subject_id='.$s.' and repetitor_id='.$repetitor_id);

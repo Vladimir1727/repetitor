@@ -46,7 +46,7 @@
                             }
                         ?>
                     </select>
-                    <input type="text" name="phone" placeholder="Телефон" id="phone" value="<?php echo $repetitor['phone'] ?>">
+                    <input type="text" name="phone" placeholder="Телефон" id="phone" value="+<?php echo $repetitor['phone'] ?>">
                     <input type="text" name="skype" placeholder="Логин Skype*" id="skype" value="<?php echo $repetitor['skype'] ?>">
                 </div>
                 <div>
@@ -171,7 +171,7 @@
                 </div>
             </form>
             </div>
-                        <button type="submit" name="button" id="save_subject">Сохранить</button>
+                <button type="submit" name="button" id="save_subject">Сохранить</button>
         </aside>
         <aside id="pay">
             <div>
@@ -179,12 +179,12 @@
                 <h3>(Внимательно проверьте правильность внесённых данных! Вы несёте полную ответственность за не верно внесённые персональные данные!)</h3>
                 <label>
                     <span class="img"><img src="<?php echo base_url(); ?>img/yandex.png" alt="yandex"></span>
-                    <input type="text" placeholder="номер кошелька" id="yandex">
+                    <input type="text" placeholder="номер кошелька" id="yandex" value="<?php echo $repetitor['yandex']; ?>">
                     <span class="check"></span>
                 </label>
                 <label>
                     <span class="img"><img src="<?php echo base_url(); ?>img/paypal.png" alt="paypal"></span>
-                    <input type="text" placeholder="аккаунт" id="paypal">
+                    <input type="text" placeholder="аккаунт" id="paypal" value="<?php echo $repetitor['paypal']; ?>">
                     <span class="check"></span>
                 </label>
             </div>
@@ -193,8 +193,8 @@
         <aside id="edu">
             <div>
                 <div class="vuz">
-                    <input type="text" id="university" placeholder="ВУЗ (напишите полное название)">
-                    <input type="text" id="specialty" placeholder="Специальность">
+                    <input type="text" id="university" placeholder="ВУЗ (напишите полное название)" value="<?php echo $repetitor['university']; ?>">
+                    <input type="text" id="specialty" placeholder="Специальность" value="<?php echo $repetitor['specialty']; ?>">
                 </div>
                 <div class="deg">
                     <select id="uni_year">
@@ -202,7 +202,11 @@
                         <?php
                         $year = date('Y');
                         for ($i = date('Y'); $i >= 1965; $i--){
-                            echo '<option value="'.$i.'">'.$i.'</option>';
+                            if ($repetitor['uni_year']==$i){
+                                echo '<option value="'.$i.'" selected="selected">'.$i.'</option>';
+                            }else{
+                                echo '<option value="'.$i.'">'.$i.'</option>';
+                            }
                         }
                          ?>
                     </select>
@@ -210,7 +214,11 @@
                         <option value="-1">Опыт работы репетитором (лет)</option>
                         <?php
                         for ($i=0;$i<=50;$i++){
-                            echo '<option value="'.$i.'">'.$i.'</option>';
+                            if ($repetitor['experience']==$i){
+                                echo '<option value="'.$i.'" selected="selected">'.$i.'</option>';
+                            }else{
+                                echo '<option value="'.$i.'">'.$i.'</option>';
+                            }
                         }
                          ?>
                     </select>
@@ -220,14 +228,18 @@
                         <option value="0">Ученая степень</option>
                         <?php
                         foreach ($uni_degrees as $option) {
-                                echo '<option value="'.$option['id'].'">'.$option['uni_degree'].'</option>';
+                            if ($repetitor['degree_id']==$i){
+                                echo '<option value="'.$i.'" selected="selected">'.$i.'</option>';
+                            }else{
+                                echo '<option value="'.$i.'">'.$i.'</option>';
                             }
+                        }
                         ?>
                     </select>
                 </div>
             </div>
             <div>
-                <textarea placeholder="Опыт преподавания (до 400 символов)" id="exp_comment"></textarea>
+                <textarea placeholder="Опыт преподавания (до 400 символов)" id="exp_comment"><?php echo $repetitor['exp_comment'] ?></textarea>
             </div>
             <button type="submit" name="button" id="save_edu">Сохранить</button>
         </aside>
@@ -267,9 +279,28 @@
                 <h3>Состояния профиля по умолчанию</h3>
                 <p><span class="check"></span>На рассмотрении</p>
                 <h3>Вы можете изменить состояние профиля</h3>
-                <label><input type="checkbox" name="" value=""><span></span> Не активен (не отображается на сайте)</label>
-                <label><input type="checkbox" name="" value=""><span></span> Удалить профиль с сайта</label>
-                <button type="submit" name="button">Сохранить</button>
+                <label>
+                <?php
+                    if ($repetitor['activity']==0){
+                        echo '<input type="checkbox" id="passive_status" checked="checked">';
+                    } else{
+                        echo '<input type="checkbox" id="passive_status">';
+                    }
+                 ?>
+                    <span></span> Не активен (не отображается на сайте)
+                </label>
+                <label>
+
+                    <?php
+                    if ($repetitor['status']==3){
+                        echo '<input type="checkbox" id="delete_status" checked="checked">';
+                    } else{
+                        echo '<input type="checkbox" id="delete_status">';
+                    }
+                     ?>
+                    <span></span> Удалить профиль с сайта
+                </label>
+                <button type="submit" name="button" id="save_status">Сохранить</button>
             </div>
         </aside>
     </section>

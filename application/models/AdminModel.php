@@ -320,7 +320,7 @@ class AdminModel extends CI_Model{
 			status tinyint default 0,
 			reight tinyint default 0,
 			balance int unsigned default 0,
-			phone varchar (12) default NULL UNIQUE,
+			phone varchar (20) default NULL UNIQUE,
 			subject1 int(5) unsigned default NULL,
 			subject2 int(5) unsigned default NULL,
 			doc1 varchar (256) default NULL,

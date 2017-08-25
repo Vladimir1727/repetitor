@@ -110,8 +110,7 @@ $('#save_personal').click(function(){
 $('#price').on('keyup',function(){
     var v = parseInt($('#price').val());
     if (v > 0){
-
-        $('#sprice').val(parseInt(v*(1+proc)));
+        $('#sprice').val(Math.round(v*(1+proc)));
     } else{
         $('#sprice').val('');
     }
@@ -449,6 +448,32 @@ $('#save_pay').click(function(){
         });
     } else{
         errdiag('Предупреждение', 'введите хотя бы один способ оплаты');
+    }
+    return false;
+});
+
+mask('phone');
+
+$('#save_status').click(function(){
+    var del = $('#delete_status').prop('checked');
+    var pas = $('#passive_status').prop('checked');
+    if (pas == true){
+        rUpdate({
+            'activity' : 0
+        });
+    } else{
+        rUpdate({
+            'activity' : 1
+        });
+    }
+    if (del == true){
+        rUpdate({
+            'status' : 3
+        });
+    } else{
+        rUpdate({
+            'status' : 0
+        });
     }
     return false;
 });

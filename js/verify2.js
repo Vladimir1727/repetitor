@@ -81,3 +81,54 @@ function verify2(arr){
 	}
 return f;
 }
+
+function mask(id){
+    var inp=document.getElementById(id);
+    var old="+(";
+    var exs = {
+        '0': '',
+        '1': '\\+',
+        '2': '\\+\\(',
+        '3': '\\+\\(\\d{1}',
+        '4': '\\+\\(\\d{2}',
+        '5': '\\+\\(\\d{3}',
+        '6': '\\+\\(\\d{3}\\)',
+        '7': '\\+\\(\\d{3}\\) ',
+        '8': '\\+\\(\\d{3}\\) \\d{1}',
+        '9': '\\+\\(\\d{3}\\) \\d{2}',
+        '10': '\\+\\(\\d{3}\\) \\d{3}',
+        '11': '\\+\\(\\d{3}\\) \\d{4}',
+        '12': '\\+\\(\\d{3}\\) \\d{5}',
+        '13': '\\+\\(\\d{3}\\) \\d{6}',
+        '14': '\\+\\(\\d{3}\\) \\d{7}',
+		'15': '\\+\\(\\d{3}\\) \\d{8}',
+		'16': '\\+\\(\\d{3}\\) \\d{9}',
+		'17': '\\+\\(\\d{3}\\) \\d{10}',
+		'18': '\\+\\(\\d{3}\\) \\d{11}',
+		'19': '\\+\\(\\d{3}\\) \\d{12}',
+		'20': '\\+\\(\\d{3}\\) \\d{13}',
+    };
+    inp.onfocus = function(){
+        if (inp.value==''){
+            inp.value = old;
+			console.log('make old');
+        }
+    }
+	inp.onkeyup = function(event){
+        if (inp.value.search(exs[inp.value.length])==-1){
+			inp.value=old;
+        }
+        if (event.keyCode!=8){
+            if (inp.value.length<3){
+                inp.value="+(";
+            }
+            if (inp.value.length==5){
+                inp.value+=") ";
+            }
+            if (inp.value.length>20){
+                inp.value=old;
+            }
+        }
+        old = inp.value;
+    }
+}
