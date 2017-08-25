@@ -50,8 +50,7 @@ class Repetitor extends CI_Controller {
 		  } else {
 			  try {
 			  	$this->RepetitorModel->addNewRep($this->input->post('email', TRUE), $this->input->post('pass', TRUE));
-				$login = $this->RepetitorModel->login($this->input->post('email', TRUE), $this->input->post('pass', TRUE));
-				$this->session->set_userdata('repetitor_id', $login);
+				$this->RepetitorModel->login($this->input->post('email', TRUE), $this->input->post('pass', TRUE));
 			  } catch (Exception $e) {
 				  exit($e->getMessage());
 			  }
@@ -72,7 +71,6 @@ class Repetitor extends CI_Controller {
 			  } catch (Exception $e) {
 				  exit($e->getMessage());
 			  }
-			  $this->session->set_userdata('repetitor_id', $login);
 			  exit("0");
 		  }
 	}

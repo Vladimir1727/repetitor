@@ -33,4 +33,14 @@ class StudentModel extends CI_Model{
 			return '0';
 		}
 	}
+
+	public function findOne($id){
+		$q = $this->db->query('select * from students where id='.$id);
+		$r = $q->result_array();
+		if (count($r)==0){
+			throw new Exception('нет такого id='.$id);
+		}
+		$this->student = $r[0];
+		return $this;
+	}
 }

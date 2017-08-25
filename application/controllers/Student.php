@@ -22,6 +22,7 @@ class Student extends CI_Controller {
 		 parent::__construct();
 		 $this->load->helper(array('form', 'url'));
 		 $this->load->model('StudentModel');
+		 $this->load->model('MainModel');
 	 }
 
 	public function newStudent()
@@ -34,9 +35,11 @@ class Student extends CI_Controller {
 		  } else {
 			  try {
 			  	$this->StudentModel->addNew($this->input->post('email', TRUE), $this->input->post('pass', TRUE));
+				$login = $this->StudentModel->login($this->input->post('email', TRUE), $this->input->post('pass', TRUE));
 			  } catch (Exception $e) {
 				  exit($e->getMessage());
 			  }
+			  $this->session->set_userdata('student_id', $login);
 			  exit("0");
 		  }
 	}
@@ -50,12 +53,39 @@ class Student extends CI_Controller {
 			  exit('некорректные данные');
 		  } else {
 			  try {
-			  	$login = $this->StudentModel->login($this->input->post('email', TRUE), $this->input->post('pass', TRUE));
+			  	$this->StudentModel->login($this->input->post('email', TRUE), $this->input->post('pass', TRUE));
 			  } catch (Exception $e) {
 				  exit($e->getMessage());
 			  }
 			  exit("0");
 		  }
+	}
+
+	public function index()
+	{
+		if (!$this->session->has_userdata('student_id')){
+			 redirect('/main/slogin');
+		} else{
+			$student = $this->StudentModel->findOne($this->session->student_id);
+			if ($student->student['status'] == 0){
+				redirect('/student/profile');
+			} else{
+				echo ' student main page';
+			}
+		}
+	}
+
+	public function profile(){
+		if (!$this->session->has_userdata('student_id')){
+			 redirect('/main/slogin');
+		} else{
+			$student = $this->StudentModel->findOne($this->session->student_id);
+			$data=array(
+				'student'=> $student->student,
+				'tzones'=>$this->MainModel->getAll('timezones'),
+			);
+			$this->load->view('student/profile', $data);
+		}
 	}
 
 }

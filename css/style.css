@@ -923,7 +923,7 @@ main.rep-info {
             text-align: center;
             border: 1px #fff solid; }
             main.rep-info section.result aside.sh table tbody tr td.free:after {
-              content: 'Свободен'; }
+              content: '╨б╨▓╨╛╨▒╨╛╨┤╨╡╨╜'; }
           main.rep-info section.result aside.sh table tbody tr td:first-of-type {
             text-align: center;
             border: none;
@@ -932,7 +932,7 @@ main.rep-info {
     main.rep-info section.result aside.video {
       position: relative;
       padding-bottom: 56.25%;
-      /* задаёт высоту контейнера для 16:9 (если 4:3 — поставьте 75%) */
+      /* ╨╖╨░╨┤╨░╤С╤В ╨▓╤Л╤Б╨╛╤В╤Г ╨║╨╛╨╜╤В╨╡╨╣╨╜╨╡╤А╨░ ╨┤╨╗╤П 16:9 (╨╡╤Б╨╗╨╕ 4:3 тАФ ╨┐╨╛╤Б╤В╨░╨▓╤М╤В╨╡ 75%) */
       padding-top: 30px;
       height: 0;
       overflow: hidden; }
@@ -1688,7 +1688,8 @@ div.rep-header {
       width: 70px; }
       div.rep-header section div.avatar h3, div.rep-header section div.avatar h4 {
         font-size: 14px;
-        margin: 7px 0 0 0; }
+        margin: 7px 0 0 0;
+        overflow: hidden; }
       div.rep-header section div.avatar div.img {
         width: 50px;
         height: 50px;
@@ -2248,6 +2249,245 @@ div#modal_login a {
     div#modal_login a:last-of-type:hover {
       background: #ff7e5b; }
 
+div.student-header {
+  background: #fff;
+  margin: 0;
+  padding: 0; }
+  div.student-header section {
+    margin: 0 auto;
+    max-width: 1200px; }
+    div.student-header section:after {
+      content: '';
+      display: block;
+      clear: both; }
+    div.student-header section > div {
+      float: right;
+      min-height: 125px; }
+      div.student-header section > div.logo {
+        float: left; }
+    div.student-header section div.logo img {
+      margin: 10px 0 7px 5px; }
+    div.student-header section div.menu > ul {
+      color: #999;
+      font-family: "OpenSans Regular", Arial, sans-serif;
+      font-size: 16px;
+      margin: 90px 0 0 0;
+      text-align: center;
+      padding: 0; }
+      div.student-header section div.menu > ul > li {
+        float: left;
+        display: block;
+        list-style: none;
+        margin-right: 15px; }
+        div.student-header section div.menu > ul > li > a {
+          display: block;
+          height: 30px;
+          padding: 2px 10px;
+          color: #666;
+          text-decoration: none;
+          border: 1px #666 solid; }
+          div.student-header section div.menu > ul > li > a:hover {
+            background: #eee;
+            color: #028163;
+            border-color: #028163;
+            text-decoration: none; }
+        div.student-header section div.menu > ul > li span.s {
+          display: block;
+          width: 18px;
+          height: 2px;
+          background: #666;
+          margin-bottom: 3px; }
+          div.student-header section div.menu > ul > li span.s:first-of-type {
+            margin-top: 6px; }
+    div.student-header section div.menu li.mail {
+      background: url("../img/mail.png");
+      background-position: center;
+      background-repeat: no-repeat; }
+      div.student-header section div.menu li.mail a {
+        width: 54px;
+        color: transparent; }
+      div.student-header section div.menu li.mail:hover {
+        background: #eee; }
+      div.student-header section div.menu li.mail a:hover {
+        color: transparent;
+        background: url("../img/mail_green.png") center no-repeat; }
+    div.student-header section div.menu li#slide {
+      margin-right: 0;
+      position: relative; }
+      div.student-header section div.menu li#slide ul {
+        display: none;
+        z-index: 1;
+        position: absolute;
+        right: 0;
+        top: 30px;
+        list-style: none;
+        color: #666;
+        font-family: "OpenSans Regular", Arial, sans-serif;
+        font-size: 16px;
+        margin: 0;
+        text-align: left; }
+        div.student-header section div.menu li#slide ul > li {
+          float: left;
+          display: block;
+          list-style: none;
+          margin-bottom: 0px; }
+          div.student-header section div.menu li#slide ul > li > a {
+            display: block;
+            min-height: 30px;
+            width: 170px;
+            padding: 2px 10px;
+            color: #666;
+            text-decoration: none;
+            border: 1px #666 solid;
+            background: #fff; }
+            div.student-header section div.menu li#slide ul > li > a:hover {
+              background: #eee;
+              text-decoration: none;
+              color: #028163;
+              border-color: #028163; }
+          div.student-header section div.menu li#slide ul > li:nth-child(1), div.student-header section div.menu li#slide ul > li:nth-child(2), div.student-header section div.menu li#slide ul > li:nth-child(3), div.student-header section div.menu li#slide ul > li:nth-child(4), div.student-header section div.menu li#slide ul > li:nth-child(5) {
+            display: none; }
+          div.student-header section div.menu li#slide ul > li.mail {
+            background: #fff; }
+            div.student-header section div.menu li#slide ul > li.mail > a {
+              color: transparent;
+              background: url("../img/mail.png");
+              background-position: center;
+              background-repeat: no-repeat; }
+            div.student-header section div.menu li#slide ul > li.mail:hover {
+              background: #eee; }
+            div.student-header section div.menu li#slide ul > li.mail > a:hover {
+              color: transparent;
+              background: url("../img/mail_green.png") center no-repeat; }
+      div.student-header section div.menu li#slide:hover {
+        background: #fff; }
+        div.student-header section div.menu li#slide:hover a {
+          background: #fff; }
+      div.student-header section div.menu li#slide:hover ul {
+        display: block; }
+      div.student-header section div.menu li#slide:hover > a > span {
+        background-color: #028163; }
+    div.student-header section div.balance p {
+      margin: 20px 0 0 0;
+      color: #FF5C39;
+      border: 1px #FF5C39 solid;
+      padding: 0 7px;
+      height: 18px;
+      font-family: "Arial Narrow", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1; }
+    div.student-header section div.balance a {
+      display: block;
+      margin: 10px 0 0 0;
+      color: #999;
+      border: 1px #999 solid;
+      padding: 0 7px;
+      height: 18px;
+      font-family: "Arial Narrow", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1;
+      background: #fff;
+      text-decoration: none; }
+      div.student-header section div.balance a:hover {
+        background: #eee; }
+    div.student-header section div.avatar {
+      margin-left: 30px;
+      font-family: "Arial Narrow", Arial, sans-serif;
+      color: #999;
+      text-align: center;
+      width: 70px; }
+      div.student-header section div.avatar h3, div.student-header section div.avatar h4 {
+        font-size: 14px;
+        margin: 7px 0 0 0;
+        overflow: hidden; }
+      div.student-header section div.avatar div.img {
+        width: 50px;
+        height: 50px;
+        margin: 10px auto 0 auto;
+        border: 1px #999 solid;
+        border-radius: 50%;
+        overflow: hidden; }
+        div.student-header section div.avatar div.img img {
+          width: 50px; }
+      div.student-header section div.avatar div.switch {
+        width: 26px;
+        height: 16px;
+        margin: 0 auto; }
+        div.student-header section div.avatar div.switch.on {
+          background: url("../img/switch_on.png") no-repeat center; }
+        div.student-header section div.avatar div.switch.off {
+          background: url("../img/switch_off.png") no-repeat center; }
+
+main.student-profile {
+  padding: 15px 10px;
+  max-width: 1200px;
+  width: 100%;
+  margin: 30px auto 100px auto;
+  background: #fff; }
+  main.student-profile section {
+    margin: 0 auto;
+    max-width: 830px;
+    width: 100%; }
+    main.student-profile section:after {
+      content: '';
+      display: block;
+      clear: both; }
+    main.student-profile section div.avatar {
+      float: left;
+      width: 185px;
+      padding-top: 20px;
+      margin-right: 15px; }
+      main.student-profile section div.avatar div.img {
+        width: 183px;
+        height: 183px;
+        border: 1px #999 solid;
+        border-radius: 50%;
+        overflow: hidden; }
+        main.student-profile section div.avatar div.img img {
+          width: 185px; }
+      main.student-profile section div.avatar p {
+        font-size: 12px;
+        padding: 10px 0; }
+      main.student-profile section div.avatar button {
+        display: block;
+        margin: 0 auto;
+        background: #FF5C39;
+        border: none;
+        width: 170px;
+        height: 30px;
+        color: #fff;
+        font-family: "OpenSans Regular", Arial, sans-serif;
+        font-size: 16px;
+        text-align: center; }
+        main.student-profile section div.avatar button:hover {
+          background: #ff7e5b; }
+    main.student-profile section div.info div {
+      width: 200px;
+      float: left;
+      padding: 0 0 0 30px;
+      margin-bottom: 70px; }
+      main.student-profile section div.info div input, main.student-profile section div.info div select {
+        width: 170px;
+        padding: 5px 5px;
+        font-size: 14px;
+        color: #222f3b;
+        border: 1px #999 solid;
+        height: 30px;
+        margin-bottom: 35px; }
+    main.student-profile section div.info button {
+      display: block;
+      margin: 0 auto;
+      background: #FF5C39;
+      border: none;
+      width: 170px;
+      height: 30px;
+      color: #fff;
+      font-family: "OpenSans Regular", Arial, sans-serif;
+      font-size: 16px;
+      text-align: center; }
+      main.student-profile section div.info button:hover {
+        background: #ff7e5b; }
+
 @media screen and (max-width: 1200px) {
   section.filter > div.row {
     max-width: 410px;
@@ -2276,6 +2516,11 @@ div#modal_login a {
     display: none; }
   div.rep-header section div.menu ul li#slide ul li:nth-child(5) {
     display: inline-block; } }
+@media screen and (max-width: 1155px) {
+  div.student-header section div.menu ul li:nth-child(5) {
+    display: none; }
+  div.student-header section div.menu ul li#slide ul li:nth-child(5) {
+    display: inline-block; } }
 @media screen and (max-width: 1100px) {
   main.rep-profile section.warp aside#subject > div {
     margin: 10px auto;
@@ -2296,7 +2541,12 @@ div#modal_login a {
       height: auto; }
   main.rep-profile section.warp aside#edu div.vuz, main.rep-profile section.warp aside#edu div.deg, main.rep-profile section.warp aside#edu div.year {
     float: none;
-    WIDTH: 100%; } }
+    WIDTH: 100%; }
+
+  div.student-header section div.menu ul li:nth-child(4) {
+    display: none; }
+  div.student-header section div.menu ul li#slide ul li:nth-child(4) {
+    display: inline-block; } }
 @media screen and (max-width: 1163px) {
   section.comfort aside {
     max-width: 858px; } }
@@ -2390,7 +2640,12 @@ div#modal_login a {
   main.rep-info section.result aside.sh header h2, main.rep-info section.result aside.sh header div.tzone, main.rep-info section.result aside.sh header div.pagg {
     float: none;
     margin: 5px auto;
-    text-align: center; } }
+    text-align: center; }
+
+  div.student-header section div.menu ul li:nth-child(3) {
+    display: none; }
+  div.student-header section div.menu ul li#slide ul li:nth-child(3) {
+    display: inline-block; } }
 @media screen and (max-width: 890px) {
   section.start-rep aside {
     max-width: 715px; }
@@ -2409,6 +2664,18 @@ div#modal_login a {
 @media screen and (max-width: 877px) {
   section.comfort aside {
     max-width: 572px; } }
+@media screen and (max-width: 850px) {
+  main.student-profile section div.avatar {
+    float: none;
+    margin: 0 auto 30px auto; }
+  main.student-profile section div.info {
+    float: none;
+    margin: 0 auto; }
+    main.student-profile section div.info > div {
+      width: 33%;
+      padding: 0;
+      text-align: center;
+      margin-bottom: 20px; } }
 @media screen and (max-width: 840px) {
   section.reg form {
     max-width: 777px;
@@ -2481,7 +2748,12 @@ div#modal_login a {
       float: none;
       margin: 0 auto; }
     main.rep-profile section.warp aside#present div.info {
-      margin: 0 auto; } }
+      margin: 0 auto; }
+
+  div.student-header section div.menu ul li:nth-child(2) {
+    display: none; }
+  div.student-header section div.menu ul li#slide ul li:nth-child(2) {
+    display: inline-block; } }
 @media screen and (max-width: 694px) {
   section.start aside {
     max-width: 225px; }
@@ -2492,6 +2764,11 @@ div#modal_login a {
   div.rep-header section div.menu ul li:nth-child(1) {
     display: none; }
   div.rep-header section div.menu ul li#slide ul li:nth-child(1) {
+    display: inline-block; } }
+@media screen and (max-width: 650px) {
+  div.student-header section div.menu ul li:nth-child(1) {
+    display: none; }
+  div.student-header section div.menu ul li#slide ul li:nth-child(1) {
     display: inline-block; } }
 @media screen and (max-width: 627px) {
   main.rep-profile section.warp aside#pay > div > label {
@@ -2537,7 +2814,7 @@ div#modal_login a {
     main.rep-info section.result aside.sh table thead tr th {
       text-align: center; }
   main.rep-info section.result aside.sh table tbody tr td.free:after {
-    content: 'СВ.'; }
+    content: '╨б╨Т.'; }
 
   main.rep-profile section.warp aside#present div.avatar {
     width: 150px; }
@@ -2561,6 +2838,13 @@ div#modal_login a {
     main.rep-profile section.warp aside#subject > div > form > div:nth-child(3) > div {
       float: none;
       width: 100%; } }
+@media screen and (max-width: 560px) {
+  main.student-profile section div.info > div {
+    float: none;
+    width: 100%; }
+    main.student-profile section div.info > div input, main.student-profile section div.info > div select {
+      display: block;
+      margin: 0 auto 20px auto; } }
 @media screen and (max-width: 493px) {
   div.rep-header {
     position: relative; }
@@ -2577,6 +2861,24 @@ div#modal_login a {
       top: -70px;
       left: -20px; }
       div.rep-header section > div.menu > ul > li#slide ul {
+        right: auto;
+        left: -40px; }
+
+  div.student-header {
+    position: relative; }
+    div.student-header section > div.avatar {
+      margin-left: 0; }
+    div.student-header section > div.balance {
+      position: absolute;
+      float: none;
+      top: 0px;
+      right: 65px; }
+    div.student-header section > div.menu {
+      float: none;
+      position: absolute;
+      top: -70px;
+      left: 20px; }
+      div.student-header section > div.menu > ul > li#slide ul {
         right: auto;
         left: -40px; } }
 @media screen and (max-width: 416px) {

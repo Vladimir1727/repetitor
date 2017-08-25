@@ -17,6 +17,7 @@ $('#logform').submit(function(){
                 console.log('data=', data);
                 if (data=='0'){
                     console.log('login');
+                    document.location = '/index.php/student';
                 } else{
                     errdiag('Ошибка', data);
                 }

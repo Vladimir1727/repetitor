@@ -2135,6 +2135,7 @@ div.rep-header{
 			h3, h4{
 				font-size: 14px;
 				margin: 7px 0 0 0;
+				overflow: hidden;
 			}
 			div.img{
 				width: 50px;
@@ -2786,6 +2787,291 @@ div#modal_login{
 }
 //end modal login
 
+//student header
+div.student-header{
+	background: #fff;
+	margin: 0;
+	padding: 0;
+	section{
+		@include end;
+		margin: 0 auto;
+		max-width: 1200px;
+		>div{
+			float: right;
+			min-height: 125px;
+			&.logo{
+				float: left;
+			}
+		}
+		div.logo{
+			img{
+				margin: 10px 0 7px 5px;
+			}
+		}
+		div.menu{
+			>ul{
+				color: $color_gray2;
+				@include o-reg;
+				font-size: 16px;
+				margin: 90px 0 0 0;
+				text-align: center;
+				padding: 0;
+				>li{
+					float: left;
+					display: block;
+					list-style: none;
+					margin-right: 15px;
+					>a{
+						display: block;
+						height: 30px;
+						padding: 2px 10px;
+						color: #666;
+						text-decoration: none;
+						border: 1px #666 solid;
+						&:hover{
+							background: #eee;
+							color: $color_green5;
+							border-color: $color_green5;
+							text-decoration: none;
+						}
+					}
+					span.s{
+						display: block;
+						width: 18px;
+						height: 2px;
+						background:  #666;
+						margin-bottom: 3px;
+						&:first-of-type{
+							margin-top: 6px;
+						}
+					}
+				}
+			}
+			li.mail{
+				background: url('../img/mail.png');
+				background-position: center;
+				background-repeat: no-repeat;
+				a{
+					width: 54px;
+					color: transparent;
+				}
+				&:hover{
+					background: #eee;
+				}
+				a:hover{
+					color: transparent;
+					background: url('../img/mail_green.png') center no-repeat;
+				}
+			}
+			li#slide{
+				margin-right: 0;
+				position: relative;
+
+				ul{
+					display: none;
+					z-index: 1;
+					position: absolute;
+					right: 0;
+					top: 30px;
+					list-style: none;
+					color: #666;
+					@include o-reg;
+					font-size: 16px;
+					margin: 0;
+					text-align: left;
+					>li{
+						float: left;
+						display: block;
+						list-style: none;
+						margin-bottom: 0px;
+						>a{
+							display: block;
+							min-height: 30px;
+							width: 170px;
+							padding: 2px 10px;
+							color: #666;
+							text-decoration: none;
+							border: 1px #666 solid;
+							background: #fff;
+							&:hover{
+								background: #eee;
+								text-decoration: none;
+								color: $color_green5;
+								border-color: $color_green5;
+							}
+						}
+						&:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5){
+							display: none;
+						};
+						&.mail{
+							background: #fff;
+							>a{
+								color: transparent;
+								background: url('../img/mail.png');
+								background-position: center;
+								background-repeat: no-repeat;
+							}
+							&:hover{
+								background: #eee;
+							}
+							>a:hover{
+								color: transparent;
+								background: url('../img/mail_green.png') center no-repeat;
+							}
+						}
+					}
+				}
+				&:hover{
+					background: #fff;
+					a{
+						background: #fff;
+					}
+				}
+				&:hover ul{
+					display: block;
+				}
+				&:hover>a>span{
+					background-color : $color_green5;
+				}
+			}
+		}
+		div.balance{
+			p{
+				margin: 20px 0 0 0;
+				color: $color_orange;
+				border: 1px $color_orange solid;
+				padding: 0 7px;
+				height: 18px;
+				@include f-n;
+				font-size: 16px;
+				line-height: 1;
+			}
+			a{
+				display: block;
+				margin: 10px 0 0 0;
+				color: $color_gray2;
+				border: 1px $color_gray2 solid;
+				padding: 0 7px;
+				height: 18px;
+				@include f-n;
+				font-size: 16px;
+				line-height: 1;
+				background: #fff;
+				text-decoration: none;
+				&:hover{
+					background: #eee;
+				}
+			}
+		}
+		div.avatar{
+			margin-left: 30px;
+			@include f-n;
+			color: $color_gray2;
+			text-align: center;
+			width: 70px;
+			h3, h4{
+				font-size: 14px;
+				margin: 7px 0 0 0;
+				overflow: hidden;
+			}
+			div.img{
+				width: 50px;
+				height: 50px;
+				margin: 10px auto 0 auto;
+				border: 1px $color_gray2 solid;
+				border-radius: 50%;
+				overflow: hidden;
+				img{
+					width: 50px;
+				}
+			}
+			div.switch{
+				width: 26px;
+				height: 16px;
+				margin: 0 auto;
+				&.on{
+					background: url('../img/switch_on.png') no-repeat center;
+				}
+				&.off{
+					background: url('../img/switch_off.png') no-repeat center;
+				}
+			}
+		}
+	}
+}
+//end student header
+
+//start student profile
+main.student-profile{
+	padding: 15px 10px;
+	max-width: 1200px;
+	width: 100%;
+	margin: 30px auto 100px auto;
+	background: #fff;
+	section{
+		@include end;
+		margin: 0 auto;
+		max-width: 830px;
+		width: 100%;
+		div.avatar{
+			float: left;
+			width: 185px;
+			padding-top: 20px;
+			margin-right: 15px;
+			div.img{
+				width: 183px;
+				height: 183px;
+				border: 1px $color_gray2 solid;
+				border-radius: 50%;
+				overflow: hidden;
+				img{
+					width: 185px;
+				}
+			}
+			p{
+				font-size: 12px;
+				padding: 10px 0;
+			}
+			button{
+				display: block;
+				margin: 0 auto;
+				background: $color_orange;
+				border: none;
+				width: 170px;
+				height: 30px;
+				color: #fff;
+				@include o-reg;
+				font-size: 16px;
+				text-align: center;
+				&:hover{
+					background: $color_orange + $hover;
+				}
+			}
+		}
+		div.info{
+			div{
+				width: 200px;
+				float: left;
+				padding: 0 0 0 30px;
+				margin-bottom: 70px;
+				input, select{
+					width: 170px;
+	                padding: 5px 5px;
+	                font-size: 14px;
+	                color: $color_dblue2;
+	                border: 1px $color_gray2 solid;
+	                height: 30px;
+					margin-bottom: 35px;
+	            }
+			}
+			button{
+				@include saveBut;
+			}
+		}
+	}
+}
+//end student profile
+
 @media screen and (max-width: 1200px) {
 	section.filter{
 		>div.row{
@@ -2821,6 +3107,31 @@ div#modal_login{
 		}
 	}
 	div.rep-header{
+		section{
+			div.menu{
+				ul{
+					li{
+						&:nth-child(5){
+							display: none;
+						}
+					}
+					li#slide{
+						ul{
+							li{
+								&:nth-child(5){
+									display: inline-block;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 1155px) {
+	div.student-header{
 		section{
 			div.menu{
 				ul{
@@ -2885,6 +3196,28 @@ div#modal_login{
 			}
         }
     }
+	div.student-header{
+		section{
+			div.menu{
+				ul{
+					li{
+						&:nth-child(4){
+							display: none;
+						}
+					}
+					li#slide{
+						ul{
+							li{
+								&:nth-child(4){
+									display: inline-block;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 @media screen and (max-width: 1163px) {
@@ -3041,7 +3374,28 @@ div#modal_login{
 		  }
 	  }
   }
-
+  div.student-header{
+    section{
+  	  div.menu{
+  		  ul{
+  			  li{
+  				  &:nth-child(3){
+  					  display: none;
+  				  }
+  			  }
+  			  li#slide{
+  				  ul{
+  					  li{
+  						  &:nth-child(3){
+  							  display: inline-block;
+  						  }
+  					  }
+  				  }
+  			  }
+  		  }
+  	  }
+    }
+  }
 
 }
 
@@ -3090,6 +3444,27 @@ div#modal_login{
             max-width: 572px;
         }
     }
+}
+
+@media screen and (max-width: 850px) {
+	main.student-profile{
+		section{
+			div.avatar{
+				float: none;
+				margin: 0 auto 30px auto;
+			}
+			div.info{
+				float: none;
+				margin: 0 auto;
+				>div{
+					width: 33%;
+					padding: 0;
+					text-align: center;
+					margin-bottom: 20px;
+				}
+			}
+		}
+	}
 }
 
 @media screen and (max-width: 840px) {
@@ -3241,6 +3616,28 @@ div#modal_login{
 			}
 		}
 	}
+	div.student-header{
+      section{
+    	  div.menu{
+    		  ul{
+    			  li{
+    				  &:nth-child(2){
+    					  display: none;
+    				  }
+    			  }
+    			  li#slide{
+    				  ul{
+    					  li{
+    						  &:nth-child(2){
+    							  display: inline-block;
+    						  }
+    					  }
+    				  }
+    			  }
+    		  }
+    	  }
+      }
+    }
 }
 
 
@@ -3279,6 +3676,31 @@ div#modal_login{
 			}
 		}
 	}
+}
+
+@media screen and (max-width: 650px) {
+div.student-header{
+  section{
+	div.menu{
+		ul{
+			li{
+				&:nth-child(1){
+					display: none;
+				}
+			}
+			li#slide{
+				ul{
+					li{
+						&:nth-child(1){
+							display: inline-block;
+						}
+					}
+				}
+			}
+		}
+	}
+  }
+}
 }
 
 @media screen and (max-width: 627px) {
@@ -3442,6 +3864,23 @@ div#modal_login{
     }
 }
 
+@media screen and (max-width: 560px) {
+	main.student-profile{
+		section{
+			div.info{
+				>div{
+					float: none;
+					width: 100%;
+					input, select{
+						display: block;
+						margin: 0 auto 20px auto;
+					}
+				}
+			}
+		}
+	}
+}
+
 @media screen and (max-width: 493px) {
 	div.rep-header{
 		position: relative;
@@ -3461,6 +3900,36 @@ div#modal_login{
 					position: absolute;
 					top: -70px;
 					left: -20px;
+					>ul{
+						>li#slide{
+							ul{
+								right: auto;
+								left: -40px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	div.student-header{
+		position: relative;
+		section{
+			>div{
+				&.avatar{
+					margin-left: 0;
+				}
+				&.balance{
+					position: absolute;
+					float: none;
+					top: 0px;
+					right: 65px;
+				}
+				&.menu{
+					float: none;
+					position: absolute;
+					top: -70px;
+					left: 20px;
 					>ul{
 						>li#slide{
 							ul{
