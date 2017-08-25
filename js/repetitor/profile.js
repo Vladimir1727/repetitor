@@ -378,33 +378,78 @@ $('#save_edu').click(function(){
     var specialty = $('#specialty').val().trim();
     var uni_year = $('#uni_year').val();
     var experience = $('#experience').val();
-    var degree_id = $('#degree_id').val().trim();
+    var degree_id = $('#degree_id').val();
     var exp_comment = $('#exp_comment').val().trim();
     var err = false;
     var mess = '';
     if (university.lenght<3 || university.lenght>256 ){
         err = true;
-        mess = 'Неправильное название ВУЗа';
+        mess = 'Некорректное название ВУЗа <br>';
     }
-
-        //errdiag("Предупреждение", mess);
-    /*} else{
-        $.ajax({
-            url: baseUrl+'repetitor/updateSubject',
-            type:'post',
-            data: $('#subject_form').serialize(),
-            success: function(data){
-                if (data=='0'){
-                    errdiag('Сохранение', 'профиль обновлён');
-                } else{
-                    errdiag('Ошибка', data);
-                }
-            },
-            error: function(data){
-                console.log(data);
-            }
+    if (specialty.lenght<3 || specialty.lenght>256 ){
+        err = true;
+        mess = 'Некорректное название специальности <br>';
+    }
+    if (uni_year == 0){
+        err = true;
+        mess = 'Нужно выбрать год окончания <br>';
+    }
+    if (experience == -1){
+        err = true;
+        mess = 'Нужно выбрать колличесво лет опыта <br>';
+    }
+    if (degree_id == 0){
+        err = true;
+        mess = 'Нужно выбрать ученую степень <br>';
+    }
+    if (exp_comment.lenght<5 || exp_comment.lenght>256 ){
+        err = true;
+        mess = 'Некорректный комментарий <br>';
+    }
+    if (err){
+        errdiag('Предупреждение', err);
+    } else{
+        rUpdate({
+            'university' : university,
+            'specialty' : specialty,
+            'uni_year' : uni_year,
+            'experience' : experience,
+            'degree_id' : degree_id,
+            'exp_comment' : exp_comment,
         });
-    }*/
+    }
+    return false;
+});
+
+$('#save_pay').click(function(){
+    var paypal = $('#paypal').val().trim();
+    var yandex = $('#yandex').val().trim();
+    if (paypal.length>0){
+        rUpdate({
+            'paypal' : paypal
+        });
+    }
+    if (paypal.length>0){
+        rUpdate({
+            'yandex' : yandex
+        });
+    }
+    if (paypal.length>0 && yandex.length>0){
+        rUpdate({
+            'yandex' : yandex,
+            'paypal' : paypal
+        });
+    } else if (paypal.length>0) {
+        rUpdate({
+            'paypal' : paypal
+        });
+    } else if (yandex.length>0) {
+        rUpdate({
+            'yandex' : yandex
+        });
+    } else{
+        errdiag('Предупреждение', 'введите хотя бы один способ оплаты');
+    }
     return false;
 });
 

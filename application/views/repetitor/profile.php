@@ -179,16 +179,16 @@
                 <h3>(Внимательно проверьте правильность внесённых данных! Вы несёте полную ответственность за не верно внесённые персональные данные!)</h3>
                 <label>
                     <span class="img"><img src="<?php echo base_url(); ?>img/yandex.png" alt="yandex"></span>
-                    <input type="text" placeholder="номер кошелька">
+                    <input type="text" placeholder="номер кошелька" id="yandex">
                     <span class="check"></span>
                 </label>
                 <label>
                     <span class="img"><img src="<?php echo base_url(); ?>img/paypal.png" alt="paypal"></span>
-                    <input type="text" placeholder="аккаунт">
+                    <input type="text" placeholder="аккаунт" id="paypal">
                     <span class="check"></span>
                 </label>
             </div>
-            <button type="submit" name="button">Сохранить</button>
+            <button type="submit" name="button" id="save_pay">Сохранить</button>
         </aside>
         <aside id="edu">
             <div>
@@ -207,7 +207,7 @@
                          ?>
                     </select>
                     <select id="experience">
-                        <option value="0">Опыт работы репетитором (лет)</option>
+                        <option value="-1">Опыт работы репетитором (лет)</option>
                         <?php
                         for ($i=0;$i<=50;$i++){
                             echo '<option value="'.$i.'">'.$i.'</option>';
