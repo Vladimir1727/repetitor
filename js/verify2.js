@@ -111,7 +111,6 @@ function mask(id){
     inp.onfocus = function(){
         if (inp.value==''){
             inp.value = old;
-			console.log('make old');
         }
     }
 	inp.onkeyup = function(event){

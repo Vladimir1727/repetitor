@@ -39,7 +39,6 @@ class Student extends CI_Controller {
 			  } catch (Exception $e) {
 				  exit($e->getMessage());
 			  }
-			  $this->session->set_userdata('student_id', $login);
 			  exit("0");
 		  }
 	}
@@ -80,12 +79,68 @@ class Student extends CI_Controller {
 			 redirect('/main/slogin');
 		} else{
 			$student = $this->StudentModel->findOne($this->session->student_id);
+			//var_dump($student->student);
 			$data=array(
 				'student'=> $student->student,
 				'tzones'=>$this->MainModel->getAll('timezones'),
 			);
 			$this->load->view('student/profile', $data);
 		}
+	}
+
+	public function update()
+	{
+		if (!$this->session->has_userdata('student_id')){
+			 throw new Exception('студент не вошёл');
+		}
+		$rep = $this->StudentModel->findOne($this->session->student_id);
+		$arr = json_decode($this->input->post('data'), true);
+		echo $rep->update($arr);
+	}
+
+	function addavatar()
+	{
+		$id = $this->session->student_id;
+		if ($handle = opendir('images')) {
+		    while (false !== ($file = readdir($handle))) {
+				$s = strpos($file, 'avatar_s'.$id.'_');
+				if ($s !== false){
+					unlink('images/'.$file);
+				}
+		    }
+		    closedir($handle);
+		}
+		$config['upload_path']          = './images/';
+		$config['allowed_types']        = 'gif|jpg|png';
+		$config['max_size']             = 6000;
+		$config['max_width']            = 6024;
+		$config['min_width']            = 200;
+		$config['min_height']            = 200;
+		$config['max_height']           = 6024;
+		$config['file_name']             = 'avatar_s'.$id.'_';
+		$this->load->library('upload', $config);
+			if ( ! $this->upload->do_upload(0))
+			{
+				throw new Exception($this->upload->display_errors());
+			}
+			else
+			{
+				$img = $this->upload->data();
+				$path = 'images/'.$img["file_name"];
+				$config['image_library'] = 'gd2';
+				$config['source_image'] = $path;
+				$config['create_thumb'] = TRUE;
+				$config['maintain_ratio'] = TRUE;
+				$config['width']         = 200;
+				$this->load->library('image_lib', $config);
+				$this->image_lib->resize();
+				$data =  $this->upload->data();
+				$f = $data['raw_name'].'_thumb'.$data['file_ext'];
+				$student = $this->StudentModel->findOne($id);
+				$arr = array('avatar'=>$data['raw_name'].$data['file_ext']);
+				$student->update($arr);
+				exit($f);
+			}
 	}
 
 }

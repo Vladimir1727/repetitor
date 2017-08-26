@@ -1,6 +1,6 @@
 (function($){$(function(){
 var baseUrl = '../';
-console.log('repetitor profile 1');
+console.log('repetitor profile 2');
 var proc = 0.3;
 /*$('#slide').click(function(){
     $('#slide ul').slideToggle();
@@ -200,7 +200,6 @@ function loadSubject(sub){
                         $(this).removeAttr('selected');
                     }
                 });
-                //d.ages[i]
                 $('input[name="age_id[]"]').each(function(){
                     var find = false;
                     for(i = 0; i<d.ages.length;i++){
@@ -246,17 +245,14 @@ function loadSubject(sub){
                 $('#subject_id option').each(function(){
                         $(this).removeAttr('selected');
                 });
-                $('#lang_id option').each(function(){
-                        $(this).removeAttr('selected');
-                });
                 $('input[name="age_id[]"]').each(function(){
-                            $(this).removeAttr('checked');
+                            $(this).prop( "checked", false );
                 });
                 $('input[name="specialization_id[]"]').each(function(){
-                            $(this).removeAttr('checked');
+                            $(this).prop( "checked", false );
                 });
                 $('input[name="level_id[]"]').each(function(){
-                            $(this).removeAttr('checked');
+                            $(this).prop( "checked", false );
                 });
                 $('#price').val('');
                 $('#sprice').val('');

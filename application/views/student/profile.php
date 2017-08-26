@@ -33,15 +33,16 @@
         </div>
         <div class="info">
             <div>
-                <input type="text" placeholder="Имя*">
-                <input type="text" placeholder="Фамилия*">
-                <input type="text" placeholder="Отчество">
+                <input type="text" placeholder="Имя*" id="first_name" value="<?php echo $student['first_name']; ?>">
+                <input type="text" placeholder="Фамилия*" id="last_name" value="<?php echo $student['last_name']; ?>">
+                <input type="text" placeholder="Отчество" id="father_name"  value="<?php echo $student['father_name']; ?>">
             </div>
             <div>
                 <select name="tzone" id="tzone_id">
+                    <<option value="0">Выберите часовой пояс</option>
                     <?php
                         foreach ($tzones as $option) {
-                            if ($option['id'] == $repetitor['tzone_id']){
+                            if ($option['id'] == $student['tzone_id']){
                                 echo '<option value="'.$option['id'].'" selected="selecter">'.$option['zone_name'].'</option>';
                             } else{
                                 echo '<option value="'.$option['id'].'">'.$option['zone_name'].'</option>';
@@ -49,18 +50,18 @@
                         }
                     ?>
                 </select>
-                <input type="text" placeholder="Телефон">
-                <input type="text" placeholder="Логин Skype*">
+                <input type="text" placeholder="Телефон" id="phone" value="<?php echo $student['phone']; ?>">
+                <input type="text" placeholder="Логин Skype*" id="skype"  value="<?php echo $student['skype']; ?>">
             </div>
             <div>
-                <input type="text" placeholder="Email*">
-                <input type="text" placeholder="Пароль*">
-                <input type="text" placeholder="Подтверждение пароля*">
+                <input type="text" placeholder="Email*" id="email" value="<?php echo $student['email']; ?>">
+                <input type="password" placeholder="Пароль*" id="password" value="<?php echo $student['password']; ?>">
+                <input type="password" placeholder="Подтверждение пароля*" id="password2" value="<?php echo $student['password']; ?>">
             </div>
-            <button>Сохранить</button>
+            <button id="save_profile">Сохранить</button>
         </div>
     </section>
 </main>
 
-<script src="<?php echo base_url(); ?>js/repetitor/profile.js"></script>
+<script src="<?php echo base_url(); ?>js/student/profile.js"></script>
 <?php $this->load->view('main/footer'); ?>
