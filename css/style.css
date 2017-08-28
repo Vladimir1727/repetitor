@@ -923,7 +923,7 @@ main.rep-info {
             text-align: center;
             border: 1px #fff solid; }
             main.rep-info section.result aside.sh table tbody tr td.free:after {
-              content: '╨б╨▓╨╛╨▒╨╛╨┤╨╡╨╜'; }
+              content: 'Свободен'; }
           main.rep-info section.result aside.sh table tbody tr td:first-of-type {
             text-align: center;
             border: none;
@@ -932,7 +932,7 @@ main.rep-info {
     main.rep-info section.result aside.video {
       position: relative;
       padding-bottom: 56.25%;
-      /* ╨╖╨░╨┤╨░╤С╤В ╨▓╤Л╤Б╨╛╤В╤Г ╨║╨╛╨╜╤В╨╡╨╣╨╜╨╡╤А╨░ ╨┤╨╗╤П 16:9 (╨╡╤Б╨╗╨╕ 4:3 тАФ ╨┐╨╛╤Б╤В╨░╨▓╤М╤В╨╡ 75%) */
+      /* задаёт высоту контейнера для 16:9 (если 4:3 — поставьте 75%) */
       padding-top: 30px;
       height: 0;
       overflow: hidden; }
@@ -2814,7 +2814,7 @@ main.student-profile {
     main.rep-info section.result aside.sh table thead tr th {
       text-align: center; }
   main.rep-info section.result aside.sh table tbody tr td.free:after {
-    content: '╨б╨Т.'; }
+    content: 'СВ.'; }
 
   main.rep-profile section.warp aside#present div.avatar {
     width: 150px; }

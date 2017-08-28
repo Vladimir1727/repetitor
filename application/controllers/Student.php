@@ -23,6 +23,7 @@ class Student extends CI_Controller {
 		 $this->load->helper(array('form', 'url'));
 		 $this->load->model('StudentModel');
 		 $this->load->model('MainModel');
+		 $this->load->library('image_lib');
 	 }
 
 	public function newStudent()
@@ -126,16 +127,57 @@ class Student extends CI_Controller {
 			else
 			{
 				$img = $this->upload->data();
+				$data =  $this->upload->data();
+				$f = $data['raw_name'].'_thumb'.$data['file_ext'];
 				$path = 'images/'.$img["file_name"];
+				$image = $data['raw_name'].$data['file_ext'];
+				$size = getimagesize('images/'.$image);
+				$w = $size[0];
+				$h = $size[1];
+				$path = 'images/'.$image;
 				$config['image_library'] = 'gd2';
 				$config['source_image'] = $path;
 				$config['create_thumb'] = TRUE;
 				$config['maintain_ratio'] = TRUE;
-				$config['width']         = 200;
-				$this->load->library('image_lib', $config);
+				$config['y_axis'] = 0;
+				$config['x_axis'] = 0;
+				if ($h > $w){
+				    $config['width']         = 200;
+				    $config['master_dim']         = 'width';
+				} else{
+				    $config['height']         = 200;
+				    $config['master_dim']         = 'height';
+				}
+				if (!$this->image_lib->initialize($config)){
+				    exit($this->image_lib->display_errors());
+				}
 				$this->image_lib->resize();
-				$data =  $this->upload->data();
-				$f = $data['raw_name'].'_thumb'.$data['file_ext'];
+				if (!$this->image_lib->resize()){
+				    exit($this->image_lib->display_errors());
+				}
+				//crop
+				$image = $f;
+				$size = getimagesize('images/'.$image);
+				$w = $size[0];
+				$h = $size[1];
+				$path = 'images/'.$image;
+				$config['image_library'] = 'gd2';
+				$config['source_image'] = $path;
+				$config['create_thumb'] = FALSE;
+				$config['maintain_ratio'] = FALSE;
+				if ($w> $h){
+				    $config['x_axis'] = ($w-200)/2;
+				    $config['y_axis'] = 0;
+				} else{
+				    $config['x_axis'] = 0;
+				    $config['y_axis'] = ($h-200)/2;
+				}
+				$config['width']         = 200;
+				$config['height']         = 200;
+				$this->image_lib->initialize($config);
+				if (!$this->image_lib->crop()){
+				    exit($this->image_lib->display_errors());
+				}
 				$student = $this->StudentModel->findOne($id);
 				$arr = array('avatar'=>$data['raw_name'].$data['file_ext']);
 				$student->update($arr);
