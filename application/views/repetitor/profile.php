@@ -64,7 +64,9 @@
                         if (is_null($repetitor['avatar'])){
                             echo '<img src="'.base_url().'img/avatar3.png" alt="empty avarat" style="padding-top: 30px">';
                         } else{
-                            echo '<img src="../../images/'.$repetitor['avatar'].'" alt="avarat">';
+                            $d = strrpos($repetitor['avatar'],'.');
+    						$av = substr($repetitor['avatar'], 0 , $d).'_thumb'.substr($repetitor['avatar'], $d);
+    						echo '<img src="../../images/'.$av.'" alt="avarat">';
                         }
                     ?>
                 </div>
@@ -228,10 +230,10 @@
                         <option value="0">Ученая степень</option>
                         <?php
                         foreach ($uni_degrees as $option) {
-                            if ($repetitor['degree_id']==$i){
-                                echo '<option value="'.$i.'" selected="selected">'.$i.'</option>';
+                            if ($repetitor['degree_id'] == $option['id']){
+                                echo '<option value="'.$option['id'].'" selected="selected">'.$option['uni_degree'].'</option>';
                             }else{
-                                echo '<option value="'.$i.'">'.$i.'</option>';
+                                echo '<option value="'.$option['id'].'">'.$option['uni_degree'].'</option>';
                             }
                         }
                         ?>
@@ -272,7 +274,6 @@
                      ?>
                 </div>
             </div>
-            <button type="submit" name="button">Сохранить</button>
         </aside>
         <aside id="status">
             <div>
@@ -305,7 +306,7 @@
         </aside>
     </section>
 </main>
-<a href="#" class="send-rep-profile">Отправить запрос на активацию профиля</a>
+<a href="#" class="send-rep-profile btn" disabled="disabled" id="send_profile">Отправить запрос на активацию профиля</a>
 
 <script src="<?php echo base_url(); ?>js/repetitor/profile.js"></script>
 <?php $this->load->view('main/footer'); ?>

@@ -123,13 +123,13 @@
 			<p>Безопасная сделка</p>
 		</div>
 	</aside>
-	<a href="#">
+	<a href="<?php echo base_url();?>index.php/main/filter?lang=all">
 		<img src="<?php echo base_url(); ?>img/gal.png" alt="V">
 		Найти репетитора
 	</a>
 </section>
 <section class="light2">
-	Остались вопросы? — тогда Вам сюда, в раздел <a href="#">«ВОПРОСЫ И ОТВЕТЫ».</a>
+	Остались вопросы? — тогда Вам сюда, в раздел <a href="https://reallanguage.club/voprosy-i-otvety-po-rabote-s-platformoj-repetitory-real-language-club/">«ВОПРОСЫ И ОТВЕТЫ».</a>
 </section>
 <?php $this->load->view('main/footer'); ?>
 <script src="<?php echo base_url(); ?>js/main/start.js"></script>

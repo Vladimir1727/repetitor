@@ -24,19 +24,19 @@ class RepetitorModel extends CI_Model{
 			$this->email->from('test@dvn125.xyz', 'RealLanguage.Club');
 			$this->email->to($email);
 			$this->email->subject('Успешная регистрация на RealLanguage.Club');
-			$mess = "Поздравляем!\r\n";
-			$mess += "Вы успешно создали аккаунт на RealLanguage.Club(с активной ссылкой на сайт) и у Вас есть личный кабинет. \r\n";
-			$mess += "Вам осталось всего несколько шагов: \r\n";
-			$mess += " - Зайдите в личный кабинет;\r\n";
-			$mess += " - Заполните все формы Профиля;\r\n";
-			$mess += " - Отправьте запрос на активацию.\r\n";
-			$mess += "Для входа используйте: \r\n";
-			$mess += "Логин: ".$email."\r\n";
-			$mess += "Пароль: ".$pass."\r\n";
-			$mess += "Желаем Вам успехов! \r\n";
-			$mess += "С уважением, \r\n \r\n";
-			$mess += "команда RealLanguage.Club \r\n";
-			$this->email->message($mess);
+			$mess = "Поздравляем!<br><br>";
+			$mess .= "Вы успешно создали аккаунт на <a href='https://reallanguage.club'>RealLanguage.Club</a> и у Вас есть личный кабинет. <br><br>";
+			$mess .= "Вам осталось всего несколько шагов:<br>";
+			$mess .= "<ul><li>Зайдите в личный кабинет;</li>";
+			$mess .= "<li>Заполните все формы Профиля;</li>";
+			$mess .= "<li>Отправьте запрос на активацию.</li></ul>";
+			$mess .= "Для входа используйте: <br>";
+			$mess .= "Логин: ".$email."<br>";
+			$mess .= "Пароль: ".$pass."<br><br>";
+			$mess .= "Желаем Вам успехов! <br><br>";
+			$mess .= "С уважением, <br><br>";
+			$mess .= "команда RealLanguage.Club <br>";
+			$this->email->message($mess)->set_mailtype('html');
 			$this->email->send();
 
 			return '0';
@@ -77,7 +77,11 @@ class RepetitorModel extends CI_Model{
 			$this->repetitor[$k] = trim($v);
 		}
 		$this->db->where('id', $this->repetitor['id']);
-		$this->db->update('repetitors', $this->repetitor);
+		try {
+			$this->db->update('repetitors', $this->repetitor);
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
 		return 0;
 	}
 

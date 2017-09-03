@@ -21,6 +21,8 @@ body {
   font-family: 'Arial Narrow', sans-serif;
   overflow-x: hidden;
   background: #E8EAEB; }
+  body.start {
+    background: #fff; }
 
 div.main-header {
   height: 140px;
@@ -559,6 +561,8 @@ main.filter {
             margin-bottom: 2px; }
           main.filter section.result aside div.info h2 span.active {
             background: #07CA9A; }
+          main.filter section.result aside div.info h2 a, main.filter section.result aside div.info h2 a:visited {
+            color: #222f3b; }
         main.filter section.result aside div.info p {
           color: #333333;
           font-size: 16px; }
@@ -1445,7 +1449,8 @@ h1.start {
   font-weight: 600; }
 
 h2.start {
-  font-size: 16px; }
+  font-size: 16px;
+  max-width: 580px; }
 
 h3.start {
   font-weight: 600;
@@ -2461,32 +2466,988 @@ main.student-profile {
         text-align: center; }
         main.student-profile section div.avatar button:hover {
           background: #ff7e5b; }
-    main.student-profile section div.info div {
-      width: 200px;
-      float: left;
-      padding: 0 0 0 30px;
-      margin-bottom: 70px; }
-      main.student-profile section div.info div input, main.student-profile section div.info div select {
+    main.student-profile section div.info {
+      padding-top: 30px; }
+      main.student-profile section div.info div {
+        width: 200px;
+        float: left;
+        padding: 0 0 0 30px;
+        margin-bottom: 40px; }
+        main.student-profile section div.info div input, main.student-profile section div.info div select {
+          width: 170px;
+          padding: 5px 5px;
+          font-size: 14px;
+          color: #222f3b;
+          border: 1px #999 solid;
+          height: 30px;
+          margin-bottom: 35px; }
+      main.student-profile section div.info button {
+        display: block;
+        margin: 0 auto;
+        background: #FF5C39;
+        border: none;
         width: 170px;
-        padding: 5px 5px;
-        font-size: 14px;
-        color: #222f3b;
-        border: 1px #999 solid;
         height: 30px;
-        margin-bottom: 35px; }
-    main.student-profile section div.info button {
+        color: #fff;
+        font-family: "OpenSans Regular", Arial, sans-serif;
+        font-size: 16px;
+        text-align: center; }
+        main.student-profile section div.info button:hover {
+          background: #ff7e5b; }
+
+main.chat {
+  width: 100%;
+  max-width: 1200px;
+  margin: 30px auto 20px auto; }
+  main.chat:after {
+    content: '';
+    display: block;
+    clear: both; }
+  main.chat section.users {
+    width: 300px;
+    max-height: 820px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    float: left; }
+    main.chat section.users aside {
+      width: 283px;
+      height: 80px;
+      border: 1px #C6C6C6 solid;
+      margin-bottom: 10px;
+      background: #fff;
+      padding: 12px 0 12px 12px;
+      cursor: pointer; }
+      main.chat section.users aside:after {
+        content: '';
+        display: block;
+        clear: both; }
+      main.chat section.users aside:last-of-type {
+        margin-bottom: 0; }
+      main.chat section.users aside:hover {
+        background: #eee; }
+      main.chat section.users aside > div {
+        float: left; }
+      main.chat section.users aside div.avatar {
+        width: 50px;
+        height: 50px;
+        overflow: hidden;
+        border: 1px #C6C6C6 solid;
+        border-radius: 50%; }
+        main.chat section.users aside div.avatar > img {
+          width: 50px; }
+      main.chat section.users aside div.name {
+        width: 140px; }
+        main.chat section.users aside div.name h3, main.chat section.users aside div.name h4 {
+          font-family: "Arial Narrow", Arial, sans-serif;
+          font-size: 18px;
+          line-height: 1;
+          color: #666;
+          margin: 0 0 2px 10px; }
+        main.chat section.users aside div.name span.activity {
+          display: inline-block;
+          width: 12px;
+          height: 12px;
+          background: #ddd;
+          border-radius: 50%;
+          border: 1px #05a983 solid; }
+          main.chat section.users aside div.name span.activity.on {
+            background: #05a983; }
+      main.chat section.users aside div.date {
+        width: 74px;
+        text-align: right;
+        font-family: "Arial Narrow", Arial, sans-serif;
+        font-size: 14px; }
+      main.chat section.users aside div.green {
+        width: 5px;
+        height: 78px;
+        margin-top: -12px;
+        background: transparent; }
+      main.chat section.users aside.active div.green {
+        width: 5px;
+        height: 78px;
+        margin-top: -12px;
+        background: #028163; }
+  main.chat section.mess {
+    margin-left: 315px; }
+    main.chat section.mess aside.plan {
+      background: #fff;
+      border: 1px #C6C6C6 solid;
+      text-align: right;
+      padding: 10px 15px;
+      margin-bottom: 15px; }
+      main.chat section.mess aside.plan a {
+        font-family: "Arial Narrow", Arial, sans-serif;
+        font-size: 18px;
+        display: inline-block;
+        padding: 5px 15px;
+        color: #fff;
+        background: #FF5C39;
+        text-decoration: none; }
+        main.chat section.mess aside.plan a:hover {
+          background: #ff7e5b; }
+    main.chat section.mess aside.chat {
+      max-height: 650px;
+      margin-bottom: 15px;
+      overflow-x: visible;
+      overflow-y: scroll;
+      background: #fff;
+      border: 1px #C6C6C6 solid; }
+      main.chat section.mess aside.chat div.date {
+        font-family: "Arial Narrow", Arial, sans-serif;
+        font-size: 14px;
+        color: #666;
+        padding: 5px 15px;
+        border-bottom: 1px #C6C6C6 solid; }
+      main.chat section.mess aside.chat div.list {
+        padding: 10px 15px 10px 20px; }
+        main.chat section.mess aside.chat div.list:after {
+          content: '';
+          display: block;
+          clear: both; }
+        main.chat section.mess aside.chat div.list div.avatar {
+          width: 50px;
+          height: 50px;
+          overflow: hidden;
+          border: 1px #C6C6C6 solid;
+          border-radius: 50%;
+          float: left; }
+          main.chat section.mess aside.chat div.list div.avatar > img {
+            width: 50px; }
+        main.chat section.mess aside.chat div.list div.name {
+          float: left;
+          width: 100px;
+          padding-top: 9px; }
+          main.chat section.mess aside.chat div.list div.name h3, main.chat section.mess aside.chat div.list div.name h4 {
+            font-family: "Arial Narrow", Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1;
+            color: #05a983;
+            margin: 0 0 2px 10px; }
+          main.chat section.mess aside.chat div.list div.name h4 {
+            color: #666; }
+          main.chat section.mess aside.chat div.list div.name span.activity {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #ddd;
+            border-radius: 50%;
+            border: 1px #05a983 solid; }
+            main.chat section.mess aside.chat div.list div.name span.activity.on {
+              background: #05a983; }
+        main.chat section.mess aside.chat div.list div.mess {
+          margin-left: 150px;
+          color: #333;
+          font-family: "Arial Narrow", Arial, sans-serif;
+          font-size: 14px; }
+    main.chat section.mess aside.send {
+      background: #fff;
+      border: 1px #C6C6C6 solid;
+      width: 100%;
+      height: 83px;
+      padding: 15px; }
+      main.chat section.mess aside.send:after {
+        content: '';
+        display: block;
+        clear: both; }
+      main.chat section.mess aside.send a {
+        float: right;
+        font-family: "Arial Narrow", Arial, sans-serif;
+        font-size: 18px;
+        display: block;
+        padding: 5px 15px;
+        color: #fff;
+        background: #028163;
+        text-decoration: none;
+        margin-top: 5px; }
+        main.chat section.mess aside.send a:hover {
+          background: #24a385; }
+      main.chat section.mess aside.send > div {
+        float: none;
+        margin-right: 120px; }
+      main.chat section.mess aside.send textarea {
+        width: 100%;
+        height: 50px;
+        resize: none; }
+
+main.rep_less_request {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto; }
+  main.rep_less_request section.start_less {
+    margin-bottom: 20px; }
+    main.rep_less_request section.start_less h1 {
+      font-family: "Arial Regular", Arial, sans-serif;
+      font-size: 25px;
+      margin: 0; }
+    main.rep_less_request section.start_less > div:first-of-type {
+      width: 300px;
+      float: left; }
+    main.rep_less_request section.start_less > div:after {
+      content: '';
       display: block;
-      margin: 0 auto;
-      background: #FF5C39;
+      clear: both; }
+    main.rep_less_request section.start_less > div h3, main.rep_less_request section.start_less > div h4 {
+      font-family: "Arial Regular", Arial, sans-serif;
+      text-align: right;
+      font-size: 16px;
+      margin: 0; }
+  main.rep_less_request section.head:after {
+    content: '';
+    display: block;
+    clear: both; }
+  main.rep_less_request section.head > div {
+    border-right: 1px #666 solid;
+    border-top: 1px #666 solid;
+    width: 100px;
+    float: left; }
+    main.rep_less_request section.head > div:nth-child(1) {
+      border-left: 1px #666 solid; }
+    main.rep_less_request section.head > div:nth-child(2) {
+      width: 120px; }
+    main.rep_less_request section.head > div:nth-child(3) {
+      width: 120px; }
+    main.rep_less_request section.head > div:nth-child(4) {
+      width: 180px; }
+    main.rep_less_request section.head > div:nth-child(5) {
+      width: 200px; }
+    main.rep_less_request section.head > div:nth-child(6) {
+      width: 110px; }
+    main.rep_less_request section.head > div:nth-child(7) {
+      width: 110px; }
+    main.rep_less_request section.head > div:nth-child(8) {
+      width: 110px; }
+    main.rep_less_request section.head > div:nth-child(9) {
+      width: 150px; }
+  main.rep_less_request section.head > div {
+    display: table;
+    font-weight: 600;
+    text-align: center;
+    height: 50px;
+    background: #07CA9A; }
+    main.rep_less_request section.head > div p {
+      display: table-cell;
+      vertical-align: middle; }
+  main.rep_less_request section.table > aside > div {
+    border-right: 1px #666 solid;
+    border-top: 1px #666 solid;
+    width: 100px;
+    float: left; }
+    main.rep_less_request section.table > aside > div:nth-child(1) {
+      border-left: 1px #666 solid; }
+    main.rep_less_request section.table > aside > div:nth-child(2) {
+      width: 120px; }
+    main.rep_less_request section.table > aside > div:nth-child(3) {
+      width: 120px; }
+    main.rep_less_request section.table > aside > div:nth-child(4) {
+      width: 180px; }
+    main.rep_less_request section.table > aside > div:nth-child(5) {
+      width: 200px; }
+    main.rep_less_request section.table > aside > div:nth-child(6) {
+      width: 110px; }
+    main.rep_less_request section.table > aside > div:nth-child(7) {
+      width: 110px; }
+    main.rep_less_request section.table > aside > div:nth-child(8) {
+      width: 110px; }
+    main.rep_less_request section.table > aside > div:nth-child(9) {
+      width: 150px; }
+  main.rep_less_request section.table > aside:after {
+    content: '';
+    display: block;
+    clear: both; }
+  main.rep_less_request section.table > aside > div {
+    background: #fff;
+    height: 110px;
+    padding: 5px;
+    overflow: hidden; }
+    main.rep_less_request section.table > aside > div p {
+      font-size: 16px;
+      padding: 0;
+      margin: 0; }
+    main.rep_less_request section.table > aside > div button {
+      width: 110px;
       border: none;
+      display: block;
+      margin: 5px auto;
+      height: 25px;
+      font-family: "OpenSans Regular", Arial, sans-serif; }
+      main.rep_less_request section.table > aside > div button.ok {
+        color: #fff;
+        background: #07CA9A; }
+        main.rep_less_request section.table > aside > div button.ok:hover {
+          background: #29ecbc; }
+      main.rep_less_request section.table > aside > div button.del {
+        color: #fff;
+        background: #FF5C39; }
+        main.rep_less_request section.table > aside > div button.del:hover {
+          background: #ff7e5b; }
+      main.rep_less_request section.table > aside > div button.mess {
+        color: #fff;
+        background: #028163; }
+        main.rep_less_request section.table > aside > div button.mess:hover {
+          background: #24a385; }
+  main.rep_less_request section.table > aside:last-of-type > div {
+    border-bottom: 1px #666 solid; }
+
+main.rep_history {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto; }
+  main.rep_history section.start_less {
+    margin-bottom: 20px; }
+    main.rep_history section.start_less h1 {
+      font-family: "Arial Regular", Arial, sans-serif;
+      font-size: 25px;
+      margin: 0; }
+    main.rep_history section.start_less > div:first-of-type {
+      width: 300px;
+      float: left; }
+    main.rep_history section.start_less > div:after {
+      content: '';
+      display: block;
+      clear: both; }
+    main.rep_history section.start_less > div h3, main.rep_history section.start_less > div h4 {
+      font-family: "Arial Regular", Arial, sans-serif;
+      text-align: right;
+      font-size: 16px;
+      margin: 0; }
+  main.rep_history section.head:after {
+    content: '';
+    display: block;
+    clear: both; }
+  main.rep_history section.head > div {
+    border-right: 1px #666 solid;
+    border-top: 1px #666 solid;
+    width: 150px;
+    float: left; }
+    main.rep_history section.head > div:nth-child(1) {
+      border-left: 1px #666 solid; }
+    main.rep_history section.head > div:nth-child(4) {
+      width: 220px; }
+    main.rep_history section.head > div:nth-child(5) {
+      width: 230px; }
+  main.rep_history section.head > div {
+    display: table;
+    font-weight: 600;
+    text-align: center;
+    height: 50px;
+    background: #07CA9A; }
+    main.rep_history section.head > div p {
+      display: table-cell;
+      vertical-align: middle; }
+  main.rep_history section.table > aside > div {
+    border-right: 1px #666 solid;
+    border-top: 1px #666 solid;
+    width: 150px;
+    float: left; }
+    main.rep_history section.table > aside > div:nth-child(1) {
+      border-left: 1px #666 solid; }
+    main.rep_history section.table > aside > div:nth-child(4) {
+      width: 220px; }
+    main.rep_history section.table > aside > div:nth-child(5) {
+      width: 230px; }
+  main.rep_history section.table > aside:after {
+    content: '';
+    display: block;
+    clear: both; }
+  main.rep_history section.table > aside > div {
+    background: #fff;
+    height: 110px;
+    padding: 5px;
+    overflow: hidden; }
+    main.rep_history section.table > aside > div p {
+      font-size: 16px;
+      padding: 0;
+      margin: 0; }
+    main.rep_history section.table > aside > div button {
+      width: 110px;
+      border: none;
+      display: block;
+      margin: 5px auto;
+      height: 25px;
+      font-family: "OpenSans Regular", Arial, sans-serif; }
+      main.rep_history section.table > aside > div button.ok {
+        color: #fff;
+        background: #07CA9A; }
+        main.rep_history section.table > aside > div button.ok:hover {
+          background: #29ecbc; }
+      main.rep_history section.table > aside > div button.del {
+        color: #fff;
+        background: #FF5C39; }
+        main.rep_history section.table > aside > div button.del:hover {
+          background: #ff7e5b; }
+      main.rep_history section.table > aside > div button.mess {
+        color: #fff;
+        background: #028163; }
+        main.rep_history section.table > aside > div button.mess:hover {
+          background: #24a385; }
+  main.rep_history section.table > aside:last-of-type > div {
+    border-bottom: 1px #666 solid; }
+
+main.rep_free {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto; }
+  main.rep_free h2 {
+    font-family: "OpenSans Regular", Arial, sans-serif;
+    font-size: 23px; }
+    main.rep_free h2.new {
+      color: #FF5C39; }
+    main.rep_free h2.old {
+      color: #028163; }
+  main.rep_free section.start_less {
+    margin-bottom: 20px; }
+    main.rep_free section.start_less h1 {
+      font-family: "Arial Regular", Arial, sans-serif;
+      font-size: 25px;
+      margin: 0;
+      display: inline-block; }
+    main.rep_free section.start_less select {
+      display: inline-block;
       width: 170px;
       height: 30px;
-      color: #fff;
-      font-family: "OpenSans Regular", Arial, sans-serif;
+      font-size: 18px;
+      border: 1px #999 solid;
+      margin-left: 20px; }
+    main.rep_free section.start_less > div:first-of-type {
+      width: 415px;
+      float: left; }
+    main.rep_free section.start_less > div:after {
+      content: '';
+      display: block;
+      clear: both; }
+    main.rep_free section.start_less > div h3, main.rep_free section.start_less > div h4 {
+      font-family: "Arial Regular", Arial, sans-serif;
+      text-align: right;
       font-size: 16px;
-      text-align: center; }
-      main.student-profile section div.info button:hover {
+      margin: 0; }
+  main.rep_free section.head:after {
+    content: '';
+    display: block;
+    clear: both; }
+  main.rep_free section.head > div {
+    border-right: 1px #666 solid;
+    border-top: 1px #666 solid;
+    width: 16.6%;
+    float: left; }
+    main.rep_free section.head > div:nth-child(1) {
+      border-left: 1px #666 solid; }
+  main.rep_free section.head > div {
+    display: table;
+    font-weight: 600;
+    text-align: center;
+    height: 50px;
+    background: #07CA9A; }
+    main.rep_free section.head > div p {
+      display: table-cell;
+      vertical-align: middle; }
+  main.rep_free section.table > aside > div {
+    border-right: 1px #666 solid;
+    border-top: 1px #666 solid;
+    width: 16.6%;
+    float: left; }
+    main.rep_free section.table > aside > div:nth-child(1) {
+      border-left: 1px #666 solid; }
+  main.rep_free section.table > aside:after {
+    content: '';
+    display: block;
+    clear: both; }
+  main.rep_free section.table > aside > div {
+    background: #fff;
+    height: 110px;
+    padding: 5px;
+    overflow: hidden; }
+    main.rep_free section.table > aside > div p {
+      font-size: 16px;
+      padding: 0;
+      margin: 0; }
+    main.rep_free section.table > aside > div button {
+      width: 110px;
+      border: none;
+      display: block;
+      margin: 5px auto;
+      padding: 5px;
+      font-family: "OpenSans Regular", Arial, sans-serif; }
+      main.rep_free section.table > aside > div button.ok {
+        color: #fff;
+        background: #07CA9A; }
+        main.rep_free section.table > aside > div button.ok:hover {
+          background: #29ecbc; }
+      main.rep_free section.table > aside > div button.del {
+        color: #fff;
+        background: #FF5C39; }
+        main.rep_free section.table > aside > div button.del:hover {
+          background: #ff7e5b; }
+      main.rep_free section.table > aside > div button.mess {
+        color: #fff;
+        background: #028163; }
+        main.rep_free section.table > aside > div button.mess:hover {
+          background: #24a385; }
+  main.rep_free section.table > aside:last-of-type > div {
+    border-bottom: 1px #666 solid; }
+
+main.rep_lessons {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto; }
+  main.rep_lessons section.start_less {
+    margin-bottom: 20px; }
+    main.rep_lessons section.start_less h1 {
+      font-family: "Arial Regular", Arial, sans-serif;
+      font-size: 25px;
+      margin: 0; }
+    main.rep_lessons section.start_less > div:first-of-type {
+      width: 300px;
+      float: left; }
+    main.rep_lessons section.start_less > div:after {
+      content: '';
+      display: block;
+      clear: both; }
+    main.rep_lessons section.start_less > div h3, main.rep_lessons section.start_less > div h4 {
+      font-family: "Arial Regular", Arial, sans-serif;
+      text-align: right;
+      font-size: 16px;
+      margin: 0; }
+  main.rep_lessons section.head:after {
+    content: '';
+    display: block;
+    clear: both; }
+  main.rep_lessons section.head > div {
+    border-right: 1px #666 solid;
+    border-top: 1px #666 solid;
+    width: 130px;
+    float: left; }
+    main.rep_lessons section.head > div:nth-child(1) {
+      border-left: 1px #666 solid; }
+    main.rep_lessons section.head > div:nth-child(5) {
+      width: 200px; }
+    main.rep_lessons section.head > div:nth-child(6) {
+      width: 200px; }
+    main.rep_lessons section.head > div:nth-child(8) {
+      width: 150px; }
+  main.rep_lessons section.head > div {
+    display: table;
+    font-weight: 600;
+    text-align: center;
+    height: 50px;
+    background: #07CA9A; }
+    main.rep_lessons section.head > div p {
+      display: table-cell;
+      vertical-align: middle; }
+  main.rep_lessons section.table > aside > div {
+    border-right: 1px #666 solid;
+    border-top: 1px #666 solid;
+    width: 130px;
+    float: left; }
+    main.rep_lessons section.table > aside > div:nth-child(1) {
+      border-left: 1px #666 solid; }
+    main.rep_lessons section.table > aside > div:nth-child(5) {
+      width: 200px; }
+    main.rep_lessons section.table > aside > div:nth-child(6) {
+      width: 200px; }
+    main.rep_lessons section.table > aside > div:nth-child(8) {
+      width: 150px; }
+  main.rep_lessons section.table > aside:after {
+    content: '';
+    display: block;
+    clear: both; }
+  main.rep_lessons section.table > aside > div {
+    background: #fff;
+    height: 110px;
+    padding: 5px;
+    overflow: hidden; }
+    main.rep_lessons section.table > aside > div p {
+      font-size: 16px;
+      padding: 0;
+      margin: 0; }
+    main.rep_lessons section.table > aside > div button {
+      width: 110px;
+      border: none;
+      display: block;
+      margin: 5px auto;
+      height: 25px;
+      font-family: "OpenSans Regular", Arial, sans-serif; }
+      main.rep_lessons section.table > aside > div button.ok {
+        color: #fff;
+        background: #07CA9A; }
+        main.rep_lessons section.table > aside > div button.ok:hover {
+          background: #29ecbc; }
+      main.rep_lessons section.table > aside > div button.del {
+        color: #fff;
+        background: #FF5C39; }
+        main.rep_lessons section.table > aside > div button.del:hover {
+          background: #ff7e5b; }
+      main.rep_lessons section.table > aside > div button.mess {
+        color: #fff;
+        background: #028163; }
+        main.rep_lessons section.table > aside > div button.mess:hover {
+          background: #24a385; }
+  main.rep_lessons section.table > aside:last-of-type > div {
+    border-bottom: 1px #666 solid; }
+
+main.rep_balance {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto; }
+  main.rep_balance section.start_balance {
+    padding: 0;
+    font-family: "OpenSans Regular", Arial, sans-serif; }
+    main.rep_balance section.start_balance:after {
+      content: '';
+      display: block;
+      clear: both; }
+    main.rep_balance section.start_balance h1 {
+      float: left;
+      font-size: 25px;
+      color: #12232F;
+      margin: 0; }
+    main.rep_balance section.start_balance button {
+      float: right;
+      font-family: "OpenSans Regular", Arial, sans-serif;
+      width: 170px;
+      background: #FF5C39;
+      color: #fff;
+      padding: 6px;
+      border: none; }
+      main.rep_balance section.start_balance button:hover {
         background: #ff7e5b; }
+  main.rep_balance h2 {
+    padding: 0 0;
+    font-family: "OpenSans Regular", Arial, sans-serif;
+    font-size: 24px;
+    color: #12232F;
+    margin: 30px 0 20px 0; }
+  main.rep_balance h3 {
+    padding: 0 0 0 0;
+    font-family: "OpenSans Regular", Arial, sans-serif;
+    font-size: 22px;
+    margin: 30px 0 20px 0; }
+  main.rep_balance h3.in {
+    color: #07CA9A; }
+  main.rep_balance h3.out {
+    color: #222f3b; }
+  main.rep_balance section.in aside:after {
+    content: '';
+    display: block;
+    clear: both; }
+  main.rep_balance section.in aside > div {
+    float: left;
+    width: 25%;
+    padding: 5px;
+    border-right: 1px #666 solid;
+    border-bottom: 1px #666 solid;
+    height: 70px;
+    overflow: hidden; }
+    main.rep_balance section.in aside > div p {
+      font-family: "Arial Narrow", Arial, sans-serif;
+      font-size: 16px; }
+    main.rep_balance section.in aside > div:first-of-type {
+      border-left: 1px #666 solid; }
+  main.rep_balance section.out aside:after {
+    content: '';
+    display: block;
+    clear: both; }
+  main.rep_balance section.out aside > div {
+    float: left;
+    width: 33.3%;
+    padding: 5px;
+    border-right: 1px #666 solid;
+    border-bottom: 1px #666 solid;
+    height: 70px;
+    overflow: hidden; }
+    main.rep_balance section.out aside > div p {
+      font-family: "Arial Narrow", Arial, sans-serif;
+      font-size: 16px; }
+    main.rep_balance section.out aside > div:first-of-type {
+      border-left: 1px #666 solid; }
+  main.rep_balance section.header-in {
+    color: #fff; }
+    main.rep_balance section.header-in aside > div {
+      border-top: 1px #666 solid;
+      display: table;
+      font-weight: 600;
+      font-size: 16px;
+      text-align: center;
+      height: 50px;
+      background: #07CA9A; }
+      main.rep_balance section.header-in aside > div p {
+        display: table-cell;
+        vertical-align: middle;
+        margin: 0; }
+  main.rep_balance section.header-out {
+    color: #fff; }
+    main.rep_balance section.header-out aside > div {
+      border-top: 1px #666 solid;
+      border-right: 1px #fff solid;
+      display: table;
+      font-weight: 600;
+      font-size: 16px;
+      text-align: center;
+      height: 50px;
+      background: #4F81BD; }
+      main.rep_balance section.header-out aside > div:last-child {
+        border-right: 1px #666 solid; }
+      main.rep_balance section.header-out aside > div p {
+        display: table-cell;
+        vertical-align: middle;
+        margin: 0; }
+  main.rep_balance section.table {
+    background: #fff; }
+    main.rep_balance section.table p {
+      margin: 0; }
+
+main.rep_timetable {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto; }
+  main.rep_timetable h1 {
+    font-family: "Arial Regular", Arial, sans-serif;
+    font-size: 25px;
+    padding: 0 20px;
+    margin: 0; }
+  main.rep_timetable div.form {
+    margin: 20px 0;
+    padding: 0 20px; }
+    main.rep_timetable div.form:after {
+      content: '';
+      display: block;
+      clear: both; }
+    main.rep_timetable div.form button {
+      font-family: "OpenSans Regular", Arial, sans-serif;
+      width: 170px;
+      border: none;
+      height: 30px;
+      background: #07CA9A;
+      color: #fff; }
+      main.rep_timetable div.form button:hover {
+        background: #29ecbc; }
+    main.rep_timetable div.form input {
+      width: 170px;
+      height: 30px;
+      font-size: 18px;
+      border: 1px #999 solid;
+      float: right;
+      padding: 5px; }
+  main.rep_timetable div.green {
+    height: 2px;
+    background: #07CA9A; }
+  main.rep_timetable div.weeks {
+    width: 700px;
+    margin: 20px auto;
+    padding: 0 20px; }
+    main.rep_timetable div.weeks a {
+      font-family: "Arial Regular", Arial, sans-serif;
+      font-size: 20px;
+      color: #4F81BD; }
+    main.rep_timetable div.weeks span {
+      font-family: "Arial Regular", Arial, sans-serif;
+      font-size: 20px;
+      padding: 0 20px; }
+  main.rep_timetable table {
+    width: 100%; }
+    main.rep_timetable table thead tr th {
+      font-family: "Arial Narrow", sans-serif;
+      font-size: 14px;
+      color: #12232F;
+      text-align: left;
+      width: 12.5%;
+      height: 18px;
+      font-weight: 600;
+      text-align: center; }
+    main.rep_timetable table tbody tr td {
+      border: 1px #9C9C9C solid;
+      font-family: "Arial Regular", Arial, sans-serif;
+      font-size: 14px;
+      background: #fff;
+      text-align: center; }
+      main.rep_timetable table tbody tr td:after {
+        content: 'открыть'; }
+      main.rep_timetable table tbody tr td.free {
+        background: #00CC99;
+        border: 1px #fff solid; }
+        main.rep_timetable table tbody tr td.free:after {
+          color: #fff;
+          content: 'Принимаю заявки'; }
+      main.rep_timetable table tbody tr td.busy {
+        background: #4F81BD;
+        color: #fff; }
+        main.rep_timetable table tbody tr td.busy:after {
+          content: ''; }
+      main.rep_timetable table tbody tr td:first-of-type {
+        text-align: center;
+        border: none;
+        color: #666;
+        font-size: 16px;
+        background: transparent; }
+        main.rep_timetable table tbody tr td:first-of-type:after {
+          content: ''; }
+
+main.rep_plan {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto; }
+  main.rep_plan h1 {
+    font-family: "Arial Regular", Arial, sans-serif;
+    font-size: 25px;
+    padding: 0 20px;
+    margin: 0; }
+  main.rep_plan div.form {
+    margin: 20px 0;
+    padding: 0 20px; }
+    main.rep_plan div.form:after {
+      content: '';
+      display: block;
+      clear: both; }
+    main.rep_plan div.form button {
+      font-family: "OpenSans Regular", Arial, sans-serif;
+      width: 170px;
+      border: none;
+      height: 30px;
+      background: #07CA9A;
+      color: #fff; }
+      main.rep_plan div.form button:hover {
+        background: #29ecbc; }
+    main.rep_plan div.form input {
+      width: 170px;
+      height: 30px;
+      font-size: 18px;
+      border: 1px #999 solid;
+      float: right;
+      padding: 5px; }
+  main.rep_plan div.green {
+    height: 2px;
+    background: #07CA9A; }
+  main.rep_plan div.weeks {
+    width: 700px;
+    margin: 20px auto;
+    padding: 0 20px; }
+    main.rep_plan div.weeks a {
+      font-family: "Arial Regular", Arial, sans-serif;
+      font-size: 20px;
+      color: #4F81BD; }
+    main.rep_plan div.weeks span {
+      font-family: "Arial Regular", Arial, sans-serif;
+      font-size: 20px;
+      padding: 0 20px; }
+  main.rep_plan table {
+    width: 100%; }
+    main.rep_plan table thead tr th {
+      font-family: "Arial Narrow", sans-serif;
+      font-size: 14px;
+      color: #12232F;
+      text-align: left;
+      width: 12.5%;
+      height: 18px;
+      font-weight: 600;
+      text-align: center; }
+    main.rep_plan table tbody tr td {
+      border: 1px #9C9C9C solid;
+      font-family: "Arial Regular", Arial, sans-serif;
+      font-size: 14px;
+      background: #fff;
+      text-align: center; }
+      main.rep_plan table tbody tr td:after {
+        content: 'открыть'; }
+      main.rep_plan table tbody tr td.free {
+        background: #00CC99;
+        border: 1px #fff solid; }
+        main.rep_plan table tbody tr td.free:after {
+          color: #fff;
+          content: 'Принимаю заявки'; }
+      main.rep_plan table tbody tr td.busy {
+        background: #4F81BD;
+        color: #fff; }
+        main.rep_plan table tbody tr td.busy:after {
+          content: ''; }
+      main.rep_plan table tbody tr td:first-of-type {
+        text-align: center;
+        border: none;
+        color: #666;
+        font-size: 16px;
+        background: transparent; }
+        main.rep_plan table tbody tr td:first-of-type:after {
+          content: ''; }
+  main.rep_plan section.plan:after {
+    content: '';
+    display: block;
+    clear: both; }
+  main.rep_plan section.plan table {
+    width: 80%;
+    float: left; }
+  main.rep_plan section.plan aside {
+    color: #12232F;
+    padding: 0;
+    margin: 0 0 -20px 82%;
+    font-family: "Arial Regular", Arial, sans-serif; }
+    main.rep_plan section.plan aside h3, main.rep_plan section.plan aside h4, main.rep_plan section.plan aside p {
+      background: #fff;
+      margin: 0;
+      padding: 10px; }
+    main.rep_plan section.plan aside h3 {
+      margin-top: 20px; }
+
+main.rep_getmoney {
+  width: 600px;
+  margin: 20px auto;
+  font-family: "Arial Regular", Arial, sans-serif; }
+  main.rep_getmoney h1 {
+    font-size: 25px; }
+  main.rep_getmoney h2 {
+    font-size: 22px; }
+    main.rep_getmoney h2:after {
+      content: '';
+      display: block;
+      clear: both; }
+    main.rep_getmoney h2 input {
+      width: 170px;
+      height: 30px;
+      font-size: 18px;
+      border: 1px #999 solid;
+      float: right;
+      padding: 5px; }
+    main.rep_getmoney h2 span.total {
+      float: right; }
+  main.rep_getmoney div.pay_type {
+    background: #fff;
+    padding: 10px; }
+  main.rep_getmoney label {
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    font-size: 18px;
+    cursor: pointer; }
+    main.rep_getmoney label:after {
+      content: '';
+      display: block;
+      clear: both; }
+    main.rep_getmoney label input {
+      display: none; }
+    main.rep_getmoney label span.check {
+      position: absolute;
+      top: 10px;
+      left: 0;
+      width: 19px;
+      height: 19px;
+      background: url("../img/check.png");
+      display: none; }
+    main.rep_getmoney label:first-of-type span.check {
+      top: 20px; }
+    main.rep_getmoney label input:checked + span.check {
+      display: block; }
+    main.rep_getmoney label span.number {
+      float: right; }
+  main.rep_getmoney button {
+    display: block;
+    margin: 0 auto;
+    background: #FF5C39;
+    border: none;
+    width: 170px;
+    height: 30px;
+    color: #fff;
+    font-family: "OpenSans Regular", Arial, sans-serif;
+    font-size: 16px;
+    text-align: center; }
+    main.rep_getmoney button:hover {
+      background: #ff7e5b; }
 
 @media screen and (max-width: 1200px) {
   section.filter > div.row {
@@ -2515,7 +3476,93 @@ main.student-profile {
   div.rep-header section div.menu ul li:nth-child(5) {
     display: none; }
   div.rep-header section div.menu ul li#slide ul li:nth-child(5) {
-    display: inline-block; } }
+    display: inline-block; }
+
+  main.rep_less_request section.start_less {
+    padding: 0 20px; }
+  main.rep_less_request section.head > div:nth-child(1), main.rep_less_request section.table > aside > div:nth-child(1) {
+    width: 75px; }
+  main.rep_less_request section.head > div:nth-child(2), main.rep_less_request section.table > aside > div:nth-child(2) {
+    width: 80px; }
+  main.rep_less_request section.head > div:nth-child(3), main.rep_less_request section.table > aside > div:nth-child(3) {
+    width: 95px; }
+  main.rep_less_request section.head > div:nth-child(4), main.rep_less_request section.table > aside > div:nth-child(4) {
+    width: 110px; }
+  main.rep_less_request section.head > div:nth-child(5), main.rep_less_request section.table > aside > div:nth-child(5) {
+    width: 130px; }
+  main.rep_less_request section.head > div:nth-child(6), main.rep_less_request section.table > aside > div:nth-child(6) {
+    width: 80px; }
+  main.rep_less_request section.head > div:nth-child(7), main.rep_less_request section.table > aside > div:nth-child(7) {
+    width: 85px; }
+  main.rep_less_request section.head > div:nth-child(8), main.rep_less_request section.table > aside > div:nth-child(8) {
+    width: 45px; }
+  main.rep_less_request section.head > div:nth-child(9), main.rep_less_request section.table > aside > div:nth-child(9) {
+    width: 120px; }
+  main.rep_less_request section.head, main.rep_less_request section.table {
+    width: 820px;
+    margin: 0 auto; }
+
+  main.rep_history section.start_less {
+    padding: 0 20px; }
+  main.rep_history section.head > div:nth-child(1), main.rep_history section.table > aside > div:nth-child(1) {
+    width: 75px; }
+  main.rep_history section.head > div:nth-child(2), main.rep_history section.table > aside > div:nth-child(2) {
+    width: 80px; }
+  main.rep_history section.head > div:nth-child(3), main.rep_history section.table > aside > div:nth-child(3) {
+    width: 95px; }
+  main.rep_history section.head > div:nth-child(4), main.rep_history section.table > aside > div:nth-child(4) {
+    width: 110px; }
+  main.rep_history section.head > div:nth-child(5), main.rep_history section.table > aside > div:nth-child(5) {
+    width: 130px; }
+  main.rep_history section.head > div:nth-child(6), main.rep_history section.table > aside > div:nth-child(6) {
+    width: 80px; }
+  main.rep_history section.head > div:nth-child(7), main.rep_history section.table > aside > div:nth-child(7) {
+    width: 135px; }
+  main.rep_history section.head, main.rep_history section.table {
+    width: 705px;
+    margin: 0 auto; }
+
+  main.rep_free h2 {
+    text-align: center; }
+  main.rep_free section.start_less {
+    padding: 0 20px; }
+  main.rep_free section.head > div:nth-child(1), main.rep_free section.table > aside > div:nth-child(1) {
+    width: 115px; }
+  main.rep_free section.head > div:nth-child(2), main.rep_free section.table > aside > div:nth-child(2) {
+    width: 80px; }
+  main.rep_free section.head > div:nth-child(3), main.rep_free section.table > aside > div:nth-child(3) {
+    width: 95px; }
+  main.rep_free section.head > div:nth-child(4), main.rep_free section.table > aside > div:nth-child(4) {
+    width: 110px; }
+  main.rep_free section.head > div:nth-child(5), main.rep_free section.table > aside > div:nth-child(5) {
+    width: 90px; }
+  main.rep_free section.head > div:nth-child(6), main.rep_free section.table > aside > div:nth-child(6) {
+    width: 130px; }
+  main.rep_free section.head, main.rep_free section.table {
+    width: 620px;
+    margin: 0 auto; }
+
+  main.rep_lessons section.start_less {
+    padding: 0 20px; }
+  main.rep_lessons section.head > div:nth-child(1), main.rep_lessons section.table > aside > div:nth-child(1) {
+    width: 75px; }
+  main.rep_lessons section.head > div:nth-child(2), main.rep_lessons section.table > aside > div:nth-child(2) {
+    width: 80px; }
+  main.rep_lessons section.head > div:nth-child(3), main.rep_lessons section.table > aside > div:nth-child(3) {
+    width: 95px; }
+  main.rep_lessons section.head > div:nth-child(4), main.rep_lessons section.table > aside > div:nth-child(4) {
+    width: 90px; }
+  main.rep_lessons section.head > div:nth-child(5), main.rep_lessons section.table > aside > div:nth-child(5) {
+    width: 130px; }
+  main.rep_lessons section.head > div:nth-child(6), main.rep_lessons section.table > aside > div:nth-child(6) {
+    width: 135px; }
+  main.rep_lessons section.head > div:nth-child(7), main.rep_lessons section.table > aside > div:nth-child(7) {
+    width: 85px; }
+  main.rep_lessons section.head > div:nth-child(8), main.rep_lessons section.table > aside > div:nth-child(8) {
+    width: 130px; }
+  main.rep_lessons section.head, main.rep_lessons section.table {
+    width: 820px;
+    margin: 0 auto; } }
 @media screen and (max-width: 1155px) {
   div.student-header section div.menu ul li:nth-child(5) {
     display: none; }
@@ -2688,12 +3735,70 @@ main.student-profile {
   section.start aside {
     max-width: 675px; }
     section.start aside div.arrow {
-      display: none; } }
+      display: none; }
+
+  main.rep_less_request section.start_less > div:first-of-type {
+    float: none;
+    width: 100%;
+    text-align: center; }
+  main.rep_less_request section.start_less > div h3, main.rep_less_request section.start_less > div h4 {
+    text-align: center; }
+  main.rep_less_request section.head {
+    display: none; }
+  main.rep_less_request section.table aside {
+    margin-bottom: 20px; }
+    main.rep_less_request section.table aside > div {
+      float: none;
+      height: auto;
+      padding: 5px 15px; }
+      main.rep_less_request section.table aside > div > p {
+        text-align: center; }
+      main.rep_less_request section.table aside > div:nth-child(1), main.rep_less_request section.table aside > div:nth-child(2), main.rep_less_request section.table aside > div:nth-child(3), main.rep_less_request section.table aside > div:nth-child(4), main.rep_less_request section.table aside > div:nth-child(5), main.rep_less_request section.table aside > div:nth-child(6), main.rep_less_request section.table aside > div:nth-child(7), main.rep_less_request section.table aside > div:nth-child(8), main.rep_less_request section.table aside > div:nth-child(9) {
+        width: 100%;
+        border-left: 1px #666 solid;
+        border-bottom: none; }
+      main.rep_less_request section.table aside > div:nth-child(9) {
+        border-bottom: 1px #666 solid; }
+      main.rep_less_request section.table aside > div > button {
+        width: 270px; }
+
+  main.rep_lessons section.start_less > div:first-of-type {
+    float: none;
+    width: 100%;
+    text-align: center; }
+  main.rep_lessons section.start_less > div h3, main.rep_lessons section.start_less > div h4 {
+    text-align: center; }
+  main.rep_lessons section.head {
+    display: none; }
+  main.rep_lessons section.table aside {
+    margin-bottom: 20px; }
+    main.rep_lessons section.table aside > div {
+      float: none;
+      height: auto;
+      padding: 5px 15px; }
+      main.rep_lessons section.table aside > div > p {
+        text-align: center; }
+      main.rep_lessons section.table aside > div:nth-child(1), main.rep_lessons section.table aside > div:nth-child(2), main.rep_lessons section.table aside > div:nth-child(3), main.rep_lessons section.table aside > div:nth-child(4), main.rep_lessons section.table aside > div:nth-child(5), main.rep_lessons section.table aside > div:nth-child(6), main.rep_lessons section.table aside > div:nth-child(7), main.rep_lessons section.table aside > div:nth-child(8), main.rep_lessons section.table aside > div:nth-child(9) {
+        width: 100%;
+        border-left: 1px #666 solid;
+        border-bottom: none; }
+      main.rep_lessons section.table aside > div:last-child {
+        border-bottom: 1px #666 solid; }
+      main.rep_lessons section.table aside > div > button {
+        width: 270px; } }
 @media screen and (max-width: 801px) {
   div.rep-header section div.menu ul li:nth-child(2) {
     display: none; }
   div.rep-header section div.menu ul li#slide ul li:nth-child(2) {
-    display: inline-block; } }
+    display: inline-block; }
+
+  main.rep_plan section.plan table {
+    float: none;
+    width: 100%; }
+  main.rep_plan section.plan aside {
+    margin: 20px; }
+    main.rep_plan section.plan aside h4, main.rep_plan section.plan aside p {
+      padding-top: 0; } }
 @media screen and (max-width: 785px) {
   div.main-header {
     height: 190px; }
@@ -2753,7 +3858,111 @@ main.student-profile {
   div.student-header section div.menu ul li:nth-child(2) {
     display: none; }
   div.student-header section div.menu ul li#slide ul li:nth-child(2) {
-    display: inline-block; } }
+    display: inline-block; }
+
+  main.chat section.users {
+    width: 142px;
+    max-height: 560px; }
+    main.chat section.users aside {
+      position: relative;
+      padding: 5px;
+      width: 125px;
+      height: 126px;
+      overflow: hidden; }
+      main.chat section.users aside > div {
+        float: none; }
+      main.chat section.users aside div.avatar {
+        margin: 0 auto; }
+      main.chat section.users aside div.name {
+        width: 100%; }
+        main.chat section.users aside div.name h3, main.chat section.users aside div.name h4 {
+          margin: 0;
+          text-align: center; }
+        main.chat section.users aside div.name h3 {
+          font-size: 16px; }
+          main.chat section.users aside div.name h3 span.activity {
+            height: 10px;
+            width: 10px; }
+      main.chat section.users aside div.date {
+        width: 100%;
+        text-align: center; }
+      main.chat section.users aside div.green {
+        position: absolute;
+        top: 1px;
+        right: 0;
+        margin: 0; }
+      main.chat section.users aside.active div.green {
+        height: 134px; }
+  main.chat section.mess {
+    margin-left: 143px; }
+    main.chat section.mess aside.plan {
+      text-align: center;
+      padding: 10px; }
+    main.chat section.mess aside.chat {
+      max-height: 300px; }
+      main.chat section.mess aside.chat div.list {
+        padding: 10px; }
+        main.chat section.mess aside.chat div.list div.name {
+          float: none;
+          width: 100%; }
+          main.chat section.mess aside.chat div.list div.name:after {
+            content: '';
+            display: block;
+            clear: both; }
+        main.chat section.mess aside.chat div.list div.mess {
+          margin-left: 0; }
+    main.chat section.mess aside.send {
+      height: 150px;
+      position: relative; }
+      main.chat section.mess aside.send a {
+        position: absolute;
+        left: 50%;
+        bottom: 10px;
+        float: none;
+        width: 100px;
+        margin-left: -50px;
+        text-align: center; }
+      main.chat section.mess aside.send > div {
+        float: left;
+        width: 100%;
+        margin: 5px auto; }
+        main.chat section.mess aside.send > div textarea {
+          height: 70px; } }
+@media screen and (max-width: 705px) {
+  main.rep_history section.start_less > div:first-of-type {
+    float: none;
+    width: 100%;
+    text-align: center; }
+  main.rep_history section.start_less > div h3, main.rep_history section.start_less > div h4 {
+    text-align: center; }
+  main.rep_history section.head {
+    display: none; }
+  main.rep_history section.table aside {
+    margin-bottom: 20px; }
+    main.rep_history section.table aside > div {
+      float: none;
+      height: auto;
+      padding: 5px 15px; }
+      main.rep_history section.table aside > div > p {
+        text-align: center; }
+      main.rep_history section.table aside > div:nth-child(1), main.rep_history section.table aside > div:nth-child(2), main.rep_history section.table aside > div:nth-child(3), main.rep_history section.table aside > div:nth-child(4), main.rep_history section.table aside > div:nth-child(5), main.rep_history section.table aside > div:nth-child(6), main.rep_history section.table aside > div:nth-child(7), main.rep_history section.table aside > div:nth-child(8), main.rep_history section.table aside > div:nth-child(9) {
+        width: 100%;
+        border-left: 1px #666 solid;
+        border-bottom: none; }
+      main.rep_history section.table aside > div:last-child {
+        border-bottom: 1px #666 solid; }
+      main.rep_history section.table aside > div > button {
+        width: 270px; }
+
+  main.rep_timetable div.weeks, main.rep_plan div.weeks {
+    width: 100%;
+    padding: 0; }
+    main.rep_timetable div.weeks a, main.rep_timetable div.weeks span, main.rep_plan div.weeks a, main.rep_plan div.weeks span {
+      padding: 0;
+      width: 300px;
+      display: block;
+      margin: 5px auto;
+      text-align: center; } }
 @media screen and (max-width: 694px) {
   section.start aside {
     max-width: 225px; }
@@ -2764,7 +3973,40 @@ main.student-profile {
   div.rep-header section div.menu ul li:nth-child(1) {
     display: none; }
   div.rep-header section div.menu ul li#slide ul li:nth-child(1) {
-    display: inline-block; } }
+    display: inline-block; }
+
+  main.rep_free section.start_less > div:first-of-type {
+    float: none;
+    width: 100%;
+    text-align: center; }
+    main.rep_free section.start_less > div:first-of-type h1 {
+      display: block;
+      margin: 0 auto; }
+    main.rep_free section.start_less > div:first-of-type select {
+      display: block;
+      margin: 10px auto; }
+  main.rep_free section.start_less > div h3, main.rep_free section.start_less > div h4 {
+    text-align: center; }
+  main.rep_free section.head {
+    display: none; }
+  main.rep_free section.table aside {
+    margin-bottom: 20px; }
+    main.rep_free section.table aside > div {
+      float: none;
+      height: auto;
+      padding: 5px 15px; }
+      main.rep_free section.table aside > div > p {
+        text-align: center; }
+      main.rep_free section.table aside > div h5 {
+        text-align: center; }
+      main.rep_free section.table aside > div:nth-child(1), main.rep_free section.table aside > div:nth-child(2), main.rep_free section.table aside > div:nth-child(3), main.rep_free section.table aside > div:nth-child(4), main.rep_free section.table aside > div:nth-child(5), main.rep_free section.table aside > div:nth-child(6), main.rep_free section.table aside > div:nth-child(7), main.rep_free section.table aside > div:nth-child(8), main.rep_free section.table aside > div:nth-child(9) {
+        width: 100%;
+        border-left: 1px #666 solid;
+        border-bottom: none; }
+      main.rep_free section.table aside > div:last-child {
+        border-bottom: 1px #666 solid; }
+      main.rep_free section.table aside > div > button {
+        width: 270px; } }
 @media screen and (max-width: 650px) {
   div.student-header section div.menu ul li:nth-child(1) {
     display: none; }
@@ -2845,6 +4087,43 @@ main.student-profile {
     main.student-profile section div.info > div input, main.student-profile section div.info > div select {
       display: block;
       margin: 0 auto 20px auto; } }
+@media screen and (max-width: 530px) {
+  main.rep_balance h2, main.rep_balance h3 {
+    text-align: center;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0 10px; }
+  main.rep_balance section.start_balance h1 {
+    float: none;
+    font-size: 20px;
+    text-align: center; }
+  main.rep_balance section.start_balance button {
+    float: none;
+    display: block;
+    margin: 20px auto 0 auto; }
+  main.rep_balance section.header-in, main.rep_balance section.header-out {
+    display: none; }
+  main.rep_balance section.out aside, main.rep_balance section.in aside {
+    margin-bottom: 20px; }
+    main.rep_balance section.out aside > div, main.rep_balance section.in aside > div {
+      float: none;
+      width: 100%;
+      border-left: 1px #666 solid;
+      height: auto;
+      text-align: center; }
+      main.rep_balance section.out aside > div:first-child, main.rep_balance section.in aside > div:first-child {
+        border-top: 1px #666 solid; } }
+@media screen and (max-width: 500px) {
+  main.rep_timetable span.big, main.rep_plan span.big {
+    display: none; }
+  main.rep_timetable table tbody tr td:after, main.rep_plan table tbody tr td:after {
+    content: 'откр'; }
+  main.rep_timetable table tbody tr td.free:after, main.rep_plan table tbody tr td.free:after {
+    content: 'прин'; }
+  main.rep_timetable table tbody tr td.busy, main.rep_plan table tbody tr td.busy {
+    font-size: 10px; }
+  main.rep_timetable table tbody tr td:first-of-type, main.rep_plan table tbody tr td:first-of-type {
+    font-size: 12px; } }
 @media screen and (max-width: 493px) {
   div.rep-header {
     position: relative; }
@@ -2904,6 +4183,11 @@ main.student-profile {
           width: 180px; }
       main.rep-profile section.warp aside#edu > div textarea {
         width: 180px; } }
+@media screen and (max-width: 400px) {
+  main.rep_timetable div.form button, main.rep_timetable div.form input, main.rep_plan div.form button, main.rep_plan div.form input {
+    float: none;
+    display: block;
+    margin: 7px auto; } }
 @media screen and (max-width: 350px) {
   main.rep-profile section.menu, main.rep-profile section.warp {
     float: none;

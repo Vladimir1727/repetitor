@@ -21,7 +21,9 @@
                     if (is_null($student['avatar'])){
                         echo '<img src="'.base_url().'img/avatar3.png" alt="empty avarat" style="padding-top: 30px">';
                     } else{
-                        echo '<img src="../../images/'.$student['avatar'].'" alt="avarat">';
+                        $d = strrpos($student['avatar'],'.');
+                        $av = substr($student['avatar'], 0 , $d).'_thumb'.substr($student['avatar'], $d);
+                        echo '<img src="../../images/'.$av.'" alt="avarat">';
                     }
                 ?>
             </div>

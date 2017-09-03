@@ -23,15 +23,16 @@ class StudentModel extends CI_Model{
 			$this->email->from('test@dvn125.xyz', 'RealLanguage.Club');
 			$this->email->to($email);
 			$this->email->subject('Успешная регистрация на RealLanguage.Club');
-			$mess = "Поздравляем!\r\n";
-			$mess += "Вы успешно создали аккаунт на RealLanguage.Club(с активной ссылкой на сайт) и у Вас есть личный кабинет. \r\n";
-			$mess += "Для входа используйте: \r\n";
-			$mess += "Логин: ".$email."\r\n";
-			$mess += "Пароль: ".$pass."\r\n";
-			$mess += "Желаем Вам успехов в учебе! \r\n";
-			$mess += "С уважением, \r\n \r\n";
-			$mess += "команда RealLanguage.Club \r\n";
-			$this->email->message($mess);
+			$mess = "Поздравляем!<br><br>";
+			$mess .= "Вы успешно создали аккаунт на <a href='https://reallanguage.club'>RealLanguage.Club</a> и у Вас есть личный кабинет. <br>";
+			$mess .= "Для входа используйте: <br>";
+			$mess .= "Логин: ".$email."<br>";
+			$mess .= "Пароль: ".$pass."<br><br>";
+			$mess .= "Желаем Вам успехов в учебе! <br><br>";
+			$mess .= "С уважением, <br><br>";
+			$mess .= "команда RealLanguage.Club <br>";
+			$this->email->message($mess)->set_mailtype('html');
+
 			$this->email->send();
 			return '0';
 		}

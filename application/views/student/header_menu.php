@@ -1,7 +1,9 @@
 <div class="student-header">
 	<section>
 		<div class="logo">
-			<img src="<?php echo base_url(); ?>img/main_logo.png" alt="logo">
+			<a href="https://reallanguage.club">
+				<img src="<?php echo base_url(); ?>img/main_logo.png" alt="logo">
+			</a>
 		</div>
 		<div class="avatar">
 			<div class="img" id="avatar-main">
@@ -9,7 +11,9 @@
 					if (is_null($student['avatar'])){
 						echo '<img src="'.base_url().'img/avatar3.png" alt="empty avarat">';
 					} else{
-						echo '<img src="../../images/'.$student['avatar'].'" alt="avarat">';
+						$d = strrpos($student['avatar'],'.');
+                        $av = substr($student['avatar'], 0 , $d).'_thumb'.substr($student['avatar'], $d);
+                        echo '<img src="../../images/'.$av.'" alt="avarat">';
 					}
 				?>
 			</div>
@@ -60,9 +64,9 @@
 						<li><a href="#">Избранные Репетиторы</a></li>
 						<li><a href="#">История уроков</a></li>
 						<li><a href="#">Баланс кошелька</a></li>
+						<li><a href="https://reallanguage.club/instrukciya-dlya-uchenika-po-rabote-s-platformoj-repetitory-real-language-club/">Инструкция для ученика</a></li>
+						<li><a href="#">Связаться с администратором</a></li>
 						<li><a href="#">Настройки Профиля</a></li>
-						<li><a href="#">Вопросы-ответы</a></li>
-						<li><a href="#">Поддержка</a></li>
 						<li><a href="#">Выйти</a></li>
 					</ul>
 				</li>

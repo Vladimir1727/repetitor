@@ -16,7 +16,7 @@
 		<li>Вы можете заказать срочный урок.</li>
 		<li>Наши репетиторы к Вашим услугам 24/7.</li>
 	</ul>
-	<h5>Подробнее о преимуществах обучения на нашей платформе Вы можете <a href="#">прочитать здесь >>></a></h5>
+	<h5>Подробнее о преимуществах обучения на нашей платформе Вы можете <a href="<?php echo base_url();?>index.php/main/about">прочитать здесь >>></a></h5>
 </section>
 <section class="filter">
 	<div class="row">
@@ -143,7 +143,7 @@
 				<a href="#"><span></span> Видео</a>
 			</div>
 			<div class="info">
-				<h2><span class="active"></span>Анна</h2>
+				<h2><span class="active"></span><a href="#">Анна</a></h2>
 				<p><strong>Преподаёт:</strong><span>английский язык</span></p>
 				<p class="lang_block"><strong>Родной язык:</strong><span>русский</span></p>
 				<div class="stars">

@@ -124,7 +124,7 @@
 	</aside>
 </section>
 <section class="more">
-	<h2>Больше информации Вы найдете  <a href="#">здесь >></a></h2>
+	<h2>Больше информации Вы найдете  <a href="https://reallanguage.club/voprosy-i-otvety-po-rabote-s-platformoj-repetitory-real-language-club/">здесь >></a></h2>
 </section>
 <section class="berep">
 	<h2>Станьте репетитором на real language club</h2>

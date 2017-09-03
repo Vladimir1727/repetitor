@@ -31,14 +31,12 @@ class Repetitor extends CI_Controller {
 	{
 		if (!$this->session->has_userdata('repetitor_id')){
 			 redirect('/main/rlogin');
-		} else{
-			$repetitor = $this->RepetitorModel->findOne($this->session->repetitor_id);
-			if ($repetitor->repetitor['status'] == 0){
-				redirect('/repetitor/profile');
-			} else{
-				echo ' repetitor main page';
-			}
 		}
+		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
+		$data=array(
+			'repetitor'=> $rep->repetitor,
+		);
+		$this->load->view('repetitor/lessonsrequests', $data);
 	}
 
 	public function newrepetitor()
@@ -98,11 +96,16 @@ class Repetitor extends CI_Controller {
 	public function update()
 	{
 		if (!$this->session->has_userdata('repetitor_id')){
-			 throw new Exception('репетитор не вошёл');
+			 redirect('/main/rlogin');
 		}
 		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
 		$arr = json_decode($this->input->post('data'), true);
-		echo $rep->update($arr);
+		try {
+			$r = $rep->update($arr);
+		} catch (Exception $e) {
+			echo $e->getMessage();
+		}
+		echo $r;
 	}
 
 	public function updateSubject()
@@ -127,6 +130,9 @@ class Repetitor extends CI_Controller {
 
 	public function loadSubject()
 	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 throw new Exception('репетитор не вошёл');
+		}
 		$pos = $this->input->post('subject');
 		try {
 		  $data = $this->RepetitorModel->loadSubject($this->session->repetitor_id, $pos);
@@ -138,6 +144,9 @@ class Repetitor extends CI_Controller {
 
 	function addavatar()
 	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 throw new Exception('репетитор не вошёл');
+		}
 		if ($handle = opendir('images')) {
 		    while (false !== ($file = readdir($handle))) {
 				$s = strpos($file, 'avatar_r'.$this->session->repetitor_id.'_');
@@ -223,6 +232,9 @@ class Repetitor extends CI_Controller {
 
 	function adddoc()
 	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 throw new Exception('репетитор не вошёл');
+		}
 		$pos = $this->input->post('pos');
 		$rid = $this->session->repetitor_id;
 		if ($handle = opendir('images')) {
@@ -265,5 +277,113 @@ class Repetitor extends CI_Controller {
 				$rep->update($arr);
 				exit($f);
 			}
+	}
+
+	public function chat()
+	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 redirect('/main/rlogin');
+		}
+		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
+		$data=array(
+			'repetitor'=> $rep->repetitor,
+		);
+		$this->load->view('repetitor/chat', $data);
+	}
+
+	public function lessonsrequests($value='')
+	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			redirect('/main/rlogin');
+		}
+		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
+		$data=array(
+			'repetitor'=> $rep->repetitor,
+		);
+		$this->load->view('repetitor/lessonsrequests', $data);
+	}
+
+	public function history()
+	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 redirect('/main/rlogin');
+		}
+		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
+		$data=array(
+			'repetitor'=> $rep->repetitor,
+		);
+		$this->load->view('repetitor/history', $data);
+	}
+
+	public function timetable()
+	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 redirect('/main/rlogin');
+		}
+		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
+		$data=array(
+			'repetitor'=> $rep->repetitor,
+		);
+		$this->load->view('repetitor/timetable', $data);
+	}
+
+	public function freerequests()
+	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 redirect('/main/rlogin');
+		}
+		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
+		$data=array(
+			'repetitor'=> $rep->repetitor,
+		);
+		$this->load->view('repetitor/freerequests', $data);
+	}
+
+	public function lessons()
+	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 redirect('/main/rlogin');
+		}
+		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
+		$data=array(
+			'repetitor'=> $rep->repetitor,
+		);
+		$this->load->view('repetitor/lessons', $data);
+	}
+
+	public function balance()
+	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 redirect('/main/rlogin');
+		}
+		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
+		$data=array(
+			'repetitor'=> $rep->repetitor,
+		);
+		$this->load->view('repetitor/balance', $data);
+	}
+
+	public function plan()
+	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 redirect('/main/rlogin');
+		}
+		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
+		$data=array(
+			'repetitor'=> $rep->repetitor,
+		);
+		$this->load->view('repetitor/plan', $data);
+	}
+
+	public function getmoney()
+	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 redirect('/main/rlogin');
+		}
+		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
+		$data=array(
+			'repetitor'=> $rep->repetitor,
+		);
+		$this->load->view('repetitor/getmoney', $data);
 	}
 }

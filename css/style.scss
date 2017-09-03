@@ -16,6 +16,7 @@ $color_lgreen : #07CA9A;
 $color_wave : #6B7683;
 $color_bg : #E8EAEB;
 $hover : #222222;
+$color_blue : #4F81BD;
 
 @mixin end{
 	&:after{
@@ -99,6 +100,9 @@ body{
     font-family: 'Arial Narrow', sans-serif;
 	overflow-x: hidden;
 	background: $color_bg;
+	&.start{
+		background: #fff;
+	}
 }
 
 div.main-header{
@@ -754,6 +758,9 @@ main.filter{
 					}
 					span.active{
 						background: #07CA9A;
+					}
+					a, a:visited{
+						color: $color_dblue2;
 					}
 				}
 				p{
@@ -1839,11 +1846,13 @@ h1.start{
 }
 h2.start{
 	font-size: 16px;
+	max-width: 580px;
 }
 h3.start{
 	font-weight: 600;
 	margin: 14px auto;
 	font-size: 23px;
+
 }
 
 section.lang{
@@ -3049,11 +3058,12 @@ main.student-profile{
 			}
 		}
 		div.info{
+			padding-top: 30px;
 			div{
 				width: 200px;
 				float: left;
 				padding: 0 0 0 30px;
-				margin-bottom: 70px;
+				margin-bottom: 40px;
 				input, select{
 					width: 170px;
 	                padding: 5px 5px;
@@ -3071,6 +3081,1196 @@ main.student-profile{
 	}
 }
 //end student profile
+
+//start chat page
+main.chat{
+	width: 100%;
+	max-width: 1200px;
+	margin: 30px auto 20px auto;
+	@include end;
+	section.users{
+		width: 300px;
+		max-height: 820px;
+		overflow-y: scroll;
+		overflow-x: hidden;
+		float: left;
+		aside{
+			width: 283px;
+			height: 80px;
+			border: 1px #C6C6C6 solid;
+			margin-bottom: 10px;
+			background: #fff;
+			padding: 12px 0 12px 12px;
+			cursor: pointer;
+			@include end;
+			&:last-of-type{
+				margin-bottom: 0;
+			}
+			&:hover{
+				background: #eee;
+			}
+			>div{
+				float: left;
+			}
+			div.avatar{
+				width: 50px;
+				height: 50px;
+				overflow: hidden;
+				border: 1px #C6C6C6 solid;
+				border-radius: 50%;
+				>img{
+					width: 50px;
+				}
+			}
+			div.name{
+				width: 140px;
+				h3, h4{
+					@include f-n;
+					font-size: 18px;
+					line-height: 1;
+					color: #666;
+					margin: 0 0 2px 10px;
+				}
+				span.activity{
+					display: inline-block;
+					width: 12px;
+					height: 12px;
+					background: #ddd;
+					border-radius: 50%;
+					border: 1px $color_green solid;
+					&.on{
+						background: $color_green;
+					}
+				}
+			}
+			div.date{
+				width: 74px;
+				text-align: right;
+				@include f-n;
+				font-size: 14px;
+			}
+			div.green{
+				width: 5px;
+				height: 78px;
+				margin-top: -12px;
+				background: transparent;
+			}
+			&.active{
+				div.green{
+					width: 5px;
+					height: 78px;
+					margin-top: -12px;
+					background: $color_dgreen;
+				}
+			}
+		}
+	}
+	section.mess{
+		margin-left: 315px;
+		aside.plan{
+			background: #fff;
+			border: 1px #C6C6C6 solid;
+			text-align: right;
+			padding: 10px 15px;
+			margin-bottom: 15px;
+			a{
+				@include f-n;
+				font-size: 18px;
+				display: inline-block;
+				padding: 5px 15px;
+				color: #fff;
+				background: $color_orange;
+				text-decoration: none;
+				&:hover{
+					background: $color_orange + $hover;
+				}
+			}
+		}
+		aside.chat{
+			max-height: 650px;
+			margin-bottom: 15px;
+			overflow-x: visible;
+			overflow-y: scroll;
+			background: #fff;
+			border: 1px #C6C6C6 solid;
+			div.date{
+				@include f-n;
+				font-size: 14px;
+				color: #666;
+				padding: 5px 15px;
+				border-bottom: 1px #C6C6C6 solid;
+			}
+			div.list{
+				@include end;
+				padding: 10px 15px 10px 20px;
+				div.avatar{
+					width: 50px;
+					height: 50px;
+					overflow: hidden;
+					border: 1px #C6C6C6 solid;
+					border-radius: 50%;
+					>img{
+						width: 50px;
+					}
+					float: left;
+				}
+				div.name{
+					float: left;
+					width: 100px;
+					padding-top: 9px;
+					h3, h4{
+						@include f-n;
+						font-size: 14px;
+						line-height: 1;
+						color: $color_green;
+						margin: 0 0 2px 10px;
+					}
+					h4{
+						color: #666;
+					}
+					span.activity{
+						display: inline-block;
+						width: 10px;
+						height: 10px;
+						background: #ddd;
+						border-radius: 50%;
+						border: 1px $color_green solid;
+						&.on{
+							background: $color_green;
+						}
+					}
+				}
+				div.mess{
+					margin-left: 150px;
+					color: #333;
+					@include f-n;
+					font-size: 14px;
+				}
+			}
+		}
+		aside.send{
+			background: #fff;
+			border: 1px #C6C6C6 solid;
+			width: 100%;
+			height: 83px;
+			padding: 15px;
+			@include end;
+			a{
+				float: right;
+				@include f-n;
+				font-size: 18px;
+				display: block;
+				padding: 5px 15px;
+				color: #fff;
+				background: $color_dgreen;
+				text-decoration: none;
+				margin-top: 5px;
+				&:hover{
+					background: $color_dgreen + $hover;
+				}
+			}
+			>div{
+				float: none;
+				margin-right: 120px;
+			}
+			textarea{
+				width: 100%;
+				height: 50px;
+				resize: none;
+			}
+		}
+	}
+}
+//end chat page
+
+//start lessonsrequest
+main.rep_less_request{
+	width: 100%;
+	max-width: 1200px;
+	margin: 20px auto;
+	section.start_less{
+		margin-bottom: 20px;
+		h1{
+			@include f-reg;
+			font-size: 25px;
+			margin: 0;
+		}
+		>div{
+			&:first-of-type{
+				width: 300px;
+				float: left;
+			}
+			@include end;
+			h3, h4{
+				//float: right;
+				@include f-reg;
+				text-align: right;
+				font-size: 16px;
+				margin: 0;
+			}
+		}
+	}
+	@mixin less_table{
+		>div{
+			border-right: 1px #666 solid;
+			border-top: 1px #666 solid;
+			width:100px;
+			float: left;
+			&:nth-child(1){
+				border-left: 1px #666 solid;
+			}
+			&:nth-child(2){
+				width: 120px;
+			}
+			&:nth-child(3){
+				width: 120px;
+			}
+			&:nth-child(4){
+				width: 180px;
+			}
+			&:nth-child(5){
+				width: 200px;
+			}
+			&:nth-child(6){
+				width: 110px;
+			}
+			&:nth-child(7){
+				width: 110px;
+			}
+			&:nth-child(8){
+				width: 110px;
+			}
+			&:nth-child(9){
+				width: 150px;
+			}
+		}
+	}
+	section.head{
+		@include end;
+		@include less_table;
+
+		>div{
+			display: table;
+			font-weight: 600;
+			text-align: center;
+			height: 50px;
+			background: $color_lgreen;
+			p{
+				display: table-cell;
+    			vertical-align: middle;
+			}
+		}
+	}
+	section.table{
+		>aside{
+			@include less_table;
+			@include end;
+			>div{
+				background: #fff;
+				height: 110px;
+				padding: 5px;
+				overflow: hidden;
+				p{
+					font-size: 16px;
+					padding: 0;
+					margin: 0;
+				}
+				button{
+					width: 110px;
+					border: none;
+					display: block;
+					margin: 5px auto;
+					height: 25px;
+					@include o-reg;
+					&.ok{
+						color: #fff;
+						background: $color_green4;
+						&:hover{
+							background: $color_green4 + $hover;
+						}
+					}
+					&.del{
+						color: #fff;
+						background: $color_orange;
+						&:hover{
+							background: $color_orange + $hover;
+						}
+					}
+					&.mess{
+						color: #fff;
+						background: $color_dgreen;
+						&:hover{
+							background: $color_dgreen + $hover;
+						}
+					}
+				}
+			}
+			&:last-of-type{
+				>div{
+					border-bottom: 1px #666 solid;
+				}
+			}
+		}
+	}
+}
+//end lessonsrequest
+
+//start repetitor history
+main.rep_history{
+	width: 100%;
+	max-width: 1200px;
+	margin: 20px auto;
+	section.start_less{
+		margin-bottom: 20px;
+		h1{
+			@include f-reg;
+			font-size: 25px;
+			margin: 0;
+		}
+		>div{
+			&:first-of-type{
+				width: 300px;
+				float: left;
+			}
+			@include end;
+			h3, h4{
+				//float: right;
+				@include f-reg;
+				text-align: right;
+				font-size: 16px;
+				margin: 0;
+			}
+		}
+	}
+	@mixin less_table{
+		>div{
+			border-right: 1px #666 solid;
+			border-top: 1px #666 solid;
+			width:150px;
+			float: left;
+			&:nth-child(1){
+				border-left: 1px #666 solid;
+			}
+			&:nth-child(2){
+				//width: 120px;
+			}
+			&:nth-child(3){
+				//width: 120px;
+			}
+			&:nth-child(4){
+				width: 220px;
+			}
+			&:nth-child(5){
+				width: 230px;
+			}
+			&:nth-child(6){
+				//width: 110px;
+			}
+			&:nth-child(7){
+				//width: 110px;
+			}
+		}
+	}
+	section.head{
+		@include end;
+		@include less_table;
+
+		>div{
+			display: table;
+			font-weight: 600;
+			text-align: center;
+			height: 50px;
+			background: $color_lgreen;
+			p{
+				display: table-cell;
+    			vertical-align: middle;
+			}
+		}
+	}
+	section.table{
+		>aside{
+			@include less_table;
+			@include end;
+			>div{
+				background: #fff;
+				height: 110px;
+				padding: 5px;
+				overflow: hidden;
+				p{
+					font-size: 16px;
+					padding: 0;
+					margin: 0;
+				}
+				button{
+					width: 110px;
+					border: none;
+					display: block;
+					margin: 5px auto;
+					height: 25px;
+					@include o-reg;
+					&.ok{
+						color: #fff;
+						background: $color_green4;
+						&:hover{
+							background: $color_green4 + $hover;
+						}
+					}
+					&.del{
+						color: #fff;
+						background: $color_orange;
+						&:hover{
+							background: $color_orange + $hover;
+						}
+					}
+					&.mess{
+						color: #fff;
+						background: $color_dgreen;
+						&:hover{
+							background: $color_dgreen + $hover;
+						}
+					}
+				}
+			}
+			&:last-of-type{
+				>div{
+					border-bottom: 1px #666 solid;
+				}
+			}
+		}
+	}
+}
+//end repetitor history
+
+//start repetitor free requests
+main.rep_free{
+	width: 100%;
+	max-width: 1200px;
+	margin: 20px auto;
+	h2{
+		@include o-reg;
+		font-size: 23px;
+		&.new{
+			color: $color_orange;
+		}
+		&.old{
+			color: $color_dgreen;
+		}
+	}
+	section.start_less{
+		margin-bottom: 20px;
+		h1{
+			@include f-reg;
+			font-size: 25px;
+			margin: 0;
+			display: inline-block;
+		}
+		select{
+			display: inline-block;
+			width: 170px;
+			height: 30px;
+			font-size: 18px;
+			border: 1px #999 solid;
+			margin-left: 20px;
+		}
+		>div{
+			&:first-of-type{
+				width: 415px;
+				float: left;
+			}
+			@include end;
+			h3, h4{
+				@include f-reg;
+				text-align: right;
+				font-size: 16px;
+				margin: 0;
+			}
+		}
+	}
+	@mixin less_table{
+		>div{
+			border-right: 1px #666 solid;
+			border-top: 1px #666 solid;
+			width: 16.6%;
+			float: left;
+			&:nth-child(1){
+				border-left: 1px #666 solid;
+			}
+			&:nth-child(2){
+				//width: 120px;
+			}
+			&:nth-child(3){
+				//width: 120px;
+			}
+			&:nth-child(4){
+				//width: 220px;
+			}
+			&:nth-child(5){
+				//width: 230px;
+			}
+			&:nth-child(6){
+				//width: 110px;
+			}
+		}
+	}
+	section.head{
+		@include end;
+		@include less_table;
+
+		>div{
+			display: table;
+			font-weight: 600;
+			text-align: center;
+			height: 50px;
+			background: $color_lgreen;
+			p{
+				display: table-cell;
+    			vertical-align: middle;
+			}
+		}
+	}
+	section.table{
+		>aside{
+			@include less_table;
+			@include end;
+			>div{
+				background: #fff;
+				height: 110px;
+				padding: 5px;
+				overflow: hidden;
+				p{
+					font-size: 16px;
+					padding: 0;
+					margin: 0;
+				}
+				button{
+					width: 110px;
+					border: none;
+					display: block;
+					margin: 5px auto;
+					//height: 25px;
+					padding: 5px;
+					@include o-reg;
+					&.ok{
+						color: #fff;
+						background: $color_green4;
+						&:hover{
+							background: $color_green4 + $hover;
+						}
+					}
+					&.del{
+						color: #fff;
+						background: $color_orange;
+						&:hover{
+							background: $color_orange + $hover;
+						}
+					}
+					&.mess{
+						color: #fff;
+						background: $color_dgreen;
+						&:hover{
+							background: $color_dgreen + $hover;
+						}
+					}
+				}
+			}
+			&:last-of-type{
+				>div{
+					border-bottom: 1px #666 solid;
+				}
+			}
+		}
+	}
+}
+//end repetitor free requests
+
+//start lessons
+main.rep_lessons{
+	width: 100%;
+	max-width: 1200px;
+	margin: 20px auto;
+	section.start_less{
+		margin-bottom: 20px;
+		h1{
+			@include f-reg;
+			font-size: 25px;
+			margin: 0;
+		}
+		>div{
+			&:first-of-type{
+				width: 300px;
+				float: left;
+			}
+			@include end;
+			h3, h4{
+				//float: right;
+				@include f-reg;
+				text-align: right;
+				font-size: 16px;
+				margin: 0;
+			}
+		}
+	}
+	@mixin less_table{
+		>div{
+			border-right: 1px #666 solid;
+			border-top: 1px #666 solid;
+			width:130px;
+			float: left;
+			&:nth-child(1){
+				border-left: 1px #666 solid;
+			}
+			&:nth-child(2){
+				//width: 120px;
+			}
+			&:nth-child(3){
+				//width: 120px;
+			}
+			&:nth-child(4){
+				//width: 180px;
+			}
+			&:nth-child(5){
+				width: 200px;
+			}
+			&:nth-child(6){
+				width: 200px;
+			}
+			&:nth-child(7){
+				//width: 110px;
+			}
+			&:nth-child(8){
+				width: 150px;
+			}
+		}
+	}
+	section.head{
+		@include end;
+		@include less_table;
+
+		>div{
+			display: table;
+			font-weight: 600;
+			text-align: center;
+			height: 50px;
+			background: $color_lgreen;
+			p{
+				display: table-cell;
+    			vertical-align: middle;
+			}
+		}
+	}
+	section.table{
+		>aside{
+			@include less_table;
+			@include end;
+			>div{
+				background: #fff;
+				height: 110px;
+				padding: 5px;
+				overflow: hidden;
+				p{
+					font-size: 16px;
+					padding: 0;
+					margin: 0;
+				}
+				button{
+					width: 110px;
+					border: none;
+					display: block;
+					margin: 5px auto;
+					height: 25px;
+					@include o-reg;
+					&.ok{
+						color: #fff;
+						background: $color_green4;
+						&:hover{
+							background: $color_green4 + $hover;
+						}
+					}
+					&.del{
+						color: #fff;
+						background: $color_orange;
+						&:hover{
+							background: $color_orange + $hover;
+						}
+					}
+					&.mess{
+						color: #fff;
+						background: $color_dgreen;
+						&:hover{
+							background: $color_dgreen + $hover;
+						}
+					}
+				}
+			}
+			&:last-of-type{
+				>div{
+					border-bottom: 1px #666 solid;
+				}
+			}
+		}
+	}
+}
+//end lessons
+
+//start repetitor balance
+main.rep_balance{
+	width: 100%;
+	max-width: 800px;
+	margin: 20px auto;
+	section.start_balance{
+		padding: 0;
+		@include end;
+		@include o-reg;
+		h1{
+			float: left;
+			font-size: 25px;
+			color: $color_dblue;
+			margin: 0;
+		}
+		button{
+			float: right;
+			@include o-reg;
+			width: 170px; //height: 30px;
+			background: $color_orange;
+			color: #fff;
+			padding: 6px;
+			border: none;
+			&:hover{
+				background: $color_orange + $hover;
+			}
+		}
+	}
+	h2{
+		padding: 0 0;
+		@include o-reg;
+		font-size: 24px;
+		color: $color_dblue;
+		margin: 30px 0 20px 0;
+	}
+	h3{
+		padding: 0 0 0 0;
+		@include o-reg;
+		font-size: 22px;
+		margin: 30px 0 20px 0;
+	}
+	h3.in{
+		color: $color_lgreen;
+	}
+	h3.out{
+		color: $color_dblue2;
+	}
+	section.in{
+		aside{
+			@include end;
+			>div{
+				float: left;
+				width: 25%;
+				padding: 5px;
+				border-right: 1px #666 solid;
+				border-bottom: 1px #666 solid;
+				height: 70px;
+				overflow: hidden;
+				p{
+					@include f-n;
+					font-size: 16px;
+				}
+				&:first-of-type{
+					border-left: 1px #666 solid;
+				}
+			}
+		}
+	}
+	section.out{
+		aside{
+			@include end;
+			>div{
+				float: left;
+				width: 33.3%;
+				padding: 5px;
+				border-right: 1px #666 solid;
+				border-bottom: 1px #666 solid;
+				height: 70px;
+				overflow: hidden;
+				p{
+					@include f-n;
+					font-size: 16px;
+				}
+				&:first-of-type{
+					border-left: 1px #666 solid;
+				}
+			}
+		}
+	}
+	section.header-in{
+		color: #fff;
+		aside>div{
+			border-top: 1px #666 solid;
+			display: table;
+			font-weight: 600;
+			font-size: 16px;
+			text-align: center;
+			height: 50px;
+			background: $color_lgreen;
+			p{
+				display: table-cell;
+    			vertical-align: middle;
+				margin: 0;
+			}
+		}
+	}
+	section.header-out{
+		color: #fff;
+		aside>div{
+			border-top: 1px #666 solid;
+			border-right: 1px #fff solid;
+			display: table;
+			font-weight: 600;
+			font-size: 16px;
+			text-align: center;
+			height: 50px;
+			background: $color_blue;
+			&:last-child{
+				border-right: 1px #666 solid;
+			}
+			p{
+				display: table-cell;
+    			vertical-align: middle;
+				margin: 0;
+			}
+		}
+	}
+	section.table{
+		background: #fff;
+		p{
+			margin: 0;
+		}
+	}
+}
+//end repetitor balance
+
+//start repetitor timetable
+main.rep_timetable{
+	width: 100%;
+	max-width: 1200px;
+	margin: 20px auto;
+	h1{
+		font-family: "Arial Regular", Arial, sans-serif;
+	    font-size: 25px;
+		padding: 0 20px;
+	    margin: 0;
+	}
+	div.form{
+		margin: 20px 0;
+		padding: 0 20px;
+		@include end;
+		button{
+			@include o-reg;
+			width: 170px;
+			border: none;
+			height: 30px;
+			background: $color_lgreen;
+			color: #fff;
+			&:hover{
+				background: $color_lgreen + $hover;
+			}
+		}
+		input{
+			width: 170px;
+			height: 30px;
+			font-size: 18px;
+			border: 1px #999 solid;
+			float: right;
+			padding: 5px;
+		}
+	}
+	div.green{
+		height: 2px;
+		background: $color_lgreen;
+	}
+	div.weeks{
+		width: 700px;
+		margin: 20px auto;
+		padding: 0 20px;
+		a{
+			@include f-reg;
+			font-size: 20px;
+			color: $color_blue;
+		}
+		span{
+			@include f-reg;
+			font-size: 20px;
+			padding: 0 20px;
+		}
+	}
+	table{
+		width: 100%;
+		thead{
+			tr{
+				th{
+					font-family: "Arial Narrow", sans-serif;
+					font-size: 14px;
+					color: $color_dblue;
+					text-align: left;
+					width: 12.5%;
+					height: 18px;
+					font-weight: 600;
+					text-align: center;
+				}
+			}
+		}
+		tbody{
+			tr{
+				td{
+					border: 1px #9C9C9C solid;
+					font-family: "Arial Regular", Arial, sans-serif;
+					font-size: 14px;
+					background: #fff;
+					text-align: center;
+					&:after{
+						content: 'открыть';
+					}
+					&.free{
+						background: #00CC99;
+						border: 1px #fff solid;
+						&:after{
+							color: #fff;
+							content: 'Принимаю заявки';
+						}
+					}
+					&.busy{
+						background: $color_blue;
+						color: #fff;
+						&:after{
+							content: '';
+						}
+					}
+					&:first-of-type{
+						text-align: center;
+						border: none;
+						color: #666;
+						font-size: 16px;
+						background: transparent;
+						&:after{
+							content: '';
+						}
+					}
+				}
+			}
+		}
+	}
+}
+//end repetitor timetable
+
+//start repetitor plan
+main.rep_plan{
+	width: 100%;
+	max-width: 1200px;
+	margin: 20px auto;
+	h1{
+		font-family: "Arial Regular", Arial, sans-serif;
+	    font-size: 25px;
+		padding: 0 20px;
+	    margin: 0;
+	}
+	div.form{
+		margin: 20px 0;
+		padding: 0 20px;
+		@include end;
+		button{
+			@include o-reg;
+			width: 170px;
+			border: none;
+			height: 30px;
+			background: $color_lgreen;
+			color: #fff;
+			&:hover{
+				background: $color_lgreen + $hover;
+			}
+		}
+		input{
+			width: 170px;
+			height: 30px;
+			font-size: 18px;
+			border: 1px #999 solid;
+			float: right;
+			padding: 5px;
+		}
+	}
+	div.green{
+		height: 2px;
+		background: $color_lgreen;
+	}
+	div.weeks{
+		width: 700px;
+		margin: 20px auto;
+		padding: 0 20px;
+		a{
+			@include f-reg;
+			font-size: 20px;
+			color: $color_blue;
+		}
+		span{
+			@include f-reg;
+			font-size: 20px;
+			padding: 0 20px;
+		}
+	}
+	table{
+		width: 100%;
+		thead{
+			tr{
+				th{
+					font-family: "Arial Narrow", sans-serif;
+					font-size: 14px;
+					color: $color_dblue;
+					text-align: left;
+					width: 12.5%;
+					height: 18px;
+					font-weight: 600;
+					text-align: center;
+				}
+			}
+		}
+		tbody{
+			tr{
+				td{
+					border: 1px #9C9C9C solid;
+					font-family: "Arial Regular", Arial, sans-serif;
+					font-size: 14px;
+					background: #fff;
+					text-align: center;
+					&:after{
+						content: 'открыть';
+					}
+					&.free{
+						background: #00CC99;
+						border: 1px #fff solid;
+						&:after{
+							color: #fff;
+							content: 'Принимаю заявки';
+						}
+					}
+					&.busy{
+						background: $color_blue;
+						color: #fff;
+						&:after{
+							content: '';
+						}
+					}
+					&:first-of-type{
+						text-align: center;
+						border: none;
+						color: #666;
+						font-size: 16px;
+						background: transparent;
+						&:after{
+							content: '';
+						}
+					}
+				}
+			}
+		}
+	}
+	section.plan{
+		@include end;
+		table{
+			width: 80%;
+			float: left;
+		}
+		aside{
+			color: $color_dblue;
+			padding: 0;
+			margin: 0 0 -20px 82%;
+			@include f-reg;
+			h3, h4, p{
+				background: #fff;
+				margin: 0;
+				padding: 10px;
+			}
+			h3{
+				margin-top: 20px;
+			}
+		}
+	}
+}
+//end repetitor plan
+
+//start repetitor getmoney
+main.rep_getmoney{
+	width: 600px;
+	margin: 20px auto;
+	@include f-reg;
+	h1{
+		font-size: 25px;
+	}
+	h2{
+		font-size: 22px;
+		@include end;
+		input{
+			width: 170px;
+			height: 30px;
+			font-size: 18px;
+			border: 1px #999 solid;
+			float: right;
+			padding: 5px;
+		}
+		span.total{
+			float: right;
+		}
+	}
+	div.pay_type{
+		background: #fff;
+		padding: 10px;
+	}
+	label{
+		@include end;
+		display: block;
+		position: relative;
+		padding-left: 30px;
+		font-size: 18px;
+		cursor: pointer;
+
+		input{
+			display: none;
+		}
+		span.check{
+			position: absolute;
+			top: 10px;
+			left: 0;
+			width: 19px;
+			height: 19px;
+			background: url('../img/check.png');
+			display: none;
+		}
+		&:first-of-type{
+			span.check{
+				top: 20px;
+			}
+		}
+		input:checked+span.check{
+			display: block;
+		}
+		span.number{
+			float: right;
+		}
+	}
+	button{
+		display: block;
+		margin: 0 auto;
+		background: $color_orange;
+		border: none;
+		width: 170px;
+		height: 30px;
+		color: #fff;
+		@include o-reg;
+		font-size: 16px;
+		text-align: center;
+		&:hover{
+			background: $color_orange + $hover;
+		}
+	}
+}
+//end repetitor getmoney
 
 @media screen and (max-width: 1200px) {
 	section.filter{
@@ -3126,6 +4326,164 @@ main.student-profile{
 					}
 				}
 			}
+		}
+	}
+	main.rep_less_request{
+		@mixin less_table{
+			>div{
+				&:nth-child(1){
+					width: 75px;
+				}
+				&:nth-child(2){
+					width: 80px;
+				}
+				&:nth-child(3){
+					width: 95px;
+				}
+				&:nth-child(4){
+					width: 110px;
+				}
+				&:nth-child(5){
+					width: 130px;
+				}
+				&:nth-child(6){
+					width: 80px;
+				}
+				&:nth-child(7){
+					width: 85px;
+				}
+				&:nth-child(8){
+					width: 45px;
+				}
+				&:nth-child(9){
+					width: 120px;
+				}
+			}
+		}
+		section.start_less{
+			padding: 0 20px;
+		}
+		section.head, section.table>aside{
+			@include less_table;
+		}
+		section.head, section.table{
+			width: 820px;
+			margin: 0 auto;
+		}
+	}
+	main.rep_history{
+		@mixin less_table{
+			>div{
+				&:nth-child(1){
+					width: 75px;
+				}
+				&:nth-child(2){
+					width: 80px;
+				}
+				&:nth-child(3){
+					width: 95px;
+				}
+				&:nth-child(4){
+					width: 110px;
+				}
+				&:nth-child(5){
+					width: 130px;
+				}
+				&:nth-child(6){
+					width: 80px;
+				}
+				&:nth-child(7){
+					width: 135px;
+				}
+			}
+		}
+
+		section.start_less{
+			padding: 0 20px;
+		}
+		section.head, section.table>aside{
+			@include less_table;
+		}
+		section.head, section.table{
+			width: 705px;
+			margin: 0 auto;
+		}
+	}
+	main.rep_free{
+		@mixin less_table{
+			>div{
+				&:nth-child(1){
+					width: 115px;
+				}
+				&:nth-child(2){
+					width: 80px;
+				}
+				&:nth-child(3){
+					width: 95px;
+				}
+				&:nth-child(4){
+					width: 110px;
+				}
+				&:nth-child(5){
+					width: 90px;
+				}
+				&:nth-child(6){
+					width: 130px;
+				}
+			}
+		}
+		h2{
+			text-align: center;
+		}
+		section.start_less{
+			padding: 0 20px;
+		}
+		section.head, section.table>aside{
+			@include less_table;
+		}
+		section.head, section.table{
+			width: 620px;
+			margin: 0 auto;
+		}
+	}
+	main.rep_lessons{
+		@mixin less_table{
+			>div{
+				&:nth-child(1){
+					width: 75px;
+				}
+				&:nth-child(2){
+					width: 80px;
+				}
+				&:nth-child(3){
+					width: 95px;
+				}
+				&:nth-child(4){
+					width: 90px;
+				}
+				&:nth-child(5){
+					width: 130px;
+				}
+				&:nth-child(6){
+					width: 135px;
+				}
+				&:nth-child(7){
+					width: 85px;
+				}
+				&:nth-child(8){
+					width: 130px;
+				}
+			}
+		}
+		section.start_less{
+			padding: 0 20px;
+		}
+		section.head, section.table>aside{
+			@include less_table;
+		}
+		section.head, section.table{
+			width: 820px;
+			margin: 0 auto;
 		}
 	}
 }
@@ -3490,6 +4848,94 @@ main.student-profile{
             }
         }
     }
+	main.rep_less_request{
+		section.start_less{
+			>div{
+				&:first-of-type{
+					float:none;
+					width: 100%;
+					text-align: center;
+				}
+				h3, h4{
+					text-align: center;
+				}
+			}
+		}
+		section.head{
+			display: none;
+		}
+		section.table{
+			aside{
+				margin-bottom: 20px;
+				>div{
+					float: none;
+					height: auto;
+					padding: 5px 15px;
+					>p{
+						text-align: center;
+					}
+					&:nth-child(1){
+
+					}
+					&:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6), &:nth-child(7), &:nth-child(8), &:nth-child(9){
+						width: 100%;
+						border-left: 1px #666 solid;
+						border-bottom: none;
+					}
+					&:nth-child(9){
+						border-bottom: 1px #666 solid;
+					}
+					>button{
+						width: 270px;
+					}
+				}
+			}
+		}
+	}
+	main.rep_lessons{
+		section.start_less{
+			>div{
+				&:first-of-type{
+					float:none;
+					width: 100%;
+					text-align: center;
+				}
+				h3, h4{
+					text-align: center;
+				}
+			}
+		}
+		section.head{
+			display: none;
+		}
+		section.table{
+			aside{
+				margin-bottom: 20px;
+				>div{
+					float: none;
+					height: auto;
+					padding: 5px 15px;
+					>p{
+						text-align: center;
+					}
+					&:nth-child(1){
+
+					}
+					&:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6), &:nth-child(7), &:nth-child(8), &:nth-child(9){
+						width: 100%;
+						border-left: 1px #666 solid;
+						border-bottom: none;
+					}
+					&:last-child{
+						border-bottom: 1px #666 solid;
+					}
+					>button{
+						width: 270px;
+					}
+				}
+			}
+		}
+	}
 }
 
 @media screen and (max-width: 801px) {
@@ -3511,6 +4957,20 @@ main.student-profile{
 							}
 						}
 					}
+				}
+			}
+		}
+	}
+	main.rep_plan{
+		section.plan{
+			table{
+				float: none;
+				width: 100%;
+			}
+			aside{
+				margin: 20px;
+				h4,p{
+					padding-top: 0;
 				}
 			}
 		}
@@ -3638,8 +5098,158 @@ main.student-profile{
     	  }
       }
     }
+	main.chat{
+		section.users{
+			width: 142px;
+				max-height: 560px;
+			aside{
+				position: relative;
+				padding: 5px;
+				width: 125px;
+				height: 126px;
+				overflow: hidden;
+				>div{
+					float: none;
+				}
+				div.avatar{
+					margin: 0 auto;
+				}
+				div.name{
+					width: 100%;
+					h3,h4{
+						margin: 0;
+						text-align: center;
+					}
+					h3{
+						font-size: 16px;
+						span.activity{
+							height: 10px;
+							width: 10px;
+						}
+					}
+				}
+				div.date{
+					width: 100%;
+					text-align: center;
+				}
+				div.green{
+					position: absolute;
+					top: 1px;
+					right: 0;
+					margin: 0;
+				}
+				&.active{
+					div.green{
+						height: 134px;
+					}
+				}
+			}
+		}
+		section.mess{
+
+			margin-left: 143px;
+			aside.plan{
+				text-align: center;
+				padding: 10px;
+			}
+			aside.chat{
+				max-height: 300px;
+				div.list{
+					padding: 10px;
+					div.name{
+						@include end;
+						float: none;
+						width: 100%;
+					}
+					div.mess{
+						margin-left: 0;
+					}
+				}
+			}
+			aside.send{
+				height: 150px;
+				position: relative;
+				a{
+					position: absolute;
+					left: 50%;
+					bottom: 10px;
+					float: none;
+					width: 100px;
+					margin-left: -50px;
+					text-align: center;
+				}
+				>div{
+					float: left;
+					width: 100%;
+					margin: 5px auto;
+					textarea{
+						height: 70px;
+					}
+				}
+			}
+		}
+	}
 }
 
+@media screen and (max-width: 705px) {
+	main.rep_history{
+		section.start_less{
+			>div{
+				&:first-of-type{
+					float:none;
+					width: 100%;
+					text-align: center;
+				}
+				h3, h4{
+					text-align: center;
+				}
+			}
+		}
+		section.head{
+			display: none;
+		}
+		section.table{
+			aside{
+				margin-bottom: 20px;
+				>div{
+					float: none;
+					height: auto;
+					padding: 5px 15px;
+					>p{
+						text-align: center;
+					}
+					&:nth-child(1){
+
+					}
+					&:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6), &:nth-child(7), &:nth-child(8), &:nth-child(9){
+						width: 100%;
+						border-left: 1px #666 solid;
+						border-bottom: none;
+					}
+					&:last-child{
+						border-bottom: 1px #666 solid;
+					}
+					>button{
+						width: 270px;
+					}
+				}
+			}
+		}
+	}
+	main.rep_timetable, main.rep_plan{
+		div.weeks{
+			width: 100%;
+			padding: 0;
+			a, span{
+				padding: 0;
+				width: 300px;
+				display: block;
+				margin: 5px auto;
+				text-align: center;
+			}
+		}
+	}
+}
 
 @media screen and (max-width: 694px) {
     section.start{
@@ -3671,6 +5281,61 @@ main.student-profile{
 								}
 							}
 						}
+					}
+				}
+			}
+		}
+	}
+	main.rep_free{
+		section.start_less{
+			>div{
+				&:first-of-type{
+					float:none;
+					width: 100%;
+					text-align: center;
+					h1{
+						display: block;
+						margin: 0 auto;
+					}
+					select{
+						display: block;
+						margin: 10px auto;
+					}
+				}
+				h3, h4{
+					text-align: center;
+				}
+			}
+		}
+		section.head{
+			display: none;
+		}
+		section.table{
+			aside{
+				margin-bottom: 20px;
+				>div{
+					float: none;
+					height: auto;
+					padding: 5px 15px;
+					>p{
+						text-align: center;
+					}
+					h5{
+						text-align: center;
+					}
+					&:nth-child(1){
+
+					}
+					&:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5), &:nth-child(6), &:nth-child(7), &:nth-child(8), &:nth-child(9){
+						width: 100%;
+						border-left: 1px #666 solid;
+						border-bottom: none;
+					}
+					&:last-child{
+						border-bottom: 1px #666 solid;
+					}
+					>button{
+						width: 270px;
 					}
 				}
 			}
@@ -3866,6 +5531,7 @@ div.student-header{
 
 @media screen and (max-width: 560px) {
 	main.student-profile{
+
 		section{
 			div.info{
 				>div{
@@ -3879,6 +5545,78 @@ div.student-header{
 			}
 		}
 	}
+}
+
+@media screen and (max-width: 530px) {
+	main.rep_balance{
+		h2, h3{
+			text-align: center;
+			margin-left: 0;
+			margin-right: 0;
+			padding: 0 10px;
+		}
+		section.start_balance{
+			h1{
+				float: none;
+				font-size: 20px;
+				text-align: center;
+			}
+			button{
+				float: none;
+				display: block;
+				margin: 20px auto 0 auto;
+			}
+		}
+		section.header-in, section.header-out{
+			display: none;
+		}
+		section.out, section.in{
+			aside{
+				>div{
+					float: none;
+					width: 100%;
+					border-left: 1px #666 solid;
+					height: auto;
+					text-align: center;
+					&:first-child{
+						border-top: 1px #666 solid;
+					}
+				}
+				margin-bottom: 20px;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 500px) {
+	main.rep_timetable, main.rep_plan{
+		span.big{
+			display: none;
+		}
+		table{
+			tbody{
+				tr{
+					td{
+						&:after{
+							content: 'откр';
+						}
+						&.free{
+							&:after{
+								content: 'прин';
+							}
+						}
+						&.busy{
+							font-size: 10px;
+						}
+						&:first-of-type{
+							font-size: 12px;
+						}
+					}
+				}
+			}
+		}
+	}
+
 }
 
 @media screen and (max-width: 493px) {
@@ -3977,6 +5715,18 @@ div.student-header{
 						width: 180px;
 					}
 				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 400px) {
+	main.rep_timetable, main.rep_plan{
+		div.form{
+			button, input{
+				float: none;
+				display: block;
+				margin: 7px auto;
 			}
 		}
 	}

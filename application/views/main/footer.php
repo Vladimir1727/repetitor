@@ -49,7 +49,7 @@
             <a href="https://www.facebook.com/reallanguage.es/">Разговорный испанский</a>
         </div>
         <div class="col-sx-12 col-sm-3 col-md-2  col-lg-2 mess">
-            <a href="#">Вопросы и ответы</a>
+            <a href="https://reallanguage.club/voprosy-i-otvety-po-rabote-s-platformoj-repetitory-real-language-club/">Вопросы и ответы</a>
             <br><br>
             <a href="https://reallanguage.club/kontakt/">Контакты</a>
             <br><br>
@@ -97,7 +97,7 @@
             <span class="pull-right">|</span>
         </div>
         <div class="col-sx-12 col-sm-3 col-md-2 col-lg-2 small">
-            <a href="#">Технические требования</a>
+            <a href="https://reallanguage.club/texnicheskie-trebovaniya/">Технические требования</a>
             <span class="pull-right">|</span>
         </div>
         <div class="col-sx-12 col-sm-3 col-md-2 col-lg-2 small">
@@ -105,7 +105,7 @@
             <span class="pull-right">|</span>
         </div>
         <div class="col-sx-12 col-sm-3 col-md-2 col-lg-2 small">
-            <a href="#">Политика конфиденциальности</a>
+            <a href="https://reallanguage.club/politika-konfidencialnosti/">Политика конфиденциальности</a>
         </div>
         <div class="col-sm-0 col-md-2 col-lg-2">
         </div>
