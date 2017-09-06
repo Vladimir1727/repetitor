@@ -185,4 +185,152 @@ class Student extends CI_Controller {
 			}
 	}
 
+	public function balance()
+	{
+		if (!$this->session->has_userdata('student_id')){
+			 redirect('/main/slogin');
+		} else{
+			$student = $this->StudentModel->findOne($this->session->student_id);
+			$data=array(
+				'student'=> $student->student,
+			);
+			$this->load->view('student/balance', $data);
+		}
+	}
+
+	public function lessonsrequest()
+	{
+		if (!$this->session->has_userdata('student_id')){
+			 redirect('/main/slogin');
+		} else{
+			$student = $this->StudentModel->findOne($this->session->student_id);
+			$data=array(
+				'student'=> $student->student,
+				'tzones'=>$this->MainModel->getAll('timezones'),
+			);
+			$this->load->view('student/lessonsrequests', $data);
+		}
+	}
+
+	public function favorites()
+	{
+		if (!$this->session->has_userdata('student_id')){
+			 redirect('/main/slogin');
+		} else{
+			$student = $this->StudentModel->findOne($this->session->student_id);
+			$data=array(
+				'student'=> $student->student,
+			);
+			$this->load->view('student/favorites', $data);
+		}
+	}
+
+	public function history()
+	{
+		if (!$this->session->has_userdata('student_id')){
+			 redirect('/main/slogin');
+		} else{
+			$student = $this->StudentModel->findOne($this->session->student_id);
+			$data=array(
+				'student'=> $student->student,
+			);
+			$this->load->view('student/history', $data);
+		}
+	}
+
+	public function lessons()
+	{
+		if (!$this->session->has_userdata('student_id')){
+			 redirect('/main/slogin');
+		} else{
+			$student = $this->StudentModel->findOne($this->session->student_id);
+			$data=array(
+				'student'=> $student->student,
+			);
+			$this->load->view('student/lessons', $data);
+		}
+	}
+
+	public function freerequests()
+	{
+		if (!$this->session->has_userdata('student_id')){
+			 redirect('/main/slogin');
+		} else{
+			$student = $this->StudentModel->findOne($this->session->student_id);
+			$data=array(
+				'student'=> $student->student,
+				'subjects'=>$this->MainModel->getAll('subjects'),
+			);
+			$this->load->view('student/freerequests', $data);
+		}
+	}
+
+	public function pay()
+	{
+		if (!$this->session->has_userdata('student_id')){
+			 redirect('/main/slogin');
+		} else{
+			$student = $this->StudentModel->findOne($this->session->student_id);
+			$data=array(
+				'student'=> $student->student,
+			);
+			$this->load->view('student/pay', $data);
+		}
+	}
+
+	public function logout()
+	{
+		$this->session->unset_userdata('student_id');
+		redirect('/');
+	}
+
+	public function chat()
+	{
+		if (!$this->session->has_userdata('student_id')){
+			 redirect('/main/slogin');
+		}
+		$student = $this->StudentModel->findOne($this->session->student_id);
+		$data=array(
+			'student'=> $student->student,
+		);
+		$this->load->view('student/chat', $data);
+	}
+
+	public function step1()
+	{
+		if (!$this->session->has_userdata('student_id')){
+			 redirect('/main/slogin');
+		}
+		$student = $this->StudentModel->findOne($this->session->student_id);
+		$data=array(
+			'student'=> $student->student,
+
+		);
+		$this->load->view('student/step1', $data);
+	}
+
+	public function step2()
+	{
+		if (!$this->session->has_userdata('student_id')){
+			 redirect('/main/slogin');
+		}
+		$student = $this->StudentModel->findOne($this->session->student_id);
+		$data=array(
+			'student'=> $student->student,
+			'spec'=> $this->MainModel->getAll('specializations'),
+		);
+		$this->load->view('student/step2', $data);
+	}
+
+	public function step3()
+	{
+		if (!$this->session->has_userdata('student_id')){
+			 redirect('/main/slogin');
+		}
+		$student = $this->StudentModel->findOne($this->session->student_id);
+		$data=array(
+			'student'=> $student->student,
+		);
+		$this->load->view('student/step3', $data);
+	}
 }

@@ -14,7 +14,7 @@
 		<li>Вы имеете возможность сделать заказ от одного урока.</li>
 		<li>Вы получаете удобный личный кабинет, где онлайн-занятие проходит при помощи Skype, один на один с репетитором.</li>
 	</ul>
-	<a href="#">
+	<a href="<?php echo base_url(); ?>index.php/main/filter?lang=all">
 		<img src="<?php echo base_url(); ?>img/gal.png" alt="V">
 		Найти репетитора
 	</a>

@@ -386,4 +386,10 @@ class Repetitor extends CI_Controller {
 		);
 		$this->load->view('repetitor/getmoney', $data);
 	}
+
+	public function logout()
+	{
+		$this->session->unset_userdata('repetitor_id');
+		redirect('/');
+	}
 }

@@ -4,7 +4,7 @@ class AdminModel extends CI_Model{
 		parent::__construct();
 		$this->load->database();
         $this->load->dbforge();
-		//$this->load->library('session');
+		$this->load->library('session');
 	}
 
     public function createDB()
@@ -503,18 +503,46 @@ class AdminModel extends CI_Model{
 					foreign key (free_id) references free_apps(id) on update cascade
 				)default charset=utf8';
 			$this->db->query($table);
+			$table = 'CREATE TABLE other(
+					id int not null auto_increment primary key,
+					name varchar (128),
+					sense varchar (128)
+				)default charset=utf8';
+			$this->db->query($table);
+			$ins = array('name'=>'admin_password', 'sense'=>'1111');
+			$str = $this->db->insert_string('other', $ins);
+			$this->db->query($str);
 		return 'DB created';
     }
 
 	public function createTable()
 	{
-
+		$table = 'CREATE TABLE other(
+				id int not null auto_increment primary key,
+				name varchar (128),
+				sense varchar (128)
+			)default charset=utf8';
+		$this->db->query($table);
 		return 'table created';
 	}
 
 	public function seed()
 	{
-
+		$ins = array('name'=>'admin_password', 'sense'=>'1111');
+		$str = $this->db->insert_string('other', $ins);
+		$this->db->query($str);
 		return 'table seeded';
+	}
+
+	public function login($pass)
+	{
+		$q = $this->db->query('select sense from other where sense="'.$pass.'" and name="admin_password"');
+		$r = $q->result_array();
+		if (count($r) == 0){
+			throw new Exception('неправильный логин/пароль');
+		} else{
+			$this->session->set_userdata('admin', 'admin');
+			return '0';
+		}
 	}
 }

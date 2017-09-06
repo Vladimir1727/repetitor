@@ -43,11 +43,11 @@
 		</div>
 		<div class="menu">
 			<ul>
-				<li><a href="#">Запросы на уроки</a></li>
-				<li><a href="#">Уроки</a></li>
-				<li><a href="#">Найти репетитора</a></li>
-				<li><a href="#">Свободные заявки</a></li>
-				<li class="mail"><a href="#">почта</a></li>
+				<li><a href="<?php echo base_url(); ?>index.php/student/lessonsrequest">Запросы на уроки</a></li>
+				<li><a href="<?php echo base_url(); ?>index.php/student/lessons">Уроки</a></li>
+				<li><a href="<?php echo base_url(); ?>index.php/main/filter?lang=all">Найти репетитора</a></li>
+				<li><a href="<?php echo base_url(); ?>index.php/student/freerequests">Свободные заявки</a></li>
+				<li class="mail"><a href="<?php echo base_url(); ?>index.php/student/chat">почта</a></li>
 				<li id="slide">
 					<a href="#">
 						<span class="s"></span>
@@ -55,19 +55,19 @@
 						<span class="s"></span>
 					</a>
 					<ul>
-						<li><a href="#">Запросы на уроки</a></li>
+						<li><a href="<?php echo base_url(); ?>index.php/student/lessonsrequest">Запросы на уроки</a></li>
 						<li><a href="#">Уроки</a></li>
-						<li><a href="#">Найти репетитора</a></li>
-						<li><a href="#">Свободные заявки</a></li>
-						<li class="mail"><a href="#">почта</a></li>
-						<li><a href="#">Репетиторы сейчас онлайн</a></li>
-						<li><a href="#">Избранные Репетиторы</a></li>
-						<li><a href="#">История уроков</a></li>
-						<li><a href="#">Баланс кошелька</a></li>
+						<li><a href="<?php echo base_url(); ?>index.php/main/filter?lang=all">Найти репетитора</a></li>
+						<li><a href="<?php echo base_url(); ?>index.php/student/freerequests">Свободные заявки</a></li>
+						<li class="mail"><a href="<?php echo base_url(); ?>index.php/student/chat">почта</a></li>
+						<li><a href="<?php echo base_url(); ?>index.php/main/filter?lang=all&free=1">Репетиторы сейчас онлайн</a></li>
+						<li><a href="<?php echo base_url(); ?>index.php/student/favorites">Избранные Репетиторы</a></li>
+						<li><a href="<?php echo base_url(); ?>index.php/student/history">История уроков</a></li>
+						<li><a href="<?php echo base_url(); ?>index.php/student/balance">Баланс кошелька</a></li>
 						<li><a href="https://reallanguage.club/instrukciya-dlya-uchenika-po-rabote-s-platformoj-repetitory-real-language-club/">Инструкция для ученика</a></li>
-						<li><a href="#">Связаться с администратором</a></li>
-						<li><a href="#">Настройки Профиля</a></li>
-						<li><a href="#">Выйти</a></li>
+						<li><a href="<?php echo base_url(); ?>index.php/student/chat">Связаться с администратором</a></li>
+						<li><a href="<?php echo base_url(); ?>index.php/student/profile">Настройки Профиля</a></li>
+						<li><a href="<?php echo base_url(); ?>index.php/student/logout">Выйти</a></li>
 					</ul>
 				</li>
 			</ul>

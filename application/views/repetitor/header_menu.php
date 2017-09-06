@@ -64,8 +64,8 @@
 						<li><a href="<?php echo base_url(); ?>index.php/repetitor/balance">Баланс</a></li>
 						<li><a href="<?php echo base_url(); ?>index.php/repetitor/profile">Настройки Профиля</a></li>
 						<li><a href="https://reallanguage.club/instrukciya-dlya-repetitora-po-rabote-s-platformoj-repetitory-real-language-club/">Инструкция для репетитора</a></li>
-						<li><a href="#">Связаться с администратором</a></li>
-						<li><a href="#">Выйти</a></li>
+						<li><a href="<?php echo base_url(); ?>index.php/repetitor/profile/chat">Связаться с администратором</a></li>
+						<li><a href="<?php echo base_url(); ?>index.php/repetitor/logout">Выйти</a></li>
 					</ul>
 				</li>
 			</ul>

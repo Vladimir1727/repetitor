@@ -54,8 +54,8 @@
             <a href="https://reallanguage.club/kontakt/">Контакты</a>
             <br><br>
             Отвечаем в мессенжерах:<br>
-            <a href="#"><img src="<?php  echo base_url(); ?>img/fb.png" alt="facebook"></a>
-            <a href="#"><img src="<?php  echo base_url(); ?>img/skype.png" alt="skype"></a>
+            <a href="https://www.messenger.com/t/adminRealLanguageClub"><img src="<?php  echo base_url(); ?>img/fb.png" alt="facebook"></a>
+            <a href="skype:live:b79d2994b5024754"><img src="<?php  echo base_url(); ?>img/skype.png" alt="skype"></a>
         </div>
         <div class="col-sx-12 col-sm-3 col-md-2  col-lg-2">
         </div>
@@ -93,7 +93,7 @@
         <div class="col-sm-0 col-md-2 col-lg-2">
         </div>
         <div class="col-sx-12 col-sm-3 col-md-2 col-lg-2 small">
-            <a href="#">Правила пользования сайтом</a>
+            <a href="https://reallanguage.club/pravila-polzovaniya-sajtom/">Правила пользования сайтом</a>
             <span class="pull-right">|</span>
         </div>
         <div class="col-sx-12 col-sm-3 col-md-2 col-lg-2 small">
@@ -101,7 +101,7 @@
             <span class="pull-right">|</span>
         </div>
         <div class="col-sx-12 col-sm-3 col-md-2 col-lg-2 small">
-            <a href="#">Пользовательское соглашение</a>
+            <a href="https://reallanguage.club/polzovatelskoe-soglashenie/">Пользовательское соглашение</a>
             <span class="pull-right">|</span>
         </div>
         <div class="col-sx-12 col-sm-3 col-md-2 col-lg-2 small">

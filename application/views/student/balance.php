@@ -4,22 +4,23 @@
 <title>Репетиторы по разным языкам. Баланс</title>
 </head>
 <body>
-<?php $this->load->view('repetitor/header_menu'); ?>
+<?php $this->load->view('student/header_menu'); ?>
 
 <main class="rep_balance">
     <section class="start_balance">
-        <h1>Баланс личного счёта: <span>0 $</span></h1>
-        <button>Вывести средства</button>
+        <h1>Баланс личного счёта: <span>100 $</span></h1>
+        <!-- <button>Пополнить</button> -->
+        <a href="<?php echo base_url(); ?>index.php/student/pay">Пополнить</a>
     </section>
     <h2>История транзакций:</h2>
-    <h3 class="in">Зачисления</h3>
+    <h3 class="in">Оплата</h3>
     <section class="header-in in">
         <aside>
             <div>
                 <p>Дата</p>
             </div>
             <div>
-                <p>Ученик</p>
+                <p>Репетитор</p>
             </div>
             <div>
                 <p>Основание</p>
@@ -35,25 +36,25 @@
                 <p>23.10.2017</p>
             </div>
             <div>
-                <p>Мария</p>
-                <p>ID 22222222</p>
+                <p>Светлана</p>
+                <p>ID 33333333</p>
             </div>
             <div>
                 <p>1 урок по расписанию</p>
             </div>
             <div>
-                <p>600</p>
+                <p>60</p>
             </div>
         </aside>
     </section>
-    <h3 class="out">Вывод средств</h3>
+    <h3 class="out">Пополнения</h3>
     <section class="header-out out">
         <aside>
             <div>
                 <p>Дата</p>
             </div>
             <div>
-                <p>Способ вывода</p>
+                <p>Способ пополнения</p>
             </div>
             <div>
                 <p>Сумма ($)</p>
@@ -63,13 +64,13 @@
     <section class="table out">
         <aside>
             <div>
-                <p>25.10.2017</p>
+                <p>21.10.2017</p>
             </div>
             <div>
                 <p>Яндекс Деньги</p>
             </div>
             <div>
-                <p>600</p>
+                <p>170</p>
             </div>
         </aside>
     </section>

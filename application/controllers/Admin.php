@@ -25,7 +25,8 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
-		echo 'start_page';
+		$data = array();
+		$this->load->view('admin/login', $data);
 	}
 
 	public function createDB()
@@ -41,5 +42,94 @@ class Admin extends CI_Controller {
 	public function seed()
 	{
 		echo $this->AdminModel->seed();
+	}
+
+	public function logout()
+	{
+		$this->session->unset_userdata('admin');
+		redirect('/');
+	}
+
+	public function trylogin()
+	{
+	  try {
+	  	$this->AdminModel->login($this->input->post('pass', TRUE));
+		//echo $this->input->post('pass', TRUE);
+	  } catch (Exception $e) {
+		  exit($e->getMessage());
+	  }
+	  exit("0");
+	}
+
+	public function main()
+	{
+		if (!$this->session->has_userdata('admin')){
+			 redirect('/');
+		}
+		$data = array();
+		$this->load->view('admin/repetitors', $data);
+	}
+
+	public function payback()
+	{
+		if (!$this->session->has_userdata('admin')){
+			 redirect('/');
+		}
+		$data = array();
+		$this->load->view('admin/payback', $data);
+	}
+
+	public function chathistory()
+	{
+		if (!$this->session->has_userdata('admin')){
+			 redirect('/');
+		}
+		$data = array();
+		$this->load->view('admin/chathistory', $data);
+	}
+
+	public function lessonshistory()
+	{
+		if (!$this->session->has_userdata('admin')){
+			 redirect('/');
+		}
+		$data = array();
+		$this->load->view('admin/lessonshistory', $data);
+	}
+
+	public function repetitors()
+	{
+		if (!$this->session->has_userdata('admin')){
+			 redirect('/');
+		}
+		$data = array();
+		$this->load->view('admin/repetitors', $data);
+	}
+
+	public function students()
+	{
+		if (!$this->session->has_userdata('admin')){
+			 redirect('/');
+		}
+		$data = array();
+		$this->load->view('admin/students', $data);
+	}
+
+	public function freerequests()
+	{
+		if (!$this->session->has_userdata('admin')){
+			 redirect('/');
+		}
+		$data = array();
+		$this->load->view('admin/freerequests', $data);
+	}
+
+	public function chat()
+	{
+		if (!$this->session->has_userdata('admin')){
+			 redirect('/');
+		}
+		$data = array();
+		$this->load->view('admin/chat', $data);
 	}
 }
