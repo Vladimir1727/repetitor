@@ -1,7 +1,7 @@
 (function($){$(function(){
-console.log('admin login 3');
-var baseUrl = '';
-$('#logform').submit(function(){
+console.log('admin login 5');
+var baseUrl = '../';
+/*$('#logform').submit(function(){
     var ver = verify2([
         $('#pass').val().trim()
     ]);
@@ -24,6 +24,6 @@ $('#logform').submit(function(){
 
     }
     return false;
-});
+});*/
 
 })})(jQuery)

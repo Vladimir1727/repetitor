@@ -27,7 +27,7 @@
 						<li><a href="<?php echo base_url(); ?>index.php/admin/freerequests">Свободные заявки</a></li>
 						<li><a href="<?php echo base_url(); ?>index.php/admin/chathistory">История чатов</a></li>
 						<li class="mail"><a href="<?php echo base_url(); ?>index.php/admin/chat">почта</a></li>
-						<li><a href="<?php echo base_url(); ?>index.php/student/logout">Выйти</a></li>
+						<li><a href="<?php echo base_url(); ?>index.php/admin/logout">Выйти</a></li>
 					</ul>
 				</li>
 			</ul>

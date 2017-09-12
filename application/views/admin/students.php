@@ -52,50 +52,49 @@
         </aside>
     </section>
     <section class="table">
-        <aside>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <button class="mess">Написать сообщение</button>
-                <button class="del">Удалить</button>
-            </div>
-        </aside>
+        <?php
+            foreach ($students as $student) {
+                if ($student['status'] != 3){
+                    echo '<aside>';
+                    echo '<div><p>'.$student['first_name'].'</p>';
+                    if ($student['father_name'] != ''){
+                        echo '<p>'.$student['father_name'].'</p>';
+                    }
+                    echo '<p>ID ';
+                    $len = strlen(strval($student['id']));
+                    for($i = 0; $i < (7-$len); $i++){
+                        echo '0';
+                    }
+                    echo $student['id'];
+                    echo '</p></div>';
+                    $date = substr($student['created_at'],8,2).'.'.substr($student['created_at'],5,2).'.'.substr($student['created_at'],0,4);
+                    echo '<div><p>'.$date.'</p></div>';
+                    echo '<div><p>'.'-'.'</p></div>';
+                    $date = substr($student['visit_at'],8,2).'.'.substr($student['visit_at'],5,2).'.'.substr($student['visit_at'],0,4);
+                    echo '<div><p>'.$date.'</p></div>';
+                    echo '<div><p>'.$student['email'].'</p></div>';
+                    echo '<div><p>'.$student['skype'].'</p></div>';
+                    echo '<div><p>'.'0'.'</p></div>';
+                    echo '<div><p>'.'0'.'</p></div>';
+                    echo '<div><p>'.'0'.'</p></div>';
+                    echo '<div><p>'.'0'.'</p></div>';
+                    echo '<div><p>'.$student['balance'].'</p></div>';
+                    echo '<div><p>'.'0'.'</p></div>';
+                    echo '<div><form action="'.base_url().'index.php/admin/changeStudent" method="post">';
+                    echo '<button class="mess" name="mess" type="submit">Написать сообщение</button>';
+                    if ($student['status'] == 1){
+                        echo '<button class="off" name="off" type="submit">Выключить</button>';
+                    } else{
+                        echo '<button class="ok" name="ok" type="submit">Включить</button>';
+                    }
+                    echo '<button class="del" name="del" type="submit">Удалить</button>';
+                    echo '<input type="hidden" value="'.$student['id'].'" name="id">';
+                    echo '</form></div></aside>';
+                }
+            }
+         ?>
     </section>
 </main>
 
-<script src="<?php echo base_url(); ?>js/repetitor/chat.js"></script>
+<script src="<?php echo base_url(); ?>js/admin/students.js"></script>
 <?php $this->load->view('main/footer'); ?>

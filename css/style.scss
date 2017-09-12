@@ -1731,6 +1731,9 @@ form.rlogin{
 
 //start slogin
 form.slogin{
+	p.error{
+		color: red;
+	}
 	margin: 25px auto 75px auto;
 	text-align: center;
 	font-family: "Arial Regular", Arial, sans-serif;
@@ -4126,6 +4129,7 @@ main.rep_timetable{
 	div.form{
 		margin: 20px 0;
 		padding: 0 20px;
+		position: relative;
 		@include end;
 		button{
 			@include o-reg;
@@ -4146,23 +4150,37 @@ main.rep_timetable{
 			float: right;
 			padding: 5px;
 		}
+		div#students{
+			position: absolute;
+			top: 40px;
+			right: 20px;
+			width: 170px;
+			background: #fff;
+			border: 1px #666 solid;
+			border-bottom: none;
+			>p{
+				border-bottom: 1px #666 solid;
+				padding: 5px;
+				margin: 0;
+			}
+		}
 	}
 	div.green{
 		height: 2px;
 		background: $color_lgreen;
 	}
 	div.weeks{
-		width: 700px;
+		width: 800px;
 		margin: 20px auto;
 		padding: 0 20px;
 		a{
 			@include f-reg;
-			font-size: 20px;
+			font-size: 19px;
 			color: $color_blue;
 		}
 		span{
 			@include f-reg;
-			font-size: 20px;
+			font-size: 19px;
 			padding: 0 20px;
 		}
 	}
@@ -4265,17 +4283,17 @@ main.rep_plan{
 		background: $color_lgreen;
 	}
 	div.weeks{
-		width: 700px;
+		width: 800px;
 		margin: 20px auto;
 		padding: 0 20px;
 		a{
 			@include f-reg;
-			font-size: 20px;
+			font-size: 19px;
 			color: $color_blue;
 		}
 		span{
 			@include f-reg;
-			font-size: 20px;
+			font-size: 19px;
 			padding: 0 20px;
 		}
 	}
@@ -5216,11 +5234,12 @@ main.admin-repetitors{
 						margin: 2px auto;
 						@include f-n;
 						font-size: 14px;
-						&.on{
+						&.ok{
 							color: #fff;
 							background: $color_wave;
 							&:hover{
-								background: $color_wave + $hover;
+								color: #fff;
+								//background: $color_wave + $hover;
 							}
 						}
 						&.off{
@@ -5307,7 +5326,7 @@ main.admin-repetitors{
 						margin: 5px auto;
 						@include f-n;
 						font-size: 14px;
-						&.on{
+						&.ok{
 							color: #fff;
 							background: $color_wave;
 							&:hover{
@@ -5428,9 +5447,17 @@ main.admin-students{
 					@include f-n;
 					&.ok{
 						color: #fff;
-						background: $color_green4;
+						background: $color_wave;
 						&:hover{
-							background: $color_green4 + $hover;
+							color: #fff;
+							//background: $color_wave + $hover;
+						}
+					}
+					&.off{
+						color: #fff;
+						background: $color_green2;
+						&:hover{
+							background: $color_green2 + $hover;
 						}
 					}
 					&.del{
@@ -5623,17 +5650,20 @@ main.step{
 	}
 	h1{
 		@include f-reg;
-	    font-size: 22px;
+	    font-size: 25px;
 		padding: 0 20px;
 	    margin: 0 0 20px 0;
 		text-align: center;
 	}
 	h2{
 		@include f-reg;
-	    font-size: 20px;
+	    font-size: 18px;
 		padding: 0 20px;
-	    margin: 10px 0;
-		text-align: center;
+	    margin: 10px auto;
+		text-align: justify;
+		text-indent: 30px;
+		line-height: 25px;
+		max-width: 700px;
 	}
 	div.steps{
 		width: 300px;
@@ -5664,17 +5694,17 @@ main.step{
 		background: $color_lgreen;
 	}
 	div.weeks{
-		width: 700px;
+		width: 800px;
 		margin: 20px auto;
 		padding: 0 20px;
 		a{
 			@include f-reg;
-			font-size: 20px;
+			font-size: 19px;
 			color: $color_blue;
 		}
 		span{
 			@include f-reg;
-			font-size: 20px;
+			font-size: 19px;
 			padding: 0 20px;
 		}
 	}
@@ -5769,6 +5799,17 @@ main.step{
 }
 //end student step
 
+//start deldiag
+div#deldialog{
+	padding-top: 30px;
+	form{
+		display: inline-block;
+	}
+	>button{
+		float: right;
+	}
+}
+//end deldiag
 
 //START MEDIA
 @media screen and (max-width: 1200px) {
@@ -6784,6 +6825,19 @@ main.step{
 }
 
 @media screen and (max-width: 800px) {
+	main.rep_timetable, main.rep_plan{
+		div.weeks{
+			width: 100%;
+			padding: 0;
+			a, span{
+				padding: 0;
+				width: 300px;
+				display: block;
+				margin: 5px auto;
+				text-align: center;
+			}
+		}
+	}
 	main.admin-lessonshistory{
 		section.head{
 			display: none;
@@ -7041,19 +7095,7 @@ main.step{
 			}
 		}
 	}
-	main.rep_timetable, main.rep_plan{
-		div.weeks{
-			width: 100%;
-			padding: 0;
-			a, span{
-				padding: 0;
-				width: 300px;
-				display: block;
-				margin: 5px auto;
-				text-align: center;
-			}
-		}
-	}
+
 	main.student_favorites{
 		section.start_less{
 			>div{

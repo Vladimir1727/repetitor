@@ -5,20 +5,22 @@
 </head>
 <body>
 <?php $this->load->view('repetitor/header_menu'); ?>
-
+<input type="hidden" value="<?php echo $repetitor['id'];?>" id="repetitor_id">
+<input type="hidden" value="<?php echo $student['id'];?>" id="student_id">
+<input type="hidden" value="<?php echo $student['first_name'];?>" id="student_name">
 <main class="rep_plan">
     <h1>Расписание</h1>
     <section class="start_time">
         <div class="form">
-            <button>Сохранить изменения</button>
-            <input type="text" placeholder="Найти Ученика" value="Мария ID222222" disabled="disabled">
+            <button id="save">Сохранить изменения</button>
+            <input type="text" placeholder="Найти Ученика" value="<?php echo $student['first_name'].' ID '.$student['id'] ?>" disabled="disabled">
         </div>
         <div class="green">
         </div>
         <div class="weeks">
-            <a href="#"><< Предыдущая неделя</a>
-            <span>6-12 октября 2017</span>
-            <a href="#">Следующая неделя >></a>
+            <a href="#" id="prev"><< Предыдущая неделя</a>
+            <span id="weeks">6-12 октября 2017</span>
+            <a href="#" id="next">Следующая неделя >></a>
         </div>
     </section>
     <section class="plan">
@@ -35,7 +37,7 @@
                     <th>В<span class="big">о</span>с<span class="big">кресенье</span></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="table">
                 <tr> <td>0:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
                 <tr> <td>1:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
                 <tr> <td>2:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
@@ -64,8 +66,8 @@
         </table>
         <aside>
             <h3>Выбранный Ученик:</h3>
-            <h4>Мария</h4>
-            <p>ID22222222</p>
+            <h4><?php echo $student['first_name'] ?></h4>
+            <p>ID <?php echo $student['id'] ?></p>
             <p>Английский язык, 11 класс</p>
             <p>UTC+3</p>
         </aside>
@@ -73,5 +75,5 @@
 
 </main>
 
-<script src="<?php echo base_url(); ?>js/repetitor/chat.js"></script>
+<script src="<?php echo base_url(); ?>js/repetitor/plan.js"></script>
 <?php $this->load->view('main/footer'); ?>

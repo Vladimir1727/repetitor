@@ -5,20 +5,20 @@
 </head>
 <body>
 <?php $this->load->view('repetitor/header_menu'); ?>
-
+<input type="hidden" id="repetitor_id" value="<?php echo $repetitor['id']; ?>">
 <main class="rep_timetable">
     <h1>Расписание</h1>
     <section class="start_time">
         <div class="form">
-            <button>Сохранить изменения</button>
-            <input type="text" placeholder="Найти Ученика">
+            <button id="save">Сохранить изменения</button>
+            <input type="text" placeholder="Найти Ученика" id="search">
         </div>
         <div class="green">
         </div>
         <div class="weeks">
-            <a href="#"><< Предыдущая неделя</a>
-            <span>6-12 октября 2017</span>
-            <a href="#">Следующая неделя >></a>
+            <a href="#" id="prev"><< Предыдущая неделя</a>
+            <span  id="weeks">неделя</span>
+            <a href="#" id="next">Следующая неделя >></a>
         </div>
     </section>
     <table>
@@ -34,7 +34,7 @@
                 <th>В<span class="big">о</span>с<span class="big">кресенье</span></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="table">
             <tr> <td>0:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
             <tr> <td>1:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
             <tr> <td>2:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
@@ -63,5 +63,5 @@
     </table>
 </main>
 
-<script src="<?php echo base_url(); ?>js/repetitor/chat.js"></script>
+<script src="<?php echo base_url(); ?>js/repetitor/timetable.js"></script>
 <?php $this->load->view('main/footer'); ?>

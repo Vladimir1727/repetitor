@@ -325,6 +325,8 @@ class AdminModel extends CI_Model{
 			subject2 int(5) unsigned default NULL,
 			doc1 varchar (256) default NULL,
 			doc2 varchar (256) default NULL,
+			created_at timestamp,
+			visit_at timestamp,
 			foreign key (subject1) references subjects(id) on update cascade,
 			foreign key (subject2) references subjects(id) on update cascade
 		)default charset=utf8';
@@ -341,19 +343,21 @@ class AdminModel extends CI_Model{
 			skype varchar(128) DEFAULT NULL,
 			avatar varchar(256) default NULL,
 			status tinyint default 0,
+			created_at timestamp,
+			visit_at timestamp,
 			balance int unsigned default 0
 		)default charset=utf8';
 		$this->db->query($table);
 		$table = 'CREATE TABLE exercises(
 				id int not null auto_increment primary key,
-				date_from timestamp,
-				date_to timestamp,
-				created_at timestamp,
-				deleted_at timestamp,
-				pay_at timestamp,
-				sstart_at timestamp,
-				rstart_at timestamp,
-				cancel_at timestamp,
+				date_from timestamp DEFAULT NULL,
+				date_to timestamp DEFAULT NULL,
+				created_at timestamp DEFAULT NULL,
+				deleted_at timestamp DEFAULT NULL,
+				pay_at timestamp DEFAULT NULL,
+				sstart_at timestamp DEFAULT NULL,
+				rstart_at timestamp DEFAULT NULL,
+				cancel_at timestamp DEFAULT NULL,
 				cost int unsigned default 0,
 				student_id int DEFAULT NULL,
 				CONSTRAINT FK_ExSt foreign key (student_id) references students(id) on update cascade,
@@ -544,5 +548,50 @@ class AdminModel extends CI_Model{
 			$this->session->set_userdata('admin', 'admin');
 			return '0';
 		}
+	}
+
+	public function getAllRepetitors()
+	{
+		$q = $this->db->query('select * from repetitors');
+		$repetitors = $q->result_array();
+		for($i = 0; $i < count($repetitors); $i++){
+			if ($repetitors[$i]['subject1']){
+				$sub = $repetitors[$i]['subject1'];
+				$q = $this->db->query('select subject from subjects where id='.$sub);
+				$row = $q->result_array();
+				$repetitors[$i]['subject1'] = $row[0]['subject'];
+			}
+			if ($repetitors[$i]['subject2']){
+				$sub = $repetitors[$i]['subject2'];
+				$q = $this->db->query('select subject from subjects where id='.$sub);
+				$row = $q->result_array();
+				$repetitors[$i]['subject2'] = $row[0]['subject'];
+			}
+		}
+		return $repetitors;
+	}
+
+	public function getAllStudents()
+	{
+		$q = $this->db->query('select * from students');
+		$students = $q->result_array();
+		for($i = 0; $i < count($students); $i++){
+
+		}
+		return $students;
+	}
+
+	public function setRepetitorStatus($id, $status)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('repetitors', array('status'=>$status));
+		return 0;
+	}
+
+	public function setStudentStatus($id, $status)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('students', array('status'=>$status));
+		return 0;
 	}
 }

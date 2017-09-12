@@ -369,8 +369,10 @@ class Repetitor extends CI_Controller {
 			 redirect('/main/rlogin');
 		}
 		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
+		$student_id = $this->input->get('id');
 		$data=array(
 			'repetitor'=> $rep->repetitor,
+			'student'=> $this->RepetitorModel->getStudent($student_id),
 		);
 		$this->load->view('repetitor/plan', $data);
 	}
@@ -391,5 +393,27 @@ class Repetitor extends CI_Controller {
 	{
 		$this->session->unset_userdata('repetitor_id');
 		redirect('/');
+	}
+
+	public function getTimeTable()
+	{
+		$data = $this->RepetitorModel->getTimeTable($this->session->repetitor_id);
+		echo json_encode($data);
+	}
+
+	public function saveTimeTable()
+	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 exit('репетитор на вошёл');
+		}else{
+			$table = json_decode($this->input->post('table'));
+			echo $this->RepetitorModel->saveTimeTable($table, $this->session->repetitor_id);
+		}
+	}
+
+	public function getStudents()
+	{
+		$data = $this->RepetitorModel->getStudents();
+		echo json_encode($data);
 	}
 }

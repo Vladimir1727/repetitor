@@ -16,7 +16,8 @@ class RepetitorModel extends CI_Model{
 		} else{
 			$rep = array(
 				'email'=>$email,
-				'password'=>$pass
+				'password'=>$pass,
+				'created_at'=>date('Y-m-d H:i:s',time()),
 			);
 			$this->db->insert('repetitors', $rep);
 			//sending e-mail
@@ -50,6 +51,8 @@ class RepetitorModel extends CI_Model{
 		if (count($r)==0){
 			throw new Exception('неправильный логин/пароль');
 		} else{
+			$this->db->where('id', $r[0]['id']);
+			$this->db->update('repetitors', array('visit_at'=>date('Y-m-d H:i:s',time())));
 			$this->session->set_userdata('repetitor_id', $r[0]['id']);
 			return $r[0]['id'];
 		}
@@ -166,4 +169,54 @@ class RepetitorModel extends CI_Model{
 		return $data;
 	}
 
+	public function getTimeTable($repetitor_id)
+	{
+		$q = $this->db->query('select z.zone_time from repetitors r, timezones z where r.tzone_id=z.id and r.id='.$repetitor_id);
+		$r = $q->result_array();
+		$z = $r[0]['zone_time'];
+		$q = $this->db->query('select * from exercises where repetitor_id='.$repetitor_id);
+		$table = $q->result_array();
+		for ($i=0; $i < count($table); $i++) {
+			if (!is_null($table[$i]['student_id'])){
+				$q = $this->db->query('select first_name from students where id='.$table[$i]['student_id']);
+				$r = $q->result_array();
+				$table[$i]['student'] = $r[0]['first_name'];
+			}
+			$table[$i]['date_from'] = date('Y-m-d H:i:s', strtotime($table[$i]['date_from'])+$z*60*60);
+		}
+		return $table;
+	}
+
+	public function saveTimeTable($table, $repetitor_id)
+	{
+		$q = $this->db->query('select z.zone_time from repetitors r, timezones z where r.tzone_id=z.id and r.id='.$repetitor_id);
+		$r = $q->result_array();
+		$z = $r[0]['zone_time'];
+		foreach ($table as $tab) {
+			if ($tab->id == 0){
+				$tab->date_from = date('Y-m-d H:i:s', strtotime($tab->date_from)-$z*60*60);
+				$ins = 'insert into exercises(repetitor_id, date_from, created_at)
+				values('.$repetitor_id.',"'.$tab->date_from.'","'.date('Y-m-d H:i:s',time()).'")';
+				//echo ($ins);
+				$q = $this->db->query($ins);
+			} elseif($tab->date_from==''){
+				$q = $this->db->query('delete from exercises where id='.$tab->id);
+			}
+		}
+		return 0;
+	}
+
+	public function getStudents()
+	{
+		$q = $this->db->query('select * from students');
+		$students = $q->result_array();
+		return $students;
+	}
+
+	public function getStudent($student_id)
+	{
+		$q = $this->db->query('select * from students where id='.$student_id);
+		$r = $q->result_array();
+		return $r[0];
+	}
 }

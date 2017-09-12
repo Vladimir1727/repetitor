@@ -1357,6 +1357,8 @@ form.slogin {
   text-align: center;
   font-family: "Arial Regular", Arial, sans-serif;
   width: 300px; }
+  form.slogin p.error {
+    color: red; }
   form.slogin h1 {
     color: #222f3b;
     font-size: 22px;
@@ -3335,7 +3337,8 @@ main.rep_timetable {
     margin: 0; }
   main.rep_timetable div.form {
     margin: 20px 0;
-    padding: 0 20px; }
+    padding: 0 20px;
+    position: relative; }
     main.rep_timetable div.form:after {
       content: '';
       display: block;
@@ -3356,20 +3359,32 @@ main.rep_timetable {
       border: 1px #999 solid;
       float: right;
       padding: 5px; }
+    main.rep_timetable div.form div#students {
+      position: absolute;
+      top: 40px;
+      right: 20px;
+      width: 170px;
+      background: #fff;
+      border: 1px #666 solid;
+      border-bottom: none; }
+      main.rep_timetable div.form div#students > p {
+        border-bottom: 1px #666 solid;
+        padding: 5px;
+        margin: 0; }
   main.rep_timetable div.green {
     height: 2px;
     background: #07CA9A; }
   main.rep_timetable div.weeks {
-    width: 700px;
+    width: 800px;
     margin: 20px auto;
     padding: 0 20px; }
     main.rep_timetable div.weeks a {
       font-family: "Arial Regular", Arial, sans-serif;
-      font-size: 20px;
+      font-size: 19px;
       color: #4F81BD; }
     main.rep_timetable div.weeks span {
       font-family: "Arial Regular", Arial, sans-serif;
-      font-size: 20px;
+      font-size: 19px;
       padding: 0 20px; }
   main.rep_timetable table {
     width: 100%; }
@@ -3446,16 +3461,16 @@ main.rep_plan {
     height: 2px;
     background: #07CA9A; }
   main.rep_plan div.weeks {
-    width: 700px;
+    width: 800px;
     margin: 20px auto;
     padding: 0 20px; }
     main.rep_plan div.weeks a {
       font-family: "Arial Regular", Arial, sans-serif;
-      font-size: 20px;
+      font-size: 19px;
       color: #4F81BD; }
     main.rep_plan div.weeks span {
       font-family: "Arial Regular", Arial, sans-serif;
-      font-size: 20px;
+      font-size: 19px;
       padding: 0 20px; }
   main.rep_plan table {
     width: 100%; }
@@ -4157,11 +4172,11 @@ main.admin-repetitors {
       margin: 2px auto;
       font-family: "Arial Narrow", Arial, sans-serif;
       font-size: 14px; }
-      main.admin-repetitors section.table aside > div button.on {
+      main.admin-repetitors section.table aside > div button.ok {
         color: #fff;
         background: #6B7683; }
-        main.admin-repetitors section.table aside > div button.on:hover {
-          background: #8d98a5; }
+        main.admin-repetitors section.table aside > div button.ok:hover {
+          color: #fff; }
       main.admin-repetitors section.table aside > div button.off {
         color: #fff;
         background: #00CC99; }
@@ -4232,10 +4247,10 @@ main.admin-repetitors {
       margin: 5px auto;
       font-family: "Arial Narrow", Arial, sans-serif;
       font-size: 14px; }
-      main.admin-repetitors section.table_kand aside > div button.on {
+      main.admin-repetitors section.table_kand aside > div button.ok {
         color: #fff;
         background: #6B7683; }
-        main.admin-repetitors section.table_kand aside > div button.on:hover {
+        main.admin-repetitors section.table_kand aside > div button.ok:hover {
           background: #8d98a5; }
       main.admin-repetitors section.table_kand aside > div button.off {
         color: #fff;
@@ -4307,9 +4322,14 @@ main.admin-students {
       font-family: "Arial Narrow", Arial, sans-serif; }
       main.admin-students section.table > aside > div button.ok {
         color: #fff;
-        background: #07CA9A; }
+        background: #6B7683; }
         main.admin-students section.table > aside > div button.ok:hover {
-          background: #29ecbc; }
+          color: #fff; }
+      main.admin-students section.table > aside > div button.off {
+        color: #fff;
+        background: #00CC99; }
+        main.admin-students section.table > aside > div button.off:hover {
+          background: #22eebb; }
       main.admin-students section.table > aside > div button.del {
         color: #fff;
         background: #FF5C39; }
@@ -4440,16 +4460,19 @@ main.step {
       resize: none; }
   main.step h1 {
     font-family: "Arial Regular", Arial, sans-serif;
-    font-size: 22px;
+    font-size: 25px;
     padding: 0 20px;
     margin: 0 0 20px 0;
     text-align: center; }
   main.step h2 {
     font-family: "Arial Regular", Arial, sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     padding: 0 20px;
-    margin: 10px 0;
-    text-align: center; }
+    margin: 10px auto;
+    text-align: justify;
+    text-indent: 30px;
+    line-height: 25px;
+    max-width: 700px; }
   main.step div.steps {
     width: 300px;
     margin: 0 auto; }
@@ -4474,16 +4497,16 @@ main.step {
     height: 2px;
     background: #07CA9A; }
   main.step div.weeks {
-    width: 700px;
+    width: 800px;
     margin: 20px auto;
     padding: 0 20px; }
     main.step div.weeks a {
       font-family: "Arial Regular", Arial, sans-serif;
-      font-size: 20px;
+      font-size: 19px;
       color: #4F81BD; }
     main.step div.weeks span {
       font-family: "Arial Regular", Arial, sans-serif;
-      font-size: 20px;
+      font-size: 19px;
       padding: 0 20px; }
   main.step table {
     width: 100%; }
@@ -4551,6 +4574,13 @@ main.step {
     text-decoration: none; }
     main.step a.back:hover {
       background: #24a385; }
+
+div#deldialog {
+  padding-top: 30px; }
+  div#deldialog form {
+    display: inline-block; }
+  div#deldialog > button {
+    float: right; }
 
 @media screen and (max-width: 1200px) {
   section.filter > div.row {
@@ -5067,6 +5097,16 @@ main.step {
     float: none;
     width: 100%; } }
 @media screen and (max-width: 800px) {
+  main.rep_timetable div.weeks, main.rep_plan div.weeks {
+    width: 100%;
+    padding: 0; }
+    main.rep_timetable div.weeks a, main.rep_timetable div.weeks span, main.rep_plan div.weeks a, main.rep_plan div.weeks span {
+      padding: 0;
+      width: 300px;
+      display: block;
+      margin: 5px auto;
+      text-align: center; }
+
   main.admin-lessonshistory section.head {
     display: none; }
   main.admin-lessonshistory section.table aside {
@@ -5219,16 +5259,6 @@ main.step {
         border-bottom: 1px #666 solid; }
       main.rep_history section.table aside > div > button {
         width: 270px; }
-
-  main.rep_timetable div.weeks, main.rep_plan div.weeks {
-    width: 100%;
-    padding: 0; }
-    main.rep_timetable div.weeks a, main.rep_timetable div.weeks span, main.rep_plan div.weeks a, main.rep_plan div.weeks span {
-      padding: 0;
-      width: 300px;
-      display: block;
-      margin: 5px auto;
-      text-align: center; }
 
   main.student_favorites section.start_less > div:first-of-type {
     float: none;

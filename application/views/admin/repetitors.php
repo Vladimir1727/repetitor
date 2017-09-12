@@ -58,104 +58,50 @@
         </aside>
     </section>
     <section class="table">
-        <aside>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <button class="mess">Написать сообщение</button>
-                <button class="on">Включить</button>
-                <button class="del">Удалить</button>
-            </div>
-        </aside>
-        <aside>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <button class="mess">Написать сообщение</button>
-                <button class="off">Отключить</button>
-                <button class="del">Удалить</button>
-            </div>
-        </aside>
+        <?php
+            foreach ($repetitors as $repetitor) {
+                if ($repetitor['status'] == 2){
+                    echo '<aside>';
+                    echo '<div><p>'.$repetitor['first_name'].'</p>';
+                    if ($repetitor['father_name'] != ''){
+                        echo '<p>'.$repetitor['father_name'].'</p>';
+                    }
+                    echo '<p>ID ';
+                    $len = strlen(strval($repetitor['id']));
+                    for($i = 0; $i < (7-$len); $i++){
+                        echo '0';
+                    }
+                    echo $repetitor['id'];
+                    echo '</p></div>';
+                    $date = substr($repetitor['created_at'],8,2).'.'.substr($repetitor['created_at'],5,2).'.'.substr($repetitor['created_at'],0,4);
+                    echo '<div><p>'.$date.'</p></div>';
+                    echo '<div><p>'.$repetitor['subject1'].'</p>';
+                    if (!is_null($repetitor['subject2'])){
+                        echo '<p>'.$repetitor['subject2'].'</p>';
+                    }
+                    echo '</div>';
+                    //echo '<div><p>'.$repetitor['visit_at'].'</p></div>';
+                    $date = substr($repetitor['visit_at'],8,2).'.'.substr($repetitor['visit_at'],5,2).'.'.substr($repetitor['visit_at'],0,4);
+                    echo '<div><p>'.$date.'</p></div>';
+                    echo '<div><p>'.'0'.'</p></div>';
+                    echo '<div><p>'.$repetitor['email'].'</p></div>';
+                    echo '<div><p>'.$repetitor['skype'].'</p></div>';
+                    echo '<div><p>'.'0'.'</p></div>';
+                    echo '<div><p>'.'0'.'</p></div>';
+                    echo '<div><p>'.'0'.'</p></div>';
+                    echo '<div><p>'.'0'.'</p></div>';
+                    echo '<div><p>'.'0'.'</p></div>';
+                    echo '<div><p>'.'0'.'</p></div>';
+                    echo '<div><p>'.'0'.'</p></div>';
+                    echo '<div><form action="'.base_url().'index.php/admin/changeRepetitor" method="post">';
+                    echo '<button class="mess" name="mess" type="submit">Написать сообщение</button>';
+                    echo '<button class="off" name="off" type="submit">Выключить</button>';
+                    echo '<button class="del" name="del" type="submit">Удалить</button>';
+                    echo '<input type="hidden" value="'.$repetitor['id'].'" name="id">';
+                    echo '</form></div></aside>';
+                }
+            }
+         ?>
     </section>
     <h2>Кандидаты</h2>
     <section class="head_kand">
@@ -181,30 +127,41 @@
         </aside>
     </section>
     <section class="table_kand">
-        <aside>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <p></p>
-            </div>
-            <div>
-                <button class="mess">Просмотреть профиль</button>
-                <button class="ok">Включить</button>
-                <button class="del">Удалить</button>
-            </div>
-        </aside>
+            <?php
+                foreach ($repetitors as $repetitor) {
+                    if ($repetitor['status'] == 1){
+                        echo '<aside>';
+                        echo '<div><p>'.$repetitor['first_name'].'</p>';
+                        if ($repetitor['father_name'] != ''){
+                            echo '<p>'.$repetitor['father_name'].'</p>';
+                        }
+                        echo '<p>ID ';
+                        $len = strlen(strval($repetitor['id']));
+                        for($i = 0; $i < (7-$len); $i++){
+                            echo '0';
+                        }
+                        echo $repetitor['id'];
+                        echo '</p></div>';
+                        $date = substr($repetitor['created_at'],8,2).'.'.substr($repetitor['created_at'],5,2).'.'.substr($repetitor['created_at'],0,4);
+                        echo '<div><p>'.$date.'</p></div>';
+                        echo '<div><p>'.$repetitor['subject1'].'</p>';
+                        if (!is_null($repetitor['subject2'])){
+                            echo '<p>'.$repetitor['subject2'].'</p>';
+                        }
+                        echo '</div>';
+                        echo '<div><p>'.$repetitor['email'].'</p></div>';
+                        echo '<div><p>'.$repetitor['skype'].'</p></div>';
+                        echo '<div><form action="'.base_url().'index.php/admin/changeRepetitor" method="post">';
+                        echo '<button class="mess" name="view" type="submit">Просмотреть профиль</button>';
+                        echo '<button class="ok" name="ok" type="submit">Включить</button>';
+                        echo '<button class="del" name="del" type="submit">Удалить</button>';
+                        echo '<input type="hidden" value="'.$repetitor['id'].'" name="id">';
+                        echo '</form></div></aside>';
+                    }
+                }
+             ?>
     </section>
 </main>
 
-<script src="<?php echo base_url(); ?>js/repetitor/chat.js"></script>
+<script src="<?php echo base_url(); ?>js/admin/repetitors.js"></script>
 <?php $this->load->view('main/footer'); ?>

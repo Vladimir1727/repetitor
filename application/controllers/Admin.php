@@ -21,11 +21,12 @@ class Admin extends CI_Controller {
 		 parent::__construct();
 		 $this->load->helper('url');
 		 $this->load->model('AdminModel');
+		 $this->load->model('MainModel');
 	 }
 
 	public function index()
 	{
-		$data = array();
+		$data = array('error'=>'');
 		$this->load->view('admin/login', $data);
 	}
 
@@ -52,13 +53,18 @@ class Admin extends CI_Controller {
 
 	public function trylogin()
 	{
+	$enter = 1;
 	  try {
-	  	$this->AdminModel->login($this->input->post('pass', TRUE));
-		//echo $this->input->post('pass', TRUE);
+	  	$enter = $this->AdminModel->login($this->input->post('pass', TRUE));
 	  } catch (Exception $e) {
-		  exit($e->getMessage());
+		  $err=$e->getMessage();
+		  $data = array('error'=>$err);
+		  $this->load->view('admin/login', $data);
 	  }
-	  exit("0");
+	  if ($enter == 0){
+		  redirect('admin/repetitors');
+	  }
+	  //echo $this->AdminModel->login($this->input->post('pass', TRUE));
 	}
 
 	public function main()
@@ -66,7 +72,10 @@ class Admin extends CI_Controller {
 		if (!$this->session->has_userdata('admin')){
 			 redirect('/');
 		}
-		$data = array();
+		$repetitors = $this->AdminModel->getAllRepetitors();
+		$data = array(
+			'repetitors' => $repetitors,
+		);
 		$this->load->view('admin/repetitors', $data);
 	}
 
@@ -102,7 +111,10 @@ class Admin extends CI_Controller {
 		if (!$this->session->has_userdata('admin')){
 			 redirect('/');
 		}
-		$data = array();
+		$repetitors = $this->AdminModel->getAllRepetitors();
+		$data = array(
+			'repetitors' => $repetitors,
+		);
 		$this->load->view('admin/repetitors', $data);
 	}
 
@@ -111,7 +123,10 @@ class Admin extends CI_Controller {
 		if (!$this->session->has_userdata('admin')){
 			 redirect('/');
 		}
-		$data = array();
+		$students = $this->AdminModel->getAllStudents();
+		$data = array(
+			'students' => $students,
+		);
 		$this->load->view('admin/students', $data);
 	}
 
@@ -131,5 +146,46 @@ class Admin extends CI_Controller {
 		}
 		$data = array();
 		$this->load->view('admin/chat', $data);
+	}
+
+	public function changeRepetitor()
+	{
+		if (!is_null($this->input->post('view'))){
+			redirect('main/rinfo/'.$this->input->post('id'));
+		}
+		if (!is_null($this->input->post('ok'))){
+			$this->AdminModel->setRepetitorStatus($this->input->post('id'), 2);
+			redirect('admin/repetitors');
+		}
+		if (!is_null($this->input->post('off'))){
+			$this->AdminModel->setRepetitorStatus($this->input->post('id'), 1);
+			redirect('admin/repetitors');
+		}
+		if (!is_null($this->input->post('del'))){
+			$this->AdminModel->setRepetitorStatus($this->input->post('id'), 3);
+			redirect('admin/repetitors');
+		}
+		if (!is_null($this->input->post('mess'))){
+			redirect('admin/chat');
+		}
+	}
+
+	public function changeStudent()
+	{
+		if (!is_null($this->input->post('mess'))){
+			redirect('admin/chat');
+		}
+		if (!is_null($this->input->post('ok'))){
+			$this->AdminModel->setStudentStatus($this->input->post('id'), 1);
+			redirect('admin/students');
+		}
+		if (!is_null($this->input->post('off'))){
+			$this->AdminModel->setStudentStatus($this->input->post('id'), 0);
+			redirect('admin/students');
+		}
+		if (!is_null($this->input->post('del'))){
+			$this->AdminModel->setStudentStatus($this->input->post('id'), 3);
+			redirect('admin/students');
+		}
 	}
 }

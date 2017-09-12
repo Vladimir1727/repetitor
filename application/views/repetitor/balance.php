@@ -9,7 +9,7 @@
 <main class="rep_balance">
     <section class="start_balance">
         <h1>Баланс личного счёта: <span>0 $</span></h1>
-        <button>Вывести средства</button>
+        <a href="<?php echo base_url(); ?>index.php/repetitor/getmoney">Вывести средства</a>
     </section>
     <h2>История транзакций:</h2>
     <h3 class="in">Зачисления</h3>

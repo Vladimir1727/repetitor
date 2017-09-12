@@ -15,7 +15,9 @@ class StudentModel extends CI_Model{
 		} else{
 			$ins = array(
 				'email'=>$email,
-				'password'=>$pass
+				'password'=>$pass,
+				'created_at'=>date('Y-m-d H:i:s',time()),
+				'status'=>1,
 			);
 			$this->db->insert('students', $ins);
 			//sending e-mail
@@ -45,6 +47,8 @@ class StudentModel extends CI_Model{
 		if (count($r)==0){
 			throw new Exception('неправильный логин/пароль');
 		} else{
+			$this->db->where('id', $r[0]['id']);
+			$this->db->update('students', array('visit_at'=>date('Y-m-d H:i:s',time())));
 			$this->session->set_userdata('student_id', $r[0]['id']);
 			return '0';
 		}
