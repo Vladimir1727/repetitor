@@ -64,7 +64,19 @@ class RepetitorModel extends CI_Model{
 		if (count($r)==0){
 			throw new Exception('нет такого id');
 		}
-		$this->repetitor = $r[0];
+		$rep = $r[0];
+		$sub = 0;
+		for ($i=1; $i <=2 ; $i++) {
+			if (!is_null($rep['subject'.$i])){
+				$q = $this->db->query('select subject from subjects where id='.$rep['subject'.$i]);
+				$r = $q->result_array();
+				$rep['sub'.$i.'_name'] = $r['0']['subject'];
+				$sub++;
+			}
+		}
+		$rep['sub_num'] = $sub;
+
+		$this->repetitor = $rep;
 		return $this;
 	}
 
@@ -195,10 +207,15 @@ class RepetitorModel extends CI_Model{
 		foreach ($table as $tab) {
 			if ($tab->id == 0){
 				$tab->date_from = date('Y-m-d H:i:s', strtotime($tab->date_from)-$z*60*60);
-				$ins = 'insert into exercises(repetitor_id, date_from, created_at)
-				values('.$repetitor_id.',"'.$tab->date_from.'","'.date('Y-m-d H:i:s',time()).'")';
-				//echo ($ins);
-				$q = $this->db->query($ins);
+				if ($tab->student_id >0){
+					$ins = 'insert into exercises(repetitor_id, date_from, created_at, student_id, subject_id)
+					values('.$repetitor_id.',"'.$tab->date_from.'","'.date('Y-m-d H:i:s',time()).'", '.$tab->student_id.', '.$tab->subject_id.')';
+					$q = $this->db->query($ins);
+				}else{
+					$ins = 'insert into exercises(repetitor_id, date_from, created_at)
+					values('.$repetitor_id.',"'.$tab->date_from.'","'.date('Y-m-d H:i:s',time()).'")';
+					$q = $this->db->query($ins);
+				}
 			} elseif($tab->date_from==''){
 				$q = $this->db->query('delete from exercises where id='.$tab->id);
 			}
@@ -217,6 +234,12 @@ class RepetitorModel extends CI_Model{
 	{
 		$q = $this->db->query('select * from students where id='.$student_id);
 		$r = $q->result_array();
-		return $r[0];
+		$student = $r[0];
+		if ($student['tzone_id']>0){
+			$q = $this->db->query('select zone_time from timezones where id='.$student['tzone_id']);
+			$r = $q->result_array();
+			$student['tzone'] = $r[0]['zone_time'];
+		}
+		return $student;
 	}
 }

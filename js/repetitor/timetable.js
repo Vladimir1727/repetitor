@@ -41,10 +41,16 @@ $('#search').keyup(function(){
     var find = false;
     var div = '<div id="students">';
     for (var i = 0; i < students.length; i++) {
-        if ((students[i].id.indexOf(f)>-1 || students[i].first_name.indexOf(f)>-1) && f.length>0){
-            console.log(students[i].first_name);
+        console.log(students[i]);
+        if (students[i].id.indexOf(f)>-1 && f.length>0){
             find = true;
             div += '<p>'+students[i].first_name+' ID <span>'+students[i].id+'</span></p>';
+        }
+        if (students[i].first_name!=null && f.length>0){
+            if (students[i].first_name.indexOf(f)>-1){
+                find = true;
+                div += '<p>'+students[i].first_name+' ID <span>'+students[i].id+'</span></p>';
+            }
         }
     }
     div += '</div>';
@@ -58,7 +64,7 @@ $('#search').keyup(function(){
             });
         });
     } else{
-
+         $('#search').next('div').remove();
     }
 });
 
@@ -139,6 +145,7 @@ function tableClick(){
             table.push({
                 'id' : 0,
                 'repetitor_id' : $('#repetitor_id').val(),
+                'student_id' : 0,
                 'date_from' : addDate.getFullYear()+'-'+tM+'-'+tD+' '+tH+':'+tmin+':00',
             });
             console.log(table);

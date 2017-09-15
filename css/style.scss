@@ -1,3 +1,4 @@
+@charset "UTF-8";
 $color_dgreen : #028163;
 $color_green : #05a983;
 $color_green2 : #00CC99;
@@ -698,6 +699,7 @@ main.filter{
 		aside{
 			@include end;
 			background: #fff;
+			margin-bottom: 30px;
 			div.avatar{
 				height: 100%;
 				float: left;
@@ -708,6 +710,7 @@ main.filter{
 					margin: 45px auto 25px auto;
 					border: 1px #E6E6E6 solid;
 					border-radius: 50%;
+					overflow: hidden;
 					img{
 						width: 185px;
 					}
@@ -1010,6 +1013,7 @@ main.rep-info{
 					margin: 45px auto 25px auto;
 					border: 1px #E6E6E6 solid;
 					border-radius: 50%;
+					overflow: hidden;
 					img{
 						width: 185px;
 					}
@@ -1025,7 +1029,8 @@ main.rep-info{
 					margin: 0 auto;
 					line-height: 1.5;
 					position: relative;
-					padding: 4px 19px;
+					padding: 4px 10px;
+					overflow: hidden;
 				}
 			}
 			div.info{
@@ -1177,7 +1182,8 @@ main.rep-info{
 					margin: 0 auto;
 					line-height: 1.5;
 					position: relative;
-					padding: 4px 19px;
+					padding: 4px 10px;
+					overflow: hidden;
 				}
 			}
 			table{
@@ -1212,6 +1218,14 @@ main.rep-info{
 								border: 1px #fff solid;
 								&:after{
 									content: 'Свободен';
+								}
+							}
+							&.busy{
+								background: $color_blue;
+								text-align: center;
+								border: 1px #fff solid;
+								&:after{
+									content: 'Бронь';
 								}
 							}
 							&:first-of-type{
@@ -4276,6 +4290,15 @@ main.rep_plan{
 			border: 1px #999 solid;
 			float: right;
 			padding: 5px;
+		}
+		select{
+			@include f-n;
+			width: 170px;
+			height: 30px;
+			font-size: 16px;
+			border: 1px #999 solid;
+			float: right;
+			margin-right: 30px;
 		}
 	}
 	div.green{
@@ -7845,16 +7868,19 @@ div.student-header{
 	}
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 600px) {
 	main.rep_timetable, main.rep_plan{
 		div.form{
-			button, input{
+			button, input, select{
 				float: none;
 				display: block;
 				margin: 7px auto;
 			}
 		}
 	}
+}
+
+@media screen and (max-width: 400px) {
 	main.student_pay{
 		section{
 			padding: 0 10px;

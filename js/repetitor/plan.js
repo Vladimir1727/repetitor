@@ -1,6 +1,6 @@
 (function($){$(function(){
 var baseUrl = '../';
-console.log('plan 3');
+console.log('plan 7');
 var table = 0;
 var monday =0;
 var week = 0;
@@ -100,178 +100,138 @@ function weekHeader(){
 }
 weekHeader();
 
+function getDateByid(id){
+    id = id+'';
+    var wday = id.substr(0,1);
+    var hour = id.substr(1);
+    return new Date(monday.getTime()+60*60*1000*24*(wday-1)+60*60*1000*hour);
+
+}
+
+function ObjDate(id){
+    var addDate = getDateByid(id);
+    var t={
+        'year' : addDate.getFullYear()+'',
+        'month' : (parseInt(addDate.getMonth())>9) ? addDate.getMonth()+1 : '0'+(addDate.getMonth()+1),
+        'day' : (parseInt(addDate.getDate())>9) ? addDate.getDate()+'' : '0'+(addDate.getDate()+1),
+        'hour' : (parseInt(addDate.getHours())>9) ? addDate.getHours()+'' : '0'+addDate.getHours(),
+        'min' : (parseInt(addDate.getMinutes())>9) ? addDate.getMinutes()+'' : '0'+addDate.getMinutes(),
+    };
+    return t;
+}
+
+function idDateString(id){
+    var t = ObjDate(id)
+    return objToStr(t);
+}
+
+function getFromTable(dateStr){
+    if (dateStr == null) return false;
+    var t={
+        'year' : dateStr.substr(0,4),
+        'month' : dateStr.substr(5,2),
+        'day' : dateStr.substr(8,2),
+        'hour' : dateStr.substr(11,2),
+        'min' : dateStr.substr(14,2),
+    };
+    return t;
+}
+
+function equalDates(id, dateStr){
+    var d1 = ObjDate(id);
+    var d2 = getFromTable(dateStr);
+    if (d1.year == d2.year && d1.month == d2.month && d1.hour == d2.hour &&d1.day == d2.day &&d1.min == d2.min){
+        return true;
+    } else{
+        return false;
+    }
+}
+
+function objToStr(t){
+    console.log(t);
+    console.log(t.min);
+    return t.year+'-'+t.month+'-'+t.day+' '+t.hour+':'+t.min+':00';
+}
+
+function killDead(table){
+    var temp = [];
+    for (var i = 0; i < table.length; i++) {
+        if (table[i].id > 0 || table[i].date_from != null){
+             temp.push(table[i]);
+        }
+    }
+    return temp;
+}
+
 function tableClick(){
     $('.planed').each(function(){
         $(this).unbind();
         $(this).click(function(){
-            var code = $(this).attr('id');
-            var wday = code.substr(0,1);
-            var hour = code.substr(1);
-            var addDate = new Date(monday.getTime()+60*60*1000*24*(wday-2)+60*60*1000*hour);
             $(this).removeClass('planed');
             $(this).addClass('busy');
-            var tM = (parseInt(addDate.getMonth())>9) ? addDate.getMonth()+1 : '0'+(addDate.getMonth()+1);
-            var tD = (parseInt(addDate.getDate())>9) ? addDate.getDate()+1 : '0'+(addDate.getDate()+1);
-            var tH = (parseInt(addDate.getHours())>9) ? addDate.getHours() : '0'+addDate.getHours();
-            var tmin = (parseInt(addDate.getMinutes())>9) ? addDate.getMinutes() : '0'+addDate.getMinutes();
             $(this).text(student_name+' ID '+student_id);
             table.push({
                 'id' : 0,
                 'repetitor_id' : repetitor_id,
                 'student_id' : student_id,
-                'date_from' : addDate.getFullYear()+'-'+tM+'-'+tD+' '+tH+':'+tmin+':00',
-            });
-            copyt.push({
-                'type' : 'planed',
-                'date_from' : addDate.getFullYear()+'-'+tM+'-'+tD+' '+tH+':'+tmin+':00',
+                'date_from' : idDateString($(this).attr('id')),
+                'subject_id' : $('#subject').val(),
             });
             console.log(table);
-            console.log(copyt);
             tableClick();
         });
     });
     $('.free').each(function(){
         $(this).unbind();
         $(this).click(function(){
-        var code = $(this).attr('id');
-        var wday = code.substr(0,1);
-        var hour = code.substr(1);
-        var addDate = new Date(monday.getTime()+60*60*1000*24*(wday-1)+60*60*1000*hour);
         $(this).removeClass('free');
         $(this).addClass('busy');
-        var tM = (parseInt(addDate.getMonth())>9) ? addDate.getMonth()+1 : '0'+(addDate.getMonth()+1);
-        var tD = (parseInt(addDate.getDate())>9) ? addDate.getDate()+1 : '0'+(addDate.getDate()+1);
-        var tH = (parseInt(addDate.getHours())>9) ? addDate.getHours() : '0'+addDate.getHours();
-        var tmin = (parseInt(addDate.getMinutes())>9) ? addDate.getMinutes() : '0'+addDate.getMinutes();
         $(this).text(student_name+' ID '+student_id);
-        var busy = -1;
         for (var k = 0; k < table.length; k++) {
-            var tDate = new Date(table[k]['date_from']);
-            if (addDate.getDay() == tDate.getDay() && addDate.getHours() == tDate.getHours()){
-                busy = k;
+            if (equalDates($(this).attr('id'),table[k].date_from)){
+                console.log('find free');
+                table[k].date_from = null;
             }
         }
-        if (busy>-1){
-            var temp = [];
-            for (var i = 0; i < table.length; i++) {
-                if (i != busy){
-                    temp.push(table[i]);
-                }else{
-                    if (table[i].id >0 ){
-                        table[i].date_from = null;
-                        temp.push(table[i]);
-                    }
-                }
-            }
-            table = temp;
-        }
+        table = killDead(table);
         table.push({
             'id' : 0,
             'repetitor_id' : repetitor_id,
             'student_id' : student_id,
-            'date_from' : addDate.getFullYear()+'-'+tM+'-'+tD+' '+tH+':'+tmin+':00',
-        });
-        copyt.push({
-            'type' : 'free',
-            'date_from' : addDate.getFullYear()+'-'+tM+'-'+tD+' '+tH+':'+tmin+':00',
+            'date_from' : idDateString($(this).attr('id')),
+            'subject_id' : $('#subject').val(),
         });
         console.log(table);
-        console.log(copyt);
         tableClick();
         });
     });
     $('.busy').each(function(){
         $(this).unbind();
         $(this).click(function(){
-            var code = $(this).attr('id');
-            var wday = code.substr(0,1);
-            var hour = code.substr(1);
-            var addDate = new Date(monday.getTime()+60*60*1000*24*(wday-1)+60*60*1000*hour);
-            var tM = (parseInt(addDate.getMonth())>9) ? addDate.getMonth()+1 : '0'+(addDate.getMonth()+1);
-            var tD = (parseInt(addDate.getDate())>9) ? addDate.getDate()+1 : '0'+(addDate.getDate()+1);
-            var tH = (parseInt(addDate.getHours())>9) ? addDate.getHours() : '0'+addDate.getHours();
-            var tmin = (parseInt(addDate.getMinutes())>9) ? addDate.getMinutes() : '0'+addDate.getMinutes();
             var find = false;
             for (var k = 0; k < table.length; k++) {
-                var tDate = new Date(table[k]['date_from']);
-                console.log(table[k].student_id);
-                console.log(student_id);
-                console.log(addDate);
-                console.log(tDate);
-                if (table[k].student_id == student_id && addDate.getDay() == tDate.getDay() && addDate.getHours() == tDate.getHours()){
-                    find = true;
-                    table[k].date_from = null;
+                if (equalDates($(this).attr('id'),table[k].date_from) && table[k].student_id == student_id){
+                    find = k;
                 }
             }
             if (find){
                 $(this).removeClass('busy');
                 console.log('MY STUDENT!');
-                for (var k = 0; k < table.length; k++) {
-                    var tDate = new Date(table[k].date_from);
-                    if (addDate.getDay() == tDate.getDay() && addDate.getHours() == tDate.getHours()){
-                        table[k].date_from = null;
-                    }
-                }
-                var is_copy = false;
-                for (var i = 0; i < copyt.length; i++) {
-                    var cDate = new Date(table[i].date_from);
-                    if (addDate.getDay() == cDate.getDay() && addDate.getHours() == cDate.getHours()){
-                        $(this).addClass(copyt[i].type);
-                        is_copy = copyt[i];
-                        copyt[i].date_from = null;
-                    }
-                }
-                if (is_copy == false){
+                table[find].date_from = null;
+                table = killDead(table);
                     $(this).addClass('free');
                     table.push({
                         'id' : 0,
                         'repetitor_id' : repetitor_id,
-                        'date_from' : addDate.getFullYear()+'-'+tM+'-'+tD+' '+tH+':'+tmin+':00',
+                        'student_id' : 0,
+                        'date_from' : idDateString($(this).attr('id')),
                     });
-                } else{
-                    $(this).text(is_copyt.student_name+' ID '+is_copyt.student_id);
-                    table.push({
-                        'id' : 0,
-                        'repetitor_id' : is_copy.repetitor_id,
-                        'student_id' : is_copy.student_id,
-                        'date_from' : is_copy.date_from,
-                    });
-                    var temp = [];
-                    for (var i = 0; i < copyt.length; i++) {
-                        if (copyt[i].date_from != is_copy.date_from){
-                            temp.push(copyt[i]);
-                        }
-                    }
-                    copyt = temp;
-                }
+
                 $(this).text('');
             } else{
                 console.log('other student');
-                /*for (var k = 0; k < table.length; k++) {
-                    var tDate = new Date(table[k]['date_from']);
-                    if (addDate.getDay() == tDate.getDay() && addDate.getHours() == tDate.getHours()){
-                        old = table[k];
-                        table[k].date_from = null;
-                    }
-                }
-                $(this).text(student_name+' ID '+student_id);
-                table.push({
-                    'id' : 0,
-                    'repetitor_id' : repetitor_id,
-                    'student_id' : student_id,
-                    'date_from' : addDate.getFullYear()+'-'+tM+'-'+tD+' '+tH+':'+tmin+':00',
-                });
-                copyt.push({
-                    'type' : 'busy',
-                    'student_name' : old.student_name,
-                    'student_id' : old.student_id,
-                    'repetitor' : repetitor_id,
-                    'date_from' : addDate.getFullYear()+'-'+tM+'-'+tD+' '+tH+':'+tmin+':00',
-                });
-                */
             }
             console.log(table);
-            console.log(copyt);
             tableClick();
         });
     });
@@ -289,7 +249,6 @@ function tableView(){
     }
     monday = new Date(d.getTime() - 60*60*24*(week_day-1)*1000);
     monday = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate());
-    console.log('new monday=',monday);
     for (var i = 0; i <= 23; i++) {
         tab += '<tr>';
         for (var j = 0; j <= 7; j++) {
@@ -310,7 +269,6 @@ function tableView(){
                     }
                 }
                 if (find){
-                    console.log(now);
                     if (busy == -1){
                         tab +='<td class="free" id='+j+''+i+'>';
                     }else{
@@ -334,29 +292,14 @@ $.ajax({
     url: baseUrl+'repetitor/getTimeTable',
     type:'post',
     success: function(data){
-        console.log(data);
         table = JSON.parse(data);
         if (table.length == 0){
             console.log('empty');
         } else{
-            //console.log('making table');
-        }
-        tableView();
-    },
-});
 
-$.ajax({
-    url: baseUrl+'repetitor/getStudents',
-    type:'post',
-    success: function(data){
-        students = JSON.parse(data);
-        console.log(students);
-        if (students.length == 0){
-            console.log('empty');
-        } else{
-            console.log('students loaded');
         }
         tableView();
+
     },
 });
 

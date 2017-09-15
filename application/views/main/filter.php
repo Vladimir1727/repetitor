@@ -47,7 +47,6 @@
 			<select id="spec_select">
 				<option>Выберите</option>
 				<?php
-				//var_dump($specializations);
 					foreach ($specializations as $option) {
 						echo '<option value="'.$option['id'].'">'.$option['specialization'].'</option>';
 					}
@@ -101,14 +100,14 @@
 		<div class="col-lg-2 col-md-6 col-sx-12">
 			<label><br><br>
 				Сейчас онлайн
-				<input type="checkbox">
+				<input type="checkbox" id="online">
 				<span></span>
 			</label>
 		</div>
 		<div class="col-lg-2 col-md-6 col-sx-12">
 			<label><br><br>
 				Профили с видео
-				<input type="checkbox">
+				<input type="checkbox" id="video">
 				<span></span>
 			</label>
 		</div>
@@ -131,58 +130,109 @@
 	<p>
 		*Система автоматически определяет часовой пояс пользователя и в графе «Время» показывает время пользователя
 	</p>
-	<button>Показать Репетиторов</button>
+	<button id="show_filter">Показать Репетиторов</button>
 </section>
 <main class="filter">
-	<section class="result">
-		<aside>
-			<div class="avatar">
-				<div class="img">
-					<img src="<?php echo base_url(); ?>img/avatar.png" alt="avatar">
-				</div>
-				<a href="#"><span></span> Видео</a>
-			</div>
-			<div class="info">
-				<h2><span class="active"></span><a href="#">Анна</a></h2>
-				<p><strong>Преподаёт:</strong><span>английский язык</span></p>
-				<p class="lang_block"><strong>Родной язык:</strong><span>русский</span></p>
-				<div class="stars">
-					<span class="star1"></span>
-					<span class="star1"></span>
-					<span class="star1"></span>
-					<span class="star0"></span>
-					<span class="star0"></span>
-				</div>
-				<p>
-					<strong>Специализация:</strong>
-					<span>Разговорный язык / ГИА, ОГЭ / ЕГЭ / Подготовка к экзаменам / Язык с нуля /
-Деловой язык / Туризм / Для учёбы за рубежом / Грамматика / Повышение успеваемости /
-Помощь при выполнении домашнего задания / Подготовка к Международным экзаменам /
-Подготовка к олимпиаде</span>
-				</p>
-				<p><strong>Возрастные группы:</strong><span>  Начальная школа (1-4 класс) / Средняя школа (5-9 класс)</span></p>
-				<p><strong>Презентация:</strong>
-					<span>Говорить по английски легко! Это вы увидите уже на первом занятии. Моя цель научить вас говорить и быть уверенным, не бояться ошибаться. Я использую как хорошо зарекомендовавшие себя методики, так и собственные наработки.
-Мы смотрим фильмы, обсуждаем интересные для вас темы и постепенно вы научаетесь свободно использовать английский язык в любых ситуациях - на работе, в путешествиях...
-</span></p>
-				<a href="#" class="favorites"><span></span> В избранное</a>
-
-				<div class="price">
-					<span>10</span>$ <small>за час</small>
-				</div>
-				<a href="#" class="lesson">Записаться на урок</a>
-				<a href="#" class="message">Написать сообщение</a>
-				<a href="#" class="sh">Расписание</a>
-			</div>
-		</aside>
-		<ul class="pagg">
-			<li><a href="#"><</a></li>
-			<li><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li><a href="#">></a></li>
+	<section class="result" id="result">
+		<?php
+		foreach ($repetitors as $repetitor) {
+			echo '<aside>';
+			echo '<div class="avatar">';
+			echo '<div class="img">';
+			$d = strrpos($repetitor['avatar'],'.');
+			$av = substr($repetitor['avatar'], 0 , $d).'_thumb'.substr($repetitor['avatar'], $d);
+			echo '<img src="'.base_url().'images/'.$av.'" alt="avatar">';
+			echo '</div>';
+			if (!is_null($repetitor['link'])){
+				echo '<a href="'.$repetitor['link'].'"><span></span> Видео</a>';
+			}
+			echo '</div>';
+			echo '<div class="info">';
+			echo '<h2>';
+			if ($repetitor['online']){
+				echo '<span class="active">';
+			} else{
+				echo '<span>';
+			}
+			echo '</span><a href="'.base_url().'index.php/main/rinfo/'.$repetitor['id'].'">'.$repetitor['first_name'].'</a></h2>';
+			echo '<p><strong>Преподаёт: </strong><span>';
+			$first = true;
+			for ($k=0; $k < count($repetitor['subjects']) ; $k++) {
+				if ($first == false){
+					echo ' / ';
+				} else{
+					$first = false;
+				}
+				echo $repetitor['subjects'][$k];
+			}
+			echo '</span></p>';
+			echo '<p class="lang_block"><strong>Родной язык:</strong> <span>'.$repetitor['language'].'</span></p>';
+			echo '<div class="stars">';
+			echo '<span class="star1"></span>';
+			echo '<span class="star1"></span>';
+			echo '<span class="star1"></span>';
+			echo '<span class="star0"></span>';
+			echo '<span class="star0"></span>';
+			echo '</div>';
+			echo '<p>';
+			echo '<strong>Специализация: </strong>';
+			echo '<span>';
+			$first = true;
+			for ($k=0; $k < count($repetitor['spec']) ; $k++) {
+				if ($first == false){
+					echo ' / ';
+				} else{
+					$first = false;
+				}
+				echo $repetitor['spec'][$k];
+			}
+			echo '</span>';
+			echo '</p>';
+			echo '<p><strong>Возрастные группы: </strong><span>';
+			$first = true;
+			for ($k=0; $k < count($repetitor['ages']) ; $k++) {
+				if ($first == false){
+					echo ' / ';
+				} else{
+					$first = false;
+				}
+				echo $repetitor['ages'][$k];
+			}
+			echo '</span></p><p><strong>Презентация: </strong>';
+			echo '<span>';
+			echo $repetitor['about'];
+			echo '</span></p>';
+			echo '<a href="#" class="favorites"><span></span> В избранное</a>';
+			echo '<div class="price">';
+			echo '<span>';
+			if (count($repetitor['cost'])==1){
+				echo $repetitor['cost'][0];
+			} elseif($repetitor['cost'][0] == $repetitor['cost'][1]){
+				echo $repetitor['cost'][0];
+			} else{
+				if ($repetitor['cost'][0]>$repetitor['cost'][1]){
+					echo $repetitor['cost'][1].'-'.$repetitor['cost'][0];
+				}else{
+					echo $repetitor['cost'][0].'-'.$repetitor['cost'][1];
+				}
+			}
+			echo '</span>$ <small>за час</small>';
+			echo '</div>';
+			echo '<a href="'.base_url().'index.php/main/rinfo/'.$repetitor['id'].'" class="lesson">Записаться на урок</a>';
+			echo '<a href="#" class="message">Написать сообщение</a>';
+			echo '<a href="'.base_url().'index.php/main/rinfo/'.$repetitor['id'].'" class="sh">Расписание</a>';
+			echo '</div>';
+			echo '</aside>';
+		}
+		 ?>
+		<ul class="pagg" id="pagg">
+			<li><a href="<?php echo base_url().'index.php/main/filter?page='.$pagg[0]; ?>"><</a></li>
+			<?php
+				for ($i=1; $i <count($pagg)-1 ; $i++) {
+					echo '<li><a href="'.base_url().'index.php/main/filter?page='.$pagg[$i].'">'.$pagg[$i].'</a></li>';
+				}
+			 ?>
+			<li><a href="<?php echo base_url().'index.php/main/filter?page='.$pagg[count($pagg)-1]; ?>">></a></li>
 		</ul>
 	</section>
 	<section class="info">

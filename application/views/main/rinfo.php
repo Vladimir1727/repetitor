@@ -3,25 +3,57 @@
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.min.css">
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
 <script src="<?php echo base_url(); ?>js/datepicker-ru.js"></script>
-<title>Репетиторы по разным языкам. Найти репетитора</title>
+<title>Репетиторы по разным языкам. Информация о репетиторе.</title>
 </head>
 <body>
 <?php $this->load->view('main/header_menu'); ?>
+<input type="hidden" value="<?php echo $repetitor['id']; ?>" id="repetitor_id">
+<input type="hidden" value="<?php echo ($student) ? $student['id'] : 0; ?>" id="student_id">
+<input type="hidden" value="<?php echo ($student) ? $student['zone_time'] : 0; ?>" id="student_zone">
 <main class="rep-info">
 	<section class="result">
 		<aside>
 			<div class="avatar">
 				<div class="img">
-					<img src="<?php echo base_url(); ?>img/avatar.png" alt="avatar">
+					<?php
+					$d = strrpos($repetitor['avatar'],'.');
+					$av = substr($repetitor['avatar'], 0 , $d).'_thumb'.substr($repetitor['avatar'], $d);
+					echo '<img src="'.base_url().'images/'.$av.'" alt="avatar">';
+					?>
 				</div>
 				<div class="rzone">
-					Москва UTC +01:00
+					<?php echo $repetitor['zone_name']; ?>
 				</div>
 			</div>
 			<div class="info">
-				<h2><span class="active"></span>Анна</h2>
-				<p><strong>Преподаёт:</strong><span>английский язык</span></p>
-				<p><strong>Родной язык:</strong><span>русский</span></p>
+				<h2>
+					<?php if ($repetitor['online']){
+						echo '<span class="active">';
+					} else{
+						echo '<span>';
+					}
+					echo '</span>';
+					echo $repetitor['first_name'].' '.$repetitor['father_name'];
+					?>
+				</h2>
+				<p><strong>Преподаёт:</strong><span>
+					<?php
+					$first = true;
+					for ($k=1; $k <= $repetitor['sub_num']; $k++) {
+						if ($first == false){
+							echo ' / ';
+						} else{
+							$first = false;
+						}
+						echo $repetitor['sub'.$k.'_name'];
+					}
+					 ?>
+					</span>
+				</p>
+				<p><strong>Родной язык:</strong><span>
+					<?php echo $repetitor['lang'] ?>
+					</span>
+				</p>
 				<div class="stars">
 					<span class="star1"></span>
 					<span class="star1"></span>
@@ -31,20 +63,57 @@
 				</div>
 				<p>
 					<strong>Специализация:</strong>
-					<span>Разговорный язык / ГИА, ОГЭ / ЕГЭ / Подготовка к экзаменам / Язык с нуля /
-Деловой язык / Туризм / Для учёбы за рубежом / Грамматика / Повышение успеваемости /
-Помощь при выполнении домашнего задания / Подготовка к Международным экзаменам /
-Подготовка к олимпиаде</span>
+					<span>
+					<?php
+					$first = true;
+					for ($k=0; $k < count($repetitor['spec']) ; $k++) {
+						if ($first == false){
+							echo ' / ';
+						} else{
+							$first = false;
+						}
+						echo $repetitor['spec'][$k];
+					}
+					 ?>
+					</span>
 				</p>
-				<p><strong>Возрастные группы:</strong><span>  Начальная школа (1-4 класс) / Средняя школа (5-9 класс)</span></p>
+				<p><strong>Возрастные группы:</strong><span>
+					<?php
+				  $first = true;
+				  for ($k=0; $k < count($repetitor['ages']) ; $k++) {
+					  if ($first == false){
+						  echo ' / ';
+					  } else{
+						  $first = false;
+					  }
+					  echo $repetitor['ages'][$k];
+				  }
+				   ?>
+				  	</span>
+				</p>
 				<p><strong>Презентация:</strong>
-					<span>Говорить по английски легко! Это вы увидите уже на первом занятии. Моя цель научить вас говорить и быть уверенным, не бояться ошибаться. Я использую как хорошо зарекомендовавшие себя методики, так и собственные наработки.
-Мы смотрим фильмы, обсуждаем интересные для вас темы и постепенно вы научаетесь свободно использовать английский язык в любых ситуациях - на работе, в путешествиях...
-</span></p>
+					<span>
+					<?php echo $repetitor['about']; ?>
+					</span>
+				</p>
 				<a href="#" class="favorites"><span></span> В избранное</a>
 
 				<div class="price">
-					<span>10</span>$ <small>за час</small>
+					<span>
+					<?php
+					if (count($repetitor['cost'])==1){
+						echo $repetitor['cost'][0];
+					} elseif($repetitor['cost'][0] == $repetitor['cost'][1]){
+						echo $repetitor['cost'][0];
+					} else{
+						if ($repetitor['cost'][0]>$repetitor['cost'][1]){
+							echo $repetitor['cost'][1].'-'.$repetitor['cost'][0];
+						}else{
+							echo $repetitor['cost'][0].'-'.$repetitor['cost'][1];
+						}
+					}
+					 ?>
+					</span>$ <small>за час</small>
 				</div>
 				<a href="#" class="lesson">Записаться на урок</a>
 				<a href="#" class="message">Написать сообщение</a>
@@ -53,13 +122,18 @@
 		<aside class="sh">
 			<header>
 				<h2>Расписание</h2>
-				<div class="tzone">
-					Москва UTC+01:00
+				<div class="tzone" id="s_zone">
+				<?php
+				if ($student){
+					echo $student['zone_name'];
+				}
+				 ?>
 				</div>
 				<div class="pagg">
-					<a href="#"><</a>
-						31.07.2017 - 06.08.2017
-					<a href="#">></a>
+					<a href="#" id="prev"><</a>
+						<!-- 31.07.2017 - 06.08.2017 -->
+						<span  id="weeks">неделя</span>
+					<a href="#" id="next">></a>
 				</div>
 			</header>
 			<table>
@@ -75,7 +149,7 @@
 						<th>В<span class="hide">о</span>с<span class="hide">кресенье</span></th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="table">
 					<tr> <td>0:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
 					<tr> <td>1:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
 					<tr> <td>2:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
@@ -105,25 +179,64 @@
 			</table>
 		</aside>
 		<aside class="video">
-			<iframe	src="https://www.youtube.com/embed/P5EcDas4BZM">
+			<iframe	src="<?php echo $repetitor['link'];?>">
 			</iframe>
 		</aside>
 		<aside class="exp">
 			<h2>Опыт работы</h2>
-			<p><strong>Опыт работы:</strong> <span>11 лет</span></p>
-			<p><strong>Опыт преподавания:</strong> <span>Опыт преподавания английского языка 9 лет</span></p>
-			<p><strong>Образование:</strong> <span>Агинский колледж</span></p>
+			<p><strong>Опыт работы:</strong> <span>
+			<?php echo $repetitor['experience'] ?> лет
+			</span></p>
+			<p><strong>Опыт преподавания:</strong> <span><?php echo $repetitor['exp_comment']; ?></span></p>
+			<p><strong>Образование:</strong> <span><?php echo $repetitor['university'].' '.$repetitor['specialty']; ?></span></p>
 		</aside>
 		<aside class="docs">
 			<h2>Документы <span class="switch switch-down pull-right"></span></h2>
 			<div>
-				<a href="<?php echo base_url(); ?>img/doc1.png"><img src="<?php echo base_url(); ?>img/doc1.png" alt="document 1"></a>
-				<a href="<?php echo base_url(); ?>img/doc2.png"><img src="<?php echo base_url(); ?>img/doc2.png" alt="document 2"></a>
+			<?php
+			if (!is_null($repetitor['doc1'])){
+				$d = strrpos($repetitor['doc1'],'.');
+				$av = substr($repetitor['doc1'], 0 , $d).'_thumb'.substr($repetitor['doc1'], $d);
+				echo '<a href="'.base_url().'images/'.$repetitor['doc1'].'"><img src="'.base_url().'images/'.$av.'"></a>';
+			}
+			if (!is_null($repetitor['doc2'])){
+				$d = strrpos($repetitor['doc2'],'.');
+				$av = substr($repetitor['doc2'], 0 , $d).'_thumb'.substr($repetitor['doc2'], $d);
+				echo '<a href="'.base_url().'images/'.$repetitor['doc2'].'"><img src="'.base_url().'images/'.$av.'"></a>';
+			}
+			 ?>
 			</div>
 		</aside>
 		<aside class="feeds">
 			<h2>Отзывы<span class="switch pull-right switch-down"></span></h2>
 			<div>
+				<!-- <div class="feed">
+					<h3>Anna</h3>
+					<p>
+						Нужно было быстро подготовиться к поездке за границу, переживала насчет “трудностей понимания”. За короткий период с Натальей прошли основные темы по теме - вообщем поездка прошла отлично. Главное не было шока и ступора, когда нужно было спросить или ответить.
+					</p>
+					<div class="stars">
+						<span class="star1"></span>
+						<span class="star1"></span>
+						<span class="star1"></span>
+						<span class="star0"></span>
+						<span class="star0"></span>
+					</div>
+				</div>
+
+				<div class="feed">
+					<h3>Igor</h3>
+					<p>
+						Спасибо за помощь в победе над языковым барьером, очень долго самостоятельно не мог преодолеть этот порог, стеснялся говорить. Благодаря Наталье достаточно быстро разговорился. Спасибо за помощь.
+					</p>
+					<div class="stars">
+						<span class="star1"></span>
+						<span class="star1"></span>
+						<span class="star1"></span>
+						<span class="star0"></span>
+						<span class="star0"></span>
+					</div>
+				</div>
 				<div class="feed">
 					<h3>Anna</h3>
 					<p>
@@ -151,19 +264,6 @@
 					</div>
 				</div>
 				<div class="feed">
-					<h3>Anna</h3>
-					<p>
-						Нужно было быстро подготовиться к поездке за границу, переживала насчет “трудностей понимания”. За короткий период с Натальей прошли основные темы по теме - вообщем поездка прошла отлично. Главное не было шока и ступора, когда нужно было спросить или ответить.
-					</p>
-					<div class="stars">
-						<span class="star1"></span>
-						<span class="star1"></span>
-						<span class="star1"></span>
-						<span class="star0"></span>
-						<span class="star0"></span>
-					</div>
-				</div>
-				<div class="feed">
 					<h3>Igor</h3>
 					<p>
 						Спасибо за помощь в победе над языковым барьером, очень долго самостоятельно не мог преодолеть этот порог, стеснялся говорить. Благодаря Наталье достаточно быстро разговорился. Спасибо за помощь.
@@ -175,23 +275,14 @@
 						<span class="star0"></span>
 						<span class="star0"></span>
 					</div>
-				</div>
-				<div class="feed">
-					<h3>Igor</h3>
-					<p>
-						Спасибо за помощь в победе над языковым барьером, очень долго самостоятельно не мог преодолеть этот порог, стеснялся говорить. Благодаря Наталье достаточно быстро разговорился. Спасибо за помощь.
-					</p>
-					<div class="stars">
-						<span class="star1"></span>
-						<span class="star1"></span>
-						<span class="star1"></span>
-						<span class="star0"></span>
-						<span class="star0"></span>
-					</div>
-				</div>
+				</div> -->
 			</div>
 		</aside>
-		<a href="#" class="lesson">Записаться на урок</a>
+		<?php
+		if ($student){
+			echo '<a href="#" class="lesson">Записаться на урок</a>';
+		}
+		?>
 	</section>
 	<section class="info">
 		<h3>Советы</h3>

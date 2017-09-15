@@ -21,6 +21,7 @@ class Main extends CI_Controller {
 		 parent::__construct();
 		 $this->load->helper(array('form', 'url'));
 		 $this->load->model('MainModel');
+		 $this->load->model('RepetitorModel');
 		 $this->load->library('session');
 	 }
 
@@ -36,12 +37,15 @@ class Main extends CI_Controller {
 
 	public function filter()
 	{
+		$page = (is_null($this->input->get('page'))) ? 1 : $this->input->get ('page');
 		$data=array(
 			'subjects'=>$this->MainModel->getAll('subjects'),
 			'ages'=>$this->MainModel->getAll('ages'),
 			'specializations'=>$this->MainModel->getAll('specializations'),
 			'languages'=>$this->MainModel->getAll('languages'),
 			'levels'=>$this->MainModel->getAll('levels'),
+			'repetitors'=>$this->MainModel->getRepetitors($page),
+			'pagg'=>$this->MainModel->repPagg($page),
 		);
 		$this->load->view('main/filter', $data);
 	}
@@ -62,9 +66,19 @@ class Main extends CI_Controller {
 		$this->load->view('main/studentlogin');
 	}
 
-	public function rinfo()
+	public function rinfo($id)
 	{
-		$this->load->view('main/rinfo');
+		$repetitor = $this->MainModel->getRepetitor($id);
+		if ($this->session->has_userdata('student_id')){
+			$student = $this->MainModel->getStudent($this->session->student_id);
+		} else{
+			$student = false;
+		}
+		$data =  array(
+			'repetitor' => $repetitor,
+			'student' => $student,
+		);
+		$this->load->view('main/rinfo', $data);
 	}
 
 	public function test(){
@@ -183,5 +197,22 @@ class Main extends CI_Controller {
 	public function testajax()
 	{
 		echo "test AJAX";
+	}
+
+	public function getfilter()
+	{
+		$page = $this->input->post('page');
+		$filter = json_decode($this->input->post('filter'));
+		$repetitors = $this->MainModel->getRepetitors($page, $filter);
+		$pagg = $this->MainModel->repPagg($page, count($repetitors));
+		//var_dump($pagg);
+		echo json_encode(array('pagg'=>$pagg,'repetitors'=>$repetitors));
+	}
+
+	public function getTimeTable()
+	{
+		$repetitor_id = $this->input->post('repetitor_id');
+		$data = $this->RepetitorModel->getTimeTable($repetitor_id);
+		echo json_encode($data);
 	}
 }

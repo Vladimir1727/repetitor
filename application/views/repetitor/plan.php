@@ -14,6 +14,18 @@
         <div class="form">
             <button id="save">Сохранить изменения</button>
             <input type="text" placeholder="Найти Ученика" value="<?php echo $student['first_name'].' ID '.$student['id'] ?>" disabled="disabled">
+                <?php
+                if ($repetitor['sub_num']==1){
+                    echo '<select id="subject" disabled>';
+                    echo '<option value="'.$repetitor['subject1'].'">'.$repetitor['sub1_name'].'</option>';
+                    echo '<select>';
+                } else{
+                    echo '<select id="subject">';
+                    echo '<option value="'.$repetitor['subject1'].'">'.$repetitor['sub1_name'].'</option>';
+                    echo '<option value="'.$repetitor['subject2'].'">'.$repetitor['sub2_name'].'</option>';
+                    echo '<select>';
+                }
+                ?>
         </div>
         <div class="green">
         </div>
@@ -68,8 +80,19 @@
             <h3>Выбранный Ученик:</h3>
             <h4><?php echo $student['first_name'] ?></h4>
             <p>ID <?php echo $student['id'] ?></p>
-            <p>Английский язык, 11 класс</p>
-            <p>UTC+3</p>
+            <p>
+                UTC
+                <?php
+                if (is_null($student['tzone_id'])){
+                    echo ' не определился';
+                } else{
+                    if ($student['tzone']>0){
+                        echo '+';
+                    }
+                    echo $student['tzone'];
+                }
+                ?>
+            </p>
         </aside>
     </section>
 

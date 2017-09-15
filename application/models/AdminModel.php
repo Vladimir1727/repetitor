@@ -343,6 +343,7 @@ class AdminModel extends CI_Model{
 			skype varchar(128) DEFAULT NULL,
 			avatar varchar(256) default NULL,
 			status tinyint default 0,
+			phone varchar (20) default NULL,
 			created_at timestamp,
 			visit_at timestamp,
 			balance int unsigned default 0

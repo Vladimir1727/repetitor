@@ -503,7 +503,8 @@ main.filter {
     max-width: 885px;
     float: left; }
     main.filter section.result aside {
-      background: #fff; }
+      background: #fff;
+      margin-bottom: 30px; }
       main.filter section.result aside:after {
         content: '';
         display: block;
@@ -517,7 +518,8 @@ main.filter {
           height: 185px;
           margin: 45px auto 25px auto;
           border: 1px #E6E6E6 solid;
-          border-radius: 50%; }
+          border-radius: 50%;
+          overflow: hidden; }
           main.filter section.result aside div.avatar div.img img {
             width: 185px; }
         main.filter section.result aside div.avatar a, main.filter section.result aside div.avatar a:visited {
@@ -764,7 +766,8 @@ main.rep-info {
           height: 185px;
           margin: 45px auto 25px auto;
           border: 1px #E6E6E6 solid;
-          border-radius: 50%; }
+          border-radius: 50%;
+          overflow: hidden; }
           main.rep-info section.result aside div.avatar div.img img {
             width: 185px; }
         main.rep-info section.result aside div.avatar div.rzone {
@@ -778,7 +781,8 @@ main.rep-info {
           margin: 0 auto;
           line-height: 1.5;
           position: relative;
-          padding: 4px 19px; }
+          padding: 4px 10px;
+          overflow: hidden; }
       main.rep-info section.result aside div.info {
         float: left;
         padding: 25px 10px 28px 0;
@@ -903,7 +907,8 @@ main.rep-info {
           margin: 0 auto;
           line-height: 1.5;
           position: relative;
-          padding: 4px 19px; }
+          padding: 4px 10px;
+          overflow: hidden; }
       main.rep-info section.result aside.sh table {
         width: 100%; }
         main.rep-info section.result aside.sh table thead tr th {
@@ -928,6 +933,12 @@ main.rep-info {
             border: 1px #fff solid; }
             main.rep-info section.result aside.sh table tbody tr td.free:after {
               content: 'Свободен'; }
+          main.rep-info section.result aside.sh table tbody tr td.busy {
+            background: #4F81BD;
+            text-align: center;
+            border: 1px #fff solid; }
+            main.rep-info section.result aside.sh table tbody tr td.busy:after {
+              content: 'Бронь'; }
           main.rep-info section.result aside.sh table tbody tr td:first-of-type {
             text-align: center;
             border: none;
@@ -3457,6 +3468,14 @@ main.rep_plan {
       border: 1px #999 solid;
       float: right;
       padding: 5px; }
+    main.rep_plan div.form select {
+      font-family: "Arial Narrow", Arial, sans-serif;
+      width: 170px;
+      height: 30px;
+      font-size: 16px;
+      border: 1px #999 solid;
+      float: right;
+      margin-right: 30px; }
   main.rep_plan div.green {
     height: 2px;
     background: #07CA9A; }
@@ -5607,12 +5626,12 @@ div#deldialog {
     display: none; }
   div.admin-header section div.menu ul li#slide ul li:nth-child(1) {
     display: inline-block; } }
-@media screen and (max-width: 400px) {
-  main.rep_timetable div.form button, main.rep_timetable div.form input, main.rep_plan div.form button, main.rep_plan div.form input {
+@media screen and (max-width: 600px) {
+  main.rep_timetable div.form button, main.rep_timetable div.form input, main.rep_timetable div.form select, main.rep_plan div.form button, main.rep_plan div.form input, main.rep_plan div.form select {
     float: none;
     display: block;
-    margin: 7px auto; }
-
+    margin: 7px auto; } }
+@media screen and (max-width: 400px) {
   main.student_pay section {
     padding: 0 10px; }
     main.student_pay section label:first-child h3 {

@@ -70,7 +70,7 @@ class Student extends CI_Controller {
 			if ($student->student['status'] == 0){
 				redirect('/student/profile');
 			} else{
-				echo ' student main page';
+				redirect('/student/profile');
 			}
 		}
 	}
