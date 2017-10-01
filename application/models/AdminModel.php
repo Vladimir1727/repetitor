@@ -352,7 +352,7 @@ class AdminModel extends CI_Model{
 		$table = 'CREATE TABLE exercises(
 				id int not null auto_increment primary key,
 				date_from timestamp DEFAULT NULL,
-				date_to timestamp DEFAULT NULL,
+				date_accept timestamp DEFAULT NULL,
 				created_at timestamp DEFAULT NULL,
 				deleted_at timestamp DEFAULT NULL,
 				pay_at timestamp DEFAULT NULL,
@@ -375,11 +375,10 @@ class AdminModel extends CI_Model{
 			$table = 'CREATE TABLE chats(
 					id int not null auto_increment primary key,
 					created_at timestamp,
-					deleted_at timestamp,
-					student_id int DEFAULT NULL,
-					foreign key (student_id) references students(id) on update cascade,
-					repetitor_id int DEFAULT NULL,
-					foreign key (repetitor_id) references repetitors(id) on update cascade,
+					from_role tinyint,
+					from_id int(10) default 0,
+					to_role tinyint,
+					to_id int(10) default 0,
 					message varchar(1024)
 				)default charset=utf8';
 			$this->db->query($table);
@@ -397,6 +396,7 @@ class AdminModel extends CI_Model{
 					cost int,
 					created_at timestamp,
 					student_id int,
+					type varchar(256) default NULL,
 					foreign key (student_id) references students(id) on update cascade
 				)default charset=utf8';
 			$this->db->query($table);
@@ -594,5 +594,35 @@ class AdminModel extends CI_Model{
 		$this->db->where('id', $id);
 		$this->db->update('students', array('status'=>$status));
 		return 0;
+	}
+
+	public function getUsers()
+	{
+		$users = array();
+		$sel = 'select id, first_name, father_name, last_name from repetitors';
+		$q = $this->db->query($sel);
+		$row = $q->result_array();
+		foreach ($row as $r) {
+			$data[] = array(
+				'id' => $r['id'],
+				'first_name' => (is_null($r['first_name'])) ? '' : $r['first_name'],
+				'last_name' => (is_null($r['last_name'])) ? '' : $r['last_name'],
+				'father_name' => (is_null($r['father_name'])) ? '' : $r['father_name'],
+				'role' =>1,
+			);
+		}
+		$sel = 'select id, first_name, father_name, last_name from students';
+		$q = $this->db->query($sel);
+		$row = $q->result_array();
+		foreach ($row as $r) {
+			$data[] = array(
+				'id' => $r['id'],
+				'first_name' => (is_null($r['first_name'])) ? '' : $r['first_name'],
+				'last_name' => (is_null($r['last_name'])) ? '' : $r['last_name'],
+				'father_name' => (is_null($r['father_name'])) ? '' : $r['father_name'],
+				'role' =>2,
+			);
+		}
+		return $data;
 	}
 }

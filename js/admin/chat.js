@@ -1,25 +1,42 @@
 (function($){$(function(){
-console.log('repetitor chat 5');
-var repetitor_id = $('#repetitor_id').val();
-var repetitor_avatar = $('#repetitor_avatar').val();
-var repetitor_name = $('#repetitor_name').val();
+console.log('admin chat 2');
 var to_role = 0;
 var to_id = 0;
 var start_id = $('#start_id').val();
 var start_role = $('#start_role').val();
+var baseUrl = '../';
+var users = [];
 if (start_role>0 && start_id>-1){
     to_role = start_role;
     to_id = start_id;
 }
 
+$.ajax({
+    url: baseUrl+'admin/getUsers',
+    type:'post',
+    success: function(data){
+        users = JSON.parse(data);
+        console.log(users);
+    },
+});
+
 function getChat(){
     $.ajax({
-        url: baseUrl+'repetitor/getChat',
+        url: baseUrl+'admin/getChat',
         type:'post',
         data: 'to_role=' + to_role + '&to_id=' + to_id,
         success: function(data){
             console.log(data);
             var chat = JSON.parse(data);
+            for (var i = 0; i < chat.length; i++) {
+                for (var j = 0; j < chat.length; j++) {
+                    if (toTime(chat[i].last_date) > toTime(chat[j].last_date)){
+                        var t = chat[i];
+                        chat[i] = chat[j];
+                        chat[j] = t;
+                    }
+                }
+            }
             list = '';
             var date = '';
             for (var i = chat.chat.length-1; i >= 0; i--) {
@@ -30,21 +47,27 @@ function getChat(){
                     date = t;
                 }
                 if (chat.chat[i].from_role == 1){
-                    var d = repetitor_avatar.search(/\./i);
-    				var av = repetitor_avatar.substr(0,d)+'_thumb'+repetitor_avatar.substr(d);
-                    list += '<div class="list"><div class="avatar"><img src="../../images/';
+                    var av = '';
+                    if (chat.info.avatar == null){
+                        av = 'img/avatar2.png';
+                    } else{
+                        var d = chat.info.avatar.search(/\./i);
+                        av += 'images/'+chat.info.avatar.substr(0,d)+'_thumb'+chat.info.avatar.substr(d);
+                    }
+                    list += '<div class="list"><div class="avatar"><img src="../../';
                     list += av;
                     list += '" alt="avatar"></div><div class="name"><h3><span class="activity';
-                    list +=  ' on';
+                    if (chat.info.online){
+                        list += ' on';
+                    }
                     list += '"></span> ';
-                    list += repetitor_name
+                    list += chat.info.first_name;
                     list += '</h3><h4>ID ';
-                    list += repetitor_id;
+                    list += chat.info.id;
                     list += '</h4></div><div class="mess">';
                     list += chat.chat[i].message;
                     list += '</div></div>';
                 } else{
-                    //student message
                     if (chat.chat[i].from_role == 2){
                         //student message
                         var av = '';
@@ -88,44 +111,19 @@ function getChat(){
     });
 }
 
-function toTime(s){
-    var d = new Date(s.substr(0,4), parseInt(s.substr(5,2))-1, s.substr(8,2), s.substr(11,2), s.substr(14,2), s.substr(17,2));
-	return d.getTime();
-}
-
 function getChatList() {
     $.ajax({
-        url: baseUrl+'repetitor/getChatList',
+        url: baseUrl+'admin/getChatList',
         type:'post',
         success: function(data){
+            console.log('chat_list=',data);
             var Chats = JSON.parse(data);
             var list = '';
             var main_list ='';
             var news = 0;
-            var temp = [];
             for (var i = 0; i < Chats.length; i++) {
-                for (var j = 0; j < Chats.length; j++) {
-                    if (toTime(Chats[i].last_date) > toTime(Chats[j].last_date)){
-                        var t = Chats[i];
-                        Chats[i] = Chats[j];
-                        Chats[j] = t;
-                    }
-                }
-            }
-            for (var i = 0; i < Chats.length; i++) {
-                if (Chats[i].from_role == 3){
-                    temp.push(Chats[i]);
-                }
-            }
-            for (var i = 0; i < Chats.length; i++) {
-                if (Chats[i].from_role < 3){
-                    temp.push(Chats[i]);
-                }
-            }
-            Chats = temp;
-            for (var i = 0; i < Chats.length; i++) {
-                list ='';
                 news += parseInt(Chats[i].new);
+                list ='';
                 if (Chats[i].from_role == to_role && Chats[i].from_id == to_id){
                     list += '<aside class="active">';
                 } else{
@@ -135,12 +133,8 @@ function getChatList() {
                 if (Chats[i].avatar == null){
                     list += 'img/avatar2.png';
                 }else{
-                    if (Chats[i].from_role == 3){
-                        list += Chats[i].avatar;
-                    } else{
-                        var d = Chats[i].avatar.search(/\./i);
-                        list += Chats[i].avatar.substr(0,d)+'_thumb'+Chats[i].avatar.substr(d);
-                    }
+                    var d = Chats[i].avatar.search(/\./i);
+                    list += Chats[i].avatar.substr(0,d)+'_thumb'+Chats[i].avatar.substr(d);
                 }
                 list +=  '" alt="avatar"></div><div class="name"><h3>';
                 if (Chats[i].online){
@@ -168,11 +162,9 @@ function getChatList() {
                 }
             }
             $('#users').html(main_list);
-            $('#users').html(main_list);
             $('li.mail span').each(function(){
                 $(this).remove();
             });
-            console.log('news=',news);
             if (news>0){
                 $('li.mail').each(function(){
                     var span = '<span>'+news+'</span>';
@@ -193,7 +185,6 @@ function userClick(){
             $(this).addClass('active');
             to_id = $(this).find('input[name="id"]').val();
             to_role = $(this).find('input[name="role"]').val();
-            $('#plan').prop('href','/index.php/repetitor/plan?id='+to_id);
             getChat();
         });
     });
@@ -202,11 +193,10 @@ function userClick(){
 
 function getOneUser() {
     $.ajax({
-        url: baseUrl+'repetitor/getOneChatUser',
+        url: baseUrl+'admin/getOneChatUser',
         type:'post',
         data: 'role='+start_role+'&id='+start_id,
         success: function(data){
-            console.log(data);
             var Chats = JSON.parse(data);
             var list = '';
             list = '';
@@ -268,7 +258,7 @@ if (message.length > 0 && message.length < 1000){
         'to_id' : to_id,
     };
     $.ajax({
-        url: baseUrl+'repetitor/sendChat',
+        url: baseUrl+'admin/sendChat',
         type:'post',
         data: mess,
         success: function(data){
@@ -292,10 +282,39 @@ setInterval(function(){
     }
 },500);
 
-$('#plan').click(function(){
-    if (to_role!=2){
-        return false;
+$('#find_but').click(function(){
+    var f = $('#search').val().trim();
+    var find = false;
+    var div = '<div id="students">';
+    for (var i = 0; i < users.length; i++) {
+        console.log(users[i]);
+        if (users[i].id.indexOf(f)>-1 && f.length>0){
+            find = true;
+        }
+        if (users[i].first_name!=null && f.length>0){
+            if (users[i].first_name.indexOf(f)>-1){
+                find = true;
+            }
+        }
+        if (find){
+            div += '<p>'+users[i].first_name+' ID <span>'+users[i].id+'</span><span class="hidden">'+i+'</span></p>';
+        }
     }
+    div += '</div>';
+    $('#students').remove();
+    if (find){
+        $('#search').after(div);
+        $('#students p').each(function(){
+            $(this).click(function(){
+                var id = $(this).find('span.hidden').text();
+                console.log(users[id]);
+                document.location = '/index.php/admin/chat?id='+users[id].id+'&role='+users[id].role;
+            });
+        });
+    } else{
+         $('#search').next('div').remove();
+    }
+    return false;
 });
 
 })})(jQuery)

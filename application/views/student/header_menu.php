@@ -13,11 +13,17 @@
 					} else{
 						$d = strrpos($student['avatar'],'.');
                         $av = substr($student['avatar'], 0 , $d).'_thumb'.substr($student['avatar'], $d);
-                        echo '<img src="../../images/'.$av.'" alt="avarat">';
+                        echo '<img src="'.base_url().'images/'.$av.'" alt="avarat">';
 					}
 				?>
 			</div>
-			<div class="switch on" id="student-online"></div>
+			<?php
+			if ($student['online']){
+				echo '<div class="switch on" id="student-online"></div>';
+			} else{
+				echo '<div class="switch off" id="student-online"></div>';
+			}
+			 ?>
 			<h3>
 				<?php
 				if ($student['first_name'] != ''){
@@ -38,8 +44,8 @@
 			</h4>
 		</div>
 		<div class="balance">
-			<p>Баланс <span>0</span> $</p>
-			<a href="#" id="add_balance">Пополнить</a>
+			<p>Баланс <span><?php echo $student['balance'];?></span> $</p>
+			<a href="<?php echo base_url(); ?>index.php/student/pay" id="add_balance">Пополнить</a>
 		</div>
 		<div class="menu">
 			<ul>
@@ -47,7 +53,13 @@
 				<li><a href="<?php echo base_url(); ?>index.php/student/lessons">Уроки</a></li>
 				<li><a href="<?php echo base_url(); ?>index.php/main/filter?lang=all">Найти репетитора</a></li>
 				<li><a href="<?php echo base_url(); ?>index.php/student/freerequests">Свободные заявки</a></li>
-				<li class="mail"><a href="<?php echo base_url(); ?>index.php/student/chat">почта</a></li>
+				<li class="mail"><a href="<?php echo base_url(); ?>index.php/student/chat">почта</a>
+					<?php if ($student['new'] > 0) {
+						echo '<span>';
+						echo $student['new'];
+						echo '</span>';
+					} ?>
+				</li>
 				<li id="slide">
 					<a href="#">
 						<span class="s"></span>
@@ -59,13 +71,19 @@
 						<li><a href="#">Уроки</a></li>
 						<li><a href="<?php echo base_url(); ?>index.php/main/filter?lang=all">Найти репетитора</a></li>
 						<li><a href="<?php echo base_url(); ?>index.php/student/freerequests">Свободные заявки</a></li>
-						<li class="mail"><a href="<?php echo base_url(); ?>index.php/student/chat">почта</a></li>
+						<li class="mail"><a href="<?php echo base_url(); ?>index.php/student/chat">почта</a>
+							<?php if ($student['new'] > 0) {
+								echo '<span>';
+								echo $student['new'];
+								echo '</span>';
+							} ?>
+						</li>
 						<li><a href="<?php echo base_url(); ?>index.php/main/filter?lang=all&free=1">Репетиторы сейчас онлайн</a></li>
 						<li><a href="<?php echo base_url(); ?>index.php/student/favorites">Избранные Репетиторы</a></li>
 						<li><a href="<?php echo base_url(); ?>index.php/student/history">История уроков</a></li>
 						<li><a href="<?php echo base_url(); ?>index.php/student/balance">Баланс кошелька</a></li>
 						<li><a href="https://reallanguage.club/instrukciya-dlya-uchenika-po-rabote-s-platformoj-repetitory-real-language-club/">Инструкция для ученика</a></li>
-						<li><a href="<?php echo base_url(); ?>index.php/student/chat">Связаться с администратором</a></li>
+						<li><a href="<?php echo base_url(); ?>index.php/student/chat?id=0">Связаться с администратором</a></li>
 						<li><a href="<?php echo base_url(); ?>index.php/student/profile">Настройки Профиля</a></li>
 						<li><a href="<?php echo base_url(); ?>index.php/student/logout">Выйти</a></li>
 					</ul>

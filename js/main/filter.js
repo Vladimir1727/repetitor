@@ -53,12 +53,19 @@ function setFilter(){
 				list += '<aside>';
 				list += '<div class="avatar">';
 				list += '<div class="img">';
-				var d = repetitor[i].avatar.search(/\./i);
-				var av = repetitor[i].avatar.substr(0,d)+'_thumb'+repetitor[i].avatar.substr(d);
-				list += '<img src="../../images/'+av+'" alt="avatar">';
+				list += '<img src="../../';
+
+				if (repetitor[i].avatar == null){
+					list += 'img/avatar3.png';
+				} else{
+					var d = repetitor[i].avatar.search(/\./i);
+					var av = repetitor[i].avatar.substr(0,d)+'_thumb'+repetitor[i].avatar.substr(d);
+					list += 'images/'+av;
+				}
+				list += '" alt="avatar">';
 				list += '</div>';
 				if (repetitor[i].link){
-					list += '<a href="'+repetitor[i].link+'"><span></span> Видео</a>';
+					list += '<a href="rinfo/'+repetitor[i].id+'#video"><span></span> Видео</a>';
 				}
 				list += '</div>';
 				list += '<div class="info">';
@@ -116,7 +123,12 @@ function setFilter(){
 				list += '<span>';
 				list += repetitor[i].about;
 				list += '</span></p>';
-				list += '<a href="#" class="favorites"><span></span> В избранное</a>';
+				if ($('#student_id').val()==0){
+					list += '<a href="remember?link=student/addrepetitor/'+repetitor[i].id+'" class="favorites"><span></span> В избранное</a>';
+				} else{
+					list += '<a href="../student/addrepetitor/'+repetitor[i].id+'" class="favorites"><span></span> В избранное</a>';
+				}
+
 				list += '<div class="price">';
 				list += '<span>';
 				if (repetitor[i].cost.length == 1){
@@ -134,9 +146,14 @@ function setFilter(){
 				}
 				list += '</span>$ <small>за час</small>';
 				list += '</div>';
-				list += '<a href="rinfo/'+repetitor[i].id+'" class="lesson">Записаться на урок</a>';
-				list += '<a href="#" class="message">Написать сообщение</a>';
-				list += '<a href="rinfo/'+repetitor[i].id+'" class="sh">Расписание</a>';
+				if ($('#student_id').val()==0){
+					list += '<a href="remember?link=student/step1/'+repetitor[i].id+'" class="lesson">Записаться на урок</a>';
+					list += '<a href="remember?link=student/chat?id='+repetitor[i].id+'" class="message">Написать сообщение</a>';
+				} else{
+					list += '<a href="../student/step1/'+repetitor[i].id+'" class="lesson">Записаться на урок</a>';
+					list +=  '<a href="../student/chat?id='+repetitor[i].id+'" class="message">Написать сообщение</a>';
+				}
+				list += '<a href="rinfo/'+repetitor[i].id+'#table" class="sh">Расписание</a>';
 				list += '</div>';
 				list += '</aside>';
 			}
@@ -145,7 +162,6 @@ function setFilter(){
 				list += '<li><a href="#" class="filter_pagg" title="'+pagg[0]+'">'+pagg[i]+'</a></li>';
 			}
 			list += '<li><a href="#" class="filter_pagg" title="'+pagg[pagg.length-1]+'">></a></li></ul>';
-
 			if (data.repetitors.length == 0){
 				$('#result').html('<h2 style="text-align:center">Упс..Попробуйте ввести другие параметры в поиск.</h2>');
 			}else{
@@ -184,5 +200,9 @@ $('#show_filter').click(function(){
 	setFilter();
 
 });
+
+if ($('#filter').val()==1){
+	setFilter();
+}
 
 })})(jQuery)

@@ -1,4 +1,4 @@
-
+<script src="<?php echo base_url(); ?>js/main/main.js"></script>
 <div class="main-header">
 	<div>
 		<a href="<?php echo base_url(); ?>index.php/main/filter?lang=all" class="pull-left but">Репетиторы</a>
@@ -6,7 +6,6 @@
 		<a href="#" class="pull-right but" data-toggle="modal" data-target="#modal_login">Вход в личный кабинет</a>
 	</div>
 </div>
-
 <nav class="main-menu">
   <div>
     <div class="but">

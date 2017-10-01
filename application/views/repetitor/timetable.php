@@ -64,4 +64,8 @@
 </main>
 
 <script src="<?php echo base_url(); ?>js/repetitor/timetable.js"></script>
+<script>
+    var baseUrl = '../';
+</script>
+<script src="<?php echo base_url(); ?>js/repetitor/repetitor.js"></script>
 <?php $this->load->view('main/footer'); ?>

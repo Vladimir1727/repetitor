@@ -7,18 +7,26 @@
 </head>
 <body>
 <?php $this->load->view('main/header_menu'); ?>
-<input type="hidden" value="<?php echo $repetitor['id']; ?>" id="repetitor_id">
-<input type="hidden" value="<?php echo ($student) ? $student['id'] : 0; ?>" id="student_id">
-<input type="hidden" value="<?php echo ($student) ? $student['zone_time'] : 0; ?>" id="student_zone">
+<form class="hidden" id="step_form" action="<?php echo base_url(); ?>index.php/student/step2" method="post">
+	<input type="hidden" value="<?php echo $repetitor['id']; ?>" id="repetitor_id" name="repetitor_id">
+	<input type="hidden" value="<?php echo ($student) ? $student['id'] : 0; ?>" id="student_id">
+	<input type="hidden" value="<?php echo ($student) ? $student['zone_time'] : 0; ?>" id="student_zone">
+	<input type="hidden" value="<?php echo ($student) ? $student['first_name'] : ''; ?>" id="student">
+</form>
 <main class="rep-info">
 	<section class="result">
 		<aside>
 			<div class="avatar">
 				<div class="img">
 					<?php
-					$d = strrpos($repetitor['avatar'],'.');
-					$av = substr($repetitor['avatar'], 0 , $d).'_thumb'.substr($repetitor['avatar'], $d);
-					echo '<img src="'.base_url().'images/'.$av.'" alt="avatar">';
+					if (!is_null($repetitor['avatar']) && $repetitor['avatar']!=''){
+						$d = strrpos($repetitor['avatar'],'.');
+						$av = substr($repetitor['avatar'], 0 , $d).'_thumb'.substr($repetitor['avatar'], $d);
+						echo '<img src="'.base_url().'images/'.$av.'" alt="avatar">';
+					} else{
+						echo '<img src="'.base_url().'img/avatar3.png" alt="avatar">';
+					}
+
 					?>
 				</div>
 				<div class="rzone">
@@ -96,8 +104,13 @@
 					<?php echo $repetitor['about']; ?>
 					</span>
 				</p>
-				<a href="#" class="favorites"><span></span> В избранное</a>
-
+				<?php
+				if ($student){
+					echo '<a href="'.base_url().'index.php/student/addrepetitor/'.$repetitor['id'].'" class="favorites"><span></span> В избранное</a>';
+				} else{
+					echo '<a href="'.base_url().'index.php/main/remember?link=student/addrepetitor/'.$repetitor['id'].'" class="favorites"><span></span> В избранное</a>';
+				}
+				 ?>
 				<div class="price">
 					<span>
 					<?php
@@ -115,8 +128,15 @@
 					 ?>
 					</span>$ <small>за час</small>
 				</div>
-				<a href="#" class="lesson">Записаться на урок</a>
-				<a href="#" class="message">Написать сообщение</a>
+				<?php
+				if ($student){
+					echo '<a href="'.base_url().'index.php/student/step1/'.$repetitor['id'].'" class="lesson">Записаться на урок</a>';
+					echo '<a href="'.base_url().'index.php/student/chat?id='.$repetitor['id'].'" class="message">Написать сообщение</a>';
+				} else{
+					echo '<a href="'.base_url().'index.php/main/remember?link=student/step1/'.$repetitor['id'].'" class="lesson">Записаться на урок</a>';
+					echo '<a href="'.base_url().'index.php/main/remember?link=student/chat?id='.$repetitor['id'].'" class="message">Написать сообщение</a>';
+				}
+				 ?>
 			</div>
 		</aside>
 		<aside class="sh">
@@ -178,10 +198,14 @@
 				</tbody>
 			</table>
 		</aside>
-		<aside class="video">
-			<iframe	src="<?php echo $repetitor['link'];?>">
-			</iframe>
-		</aside>
+		<?php
+		if(!is_null($repetitor['link']) && $repetitor['link']!=''){
+			echo '<aside class="video" id="video"><iframe	src="';
+			echo $repetitor['link'];
+			echo '"></iframe></aside>';
+		}
+		 ?>
+
 		<aside class="exp">
 			<h2>Опыт работы</h2>
 			<p><strong>Опыт работы:</strong> <span>
@@ -280,8 +304,11 @@
 		</aside>
 		<?php
 		if ($student){
-			echo '<a href="#" class="lesson">Записаться на урок</a>';
+			echo '<a href="'.base_url().'index.php/student/step1/'.$repetitor['id'].'" class="lesson" id="next_step">Записаться на урок</a>';
+		} else{
+			echo '<a href="'.base_url().'index.php/main/main/remember?link=student/step1/'.$repetitor['id'].'" class="lesson">Записаться на урок</a>';
 		}
+
 		?>
 	</section>
 	<section class="info">

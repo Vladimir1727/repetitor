@@ -7,6 +7,8 @@
 </head>
 <body>
 <?php $this->load->view('main/header_menu'); ?>
+<input type="hidden" value="<?php echo ($filter) ? 1:0; ?>" id="filter">
+<input type="hidden" value="<?php echo ($student) ? $student['id'] : 0; ?>" id="student_id">
 <section class="wellcome">
 	<h1>Добро пожаловать на платформу «Репетиторы» Real Language Club!</h1>
 	<ul>
@@ -26,7 +28,51 @@
 				<option value="0">Выберите</option>
 				<?php
 					foreach ($subjects as $subject) {
-						echo '<option value="'.$subject['id'].'">'.$subject['subject'].'</option>';
+						if ($filter && $filter['lang']){
+							$find = false;
+							switch ($filter['lang']) {
+								case 'eng':
+									if ($subject['subject']=="Английский язык"){
+										$find = true;
+									}
+									break;
+								case 'nem':
+									if ($subject['subject']=="Немецкий язык"){
+										$find = true;
+									}
+									break;
+								case 'rus':
+									if ($subject['subject']=="Русский язык"){
+										$find = true;
+									}
+									break;
+								case 'fra':
+									if ($subject['subject']=="Французский язык"){
+										$find = true;
+									}
+									break;
+								case 'ita':
+									if ($subject['subject']=="Итальянский язык"){
+										$find = true;
+									}
+									break;
+								case 'isp':
+									if ($subject['subject']=="Испанский язык"){
+										$find = true;
+									}
+									break;
+								default:
+									echo '<option value="'.$subject['id'].'">'.$subject['subject'].'</option>';
+									break;
+							}
+							if ($find){
+								echo '<option value="'.$subject['id'].'" selected="selected">'.$subject['subject'].'</option>';
+							} else{
+								echo '<option value="'.$subject['id'].'">'.$subject['subject'].'</option>';
+							}
+						} else{
+							echo '<option value="'.$subject['id'].'">'.$subject['subject'].'</option>';
+						}
 					}
 				?>
 			</select>
@@ -100,7 +146,15 @@
 		<div class="col-lg-2 col-md-6 col-sx-12">
 			<label><br><br>
 				Сейчас онлайн
-				<input type="checkbox" id="online">
+				<?php if ($filter){
+					if ($filter['online']==1){
+						echo '<input type="checkbox" id="online" checked="checked">';
+					} else{
+						echo '<input type="checkbox" id="online">';
+					}
+				} else{
+					echo '<input type="checkbox" id="online">';
+				}?>
 				<span></span>
 			</label>
 		</div>
@@ -135,16 +189,22 @@
 <main class="filter">
 	<section class="result" id="result">
 		<?php
+		if (count($repetitors) == 0){
+			echo '<h2>Активые репетиторы отсутствуют</h2>';
+		}
 		foreach ($repetitors as $repetitor) {
 			echo '<aside>';
 			echo '<div class="avatar">';
 			echo '<div class="img">';
+			if (is_null($repetitor['avatar'])){
+				echo '<img src="'.base_url().'img/avatar3.png" alt="empty avatar">';
+			}
 			$d = strrpos($repetitor['avatar'],'.');
 			$av = substr($repetitor['avatar'], 0 , $d).'_thumb'.substr($repetitor['avatar'], $d);
 			echo '<img src="'.base_url().'images/'.$av.'" alt="avatar">';
 			echo '</div>';
-			if (!is_null($repetitor['link'])){
-				echo '<a href="'.$repetitor['link'].'"><span></span> Видео</a>';
+			if (!is_null($repetitor['link']) && $repetitor['link']!=''){
+				echo '<a href="'.base_url().'index.php/main/rinfo/'.$repetitor['id'].'#video"><span></span> Видео</a>';
 			}
 			echo '</div>';
 			echo '<div class="info">';
@@ -154,6 +214,7 @@
 			} else{
 				echo '<span>';
 			}
+
 			echo '</span><a href="'.base_url().'index.php/main/rinfo/'.$repetitor['id'].'">'.$repetitor['first_name'].'</a></h2>';
 			echo '<p><strong>Преподаёт: </strong><span>';
 			$first = true;
@@ -202,7 +263,11 @@
 			echo '<span>';
 			echo $repetitor['about'];
 			echo '</span></p>';
-			echo '<a href="#" class="favorites"><span></span> В избранное</a>';
+			if ($student){
+				echo '<a href="'.base_url().'index.php/student/addrepetitor/'.$repetitor['id'].'" class="favorites"><span></span> В избранное</a>';
+			} else{
+				echo '<a href="'.base_url().'index.php/main/remember?link=student/addrepetitor/'.$repetitor['id'].'" class="favorites"><span></span> В избранное</a>';
+			}
 			echo '<div class="price">';
 			echo '<span>';
 			if (count($repetitor['cost'])==1){
@@ -218,9 +283,14 @@
 			}
 			echo '</span>$ <small>за час</small>';
 			echo '</div>';
-			echo '<a href="'.base_url().'index.php/main/rinfo/'.$repetitor['id'].'" class="lesson">Записаться на урок</a>';
-			echo '<a href="#" class="message">Написать сообщение</a>';
-			echo '<a href="'.base_url().'index.php/main/rinfo/'.$repetitor['id'].'" class="sh">Расписание</a>';
+			if ($student){
+				echo '<a href="'.base_url().'index.php/student/step1/'.$repetitor['id'].'" class="lesson">Записаться на урок</a>';
+				echo '<a href="'.base_url().'index.php/student/chat?id='.$repetitor['id'].'" class="message">Написать сообщение</a>';
+			} else{
+				echo '<a href="'.base_url().'index.php/main/remember?link=student/step1/'.$repetitor['id'].'" class="lesson">Записаться на урок</a>';
+				echo '<a href="'.base_url().'index.php/main/remember?link=student/chat?id='.$repetitor['id'].'" class="message">Написать сообщение</a>';
+			}
+			echo '<a href="'.base_url().'index.php/main/rinfo/'.$repetitor['id'].'#table" class="sh">Расписание</a>';
 			echo '</div>';
 			echo '</aside>';
 		}

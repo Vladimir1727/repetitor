@@ -3,17 +3,6 @@ var baseUrl = '../';
 console.log('student profile 1');
 
 
-$('#student-online').click(function(){
-    var s = $('#student-online');
-    if (s.hasClass('on')){
-        s.removeClass('on');
-        s.addClass('off');
-    } else {
-        s.removeClass('off');
-        s.addClass('on');
-    }
-});
-
 mask('phone');
 
 function sUpdate(data){
@@ -85,6 +74,7 @@ $('#save_profile').click(function(){
             'skype' :  skype,
             'email' :  email,
             'password' :  password,
+            'status' : 1,
         });
     }
     return false;

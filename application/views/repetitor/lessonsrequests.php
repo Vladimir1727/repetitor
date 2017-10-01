@@ -46,76 +46,53 @@
         </div>
     </section>
     <section class="table">
-        <aside>
-            <div>
-                <p>22.09.2017</p>
-                <p>22:35</p>
-            </div>
-            <div>
-                <p>Мария</p>
-                <p>ID11111111</p>
-            </div>
-            <div>
-                <p>Английский язык</p>
-            </div>
-            <div>
-                <p>Сдача экзамена B2</p>
-            </div>
-            <div>
-                <p>Повысить уровень понимания устной речи</p>
-            </div>
-            <div>
-                <p>23.09.2017</p>
-                <p>18:30 – 19:30</p>
-            </div>
-            <div>
-                <p>1/50 мин.</p>
-            </div>
-            <div>
-                <p>10 $</p>
-            </div>
-            <div>
-                <button class="ok">Принять</button>
-                <button class="mess">Сообщение</button>
-                <button class="del">Отклонить</button>
-            </div>
-        </aside>
-        <aside>
-            <div>
-                <p>22.09.2017</p>
-                <p>22:35</p>
-            </div>
-            <div>
-                <p>Мария</p>
-                <p>ID11111111</p>
-            </div>
-            <div>
-                <p>Английский язык</p>
-            </div>
-            <div>
-                <p>Сдача экзамена B2</p>
-            </div>
-            <div>
-                <p>Повысить уровень понимания устной речи</p>
-            </div>
-            <div>
-                <p>23.09.2017</p>
-                <p>18:30 – 19:30</p>
-            </div>
-            <div>
-                <p>1/50 мин.</p>
-            </div>
-            <div>
-                <p>10 $</p>
-            </div>
-            <div>
-                <button class="ok">Принять</button>
-                <button class="mess">Сообщение</button>
-                <button class="del">Отклонить</button>
-            </div>
-        </aside>
+        <?php
+        foreach ($lessons as $lesson){
+            echo '<aside>';
+            echo '<div>';
+            $c = $lesson['created_at'];
+            echo '<p>'.substr($c,8,2).'.'.substr($c,5,2).'.'.substr($c,0,4).'</p>';
+            echo '<p>'.substr($c,11,2).':'.substr($c,14,2).'</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>'.$lesson['student'].'</p>';
+            echo '<p>ID '.$lesson['student_id'].'</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>'.$lesson['subject'].'</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>'.$lesson['specialization'].'</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>'.$lesson['about'].'</p>';
+            echo '</div>';
+            echo '<div>';
+            $c = $lesson['date_from'];
+            $n = date('Y-m-d H:i:s', strtotime($lesson['date_from']) + 60*60);
+            echo '<p>'.substr($c,8,2).'.'.substr($c,5,2).'.'.substr($c,0,4).'</p>';
+            echo '<p>'.substr($c,11,2).':'.substr($c,14,2);
+            echo ' - '.substr($n,11,2).':'.substr($n,14,2).'</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>1 / 50 мин.</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>'.$lesson['cost'].' $</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<button class="ok">Принять</button>';
+            echo '<button class="mess">Сообщение</button>';
+            echo '<button class="del">Отклонить</button>';
+            echo '</div>';
+            echo '</aside>';
+        }
+         ?>
     </section>
 </main>
 
-<script src="<?php echo base_url(); ?>js/repetitor/chat.js"></script>
+<script>
+    var baseUrl = '../';
+</script>
+<script src="<?php echo base_url(); ?>js/repetitor/repetitor.js"></script>
 <?php $this->load->view('main/footer'); ?>

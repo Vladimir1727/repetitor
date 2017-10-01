@@ -6,6 +6,15 @@ var monday =0;
 var week = 0;
 var students = 0;
 
+function stringToDate(s){
+    if ( s == null) return false;
+	if (s.length > 19){
+		return new Date(s.substr(0,4), parseInt(s.substr(6,2))-1, s.substr(9,2), s.substr(12,2), s.substr(15,2), s.substr(18,2));
+	} else{
+		return new Date(s.substr(0,4), parseInt(s.substr(5,2))-1, s.substr(8,2), s.substr(11,2), s.substr(14,2), s.substr(17,2));
+	}
+}
+
 $('#next').click(function(){
     week++;
     weekHeader();
@@ -163,7 +172,7 @@ function tableClick(){
         $(this).addClass('plan');
         var busy = -1;
         for (var k = 0; k < table.length; k++) {
-            var tDate = new Date(table[k]['date_from']);
+            var tDate = stringToDate(table[k]['date_from']);
             if (addDate.getDay() == tDate.getDay() && addDate.getHours() == tDate.getHours()){
                 busy = k;
             }
@@ -212,7 +221,7 @@ function tableView(){
                 var busy = -1;
                 var r = false;
                 for (var k = 0; k < table.length; k++) {
-                    var tDate = new Date(table[k]['date_from']);
+                    var tDate = stringToDate(table[k]['date_from']);
                     if (now.getDate() == tDate.getDate() && now.getHours() == tDate.getHours() && now.getMonth() == tDate.getMonth()){
                         find = true;
                         if (table[k].student_id>0){

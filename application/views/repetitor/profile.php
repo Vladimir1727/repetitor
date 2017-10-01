@@ -291,7 +291,6 @@
                     <span></span> Не активен (не отображается на сайте)
                 </label>
                 <label>
-
                     <?php
                     if ($repetitor['status']==3){
                         echo '<input type="checkbox" id="delete_status" checked="checked">';
@@ -302,11 +301,33 @@
                     <span></span> Удалить профиль с сайта
                 </label>
                 <button type="submit" name="button" id="save_status">Сохранить</button>
+                <div class="link">
+                <?php
+                if ($repetitor['status'] == 2){
+                    $video = $_SERVER['SERVER_NAME'].base_url().'index.php/main/rinfo/'.$repetitor['id'];
+                    echo '<h4>Ваша страница <span><a href="http://'.$video.'">'.$video.'</a></span>';
+                }
+                 ?>
+                </div>
             </div>
         </aside>
     </section>
 </main>
-<a href="#" class="send-rep-profile btn" disabled="disabled" id="send_profile">Отправить запрос на активацию профиля</a>
+<a href="#" class="send-rep-profile btn" disabled="disabled" id="send_profile">
+<?php
+    if ($repetitor['status'] == 0){
+        echo 'Отправить запрос на активацию профиля';
+    } elseif ($repetitor['status'] == 1){
+        echo 'Профиль находится на рассмотрении';
+    } else{
+        echo 'Изменить профиль';
+    }
+ ?>
+</a>
 
 <script src="<?php echo base_url(); ?>js/repetitor/profile.js"></script>
+<script>
+    var baseUrl = '../';
+</script>
+<script src="<?php echo base_url(); ?>js/repetitor/repetitor.js"></script>
 <?php $this->load->view('main/footer'); ?>

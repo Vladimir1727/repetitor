@@ -53,7 +53,7 @@
 	</aside>
 </section>
 <section class="light">
-	Или <a href="#">ОСТАВЬТЕ ЗАЯВКУ</a> и репетиторы сами предложат вам свои услуги!
+	Или <a href="<?php echo ($student) ? base_url().'index.php/student/freerequests' : base_url().'index.php/main/slogin' ?>">ОСТАВЬТЕ ЗАЯВКУ</a> и репетиторы сами предложат вам свои услуги!
 </section>
 <section class="instruction-about">
 	<h2>КРАТКАЯ ИНСТРУКЦИЯ</h2>

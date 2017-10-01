@@ -5,261 +5,33 @@
 </head>
 <body>
 <?php $this->load->view('admin/header_menu'); ?>
-
+<input type="hidden" value="<?php echo $start_id; ?>" id="start_id">
+<input type="hidden" value="<?php echo $role; ?>" id="start_role">
 <main class="chat">
     <section class="users">
-        <aside>
-            <div class="avatar">
-                <img src="<?php echo base_url(); ?>img/avatar_admin.png" alt="avatar">
-            </div>
-            <div class="name">
-                <h3><span class="activity on"></span> Администратор</h3>
-            </div>
-            <div class="date">
-                30.05.2017
-            </div>
-            <div class="green">
-            </div>
-        </aside>
-        <aside class="active">
-            <div class="avatar">
-                <img src="<?php echo base_url(); ?>img/avatar.png" alt="avatar">
-            </div>
-            <div class="name">
-                <h3><span class="activity on"></span> Екатерина</h3>
-                <h4>ID 000001</h4>
-            </div>
-            <div class="date">
-                18.08.2017
-            </div>
-            <div class="green">
-            </div>
-        </aside>
-        <aside>
-            <div class="avatar">
-                <img src="<?php echo base_url(); ?>img/avatar4.png" alt="avatar">
-            </div>
-            <div class="name">
-                <h3><span class="activity"></span> Алина</h3>
-                <h4>ID 000123</h4>
-            </div>
-            <div class="date">
-                05.08.2017
-            </div>
-            <div class="green">
-            </div>
-        </aside>
-        <aside>
-            <div class="avatar">
-                <img src="<?php echo base_url(); ?>img/avatar.png" alt="avatar">
-            </div>
-            <div class="name">
-                <h3><span class="activity on"></span> Екатерина</h3>
-                <h4>ID 000001</h4>
-            </div>
-            <div class="date">
-                18.08.2017
-            </div>
-            <div class="green">
-            </div>
-        </aside>
-        <aside>
-            <div class="avatar">
-                <img src="<?php echo base_url(); ?>img/avatar4.png" alt="avatar">
-            </div>
-            <div class="name">
-                <h3><span class="activity"></span> Алина</h3>
-                <h4>ID 000123</h4>
-            </div>
-            <div class="date">
-                05.08.2017
-            </div>
-            <div class="green">
-            </div>
-        </aside>
-        <aside>
-            <div class="avatar">
-                <img src="<?php echo base_url(); ?>img/avatar.png" alt="avatar">
-            </div>
-            <div class="name">
-                <h3><span class="activity on"></span> Екатерина</h3>
-                <h4>ID 000001</h4>
-            </div>
-            <div class="date">
-                18.08.2017
-            </div>
-            <div class="green">
-            </div>
-        </aside>
-        <aside>
-            <div class="avatar">
-                <img src="<?php echo base_url(); ?>img/avatar4.png" alt="avatar">
-            </div>
-            <div class="name">
-                <h3><span class="activity"></span> Алина</h3>
-                <h4>ID 000123</h4>
-            </div>
-            <div class="date">
-                05.08.2017
-            </div>
-            <div class="green">
-            </div>
-        </aside>
-        <aside>
-            <div class="avatar">
-                <img src="<?php echo base_url(); ?>img/avatar.png" alt="avatar">
-            </div>
-            <div class="name">
-                <h3><span class="activity on"></span> Екатерина</h3>
-                <h4>ID 000001</h4>
-            </div>
-            <div class="date">
-                18.08.2017
-            </div>
-            <div class="green">
-            </div>
-        </aside>
-        <aside>
-            <div class="avatar">
-                <img src="<?php echo base_url(); ?>img/avatar4.png" alt="avatar">
-            </div>
-            <div class="name">
-                <h3><span class="activity"></span> Алина</h3>
-                <h4>ID 000123</h4>
-            </div>
-            <div class="date">
-                05.08.2017
-            </div>
-            <div class="green">
-            </div>
-        </aside>
-        <aside>
-            <div class="avatar">
-                <img src="<?php echo base_url(); ?>img/avatar.png" alt="avatar">
-            </div>
-            <div class="name">
-                <h3><span class="activity on"></span> Екатерина</h3>
-                <h4>ID 000001</h4>
-            </div>
-            <div class="date">
-                18.08.2017
-            </div>
-            <div class="green">
-            </div>
-        </aside>
-        <aside>
-            <div class="avatar">
-                <img src="<?php echo base_url(); ?>img/avatar4.png" alt="avatar">
-            </div>
-            <div class="name">
-                <h3><span class="activity"></span> Алина</h3>
-                <h4>ID 000123</h4>
-            </div>
-            <div class="date">
-                05.08.2017
-            </div>
-            <div class="green">
-            </div>
-        </aside>
+        <div  id="user">
+
+        </div>
+        <div  id="users">
+
+        </div>
     </section>
     <section class="mess">
         <aside class="plan">
-            <input type="text">
-            <a href="#">Найти</a>
+            <input type="text" id="search">
+            <a href="#" id="find_but">Найти</a>
         </aside>
-        <aside class="chat">
-            <div class="date">
-                18.08.2017
-            </div>
-            <div class="list">
-                <div class="avatar">
-                    <img src="<?php echo base_url(); ?>img/avatar.png" alt="avatar">
-                </div>
-                <div class="name">
-                    <h3><span class="activity on"></span> Алина</h3>
-                    <h4>ID 000123</h4>
-                </div>
-                <div class="mess">Добрый день, повседневная практика показывает, что новая модель организационной деятельности влечет за собой процесс внедрения и модернизации системы обучения кадров, соответствует насущным потребностям. Не следует, однако забывать, что постоянный количественный рост и сфера нашей активности представляет собой интересный эксперимент проверки дальнейших направлений развития. Таким образом консультация с широким активом способствует подготовки и реализации новых предложений.
-                </div>
-            </div>
-            <div class="list">
-                <div class="avatar">
-                    <img src="<?php echo base_url(); ?>img/avatar4.png" alt="avatar">
-                </div>
-                <div class="name">
-                    <h3><span class="activity"></span> Екатерина</h3>
-                    <h4>ID 000001</h4>
-                </div>
-                <div class="mess">Добрый день, повседневная практика показывает, что новая модель организационной деятельности влечет за собой процесс внедрения и модернизации системы обучения кадров, соответствует насущным потребностям.
-                </div>
-            </div>
-            <div class="list">
-                <div class="avatar">
-                    <img src="<?php echo base_url(); ?>img/avatar.png" alt="avatar">
-                </div>
-                <div class="name">
-                    <h3><span class="activity on"></span> Алина</h3>
-                    <h4>ID 000123</h4>
-                </div>
-                <div class="mess">Добрый день, повседневная практика показывает, что новая модель организационной деятельности влечет за собой процесс внедрения и модернизации системы обучения кадров, соответствует насущным потребностям. Не следует, однако забывать, что постоянный количественный рост и сфера нашей активности представляет собой интересный эксперимент проверки дальнейших направлений развития. Таким образом консультация с широким активом способствует подготовки и реализации новых предложений.
-                </div>
-            </div>
-            <div class="list">
-                <div class="avatar">
-                    <img src="<?php echo base_url(); ?>img/avatar4.png" alt="avatar">
-                </div>
-                <div class="name">
-                    <h3><span class="activity"></span> Екатерина</h3>
-                    <h4>ID 000001</h4>
-                </div>
-                <div class="mess">Добрый день, повседневная практика показывает, что новая модель организационной деятельности влечет за собой процесс внедрения и модернизации системы обучения кадров, соответствует насущным потребностям.
-                </div>
-            </div>
-            <div class="date">
-                21.08.2017
-            </div>
-            <div class="list">
-                <div class="avatar">
-                    <img src="<?php echo base_url(); ?>img/avatar.png" alt="avatar">
-                </div>
-                <div class="name">
-                    <h3><span class="activity on"></span> Алина</h3>
-                    <h4>ID 000123</h4>
-                </div>
-                <div class="mess">Добрый день, повседневная практика показывает, что новая модель организационной деятельности влечет за собой процесс внедрения и модернизации системы обучения кадров, соответствует насущным потребностям. Не следует, однако забывать, что постоянный количественный рост и сфера нашей активности представляет собой интересный эксперимент проверки дальнейших направлений развития. Таким образом консультация с широким активом способствует подготовки и реализации новых предложений.
-                </div>
-            </div>
-            <div class="list">
-                <div class="avatar">
-                    <img src="<?php echo base_url(); ?>img/avatar4.png" alt="avatar">
-                </div>
-                <div class="name">
-                    <h3><span class="activity"></span> Екатерина</h3>
-                    <h4>ID 000001</h4>
-                </div>
-                <div class="mess">Добрый день, повседневная практика показывает, что новая модель организационной деятельности влечет за собой процесс внедрения и модернизации системы обучения кадров, соответствует насущным потребностям.
-                </div>
-            </div>
-            <div class="list">
-                <div class="avatar">
-                    <img src="<?php echo base_url(); ?>img/avatar.png" alt="avatar">
-                </div>
-                <div class="name">
-                    <h3><span class="activity on"></span> Алина</h3>
-                    <h4>ID 000123</h4>
-                </div>
-                <div class="mess">Добрый день, повседневная практика показывает, что новая модель организационной деятельности влечет за собой процесс внедрения и модернизации системы обучения кадров, соответствует насущным потребностям. Не следует, однако забывать, что постоянный количественный рост и сфера нашей активности представляет собой интересный эксперимент проверки дальнейших направлений развития. Таким образом консультация с широким активом способствует подготовки и реализации новых предложений.
-                </div>
-            </div>
+        <aside class="chat" id="chat">
+
         </aside>
         <aside class="send">
-            <a href="#">Отправить</a>
+            <a href="#" id="send_but">Отправить</a>
             <div>
-                <textarea></textarea>
+                <textarea id="message"></textarea>
             </div>
         </aside>
     </section>
 </main>
 
-<script src="<?php echo base_url(); ?>js/repetitor/chat.js"></script>
+<script src="<?php echo base_url(); ?>js/admin/chat.js"></script>
 <?php $this->load->view('main/footer'); ?>

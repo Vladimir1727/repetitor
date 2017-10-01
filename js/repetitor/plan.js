@@ -1,6 +1,6 @@
 (function($){$(function(){
 var baseUrl = '../';
-console.log('plan 7');
+console.log('plan 8');
 var table = 0;
 var monday =0;
 var week = 0;
@@ -30,7 +30,7 @@ $('#save').click(function(){
     $.ajax({
         url: baseUrl+'repetitor/saveTimeTable',
         type:'post',
-        data: 'table='+JSON.stringify(table),
+        data: 'table=' + JSON.stringify(table) + '&subject_id=' + $('#subject').val(),
         success: function(data){
             if (data == 0){
                 errdiag('Сохранение', 'Расписание сохранено');
@@ -112,8 +112,8 @@ function ObjDate(id){
     var addDate = getDateByid(id);
     var t={
         'year' : addDate.getFullYear()+'',
-        'month' : (parseInt(addDate.getMonth())>9) ? addDate.getMonth()+1 : '0'+(addDate.getMonth()+1),
-        'day' : (parseInt(addDate.getDate())>9) ? addDate.getDate()+'' : '0'+(addDate.getDate()+1),
+        'month' : (parseInt(addDate.getMonth()+1)>9) ? addDate.getMonth()+1 : '0'+(addDate.getMonth()+1),
+        'day' : (parseInt(addDate.getDate())>9) ? addDate.getDate()+'' : '0'+(addDate.getDate()),
         'hour' : (parseInt(addDate.getHours())>9) ? addDate.getHours()+'' : '0'+addDate.getHours(),
         'min' : (parseInt(addDate.getMinutes())>9) ? addDate.getMinutes()+'' : '0'+addDate.getMinutes(),
     };
@@ -127,13 +127,23 @@ function idDateString(id){
 
 function getFromTable(dateStr){
     if (dateStr == null) return false;
-    var t={
-        'year' : dateStr.substr(0,4),
-        'month' : dateStr.substr(5,2),
-        'day' : dateStr.substr(8,2),
-        'hour' : dateStr.substr(11,2),
-        'min' : dateStr.substr(14,2),
-    };
+	if (dateStr.length > 19){
+		var t={
+	        'year' : dateStr.substr(0,4),
+	        'month' : dateStr.substr(6,2),
+	        'day' : dateStr.substr(9,2),
+	        'hour' : dateStr.substr(12,2),
+	        'min' : dateStr.substr(15,2),
+	    };
+	} else{
+	    var t={
+	        'year' : dateStr.substr(0,4),
+	        'month' : dateStr.substr(5,2),
+	        'day' : dateStr.substr(8,2),
+	        'hour' : dateStr.substr(11,2),
+	        'min' : dateStr.substr(14,2),
+	    };
+	}
     return t;
 }
 
@@ -145,6 +155,15 @@ function equalDates(id, dateStr){
     } else{
         return false;
     }
+}
+
+function stringToDate(s){
+	if ( s == null) return false;
+	if (s.length > 19){
+		return new Date(s.substr(0,4), parseInt(s.substr(6,2))-1, s.substr(9,2), s.substr(12,2), s.substr(15,2), s.substr(18,2));
+	} else{
+		return new Date(s.substr(0,4), parseInt(s.substr(5,2))-1, s.substr(8,2), s.substr(11,2), s.substr(14,2), s.substr(17,2));
+	}
 }
 
 function objToStr(t){
@@ -260,7 +279,7 @@ function tableView(){
                 var busy = -1;
                 var r = false;
                 for (var k = 0; k < table.length; k++) {
-                    var tDate = new Date(table[k]['date_from']);
+                    var tDate = stringToDate(table[k]['date_from']);
                     if (now.getDate() == tDate.getDate() && now.getHours() == tDate.getHours() && now.getMonth() == tDate.getMonth()){
                         find = true;
                         if (table[k].student_id>0){

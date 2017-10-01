@@ -32,12 +32,35 @@ class Main extends CI_Controller {
 
 	public function about()
 	{
-		$this->load->view('main/about');
+		if ($this->session->has_userdata('student_id')){
+			$student = $this->MainModel->getStudent($this->session->student_id);
+		} else{
+			$student = false;
+		}
+		$data = array(
+			'student' => $student,
+		);
+		$this->load->view('main/about', $data);
 	}
 
 	public function filter()
 	{
 		$page = (is_null($this->input->get('page'))) ? 1 : $this->input->get ('page');
+		if ($this->session->has_userdata('student_id')){
+			$student = $this->MainModel->getStudent($this->session->student_id);
+		} else{
+			$student = false;
+		}
+		$lang = $this->input->get('lang');
+		$online = $this->input->get('free');
+		if(is_null($lang) && is_null($online)){
+			$filter = false;
+		} else{
+			$filter = array(
+				'lang'=> $lang,
+				'online'=> $online,
+			);
+		}
 		$data=array(
 			'subjects'=>$this->MainModel->getAll('subjects'),
 			'ages'=>$this->MainModel->getAll('ages'),
@@ -46,6 +69,8 @@ class Main extends CI_Controller {
 			'levels'=>$this->MainModel->getAll('levels'),
 			'repetitors'=>$this->MainModel->getRepetitors($page),
 			'pagg'=>$this->MainModel->repPagg($page),
+			'student' => $student,
+			'filter' => $filter,
 		);
 		$this->load->view('main/filter', $data);
 	}
@@ -82,14 +107,9 @@ class Main extends CI_Controller {
 	}
 
 	public function test(){
-		$this->load->library('unit_test');
-		echo 'run test <br>';
-		$test = 1 + 1;
-		$expected_result = 2;
-		$test_name = 'Adds one plus one';
-		$t = $this->unit->run($test, $expected_result, $test_name);
-		echo $t;
-		//$this->load->view('test');
+		$repetitor = 3;
+
+		var_dump($data);
 	}
 
 	public function upload()
@@ -212,7 +232,22 @@ class Main extends CI_Controller {
 	public function getTimeTable()
 	{
 		$repetitor_id = $this->input->post('repetitor_id');
-		$data = $this->RepetitorModel->getTimeTable($repetitor_id);
+		$data = $this->MainModel->getTimeTable($repetitor_id);
 		echo json_encode($data);
+	}
+
+	public function remember()
+	{
+		$this->load->helper('cookie');
+		$link = $this->input->get('link');
+		set_cookie('link',$link, 300);
+		redirect('/main/slogin');
+	}
+
+	public function recall()
+	{
+		$this->load->helper('cookie');
+		$link = get_cookie('link');
+		var_dump($link);
 	}
 }

@@ -5,6 +5,7 @@
 </head>
 <body>
 <?php $this->load->view('student/header_menu'); ?>
+<input type="hidden" name="timezone" value="<?php echo ($student['tzone']) ?>">
 
 <main class="rep_less_request">
     <section class="start_less">
@@ -12,8 +13,8 @@
             <h1>Запросы на уроки</h1>
         </div>
         <div>
-            <h3>18:20 (UTC+2)</h3>
-            <h4>23 сентября 2017,суббота</h4>
+            <h3><span id="local-time">18:20</span> (UTC <?php echo ($student['tzone']>0) ? '+'.$student['tzone'] : $student['tzone']; ?>)</h3>
+            <h4 id="local-date">23 сентября 2017,суббота</h4>
         </div>
     </section>
     <section class="head">
@@ -46,76 +47,64 @@
         </div>
     </section>
     <section class="table">
-        <aside>
-            <div>
-                <p>22.09.2017</p>
-                <p>22:35</p>
-            </div>
-            <div>
-                <p>Светлана</p>
-                <p>ID333333</p>
-            </div>
-            <div>
-                <p>Английский язык</p>
-            </div>
-            <div>
-                <p>Сдача экзамена B2</p>
-            </div>
-            <div>
-                <p>Повысить уровень понимания устной речи</p>
-            </div>
-            <div>
-                <p>23.09.2017</p>
-                <p>18:30 – 19:30</p>
-            </div>
-            <div>
-                <p>1/50 мин.</p>
-            </div>
-            <div>
-                <p>10 $</p>
-            </div>
-            <div>
-                <button class="ok">Оплатить</button>
-                <button class="mess">Сообщение</button>
-                <button class="del">Удалить</button>
-            </div>
-        </aside>
-        <aside>
-            <div>
-                <p>22.09.2017</p>
-                <p>22:35</p>
-            </div>
-            <div>
-                <p>Светлана</p>
-                <p>ID333333</p>
-            </div>
-            <div>
-                <p>Английский язык</p>
-            </div>
-            <div>
-                <p>Сдача экзамена B2</p>
-            </div>
-            <div>
-                <p>Повысить уровень понимания устной речи</p>
-            </div>
-            <div>
-                <p>23.09.2017</p>
-                <p>18:30 – 19:30</p>
-            </div>
-            <div>
-                <p>1/50 мин.</p>
-            </div>
-            <div>
-                <p>10 $</p>
-            </div>
-            <div>
-                <button class="ok">На рассмотрении</button>
-                <button class="mess">Сообщение</button>
-                <button class="del">удалить</button>
-            </div>
-        </aside>
+
+        <?php
+        foreach ($lessons as $lesson) {
+            echo '<aside>';
+            echo '<div><p>';
+            $c = $lesson['created_at'];
+            echo substr($c,8,2).'.'.substr($c,5,2).'.'.substr($c,0,4);
+            echo '</p><p>'.substr($c,11,2).':'.substr($c,14,2);
+            echo '</p></div>';
+            echo '<div><p>';
+            echo $lesson['repetitor'];
+            echo '<p></p>ID '.$lesson['repetitor_id'];
+            echo '</p></div>';
+            echo '<div><p>';
+            echo $lesson['subject'];
+            echo '</p></div>';
+            echo '<div><p>';
+            echo $lesson['specialization'];
+            echo '</p></div>';
+            echo '<div><p>';
+            echo $lesson['about'];
+            echo '</p></div>';
+            echo '<div>';
+            foreach ($lesson['dates'] as $d) {
+                echo '<p>'.substr($d,8,2).'.'.substr($d,5,2).'.'.substr($d,0,4).'</p>';
+                echo '<p>'.substr($d,11,2).':'.substr($d,14,2).'</p>';
+            }
+            echo '</div>';
+            echo '<div><p>';
+            echo $lesson['count'].'/'.($lesson['count']*50).' мин';
+            echo '</p></div>';
+            echo '<div><p>';
+            echo $lesson['sum'];
+            echo '$</p></div>';
+            echo '<div>';
+            echo '<form>';
+            if (is_null($lesson['pay_at'])){
+                echo '<input class="ok pay" name="pay" type="submit" value="Оплатить">';
+            }else{
+                //echo '<input class="ok wait" name="wait" type="submit" value="На рассмотрении">';
+                echo '<button class="ok wait">На рассмотрении</button>';
+            }
+            foreach ($lesson['ids'] as $ids) {
+                echo '<input name="ids[]" type="hidden" value="'.$ids.'">';
+            }
+            echo '<a class="mess" href="'.base_url().'index.php/student/chat?id='.$lesson['repetitor_id'].'">Сообщение</a>';
+            echo '<input class="del" name="del" type="submit" value="Удалить">';
+            echo '</form>';
+            echo '</div>';
+            echo '</aside>';
+        }
+         ?>
     </section>
 </main>
 
-<script src="<?php echo base_url(); ?>js/repetitor/chat.js"></script>
+<script>
+    var baseUrl = '../';
+</script>
+<script src="<?php echo base_url(); ?>js/student/lessonsrequests.js"></script>
+<script src="<?php echo base_url(); ?>js/student/student.js"></script>
 <?php $this->load->view('main/footer'); ?>

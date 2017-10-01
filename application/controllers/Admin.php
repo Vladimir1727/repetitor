@@ -144,7 +144,22 @@ class Admin extends CI_Controller {
 		if (!$this->session->has_userdata('admin')){
 			 redirect('/');
 		}
-		$data = array();
+		$start_id = $this->input->get('id');
+		if (is_null($start_id)){
+			$start_id = -1;
+		}
+		$role = $this->input->get('role');
+		if (is_null($role)){
+			if ($start_id==0){
+				$role = 3;
+			} else{
+				$role = 2;
+			}
+		}
+		$data = array(
+			'start_id'=> $start_id,
+			'role'=> $role,
+		);
 		$this->load->view('admin/chat', $data);
 	}
 
@@ -188,4 +203,70 @@ class Admin extends CI_Controller {
 			redirect('admin/students');
 		}
 	}
+
+	public function sendChat()
+	{
+		if (!$this->session->has_userdata('admin')){
+			 exit('Админ не вошёл');
+		} else{
+			$data = array(
+				'created_at' => date('Y-m-d H:i:s', time()),
+				'from_role' => 3,
+				'from_id' => 0,
+				'to_role' => $this->input->post('to_role'),
+				'to_id' => $this->input->post('to_id'),
+				'message' => $this->input->post('message'),
+			);
+			echo $this->MainModel->sendChat($data);
+		}
+	}
+
+	public function getChat()
+	{
+		if (!$this->session->has_userdata('admin')){
+			 exit('Админ не вошёл');
+		} else{
+			//$zone= $this->RepetitorModel->getRepZone($this->session->repetitor_id);
+			$zone = 0;
+			$data = array(
+				'from_role' => 3,
+				'from_id' => 0,
+				'to_role' => $this->input->post('to_role'),
+				'to_id' => $this->input->post('to_id'),
+				'read_at' => date('Y-m-d H:i:s', time()),
+			);
+			$chat = $this->MainModel->getChat($data);
+			for($i=0;$i<count($chat['chat']);$i++){
+				$chat['chat'][$i]['created_at'] = date('Y-m-d H:i:s', strtotime($chat['chat'][$i]['created_at']) + $zone);
+			}
+			echo json_encode($chat);
+		}
+	}
+
+	public function getChatList()
+	{
+		if (!$this->session->has_userdata('admin')){
+			 exit('Админ не вошёл');
+		} else{
+			$list = $this->MainModel->getChatList(3, 0);
+			echo json_encode($list);
+		}
+	}
+
+	public function getOneChatUser()
+	{
+		if (!$this->session->has_userdata('admin')){
+			 exit('Админ не вошёл');
+		} else{
+			$list = $this->MainModel->getOneChatUser(3, 0, $this->input->post('role'), $this->input->post('id'));
+			echo json_encode($list);
+		}
+	}
+
+	public function getUsers()
+	{
+		$users = $this->AdminModel->getUsers();
+		echo json_encode($users);
+	}
+
 }

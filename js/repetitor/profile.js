@@ -6,17 +6,6 @@ var proc = 0.3;
     $('#slide ul').slideToggle();
 });*/
 
-$('#rep-online').click(function(){
-    var s = $('#rep-online');
-    if (s.hasClass('on')){
-        s.removeClass('on');
-        s.addClass('off');
-    } else {
-        s.removeClass('off');
-        s.addClass('on');
-    }
-});
-
 function warp(block){
     $('section.warp aside').each(function(){
         $(this).hide();

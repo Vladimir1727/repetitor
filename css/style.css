@@ -64,7 +64,7 @@ nav.main-menu {
   nav.main-menu div.but {
     display: none; }
   nav.main-menu ul {
-    max-width: 1030px;
+    max-width: 1155px;
     margin: 0 auto; }
   nav.main-menu li {
     position: relative;
@@ -76,7 +76,7 @@ nav.main-menu {
       font-size: 18px;
       color: #fff;
       font-family: 'Arial Narrow', Arial;
-      padding-left: 28px;
+      padding-left: 25px;
       line-height: 50px; }
     nav.main-menu li > span.icon {
       position: absolute;
@@ -139,6 +139,11 @@ footer {
     text-decoration: none; }
   footer div.mess img {
     padding: 5px; }
+  footer div.mess > a > div[id="SkypeButton_Call_live:b79d2994b5024754_1"] {
+    display: inline-block !important; }
+    footer div.mess > a > div[id="SkypeButton_Call_live:b79d2994b5024754_1"] img {
+      margin: 0 !important;
+      vertical-align: -17px !important; }
   footer div.big {
     font-size: 18px; }
   footer div.small span {
@@ -502,6 +507,11 @@ main.filter {
   main.filter section.result {
     max-width: 885px;
     float: left; }
+    main.filter section.result > h2 {
+      font-family: "Arial Regular", Arial, sans-serif;
+      color: #222f3b;
+      width: 885px;
+      text-align: center; }
     main.filter section.result aside {
       background: #fff;
       margin-bottom: 30px; }
@@ -547,7 +557,7 @@ main.filter {
       main.filter section.result aside div.info {
         float: left;
         padding: 25px 10px 28px 0;
-        max-width: 670px;
+        width: 670px;
         position: relative; }
         main.filter section.result aside div.info h2 {
           font-size: 24px;
@@ -778,7 +788,7 @@ main.rep-info {
           height: 30px;
           border: 1px #666 solid;
           color: #666;
-          margin: 0 auto;
+          margin: 0 auto 20px auto;
           line-height: 1.5;
           position: relative;
           padding: 4px 10px;
@@ -787,6 +797,7 @@ main.rep-info {
         float: left;
         padding: 25px 10px 28px 0;
         max-width: 670px;
+        width: 100%;
         position: relative; }
         main.rep-info section.result aside div.info h2 {
           font-size: 24px;
@@ -937,8 +948,6 @@ main.rep-info {
             background: #4F81BD;
             text-align: center;
             border: 1px #fff solid; }
-            main.rep-info section.result aside.sh table tbody tr td.busy:after {
-              content: 'Бронь'; }
           main.rep-info section.result aside.sh table tbody tr td:first-of-type {
             text-align: center;
             border: none;
@@ -1624,7 +1633,8 @@ div.rep-header {
     div.rep-header section div.menu li.mail {
       background: url("../img/mail.png");
       background-position: center;
-      background-repeat: no-repeat; }
+      background-repeat: no-repeat;
+      position: relative; }
       div.rep-header section div.menu li.mail a {
         width: 54px;
         color: transparent; }
@@ -1633,6 +1643,21 @@ div.rep-header {
       div.rep-header section div.menu li.mail a:hover {
         color: transparent;
         background: url("../img/mail_green.png") center no-repeat; }
+      div.rep-header section div.menu li.mail span {
+        display: block;
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        border: 1px #ff5c39 solid;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        background: #fff;
+        font-family: "Arial Narrow", Arial, sans-serif;
+        color: #ff5c39;
+        font-size: 17px;
+        text-align: center;
+        line-height: 1; }
     div.rep-header section div.menu li#slide {
       margin-right: 0;
       position: relative; }
@@ -2219,6 +2244,14 @@ main.rep-profile {
         margin-top: 20px; }
         main.rep-profile section.warp aside#status button:hover {
           background: #ff7e5b; }
+      main.rep-profile section.warp aside#status div.link h4 {
+        font-family: "Arial Narrow", Arial, sans-serif;
+        color: #FF5C39;
+        font-size: 16px;
+        margin-top: 30px; }
+        main.rep-profile section.warp aside#status div.link h4 span {
+          color: #666;
+          float: right; }
 
 a.send-rep-profile {
   display: block;
@@ -2320,7 +2353,8 @@ div.student-header {
     div.student-header section div.menu li.mail {
       background: url("../img/mail.png");
       background-position: center;
-      background-repeat: no-repeat; }
+      background-repeat: no-repeat;
+      position: relative; }
       div.student-header section div.menu li.mail a {
         width: 54px;
         color: transparent; }
@@ -2329,6 +2363,21 @@ div.student-header {
       div.student-header section div.menu li.mail a:hover {
         color: transparent;
         background: url("../img/mail_green.png") center no-repeat; }
+      div.student-header section div.menu li.mail span {
+        display: block;
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        border: 1px #ff5c39 solid;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        background: #fff;
+        font-family: "Arial Narrow", Arial, sans-serif;
+        color: #ff5c39;
+        font-size: 17px;
+        text-align: center;
+        line-height: 1; }
     div.student-header section div.menu li#slide {
       margin-right: 0;
       position: relative; }
@@ -2684,6 +2733,19 @@ main.chat {
           border: 1px #05a983 solid; }
           main.chat section.users aside div.name span.activity.on {
             background: #05a983; }
+        main.chat section.users aside div.name span.new {
+          display: inline-block;
+          margin-left: 10px;
+          border: 1px #ff5c39 solid;
+          border-radius: 50%;
+          width: 18px;
+          height: 18px;
+          background: #fff;
+          font-family: "Arial Narrow", Arial, sans-serif;
+          color: #ff5c39;
+          font-size: 17px;
+          text-align: center;
+          line-height: 1; }
       main.chat section.users aside div.date {
         width: 74px;
         text-align: right;
@@ -2706,7 +2768,8 @@ main.chat {
       border: 1px #C6C6C6 solid;
       text-align: right;
       padding: 10px 15px;
-      margin-bottom: 15px; }
+      margin-bottom: 15px;
+      position: relative; }
       main.chat section.mess aside.plan a {
         font-family: "Arial Narrow", Arial, sans-serif;
         font-size: 18px;
@@ -2724,6 +2787,19 @@ main.chat {
         border: 1px #999 solid;
         padding-left: 5px;
         margin-right: 20px; }
+      main.chat section.mess aside.plan div#students {
+        position: absolute;
+        display: block;
+        top: 50px;
+        right: 111px;
+        width: 170px;
+        background: #fff;
+        border: 1px #666 solid;
+        border-bottom: none; }
+        main.chat section.mess aside.plan div#students > p {
+          border-bottom: 1px #666 solid;
+          padding: 5px;
+          margin: 0; }
     main.chat section.mess aside.chat {
       max-height: 650px;
       margin-bottom: 15px;
@@ -2902,27 +2978,33 @@ main.rep_less_request {
       font-size: 16px;
       padding: 0;
       margin: 0; }
-    main.rep_less_request section.table > aside > div button {
+    main.rep_less_request section.table > aside > div button, main.rep_less_request section.table > aside > div a, main.rep_less_request section.table > aside > div input[type='submit'] {
       width: 110px;
       border: none;
       display: block;
       margin: 5px auto;
       min-height: 25px;
-      font-family: "OpenSans Regular", Arial, sans-serif; }
-      main.rep_less_request section.table > aside > div button.ok {
+      font-family: "OpenSans Regular", Arial, sans-serif;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      line-height: 1.7; }
+      main.rep_less_request section.table > aside > div button:hover, main.rep_less_request section.table > aside > div a:hover, main.rep_less_request section.table > aside > div input[type='submit']:hover {
+        text-decoration: none; }
+      main.rep_less_request section.table > aside > div button.ok, main.rep_less_request section.table > aside > div a.ok, main.rep_less_request section.table > aside > div input[type='submit'].ok {
         color: #fff;
         background: #07CA9A; }
-        main.rep_less_request section.table > aside > div button.ok:hover {
+        main.rep_less_request section.table > aside > div button.ok:hover, main.rep_less_request section.table > aside > div a.ok:hover, main.rep_less_request section.table > aside > div input[type='submit'].ok:hover {
           background: #29ecbc; }
-      main.rep_less_request section.table > aside > div button.del {
+      main.rep_less_request section.table > aside > div button.del, main.rep_less_request section.table > aside > div a.del, main.rep_less_request section.table > aside > div input[type='submit'].del {
         color: #fff;
         background: #FF5C39; }
-        main.rep_less_request section.table > aside > div button.del:hover {
+        main.rep_less_request section.table > aside > div button.del:hover, main.rep_less_request section.table > aside > div a.del:hover, main.rep_less_request section.table > aside > div input[type='submit'].del:hover {
           background: #ff7e5b; }
-      main.rep_less_request section.table > aside > div button.mess {
+      main.rep_less_request section.table > aside > div button.mess, main.rep_less_request section.table > aside > div a.mess, main.rep_less_request section.table > aside > div input[type='submit'].mess {
         color: #fff;
         background: #028163; }
-        main.rep_less_request section.table > aside > div button.mess:hover {
+        main.rep_less_request section.table > aside > div button.mess:hover, main.rep_less_request section.table > aside > div a.mess:hover, main.rep_less_request section.table > aside > div input[type='submit'].mess:hover {
           background: #24a385; }
   main.rep_less_request section.table > aside:last-of-type > div {
     border-bottom: 1px #666 solid; }
@@ -3198,27 +3280,32 @@ main.rep_lessons {
       font-size: 16px;
       padding: 0;
       margin: 0; }
-    main.rep_lessons section.table > aside > div button {
+    main.rep_lessons section.table > aside > div a, main.rep_lessons section.table > aside > div input[type='submit'], main.rep_lessons section.table > aside > div button {
       width: 110px;
       border: none;
       display: block;
       margin: 5px auto;
       height: 25px;
+      text-decoration: none;
+      text-align: center;
+      line-height: 1.7;
       font-family: "OpenSans Regular", Arial, sans-serif; }
-      main.rep_lessons section.table > aside > div button.ok {
+      main.rep_lessons section.table > aside > div a:hover, main.rep_lessons section.table > aside > div input[type='submit']:hover, main.rep_lessons section.table > aside > div button:hover {
+        text-decoration: none; }
+      main.rep_lessons section.table > aside > div a.ok, main.rep_lessons section.table > aside > div input[type='submit'].ok, main.rep_lessons section.table > aside > div button.ok {
         color: #fff;
         background: #07CA9A; }
-        main.rep_lessons section.table > aside > div button.ok:hover {
+        main.rep_lessons section.table > aside > div a.ok:hover, main.rep_lessons section.table > aside > div input[type='submit'].ok:hover, main.rep_lessons section.table > aside > div button.ok:hover {
           background: #29ecbc; }
-      main.rep_lessons section.table > aside > div button.del {
+      main.rep_lessons section.table > aside > div a.del, main.rep_lessons section.table > aside > div input[type='submit'].del, main.rep_lessons section.table > aside > div button.del {
         color: #fff;
         background: #FF5C39; }
-        main.rep_lessons section.table > aside > div button.del:hover {
+        main.rep_lessons section.table > aside > div a.del:hover, main.rep_lessons section.table > aside > div input[type='submit'].del:hover, main.rep_lessons section.table > aside > div button.del:hover {
           background: #ff7e5b; }
-      main.rep_lessons section.table > aside > div button.mess {
+      main.rep_lessons section.table > aside > div a.mess, main.rep_lessons section.table > aside > div input[type='submit'].mess, main.rep_lessons section.table > aside > div button.mess {
         color: #fff;
         background: #028163; }
-        main.rep_lessons section.table > aside > div button.mess:hover {
+        main.rep_lessons section.table > aside > div a.mess:hover, main.rep_lessons section.table > aside > div input[type='submit'].mess:hover, main.rep_lessons section.table > aside > div button.mess:hover {
           background: #24a385; }
   main.rep_lessons section.table > aside:last-of-type > div {
     border-bottom: 1px #666 solid; }
@@ -3654,27 +3741,29 @@ main.student_favorites {
         padding: 5px; }
         main.student_favorites table tbody tr td p {
           font-size: 15px; }
-        main.student_favorites table tbody tr td button {
+        main.student_favorites table tbody tr td a, main.student_favorites table tbody tr td button {
           width: 120px;
           border: none;
           display: block;
           margin: 5px auto;
           min-height: 25px;
+          text-align: center;
+          text-decoration: none;
           font-family: "OpenSans Regular", Arial, sans-serif; }
-          main.student_favorites table tbody tr td button.ok {
+          main.student_favorites table tbody tr td a.ok, main.student_favorites table tbody tr td button.ok {
             color: #fff;
             background: #07CA9A; }
-            main.student_favorites table tbody tr td button.ok:hover {
+            main.student_favorites table tbody tr td a.ok:hover, main.student_favorites table tbody tr td button.ok:hover {
               background: #29ecbc; }
-          main.student_favorites table tbody tr td button.del {
+          main.student_favorites table tbody tr td a.del, main.student_favorites table tbody tr td button.del {
             color: #fff;
             background: #FF5C39; }
-            main.student_favorites table tbody tr td button.del:hover {
+            main.student_favorites table tbody tr td a.del:hover, main.student_favorites table tbody tr td button.del:hover {
               background: #ff7e5b; }
-          main.student_favorites table tbody tr td button.mess {
+          main.student_favorites table tbody tr td a.mess, main.student_favorites table tbody tr td button.mess {
             color: #fff;
             background: #028163; }
-            main.student_favorites table tbody tr td button.mess:hover {
+            main.student_favorites table tbody tr td a.mess:hover, main.student_favorites table tbody tr td button.mess:hover {
               background: #24a385; }
 
 main.student_free {
@@ -4477,6 +4566,44 @@ main.step {
       border: 1px #999 solid;
       padding: 5px 10px;
       resize: none; }
+    main.step section.form label {
+      font-family: "Arial Narrow", Arial, sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      display: block;
+      margin: 20px 0 0 0; }
+      main.step section.form label > input[type='text'] {
+        width: 170px;
+        height: 30px;
+        font-size: 18px;
+        border: 1px #999 solid;
+        margin-left: 30px;
+        padding-left: 10px; }
+      main.step section.form label input[type='radio'] {
+        display: none; }
+      main.step section.form label input[type='radio'] + span {
+        display: inline-block;
+        width: 19px;
+        height: 20px;
+        background: url("../img/check_out.png");
+        background-position: left bottom;
+        background-repeat: no-repeat; }
+      main.step section.form label input[type='radio']:checked + span {
+        background: url("../img/check_in.png"); }
+    main.step section.form input[type='submit'] {
+      width: 110px;
+      border: none;
+      display: block;
+      margin: 5px auto;
+      min-height: 25px;
+      font-family: "OpenSans Regular", Arial, sans-serif;
+      color: #fff;
+      text-align: center;
+      padding: 5px;
+      text-decoration: none;
+      background: #FF5C39; }
+      main.step section.form input[type='submit']:hover {
+        background: #ff7e5b; }
   main.step h1 {
     font-family: "Arial Regular", Arial, sans-serif;
     font-size: 25px;
@@ -4492,8 +4619,13 @@ main.step {
     text-indent: 30px;
     line-height: 25px;
     max-width: 700px; }
+  main.step p.about {
+    max-width: 500px;
+    margin: 0 auto;
+    font-size: 14px;
+    text-align: center; }
   main.step div.steps {
-    width: 300px;
+    width: 500px;
     margin: 0 auto; }
     main.step div.steps:after {
       content: '';
@@ -4616,6 +4748,8 @@ div#deldialog {
   main.filter section.result {
     margin: 0 auto;
     float: none; }
+    main.filter section.result > h2 {
+      width: 100%; }
   main.filter section.info {
     display: none; }
 
@@ -5203,7 +5337,8 @@ div#deldialog {
     margin-left: 143px; }
     main.chat section.mess aside.plan {
       text-align: center;
-      padding: 10px; }
+      padding: 10px;
+      position: relative; }
       main.chat section.mess aside.plan a, main.chat section.mess aside.plan input {
         display: block;
         margin: 10px auto;
@@ -5550,7 +5685,13 @@ div#deldialog {
       main.admin-payback section.table aside > div:last-child {
         border-bottom: 1px #666 solid; }
       main.admin-payback section.table aside > div > button {
-        width: 270px; } }
+        width: 270px; }
+
+  main.step section.start_time div.steps > div {
+    float: none;
+    margin: 0 auto; }
+  main.step section.start_time div.steps div.arrow img {
+    margin: 0; } }
 @media screen and (max-width: 493px) {
   div.rep-header {
     position: relative; }

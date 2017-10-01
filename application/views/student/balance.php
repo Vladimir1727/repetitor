@@ -8,7 +8,7 @@
 
 <main class="rep_balance">
     <section class="start_balance">
-        <h1>Баланс личного счёта: <span>100 $</span></h1>
+        <h1>Баланс личного счёта: <span><?php echo $student['balance']; ?>$</span></h1>
         <!-- <button>Пополнить</button> -->
         <a href="<?php echo base_url(); ?>index.php/student/pay">Пополнить</a>
     </section>
@@ -31,21 +31,36 @@
         </aside>
     </section>
     <section class="table in">
-        <aside>
-            <div>
-                <p>23.10.2017</p>
-            </div>
-            <div>
-                <p>Светлана</p>
-                <p>ID 33333333</p>
-            </div>
-            <div>
-                <p>1 урок по расписанию</p>
-            </div>
-            <div>
-                <p>60</p>
-            </div>
-        </aside>
+        <?php
+        foreach ($lessons as $lesson) {
+            echo '<aside>';
+            echo '<div>';
+            echo '<p>';
+            $c = $lesson['pay_at'];
+            echo substr($c,8,2).'.'.substr($c,5,2).'.'.substr($c,0,4);
+            echo '</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>';
+            echo $lesson['repetitor'];
+            echo '</p>';
+            echo '<p>';
+            echo 'ID '.$lesson['repetitor_id'];
+            echo '</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>';
+            echo $lesson['count'].' уроков по расписанию';
+            echo '</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>';
+            echo $lesson['sum'];
+            echo '</p>';
+            echo '</div>';
+            echo '</aside>';
+        }
+         ?>
     </section>
     <h3 class="out">Пополнения</h3>
     <section class="header-out out">
@@ -62,19 +77,33 @@
         </aside>
     </section>
     <section class="table out">
-        <aside>
-            <div>
-                <p>21.10.2017</p>
-            </div>
-            <div>
-                <p>Яндекс Деньги</p>
-            </div>
-            <div>
-                <p>170</p>
-            </div>
-        </aside>
+        <?php
+        foreach ($pays as $pay) {
+            echo '<aside>';
+            echo '<div>';
+            echo '<p>';
+            $c = $pay['created_at'];
+            echo substr($c,8,2).'.'.substr($c,5,2).'.'.substr($c,0,4);
+            echo '</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>';
+            echo $pay['type'];
+            echo '</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>';
+            echo $lesson['cost'];
+            echo '</p>';
+            echo '</div>';
+            echo '</aside>';
+        }
+         ?>
     </section>
 </main>
 
-<script src="<?php echo base_url(); ?>js/repetitor/chat.js"></script>
+<script>
+    var baseUrl = '../';
+</script>
+<script src="<?php echo base_url(); ?>js/student/student.js"></script>
 <?php $this->load->view('main/footer'); ?>

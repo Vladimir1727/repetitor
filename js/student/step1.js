@@ -1,16 +1,18 @@
 (function($){$(function(){
+console.log('step 1.9');
 var baseUrl = '../../';
 var table = 0;
 var monday =0;
 var week = 0;
-var myStudent = false;
+var dates = [];
 var repetitor_id = $('#repetitor_id').val();
 var student_id = $('#student_id').val();
-var dates = [];
 var student = $('#student').val();
 var d = new Date();
 var utc = d.getTimezoneOffset()/60;
 var student_zone = ($('#student_zone').val() == 0) ? utc : $('#student_zone').val();
+var myStudent = false;
+
 if ($('#student_zone').val() == 0){
 	if (utc>0){
 		$('#s_zone').text('UTC +'+utc);
@@ -19,31 +21,13 @@ if ($('#student_zone').val() == 0){
 	}
 }
 
-console.log('rinfo 1.1');
-
 function stringToDate(s){
-	if ( s == null) return false;
 	if (s.length > 19){
 		return new Date(s.substr(0,4), parseInt(s.substr(6,2))-1, s.substr(9,2), s.substr(12,2), s.substr(15,2), s.substr(18,2));
 	} else{
 		return new Date(s.substr(0,4), parseInt(s.substr(5,2))-1, s.substr(8,2), s.substr(11,2), s.substr(14,2), s.substr(17,2));
 	}
 }
-
-$('.switch').each(function(){
-	$(this).parent().next('div').hide();
-	$(this).click(function(){
-		if ($(this).hasClass('switch-down')){
-			$(this).removeClass('switch-down');
-			$(this).addClass('switch-up');
-			$(this).parent().next('div').slideDown();
-		} else{
-			$(this).removeClass('switch-up');
-			$(this).addClass('switch-down');
-			$(this).parent().next('div').slideUp();
-		}
-	})
-});
 
 $('#next').click(function(){
     week++;
@@ -92,7 +76,8 @@ function getDateByid(id){
     id = id+'';
     var wday = id.substr(0,1);
     var hour = id.substr(1);
-    return new Date(monday.getTime()+60*60*1000*24*(wday-1)+60*60*1000*hour);
+	var d = new Date(monday.getTime()+60*60*1000*24*(wday-1)+60*60*1000*hour);
+	return d;
 }
 
 function ObjDate(id){
@@ -162,29 +147,22 @@ function tableClick(){
 	$('.free').each(function(){
         $(this).unbind();
         $(this).click(function(){
-	        if (student_id == 0){
-				var id = $(this).attr('id');
-				var d = getDateByid(id);
-				var t = d.getTime()-1000*60*60*student_zone;
-				var link = 'student/step1/' + repetitor_id;
-				document.location = '/index.php/main/remember?link='+link;
-			}else{
-				var id = $(this).attr('id');
-				var d = getDateByid(id);
-				var t = d.getTime()-1000*60*60*student_zone;
-				dates.push(t);
-				$(this).removeClass('free');
-				$(this).addClass('busy');
-				$(this).text(student + ' ID ' + student_id);
-				console.log(dates);
-				for (var i = 0; i < table.length; i++) {
-					if (equalDates(id, table[i].date_from)) {
-						table[i].student_id = student_id;
-					}
+			var id = $(this).attr('id');
+	        var d = getDateByid($(this).attr('id'));
+			var t = d.getTime()-1000*60*60*student_zone;
+			dates.push(t);
+			$(this).removeClass('free');
+			$(this).addClass('busy');
+			$(this).text(student + ' ID ' + student_id);
+			console.log(dates);
+			for (var i = 0; i < table.length; i++) {
+				if (equalDates(id, table[i].date_from)) {
+					table[i].student_id = student_id;
 				}
-				console.log(table);
-				tableClick();
 			}
+			console.log(table);
+		$(this).unbind();
+		tableClick()
 	    });
     });
 	$('.busy').each(function(){
@@ -212,7 +190,7 @@ function tableClick(){
 			console.log(dates);
 			console.log(table);
 		$(this).unbind();
-		tableClick();
+		tableClick()
 		});
 	});
 }
@@ -264,15 +242,15 @@ function tableView(){
             if (j==0){
                 tab +='<td>'+i+':00';
             }else{
-                var now = new Date(monday.getTime() + 60*60*24*1000*(j-1)+60*60*1000*i);
                 var find = false;
                 var busy = -1;
                 var r = false;
                 for (var k = 0; k < table.length; k++) {
-					var tDate = stringToDate(table[k].date_from);
-                    if (now.getTime() == tDate.getTime()){
+					var tDate = stringToDate(table[k]['date_from']);
+					var ff = table[k]['date_from'];
+                    if (equalDates((j+''+i),table[k]['date_from'])){
                         find = true;
-						if (table[k].student_id>0){
+                        if (table[k].student_id>0){
                             busy = k;
 							if (table[k].student_id == student_id){
 								myStudent = true;
@@ -301,7 +279,9 @@ function tableView(){
         tab += '</tr>';
     }
     $('#table').html(tab);
+	if (student_id > 0){
 		tableClick();
+	}
 }
 
 
@@ -318,10 +298,9 @@ $.ajax({
 					var s = table[i].date_from;
 					table[i].date_from = s.substr(0,5) + s.substr(6);
 				}
-				var r = table[i].date_from;
 				var d = stringToDate(table[i].date_from);
 				var t = new Date(d.getTime()+1000*60*60*student_zone);
-				var tM = (parseInt(t.getMonth()+1)>9) ? t.getMonth()+1 : '0'+(t.getMonth()+1);
+				var tM = (parseInt(t.getMonth())+1>9) ? t.getMonth()+1 : '0'+(t.getMonth()+1);
 	            var tD = (parseInt(t.getDate())>9) ? t.getDate() : '0'+(t.getDate());
 	            var tH = (parseInt(t.getHours())>9) ? t.getHours() : '0'+t.getHours();
 	            var tmin = (parseInt(t.getMinutes())>9) ? t.getMinutes() : '0'+t.getMinutes();
@@ -333,11 +312,16 @@ $.ajax({
 });
 
 $('#next_step').click(function(){
-	for (var i = 0; i < dates.length; i++) {
-		var inp = '<input type="hidden" name="date[]" value='+dates[i]+'>';
-		$('#step_form').append(inp);
+	if (dates.length>0){
+		for (var i = 0; i < dates.length; i++) {
+			var inp = '<input type="hidden" name="date[]" value='+dates[i]+'>';
+			$('#step_form').append(inp);
+		}
+		$('#step_form').trigger('submit');
+	} else{
+		errdiag('Предупреждение','Выберите хотя бы одно занятие');
 	}
-	$('#step_form').trigger('submit');
+
 	return false;
 });
 

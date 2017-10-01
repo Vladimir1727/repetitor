@@ -17,6 +17,7 @@
       </div>
     </div>
 <!-- END MODAL login-->
+<script type="text/javascript" src="https://secure.skypeassets.com/i/scom/js/skype-uri.js"></script>
 <footer>
     <div class="row">
         <div class="col-sm-0 col-md-2 col-lg-2">
@@ -32,7 +33,7 @@
         </div>
         <div class="col-sx-12 col-sm-3 col-md-2  col-lg-2">
             Репетиторы онлайн по Skype:<br>
-            <a href="<?php echo base_url(); ?>index.php/main/filter?lang=end">Репетиторы по английскому</a><br>
+            <a href="<?php echo base_url(); ?>index.php/main/filter?lang=eng">Репетиторы по английскому</a><br>
             <a href="<?php echo base_url(); ?>index.php/main/filter?lang=nem">Репетиторы по немецкому</a><br>
             <a href="<?php echo base_url(); ?>index.php/main/filter?lang=rus">Репетиторы по русскому</a><br>
             <a href="<?php echo base_url(); ?>index.php/main/filter?lang=fra">Репетиторы по французскому</a><br>
@@ -55,7 +56,18 @@
             <br><br>
             Отвечаем в мессенжерах:<br>
             <a href="https://www.messenger.com/t/adminRealLanguageClub"><img src="<?php  echo base_url(); ?>img/fb.png" alt="facebook"></a>
-            <a href="skype:live:b79d2994b5024754"><img src="<?php  echo base_url(); ?>img/skype.png" alt="skype"></a>
+            <a href="skype:live:b79d2994b5024754">
+            <div id="SkypeButton_Call_live:b79d2994b5024754_1">
+             <script type="text/javascript">
+             Skype.ui({
+             "name": "chat",
+             "element": "SkypeButton_Call_live:b79d2994b5024754_1",
+             "participants": ["live:b79d2994b5024754"],
+             "imageSize": 32
+             });
+             </script>
+            </div>
+            </a>
         </div>
         <div class="col-sx-12 col-sm-3 col-md-2  col-lg-2">
         </div>
