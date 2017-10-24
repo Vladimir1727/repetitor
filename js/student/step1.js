@@ -1,5 +1,5 @@
 (function($){$(function(){
-console.log('step 1.9');
+console.log('step 2.1');
 var baseUrl = '../../';
 var table = 0;
 var monday =0;
@@ -9,17 +9,24 @@ var repetitor_id = $('#repetitor_id').val();
 var student_id = $('#student_id').val();
 var student = $('#student').val();
 var d = new Date();
-var utc = d.getTimezoneOffset()/60;
-var student_zone = ($('#student_zone').val() == 0) ? utc : $('#student_zone').val();
+var utc = -d.getTimezoneOffset()/60;
+var student_zone = $('#student_zone').val();
 var myStudent = false;
 
-if ($('#student_zone').val() == 0){
+if ($('#zone_type').val() == "false"){
+	student_zone = utc;
+	console.log('false');
 	if (utc>0){
 		$('#s_zone').text('UTC +'+utc);
 	} else{
 		$('#s_zone').text('UTC '+utc);
 	}
 }
+
+var delta = student_zone - utc;
+console.log('UTC=', utc);
+console.log('student_zone=', student_zone);
+console.log('delta=', delta);
 
 function stringToDate(s){
 	if (s.length > 19){
@@ -225,6 +232,7 @@ function weekHeader(){
 weekHeader();
 
 function tableView(){
+	var realTime = new Date();
     var tab = '';
     var d = new Date();
     if (week>0){
@@ -245,10 +253,11 @@ function tableView(){
                 var find = false;
                 var busy = -1;
                 var r = false;
+				var now = new Date(monday.getTime() + 60*60*24*1000*(j-1)+60*60*1000*i);
                 for (var k = 0; k < table.length; k++) {
 					var tDate = stringToDate(table[k]['date_from']);
 					var ff = table[k]['date_from'];
-                    if (equalDates((j+''+i),table[k]['date_from'])){
+                    if (equalDates((j+''+i),table[k]['date_from']) && (now.getTime()+(delta+1)*60*60*1000) > realTime.getTime()){
                         find = true;
                         if (table[k].student_id>0){
                             busy = k;
@@ -290,7 +299,14 @@ $.ajax({
     type:'post',
 	data: 'repetitor_id=' + repetitor_id,
     success: function(data){
-        table = JSON.parse(data);
+		console.log(data);
+        /*table = JSON.parse(data, function(key, value){
+			//if (key == 'date_from') return stringToDate(value);
+  			return value;
+		});*/
+		table = JSON.parse(data);
+		//table = $.parseJSON(data);
+		console.log(table);
         if (table.length == 0){
         } else{
 			for (var i = 0; i < table.length; i++) {
@@ -299,7 +315,7 @@ $.ajax({
 					table[i].date_from = s.substr(0,5) + s.substr(6);
 				}
 				var d = stringToDate(table[i].date_from);
-				var t = new Date(d.getTime()+1000*60*60*student_zone);
+				var t = new Date(d.getTime()+1000*60*60*(student_zone));
 				var tM = (parseInt(t.getMonth())+1>9) ? t.getMonth()+1 : '0'+(t.getMonth()+1);
 	            var tD = (parseInt(t.getDate())>9) ? t.getDate() : '0'+(t.getDate());
 	            var tH = (parseInt(t.getHours())>9) ? t.getHours() : '0'+t.getHours();
@@ -307,6 +323,7 @@ $.ajax({
 				table[i].date_from = t.getFullYear()+'-'+tM+'-'+tD+' '+tH+':'+tmin+':00';
 			}
         }
+		console.log(table);
         tableView();
     },
 });

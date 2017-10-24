@@ -1,5 +1,5 @@
 (function($){$(function(){
-console.log('student chat 3');
+console.log('student chat 5');
 var student_id = $('#student_id').val();
 var student_avatar = $('#student_avatar').val();
 var student_name = $('#student_name').val();
@@ -10,6 +10,11 @@ var start_role = $('#start_role').val();
 if (start_role>0 && start_id>-1){
     to_role = start_role;
     to_id = start_id;
+    if (to_role!=3){
+        $('#plan').prop('href','/index.php/student/step1/'+to_id);
+    } else{
+        $('#plan').prop('href','#');
+    }
 }
 
 function getChat(){
@@ -18,7 +23,7 @@ function getChat(){
         type:'post',
         data: 'to_role=' + to_role + '&to_id=' + to_id,
         success: function(data){
-            console.log(data);
+            //console.log(data);
             var chat = JSON.parse(data);
 
             list = '';
@@ -50,7 +55,7 @@ function getChat(){
                     if (chat.chat[i].from_role == 1){
                         //repetitor message
                         var av = '';
-                        console.log('avatar=',chat.info.avatar);
+                        //console.log('avatar=',chat.info.avatar);
                         if (chat.info.avatar == null){
                             av = 'img/avatar2.png';
                         } else{
@@ -102,7 +107,7 @@ function getChatList() {
         url: baseUrl+'student/getChatList',
         type:'post',
         success: function(data){
-            console.log('chat_list=',data);
+            //console.log('chat_list=',data);
             var Chats = JSON.parse(data);
             var temp = [];
             for (var i = 0; i < Chats.length; i++) {
@@ -198,6 +203,15 @@ function getChatList() {
             }
             //$('#user').html(user_list);
             userClick();
+            if (to_id==0 && Chats.length>0 && start_id==-1){
+                to_role = Chats[0].from_role;
+                to_id = Chats[0].from_id;
+                if (to_role!=3){
+                    $('#plan').prop('href','/index.php/student/step1/'+to_id);
+                } else{
+                    $('#plan').prop('href','#');
+                }
+            }
         }
     });
 }
@@ -208,11 +222,11 @@ function getOneUser() {
         type:'post',
         data: 'role='+start_role+'&id='+start_id,
         success: function(data){
-            console.log(data);
+            //console.log(data);
             var Chats = JSON.parse(data);
             var list = '';
             list = '';
-            console.log('start_id', start_id);
+            //console.log('start_id', start_id);
             if (start_role == to_role && start_id == to_id){
                 list += '<aside class="active">';
             } else{
@@ -266,7 +280,11 @@ function userClick(){
             to_id = $(this).find('input[name="id"]').val();
             to_role = $(this).find('input[name="role"]').val();
             getChat();
-            $('#plan').prop('href','/index.php/student/step1/'+to_id);
+            if (to_role!=3){
+                $('#plan').prop('href','/index.php/student/step1/'+to_id);
+            } else{
+                $('#plan').prop('href','#');
+            }
         });
     });
 }

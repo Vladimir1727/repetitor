@@ -18,11 +18,13 @@ class RepetitorModel extends CI_Model{
 				'email'=>$email,
 				'password'=>$pass,
 				'created_at'=>date('Y-m-d H:i:s',time()),
+				'status'=>0,
+				'activity'=>1,
 			);
 			$this->db->insert('repetitors', $rep);
 			//sending e-mail
 			$this->load->library('email');
-			$this->email->from('test@dvn125.xyz', 'RealLanguage.Club');
+			$this->email->from('info@reallanguage.club', 'RealLanguage.Club');
 			$this->email->to($email);
 			$this->email->subject('Успешная регистрация на RealLanguage.Club');
 			$mess = "Поздравляем!<br><br>";
@@ -80,7 +82,6 @@ class RepetitorModel extends CI_Model{
 		} else{
 			$rep['online'] = false;
 		}
-		///
 		$sel = 'select count(id) as c from chats where to_role=1 and to_id='.$id.' and read_at is null';
 		$q = $this->db->query($sel);
 		$r = $q->result_array();
@@ -89,7 +90,7 @@ class RepetitorModel extends CI_Model{
 		} else{
 			$rep['new'] = 0;
 		}
-		///
+		$rep['tzone'] = $this->getRepZone($id);
 		$this->repetitor = $rep;
 		return $this;
 	}
@@ -135,6 +136,19 @@ class RepetitorModel extends CI_Model{
 
 	public function saveSubject($repetitor_id, $age_id, $spez_id, $level_id, $price, $lang_id, $subject_id, $pos)
 	{
+		$q = $this->db->query('select subject1, subject2 from repetitors where id='.$repetitor_id);
+		$r = $q->result_array();
+		$sub1 = $r[0]['subject1'];
+		$sub2 = $r[0]['subject2'];
+		// if (is_null($sub1) && $pos = 2){
+		// 	throw new Exception('Сначала необходимо выбрать предмет №1');
+		// }
+		if (!is_null($sub1) && $sub1 == $subject_id && $pos == 2){
+			throw new Exception('Этот предмет уже был выбран как предмет №1');
+		}
+		if (!is_null($sub2) && $sub2 == $subject_id && $pos == 1){
+			throw new Exception('Этот предмет уже был выбран как предмет №2');
+		}
 		$this->db->query('update repetitors set lang_id='.$lang_id.' where id='.$repetitor_id);
 		$q = $this->db->query('select subject'.$pos.' from repetitors where id='.$repetitor_id);
 		$res = $q->result_array();
@@ -206,7 +220,11 @@ class RepetitorModel extends CI_Model{
 		//price
 		$q = $this->db->query('select cost from rsp where subject_id='.$s.' and repetitor_id='.$repetitor_id);
 		$res = $q->result_array();
-		$data['price'] = $res[0]['cost'];
+		if (count($res)==0){
+			$data['price'] = 0;
+		} else{
+			$data['price'] = $res[0]['cost'];
+		}
 		//lang
 		$q = $this->db->query('select lang_id from repetitors where id='.$repetitor_id);
 		$res = $q->result_array();
@@ -216,6 +234,8 @@ class RepetitorModel extends CI_Model{
 
 	public function getTimeTable($repetitor_id)
 	{
+		$szone = date('H',time())-gmdate('H', time());
+		//log_message('error','SERVER ZONE='.$szone);
 		$q = $this->db->query('select z.zone_time from repetitors r, timezones z where r.tzone_id=z.id and r.id='.$repetitor_id);
 		$r = $q->result_array();
 		$z = $r[0]['zone_time'];
@@ -227,9 +247,27 @@ class RepetitorModel extends CI_Model{
 				$r = $q->result_array();
 				$table[$i]['student'] = $r[0]['first_name'];
 			}
-			$table[$i]['date_from'] = date('Y-m-d H:i:s', strtotime($table[$i]['date_from'])+$z*60*60);
+			$table[$i]['date_from'] = date('Y-m-d H:i:s', strtotime($table[$i]['date_from'])+($z)*60*60);
 		}
 		return $table;
+	}
+
+	public function saveFreeTable($table, $repetitor_id)
+	{
+		$z= $this->getRepZone($repetitor_id);
+		foreach ($table as $tab) {
+			if ($tab->id == 0){
+				$tab->date_from = date('Y-m-d H:i:s', strtotime($tab->date_from)-$z*60*60);
+				$del = 'delete from exercises where repetitor_id='.$tab->repetitor_id.' and date_from="'.$tab->date_from.'"';
+				$q = $this->db->query($del);
+				$ins = 'insert into exercises(repetitor_id, date_from, created_at)
+				values('.$repetitor_id.',"'.$tab->date_from.'","'.date('Y-m-d H:i:s',time()).'")';
+				$q = $this->db->query($ins);
+			} elseif($tab->date_from==''){
+				$q = $this->db->query('delete from exercises where id='.$tab->id);
+			}
+		}
+		return 0;
 	}
 
 	public function saveTimeTable($table, $repetitor_id, $subject_id=0)
@@ -304,29 +342,19 @@ class RepetitorModel extends CI_Model{
 	public function lessonsrequests($repetitor_id)
 	{
 		$zone = $this->getRepZone($repetitor_id);
-		$sel = 'select * from exercises where deleted_at is null and cost>0 and cancel_at is null and repetitor_id='.$repetitor_id.' and student_id is not null order by created_at';
+		$ndate = date('Y-m-d H:i:s', time() - ($zone+1)*60*60);
+		$sel = 'select * from exercises where deleted_at is null and date_from>"'.$ndate.'" and date_accept is null and cost>0 and cancel_at is null and repetitor_id='.$repetitor_id.' and student_id is not null order by created_at';
 		$q = $this->db->query($sel);
 		$row = $q->result_array();
 		$lessons = array();
 		$i = -1;
 		$cr = '';
+		$szone = date('H',time())-gmdate('H', time());
 		foreach ($row as $r) {
-			/*if ($r['created_at'] == $cr){
-				$lessons[$i]['count']++;
-				$lessons[$i]['sum'] += $r['cost'];
-				$lessons[$i]['dates'][] = date('Y-m-d H:i:s', strtotime($r['date_from']) + $zone*60*60);
-				$lessons[$i]['ids'][] = $r['id'];
-			} else{*/
-				$i++;
-				//$cr = $r['created_at'];
-				$lessons[$i] = $r;
-				$lessons[$i]['created_at'] = date('Y-m-d H:i:s', strtotime($lessons[$i]['created_at']) + $zone*60*60);
-				//$lessons[$i]['count'] = 1;
-				//$lessons[$i]['sum'] = $lessons[$i]['cost'];
-				//$lessons[$i]['dates'] = array();
-				//$lessons[$i]['dates'][0] = date('Y-m-d H:i:s', strtotime($r['date_from']) + $zone*60*60);
-				//$lessons[$i]['ids'][0] = $r['id'];
-			//}
+			$i++;
+			$lessons[$i] = $r;
+			$lessons[$i]['created_at'] = date('Y-m-d H:i:s', strtotime($lessons[$i]['created_at']) + ($zone -$szone)*60*60);
+			$lessons[$i]['date_from'] = date('Y-m-d H:i:s', strtotime($lessons[$i]['date_from']) + ($zone)*60*60);
 		}
 		for ($i=0; $i < count($lessons); $i++) {
 			$sel = 'select s.first_name, s.father_name, sub.subject, (select specialization from specializations where id=ex.specialization_id) as specialization from exercises ex, students s, subjects sub, specializations spe where ex.student_id=s.id and ex.subject_id=sub.id and ex.id='.$lessons[$i]['id'];
@@ -341,5 +369,305 @@ class RepetitorModel extends CI_Model{
 			$lessons[$i]['sel']=$sel;
 		}
 		return $lessons;
+	}
+
+	public function lessons($repetitor_id)
+	{
+		$zone = $this->getRepZone($repetitor_id);
+		$date = date('Y-m-d H:i:s', time()-($zone+1)*60*60);
+		$sel = 'select * from exercises where deleted_at is null and date_accept is not null and date_from>"'.$date.'" and cost>0 and cancel_at is null and repetitor_id='.$repetitor_id.' and student_id is not null order by created_at';
+		$q = $this->db->query($sel);
+		$row = $q->result_array();
+		$lessons = array();
+		$i = -1;
+		$cr = '';
+		foreach ($row as $r) {
+			$i++;
+			$lessons[$i] = $r;
+			$lessons[$i]['date_from'] = date('Y-m-d H:i:s', strtotime($lessons[$i]['date_from']) + $zone*60*60);
+			$actual = (time() - strtotime($lessons[$i]['date_from']))/60;
+			if ($actual > -15 && $actual < 60){
+				$lessons[$i]['active'] = true;
+			} else{
+				$lessons[$i]['active'] = false;
+			}
+			if ($actual <= -30){
+				$lessons[$i]['calcel'] = true;
+			} else{
+				$lessons[$i]['calcel'] = false;
+			}
+			$lessons[$i]['created_at'] = date('Y-m-d H:i:s', strtotime($lessons[$i]['created_at']) + $zone*60*60);
+		}
+		for ($i=0; $i < count($lessons); $i++) {
+			$sel = 'select s.first_name, s.father_name, sub.subject, s.skype, (select specialization from specializations where id=ex.specialization_id) as specialization from exercises ex, students s, subjects sub, specializations spe where ex.student_id=s.id and ex.subject_id=sub.id and ex.id='.$lessons[$i]['id'];
+			$q = $this->db->query($sel);
+			$r = $q->result_array();
+			$lessons[$i]['student'] = $r[0]['first_name'];
+			$lessons[$i]['skype'] = $r[0]['skype'];
+			if (!is_null($r[0]['father_name'])){
+				$lessons[$i]['student'] .= ' '.$r[0]['father_name'];
+			}
+			$lessons[$i]['subject'] = $r[0]['subject'];
+			$lessons[$i]['specialization'] = $r[0]['specialization'];
+			$lessons[$i]['sel']=$sel;
+		}
+		return $lessons;
+	}
+
+	public function cancelLesson($lesson_id)
+	{
+		$sel = 'update exercises set cancel_at="'.date('Y-m-d H:i:s', time()).'" where id='.$lesson_id;
+		$q = $this->db->query($sel);
+		return 0;
+	}
+
+	public function cancelLesson2($lesson_id)
+	{
+		$sel = 'select date_from, cost, student_id, repetitor_id from exercises where id='.$lesson_id;
+		$q = $this->db->query($sel);
+		$r = $q->result_array();
+		$actual = (time() - strtotime($r[0]['date_from']))/60;
+		$cost = (is_null($r[0]['cost'])) ? 0 : $r[0]['cost'];
+		$student_id = $r[0]['student_id'];
+		$repetitor_id = $r[0]['repetitor_id'];
+		if ($actual > -15 && $actual < 60){
+			$sel = 'update exercises set cancel_at="'.date('Y-m-d H:i:s', time()).'" where id='.$lesson_id;
+			$q = $this->db->query($sel);
+			$sel = 'select balance from students where id='.$student_id;
+			$q = $this->db->query($sel);
+			$r = $q->result_array();
+			$student_balance = $r[0]['balance'] + round($cost*1.3);
+			$sel = 'update students set balance='.$student_balance.' where id='.$student_id;
+			$q = $this->db->query($sel);
+			//$this->addTotalBalance(-round($cost*1.3));
+		}
+		return 0;
+	}
+
+	public function acceptLesson($lesson_id)
+	{
+		$sel = 'update exercises set date_accept="'.date('Y-m-d H:i:s', time()).'" where id='.$lesson_id;
+		$q = $this->db->query($sel);
+		$sel = 'select student_id, repetitor_id from exercises where id='.$lesson_id;
+		$q = $this->db->query($sel);
+		$r = $r = $q->result_array();
+		$student_id = $r[0]['student_id'];
+		$repetitor_id = $r[0]['repetitor_id'];
+		$sel = 'select balance from students where id='.$student_id;
+		//log_message('debug', $sel);
+		$q = $this->db->query($sel);
+		$r = $q->result_array();
+		$student_balance = $r[0]['balance'];
+		$sel = 'select cost from exercises where id='.$lesson_id;
+		$q = $this->db->query($sel);
+		$r = $q->result_array();
+		$cost = $r[0]['cost'];
+		if ($student_balance >= $cost*1.3){
+			$sel = 'update exercises set pay_at="'.date('Y-m-d H:i:s', time()).'" where id='.$lesson_id;
+			$q = $this->db->query($sel);
+			$sel = 'update students set balance='.round($student_balance-$cost*1.3).' where id='.$student_id;
+			$q = $this->db->query($sel);
+			$sel = 'select balance from repetitors where id='.$repetitor_id;
+			$q = $this->db->query($sel);
+			$r = $q->result_array();
+			$repetitor_balance = round($r[0]['balance'] + $cost);
+			$sel = 'update repetitors set balance='.$repetitor_balance.' where id='.$repetitor_id;
+			//log_message('error', $sel);
+			$q = $this->db->query($sel);
+			$sel = 'insert into rep_pays(created_at,student_id,lessons,cost, repetitor_id) values("'.date('Y-m-d H:i:s', time()).'",'.$student_id.',1,'.$cost.','.$repetitor_id.')';
+			$q = $this->db->query($sel);
+		}
+		return 0;
+	}
+
+	public function startLesson($lesson_id)
+	{
+		$sel = 'select date_from, student_id, repetitor_id, cost from exercises where id='.$lesson_id;
+		$q = $this->db->query($sel);
+		$r = $q->result_array();
+		$actual = (time() - strtotime($r[0]['date_from']))/60;
+		$cost = $r[0]['cost'];
+		$student_id = $r[0]['student_id'];
+		$repetitor_id = $r[0]['repetitor_id'];
+		if ($actual > -15 && $actual < 60){
+			$sel = 'update exercises set rstart_at="'.date('Y-m-d H:i:s', time()).'" where id='.$lesson_id;
+			$q = $this->db->query($sel);
+			$this->addTotalBalance($cost*0.3);
+		}
+		return 0;
+	}
+
+	public function history($repetitor_id)
+	{
+		$zone = $this->getRepZone($repetitor_id);
+		$date = date('Y-m-d H:i:s', time()+60*60);
+		$sel = 'select * from exercises where  date_from<"'.$date.'" and repetitor_id='.$repetitor_id.' and student_id is not null order by created_at';
+		$q = $this->db->query($sel);
+		$row = $q->result_array();
+		$lessons = array();
+		$i = -1;
+		$cr = '';
+		foreach ($row as $r) {
+			$i++;
+			$lessons[$i] = $r;
+			$lessons[$i]['created_at'] = date('Y-m-d H:i:s', strtotime($lessons[$i]['created_at']) + $zone*60*60);
+			$lessons[$i]['date_from'] = date('Y-m-d H:i:s', strtotime($lessons[$i]['date_from']) + $zone*60*60);
+		}
+		for ($i=0; $i < count($lessons); $i++) {
+			$sel = 'select s.first_name, s.father_name, sub.subject, s.skype, (select specialization from specializations where id=ex.specialization_id) as specialization from exercises ex, students s, subjects sub, specializations spe where ex.student_id=s.id and ex.subject_id=sub.id and ex.id='.$lessons[$i]['id'];
+			$q = $this->db->query($sel);
+			$r = $q->result_array();
+			$lessons[$i]['student'] = $r[0]['first_name'];
+			if (!is_null($r[0]['father_name'])){
+				$lessons[$i]['student'] .= ' '.$r[0]['father_name'];
+			}
+			$lessons[$i]['subject'] = $r[0]['subject'];
+			$lessons[$i]['specialization'] = $r[0]['specialization'];
+		}
+		return $lessons;
+	}
+
+	public function getTotalBalance()
+	{
+		$sel = 'select balance from balance limit 1';
+		$q = $this->db->query($sel);
+		$r = $q->result_array();
+		return $r[0]['balance'];
+	}
+
+	public function addTotalBalance($sum)
+	{
+		$sel = 'select id,balance from balance limit 1';
+		$q = $this->db->query($sel);
+		$r = $q->result_array();
+		$balance = $r[0]['balance'] + $sum;
+		$id = $r[0]['id'];
+		$this->db->where('id', $id);
+		$this->db->update('balance', array('balance'=>$balance));
+		return 0;
+	}
+
+	public function getStudentPays($repetitor_id)
+	{
+		$zone = $this->getRepZone($repetitor_id);
+		$sel = 'select *,(select first_name from students where id=rp.student_id) as student_name from rep_pays as rp where rp.repetitor_id='.$repetitor_id;
+		$q = $this->db->query($sel);
+		$r = $q->result_array();
+		for($i = 0; $i < count($r); $i++){
+			$r[$i]['created_at'] = date('Y-m-d H:i:s', strtotime($r[$i]['created_at'])+$zone*60*60);
+		}
+		return $r;
+	}
+
+	public function getNewFreeRequests($repetitor_id, $subject_id = 0)
+	{
+		if ($subject_id>0){
+			$sub = ' and f.subject_id='.$subject_id;
+		} else{
+			$sub = '';
+		}
+		$zone = $this->getRepZone($repetitor_id);
+		$sel = 'select *, (select first_name from students where id=f.student_id) as student_name, (select subject from subjects where id=f.subject_id) as subject, (select count(id) from free_rs where free_id=f.id) as req from free_apps as f where not f.id in (select free_id from free_rs where repetitor_id='.$repetitor_id.') and admin=1  and deleted_at is null'.$sub;
+		$q = $this->db->query($sel);
+		$r = $q->result_array();
+		for ($i=0; $i < count($r); $i++) {
+			$r[$i]['created_at'] = date('Y-m-d H:i:s', strtotime($r[$i]['created_at']) + $zone * 60 * 60);
+			if (is_null($r[$i]['student_name'])){
+				$r[$i]['student_name'] = 'Без имени';
+			}
+		}
+		return $r;
+	}
+
+	public function getAcceptedFreeRequests($repetitor_id, $subject_id = 0)
+	{
+		if ($subject_id>0){
+			$sub = ' and f.subject_id='.$subject_id;
+		} else{
+			$sub = '';
+		}
+		$zone = $this->getRepZone($repetitor_id);
+		$sel = 'select * , (select first_name from students where id=f.student_id) as student_name, (select subject from subjects where id=f.subject_id) as subject, (select count(id) from free_rs where free_id=f.id) as req from free_apps as f where f.id in (select free_id from free_rs where repetitor_id='.$repetitor_id.' and accepted=1) and admin=1 and deleted_at is null'.$sub;
+		$q = $this->db->query($sel);
+		$r = $q->result_array();
+		for ($i=0; $i < count($r); $i++) {
+			$r[$i]['created_at'] = date('Y-m-d H:i:s', strtotime($r[$i]['created_at'])+$zone*60*60);
+		}
+		return $r;
+	}
+
+	public function delFree($id, $repetitor_id)
+	{
+		$sel = 'select id from free_rs where free_id='.$id.' and repetitor_id='.$repetitor_id;
+		$q = $this->db->query($sel);
+		$r = $q->result_array();
+		if (count($r)==0){
+			$ins = array(
+				'created_at' => date('Y-m-d H:i:s', time()),
+				'repetitor_id' => $repetitor_id,
+				'free_id'=> $id,
+				'accepted'=>0
+			);
+			$this->db->insert('free_rs',$ins);
+		} else{
+			$up = array('accepted'=>0);
+			$this->db->where('id', $r[0]['id']);
+			$this->db->update('free_rs',$up);
+		}
+		return 0;
+	}
+
+	public function acceptFree($id, $repetitor_id)
+	{
+		$ins = array(
+			'created_at' => date('Y-m-d H:i:s', time()),
+			'repetitor_id' => $repetitor_id,
+			'free_id'=> $id,
+			'accepted'=>1
+		);
+		$this->db->insert('free_rs',$ins);
+		return 0;
+	}
+
+	public function sendMoneyRequest($ins)
+	{
+		$this->db->insert('salaries', $ins);
+		return 0;
+	}
+
+	public function getSalaries($repetitor_id)
+	{
+		$zone = $this->getRepZone($repetitor_id);
+		$sel = 'select * from salaries where repetitor_id='.$repetitor_id;
+		$q = $this->db->query($sel);
+		$r = $q->result_array();
+		for ($i=0; $i < count($r); $i++) {
+			$r[$i]['created_at'] = date('Y-m-d H:i:s', strtotime($r[$i]['created_at'])+$zone*60*60);
+		}
+		return $r;
+	}
+
+	public function forgot($email)
+	{
+		$q = $this->db->query('select password from repetitors where email="'.$email.'"');
+		$r = $q ->result_array();
+		if (count($r)==0){
+			return 'Репетитора с таким e-mail нет в базе';
+		} else{
+			$pass = $r[0]['password'];
+			$this->load->library('email');
+			$this->email->from('info@reallanguage.club', 'RealLanguage.Club');
+			$this->email->to($email);
+			$this->email->subject('Восстановление пароля');
+			$mess = "Для входа используйте: <br>";
+			$mess .= "Логин: ".$email."<br>";
+			$mess .= "Пароль: ".$pass."<br><br>";
+			$mess .= "Желаем Вам успехов! <br><br>";
+			$mess .= "С уважением, <br><br>";
+			$mess .= "команда RealLanguage.Club <br>";
+			$this->email->message($mess)->set_mailtype('html');
+			$this->email->send();
+			return 0;
+		}
 	}
 }

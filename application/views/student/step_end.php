@@ -1,7 +1,7 @@
 <?php $this->load->view('main/header'); ?>
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.min.css">
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
-<title>Репетиторы по разным языкам. Записаться на занятие. Окончание.</title>
+<title>Репетиторы Real Language Club. Записаться на занятие. Окончание.</title>
 </head>
 <body>
 <?php $this->load->view('student/header_menu'); ?>
@@ -14,7 +14,6 @@
     <h2>Благодарим Вас за доверие к Real Language Club!</h2>
 </main>
 
-<script src="<?php echo base_url(); ?>js/repetitor/chat.js"></script>
 <script>
     var baseUrl = '../';
 </script>

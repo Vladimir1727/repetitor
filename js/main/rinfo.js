@@ -9,9 +9,18 @@ var student_id = $('#student_id').val();
 var dates = [];
 var student = $('#student').val();
 var d = new Date();
-var utc = d.getTimezoneOffset()/60;
-var student_zone = ($('#student_zone').val() == 0) ? utc : $('#student_zone').val();
-if ($('#student_zone').val() == 0){
+var utc = - d.getTimezoneOffset()/60;
+var student_zone = 0;
+var delta = 0;
+if ($('#zone_type').val() == 'none'){
+	student_zone = utc;
+	delta = student_zone - utc;
+} else{
+	student_zone = $('#student_zone').val();
+	delta = student_zone - utc;
+}
+
+if ($('#zone_type').val() == 'none'){
 	if (utc>0){
 		$('#s_zone').text('UTC +'+utc);
 	} else{
@@ -19,7 +28,10 @@ if ($('#student_zone').val() == 0){
 	}
 }
 
-console.log('rinfo 1.1');
+console.log('rinfo 1.8');
+console.log('UTC=', utc);
+console.log('student_zone=', student_zone);
+console.log('delta=', delta);
 
 function stringToDate(s){
 	if ( s == null) return false;
@@ -249,10 +261,11 @@ weekHeader();
 function tableView(){
     var tab = '';
     var d = new Date();
+	var realTime = new Date();
     if (week>0){
         d = new Date(d.getTime() + 60*60*24*1000*7*week);
     }
-    var week_day =d.getDay();
+    var week_day = d.getDay();
     if (week_day ==0){
         week_day = 7;
     }
@@ -270,7 +283,8 @@ function tableView(){
                 var r = false;
                 for (var k = 0; k < table.length; k++) {
 					var tDate = stringToDate(table[k].date_from);
-                    if (now.getTime() == tDate.getTime()){
+					/////////
+                    if (now.getTime() == tDate.getTime() && (now.getTime()+(delta+1)*60*60*1000) > realTime.getTime()){
                         find = true;
 						if (table[k].student_id>0){
                             busy = k;
@@ -332,13 +346,29 @@ $.ajax({
     },
 });
 
-$('#next_step').click(function(){
-	for (var i = 0; i < dates.length; i++) {
-		var inp = '<input type="hidden" name="date[]" value='+dates[i]+'>';
-		$('#step_form').append(inp);
+$('#next_step, #step_one').click(function(){
+	if (dates.length >0){
+		for (var i = 0; i < dates.length; i++) {
+			var inp = '<input type="hidden" name="date[]" value='+dates[i]+'>';
+			$('#step_form').append(inp);
+		}
+		$('#step_form').trigger('submit');
+	} else{
+		// if (student_id>0){
+		// 	document.location = 'main/student/step1/'+repetitor_id;
+		// } else{
+		// 	return true;
+		// }
+		return true;
 	}
-	$('#step_form').trigger('submit');
 	return false;
+});
+
+$('#send_feed').click(function(){
+	if ($('#about').val().trim().length>1000){
+		errdiag('Предупреждение', 'отзыв должен быть не более 1000 символов');
+		return false;
+	}
 });
 
 })})(jQuery)

@@ -1,14 +1,16 @@
 <?php $this->load->view('main/header'); ?>
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.min.css">
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
-<title>Репетиторы по разным языкам. Записаться на занятие. Шаг 1</title>
+<title>Репетиторы Real Language Club. Записаться на занятие. Шаг 1</title>
 </head>
 <body>
 <?php $this->load->view('student/header_menu'); ?>
 <input type="hidden" value="<?php echo $repetitor['id']; ?>" id="repetitor_id">
 <input type="hidden" value="<?php echo ($student) ? $student['id'] : 0; ?>" id="student_id">
 <input type="hidden" value="<?php echo $student['first_name']; ?>" id="student">
-<input type="hidden" value="<?php echo ($student) ? $student['tzone'] : 0; ?>" id="student_zone">
+<input type="hidden" value="<?php echo (is_null($student['tzone'])) ? "0" : $student['tzone']; ?>" id="student_zone">
+<input type="hidden" value="<?php echo (is_null($student['tzone'])) ? "false" : "true"; ?>" id="zone_type">
+<input type="hidden" value="<?php echo ($subject_id) ? $subject_id : 0; ?>" id="subject_id">
 <main class="step">
     <section class="start_time">
         <div class="steps">
@@ -85,7 +87,7 @@
     </table>
     <a href="<?php echo base_url(); ?>index.php/student/step2" class="next" id="next_step">Далее</a>
 </main>
-<form class="hidden" action="<?php echo base_url(); ?>index.php/student/step2" method="post" id="step_form">
+<form class="hidden" action="<?php echo base_url(); ?>index.php/student/step2?subject=<?php echo ($subject_id) ? $subject_id : 0; ?>" method="post" id="step_form">
     <input type="hidden" name="repetitor_id" value="<?php echo $repetitor['id']; ?>">
 </form>
 <script src="<?php echo base_url(); ?>js/student/step1.js"></script>

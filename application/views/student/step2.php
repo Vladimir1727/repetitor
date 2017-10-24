@@ -1,7 +1,7 @@
 <?php $this->load->view('main/header'); ?>
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.min.css">
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
-<title>Репетиторы по разным языкам. Записаться на занятие. Шаг 2</title>
+<title>Репетиторы Real Language Club. Записаться на занятие. Шаг 2</title>
 </head>
 <body>
 <?php $this->load->view('student/header_menu'); ?>
@@ -48,7 +48,11 @@
         <select id="subject" name="subject_id">
             <?php
                 foreach($subjects as $subject){
-                    echo '<option value="'.$subject['id'].'">'.$subject['subject'].'</option>';
+                    if ($subject['id'] == $subject_id){
+                        echo '<option value="'.$subject['id'].'" selected="selected">'.$subject['subject'].'</option>';
+                    } else{
+                        echo '<option value="'.$subject['id'].'">'.$subject['subject'].'</option>';
+                    }
                 }
              ?>
         </select>

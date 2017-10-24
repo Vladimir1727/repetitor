@@ -2,7 +2,7 @@
 <?php $this->load->view('main/header'); ?>
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.min.css">
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
-<title>Репетиторы по разным языкам. Регистрация ученика</title>
+<title>Регистрация ученика</title>
 </head>
 <body>
 <?php $this->load->view('main/header_menu'); ?>

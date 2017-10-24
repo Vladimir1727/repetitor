@@ -1,7 +1,7 @@
 <?php $this->load->view('main/header'); ?>
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.min.css">
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
-<title>Репетиторы по разным языкам. Уроки</title>
+<title>Репетиторы Real Language Club. Уроки</title>
 </head>
 <body>
 <?php $this->load->view('student/header_menu'); ?>
@@ -16,7 +16,7 @@ $zone .= ')';
             <h1>Уроки</h1>
         </div>
         <div>
-            <h3><span id="local-time">18:20</span><?php echo $zone; ?>)</h3>
+            <h3><span id="local-time">18:20</span><?php echo $zone; ?></h3>
             <h4 id="local-date">23 сентября 2017,суббота</h4>
         </div>
     </section>
@@ -79,10 +79,14 @@ $zone .= ')';
             echo '</p></div>';
             echo '<div>';
             echo '<form>';
-            echo '<button class="ok">Начать урок</button>';
+            if ($lesson['active']){
+                echo '<button class="ok">Начать урок</button>';
+            }
             echo '<input name="id" type="hidden" value="'.$lesson['id'].'">';
             echo '<a class="mess" href="'.base_url().'index.php/student/chat?id='.$lesson['repetitor_id'].'">Сообщение</a>';
-            echo '<button class="del">Отменить</button>';
+            if ($lesson['calcel']){
+                echo '<button class="del">Отменить</button>';
+            }
             echo '</form>';
             echo '</div>';
             echo '</aside>';

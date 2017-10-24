@@ -1,6 +1,6 @@
 
 <?php $this->load->view('main/header'); ?>
-<title>Репетиторы по разным языкам. О нас</title>
+<title>Описание работы платформы «Репетиторы»</title>
 </head>
 <body>
 <?php $this->load->view('main/header_menu'); ?>

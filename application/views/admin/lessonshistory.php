@@ -1,4 +1,5 @@
 <?php $this->load->view('main/header'); ?>
+<meta name = "robots" content = "noindex,nofollow">
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.min.css">
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
 <title>Репетиторы по разным языкам. Админ. История уроков</title>
@@ -12,8 +13,8 @@
             <h1>История уроков</h1>
         </div>
         <div>
-            <h3>15:35 (UTC+2)</h3>
-            <h4>24 сентября 2017,воскресенье</h4>
+            <!-- <h3>15:35 (UTC+2)</h3>
+            <h4>24 сентября 2017,воскресенье</h4> -->
         </div>
     </section>
     <section class="head">
@@ -45,68 +46,65 @@
         </aside>
     </section>
     <section class="table">
-        <aside>
-            <div>
-                <p>22.10.2017</p>
-                <p>18:30–19:30</p>
-                <p>(UTC +2)</p>
-            </div>
-            <div>
-                <p>Мария</p>
-                <p>ID 11111111</p>
-            </div>
-            <div>
-                <p>Светлана</p>
-                <p>ID 22222222</p>
-            </div>
-            <div>
-                <p>Английский язык</p>
-            </div>
-            <div>
-                <p>Сдача экзамена B2</p>
-            </div>
-            <div>
-                <p>Повысить уровень понимания устной речи</p>
-            </div>
-            <div>
-                <p>1/50 мин.</p>
-            </div>
-            <div>
-                <p class="ok">Проведён</p>
-            </div>
-        </aside>
-        <aside>
-            <div>
-                <p>23.10.2017</p>
-                <p>18:30–19:30</p>
-                <p>(UTC +2)</p>
-            </div>
-            <div>
-                <p>Мария</p>
-                <p>ID 11111111</p>
-            </div>
-            <div>
-                <p>Светлана</p>
-                <p>ID 22222222</p>
-            </div>
-            <div>
-                <p>Английский язык</p>
-            </div>
-            <div>
-                <p>Сдача экзамена B2</p>
-            </div>
-            <div>
-                <p>Повысить уровень понимания устной речи</p>
-            </div>
-            <div>
-                <p>1/50 мин.</p>
-            </div>
-            <div>
-                <p class="del">Отменён</p>
-            </div>
-        </aside>
+        <?php
+        foreach ($lessons as $lesson) {
+            echo '<aside>';
+            echo '<div>';
+            $c = $lesson['date_from'];
+            $n = date('Y-m-d H:i:s', strtotime($c) + 60*60);
+            echo '<p>'.substr($c,8,2).'.'.substr($c,5,2).'.'.substr($c,0,4).'</p>';
+            echo '<p>'.substr($c,11,2).':'.substr($c,14,2);
+            echo ' - '.substr($n,11,2).':'.substr($n,14,2).'</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>';
+            echo $lesson['student'];
+            echo '</p>';
+            echo '<p>';
+            echo 'ID '.$lesson['student_id'];
+            echo '</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>';
+            echo $lesson['repetitor'];
+            echo '</p>';
+            echo '<p>';
+            echo 'ID '.$lesson['repetitor_id'];
+            echo '</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>';
+            echo $lesson['subject'];
+            echo '</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>';
+            echo $lesson['specialization'];
+            echo '</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>';
+            echo $lesson['about'];
+            echo '</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>';
+            echo '1/50 мин';
+            echo '</p>';
+            echo '</div>';
+            echo '<div>';
+            if ($lesson['status'] == 'Проведён'){
+                echo '<p class="ok">';
+            } else{
+                echo '<p class="del">';
+            }
+            echo $lesson['status'];
+            echo '</p>';
+            echo '</div>';
+            echo '</aside>';
+        }
+         ?>
     </section>
 </main>
 
-<script src="<?php echo base_url(); ?>js/repetitor/chat.js"></script>
 <?php $this->load->view('main/footer'); ?>

@@ -1,4 +1,5 @@
 <?php $this->load->view('main/header'); ?>
+<meta name = "robots" content = "noindex,nofollow">
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.min.css">
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
 <title>Репетиторы по разным языкам. Админ. История Чатов.</title>
@@ -28,30 +29,40 @@
         </aside>
     </section>
     <section class="table">
-        <aside>
-            <div>
-                <p>23.10.2017</p>
-                <p>14:35 UTC + 3</p>
-            </div>
-            <div>
-                <p>Мария</p>
-                <p>ID 22222222</p>
-            </div>
-            <div>
-                <p>Светлана</p>
-                <p>ID 22222222</p>
-            </div>
-            <div>
-                <p class="student">Мария:</p>
-                <p>Хотела бы записаться на урок к Вам. Можете рассказать подронее о методке обучения</p>
-            </div>
-            <div>
-                <button class="mess">Написать сообщение</button>
-                <button class="del">Удалить</button>
-            </div>
-        </aside>
+        <?php
+        foreach ($chats as $chat) {
+            echo '<aside>';
+            echo '<div>';
+            $c = $chat['created_at'];
+            echo '<p>'.substr($c,8,2).'.'.substr($c,5,2).'.'.substr($c,0,4).'</p>';
+            echo '<p>'.substr($c,11,2).':'.substr($c,14,2).'</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>'.$chat['student_name'].'</p>';
+            echo '<p>ID '.$chat['student_id'].'</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>'.$chat['repetitor_name'].'</p>';
+            echo '<p>ID '.$chat['repetitor_id'].'</p>';
+            echo '</div>';
+            echo '<div>';
+            if ($chat['from_role']==1){
+                echo '<p class="repetitor">'.$chat['repetitor_name'].'</p>';
+            } else{
+                echo '<p class="student">'.$chat['student_name'].'</p>';
+            }
+            echo '<p>'.$chat['message'].'</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<a class="mess" href="chat?id='.$chat['from_id'].'&role='.$chat['from_role'].'">Написать сообщение</a>';
+            echo '<button class="del">Удалить</button>';
+            echo '<input type="hidden" value='.$chat['id'].' name="id">';
+            echo '</div>';
+            echo '</aside>';
+        }
+         ?>
     </section>
 </main>
 
-<script src="<?php echo base_url(); ?>js/repetitor/chat.js"></script>
+<script src="<?php echo base_url(); ?>js/admin/chathistory.js"></script>
 <?php $this->load->view('main/footer'); ?>

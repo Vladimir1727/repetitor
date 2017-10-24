@@ -1,10 +1,11 @@
 (function($){$(function(){
 var baseUrl = '../';
-console.log('repetitor timetable 2');
+console.log('repetitor timetable 3');
 var table = 0;
 var monday =0;
 var week = 0;
 var students = 0;
+
 
 function stringToDate(s){
     if ( s == null) return false;
@@ -32,7 +33,7 @@ $('#prev').click(function(){
 $('#save').click(function(){
     console.log(JSON.stringify(table));
     $.ajax({
-        url: baseUrl+'repetitor/saveTimeTable',
+        url: baseUrl+'repetitor/saveFreeTable',
         type:'post',
         data: 'table='+JSON.stringify(table),
         success: function(data){
@@ -136,6 +137,20 @@ function weekHeader(){
 }
 weekHeader();
 
+function checkDate(checkTime){
+    var d = new Date();
+    var zone = $('#zone').val();
+    var utc = - d.getTimezoneOffset()/60;
+    var realTime = new Date(d.getTime() + (zone-utc)*60*60*1000);
+    var addDate = new Date(checkTime.getTime() + 60*60*24*1000);
+    if (addDate.getTime() < realTime.getTime()){
+        errdiag('Ошибка','Нельзя изменить прошлое');
+        return false;
+    } else{
+        return true;
+    }
+}
+
 function tableClick(){
     $('.plan').each(function(){
         $(this).unbind();
@@ -144,55 +159,59 @@ function tableClick(){
             var wday = code.substr(0,1);
             var hour = code.substr(1);
             var addDate = new Date(monday.getTime()+60*60*1000*24*(wday-2)+60*60*1000*hour);
+            if (checkDate(addDate) == false){
+                return false;
+            }
             $(this).removeClass('plan');
             $(this).addClass('free');
-            var tM = (parseInt(addDate.getMonth())>9) ? addDate.getMonth()+1 : '0'+(addDate.getMonth()+1);
-            var tD = (parseInt(addDate.getDate())>9) ? addDate.getDate()+1 : '0'+(addDate.getDate()+1);
+            var tM = (parseInt(addDate.getMonth()+1)>9) ? addDate.getMonth()+1 : '0'+(addDate.getMonth()+1);
+            var tD = (parseInt(addDate.getDate()+1)>9) ? addDate.getDate()+1 : '0'+(addDate.getDate()+1);
             var tH = (parseInt(addDate.getHours())>9) ? addDate.getHours() : '0'+addDate.getHours();
             var tmin = (parseInt(addDate.getMinutes())>9) ? addDate.getMinutes() : '0'+addDate.getMinutes();
-            console.log('parse TH=',parseInt(addDate.getHours()));
             table.push({
                 'id' : 0,
                 'repetitor_id' : $('#repetitor_id').val(),
                 'student_id' : 0,
                 'date_from' : addDate.getFullYear()+'-'+tM+'-'+tD+' '+tH+':'+tmin+':00',
             });
-            console.log(table);
             tableClick();
         });
     });
     $('.free').each(function(){
         $(this).unbind();
         $(this).click(function(){
-        var code = $(this).attr('id');
-        var wday = code.substr(0,1);
-        var hour = code.substr(1);
-        var addDate = new Date(monday.getTime()+60*60*1000*24*(wday-1)+60*60*1000*hour);
-        $(this).removeClass('free');
-        $(this).addClass('plan');
-        var busy = -1;
-        for (var k = 0; k < table.length; k++) {
-            var tDate = stringToDate(table[k]['date_from']);
-            if (addDate.getDay() == tDate.getDay() && addDate.getHours() == tDate.getHours()){
-                busy = k;
+            var code = $(this).attr('id');
+            var wday = code.substr(0,1);
+            var hour = code.substr(1);
+            var addDate = new Date(monday.getTime()+60*60*1000*24*(wday-1)+60*60*1000*hour);
+            if (checkDate(addDate) == false){
+                return false;
             }
-        }
-        if (busy>-1){
-            var temp = [];
-            for (var i = 0; i < table.length; i++) {
-                if (i != busy){
-                    temp.push(table[i]);
-                }else{
-                    if (table[i].id >0 ){
-                        table[i].date_from = null;
-                        temp.push(table[i]);
-                    }
+            $(this).removeClass('free');
+            $(this).addClass('plan');
+            var busy = -1;
+            for (var k = 0; k < table.length; k++) {
+                var tDate = stringToDate(table[k]['date_from']);
+                if (addDate.getDay() == tDate.getDay() && addDate.getHours() == tDate.getHours()){
+                    busy = k;
                 }
             }
-            table = temp;
-        }
-        console.log(table);
-        tableClick();
+            if (busy>-1){
+                var temp = [];
+                for (var i = 0; i < table.length; i++) {
+                    if (i != busy){
+                        temp.push(table[i]);
+                    }else{
+                        if (table[i].id >0 ){
+                            table[i].date_from = null;
+                            temp.push(table[i]);
+                        }
+                    }
+                }
+                table = temp;
+            }
+            console.log(table);
+            tableClick();
         });
     });
 }

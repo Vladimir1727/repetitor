@@ -76,12 +76,12 @@ nav.main-menu {
       font-size: 18px;
       color: #fff;
       font-family: 'Arial Narrow', Arial;
-      padding-left: 25px;
+      padding-left: 35px;
       line-height: 50px; }
     nav.main-menu li > span.icon {
       position: absolute;
       top: 18px;
-      left: 10px;
+      left: 7px;
       width: 13px;
       height: 13px;
       display: inline-block;
@@ -768,7 +768,6 @@ main.rep-info {
           margin-right: 10px;
           cursor: pointer; }
       main.rep-info section.result aside div.avatar {
-        height: 100%;
         float: left;
         width: 215px; }
         main.rep-info section.result aside div.avatar div.img {
@@ -825,7 +824,7 @@ main.rep-info {
         main.rep-info section.result aside div.info a.favorites {
           position: absolute;
           right: 30%;
-          top: 40px;
+          top: 28px;
           display: block;
           width: 100px;
           height: 20px;
@@ -843,7 +842,7 @@ main.rep-info {
         main.rep-info section.result aside div.info div.price {
           font-size: 24px;
           position: absolute;
-          top: 25px;
+          top: 20px;
           right: 22px;
           font-family: "Arial Regular", Arial, sans-serif; }
           main.rep-info section.result aside div.info div.price small {
@@ -984,6 +983,59 @@ main.rep-info {
         font-size: 18px;
         color: #666;
         font-weight: 500; }
+    main.rep-info section.result aside.feeds div.form:after {
+      content: '';
+      display: block;
+      clear: both; }
+    main.rep-info section.result aside.feeds div.form h3 {
+      text-align: center;
+      font-family: "Arial Regular", Arial, sans-serif;
+      font-size: 16px; }
+    main.rep-info section.result aside.feeds div.form form > div:first-child {
+      float: left;
+      width: 200px; }
+    main.rep-info section.result aside.feeds div.form form > div:last-child {
+      margin-left: 200px; }
+    main.rep-info section.result aside.feeds div.form span.star1, main.rep-info section.result aside.feeds div.form span.star0 {
+      display: inline-block;
+      width: 22px;
+      height: 21px; }
+    main.rep-info section.result aside.feeds div.form span.star1 {
+      background: url("../img/star1.png"); }
+    main.rep-info section.result aside.feeds div.form span.star0 {
+      background: url("../img/star0.png"); }
+    main.rep-info section.result aside.feeds div.form label {
+      display: block; }
+    main.rep-info section.result aside.feeds div.form input[type='radio'] {
+      display: none; }
+    main.rep-info section.result aside.feeds div.form input[type='radio'] + span {
+      display: inline-block;
+      width: 19px;
+      height: 20px;
+      background: url("../img/check_out.png");
+      background-position: left bottom;
+      background-repeat: no-repeat;
+      margin-right: 20px; }
+    main.rep-info section.result aside.feeds div.form input[type='radio']:checked + span {
+      background: url("../img/check_in.png"); }
+    main.rep-info section.result aside.feeds div.form textarea {
+      resize: none;
+      width: 100%;
+      height: 145px; }
+    main.rep-info section.result aside.feeds div.form button {
+      display: block;
+      margin: 0 auto;
+      background: #FF5C39;
+      border: none;
+      width: 170px;
+      height: 30px;
+      color: #fff;
+      font-family: "OpenSans Regular", Arial, sans-serif;
+      font-size: 16px;
+      text-align: center;
+      margin-top: 15px; }
+      main.rep-info section.result aside.feeds div.form button:hover {
+        background: #ff7e5b; }
     main.rep-info section.result aside.feeds div.feed {
       position: relative; }
       main.rep-info section.result aside.feeds div.feed h3 {
@@ -1825,9 +1877,42 @@ main.rep-profile {
     main.rep-profile section.warp aside {
       height: 354px;
       overflow-y: auto; }
+      main.rep-profile section.warp aside .save_warning {
+        font-family: "Arial Regular", Arial, sans-serif;
+        text-align: center;
+        margin-bottom: 0; }
+      main.rep-profile section.warp aside .must {
+        position: relative; }
+        main.rep-profile section.warp aside .must span.warn {
+          position: absolute;
+          font-family: "Arial Narrow", Arial, sans-serif;
+          font-size: 13px;
+          font-style: italic;
+          font-weight: normal; }
+        main.rep-profile section.warp aside .must span.warn1 {
+          bottom: 70px;
+          left: 13px; }
+        main.rep-profile section.warp aside .must span.warn2 {
+          top: -16px;
+          left: 3px; }
+        main.rep-profile section.warp aside .must span.warn3 {
+          bottom: 30px;
+          left: 3px; }
+        main.rep-profile section.warp aside .must span.warn4 {
+          top: 12px;
+          left: 18px; }
+        main.rep-profile section.warp aside .must span.warn5 {
+          top: 38px;
+          right: 2px; }
+        main.rep-profile section.warp aside .must span.warn6 {
+          top: -8px;
+          right: 45px; }
+        main.rep-profile section.warp aside .must span.warn7 {
+          top: -16px;
+          right: 45px; }
     main.rep-profile section.warp aside#present {
       display: none;
-      padding: 15px; }
+      padding: 0 15px; }
       main.rep-profile section.warp aside#present:after {
         content: '';
         display: block;
@@ -1867,7 +1952,7 @@ main.rep-profile {
         main.rep-profile section.warp aside#present div.info button {
           display: block;
           width: 170px;
-          margin: 35px auto 10px auto; }
+          margin: 5px auto 10px auto; }
       main.rep-profile section.warp aside#present textarea, main.rep-profile section.warp aside#present input {
         font-size: 16px;
         width: 100%;
@@ -1882,7 +1967,7 @@ main.rep-profile {
         height: 30px; }
     main.rep-profile section.warp form.personal {
       max-width: 600px;
-      margin: 30px auto 0 auto;
+      margin: 25px auto 0 auto;
       padding: 30px 10px; }
       main.rep-profile section.warp form.personal:after {
         content: '';
@@ -1953,7 +2038,8 @@ main.rep-profile {
       main.rep-profile section.warp aside#subject label.sradio {
         display: inline-block;
         display: none;
-        width: 100px; }
+        width: 100px;
+        margin-bottom: 15px; }
         main.rep-profile section.warp aside#subject label.sradio input + span {
           display: inline-block;
           width: 26px;
@@ -1995,7 +2081,7 @@ main.rep-profile {
             height: 19px;
             background: url("../img/plus.png"); }
           main.rep-profile section.warp aside#subject form > div:nth-child(1) h2 {
-            margin-bottom: 15px; }
+            margin-bottom: 0px; }
         main.rep-profile section.warp aside#subject form > div:nth-child(2) {
           width: 260px; }
           main.rep-profile section.warp aside#subject form > div:nth-child(2) h2:last-of-type {
@@ -2030,7 +2116,7 @@ main.rep-profile {
       display: none; }
       main.rep-profile section.warp aside#pay div {
         font-family: "Arial Narrow", Arial, sans-serif;
-        padding: 50px 15px 10px 15px; }
+        padding: 5px 15px 10px 15px; }
       main.rep-profile section.warp aside#pay h2, main.rep-profile section.warp aside#pay h3 {
         color: #333;
         text-align: center;
@@ -2071,6 +2157,9 @@ main.rep-profile {
           top: 20px; }
         main.rep-profile section.warp aside#pay label input:focus + span.check {
           display: block; }
+        main.rep-profile section.warp aside#pay label:last-of-type {
+          margin-bottom: 5px;
+          padding-left: 15px; }
       main.rep-profile section.warp aside#pay > button {
         display: block;
         margin: 0 auto;
@@ -2081,12 +2170,13 @@ main.rep-profile {
         color: #fff;
         font-family: "OpenSans Regular", Arial, sans-serif;
         font-size: 16px;
-        text-align: center; }
+        text-align: center;
+        margin-top: 10px; }
         main.rep-profile section.warp aside#pay > button:hover {
           background: #ff7e5b; }
     main.rep-profile section.warp aside#edu {
       display: none;
-      padding: 20px 0; }
+      padding: 7px 0; }
       main.rep-profile section.warp aside#edu > div {
         margin: 0 auto;
         width: 800px;
@@ -2191,7 +2281,7 @@ main.rep-profile {
           height: 160px; }
     main.rep-profile section.warp aside#status {
       display: none;
-      padding: 15px 10px; }
+      padding: 5px 10px; }
       main.rep-profile section.warp aside#status h3 {
         font-family: "Arial Narrow", Arial, sans-serif;
         color: #333;
@@ -2251,7 +2341,8 @@ main.rep-profile {
         margin-top: 30px; }
         main.rep-profile section.warp aside#status div.link h4 span {
           color: #666;
-          float: right; }
+          float: right;
+          margin: 0 10px; }
 
 a.send-rep-profile {
   display: block;
@@ -2267,6 +2358,11 @@ a.send-rep-profile {
   background: #48B6A8; }
   a.send-rep-profile:hover {
     background: #6ad8ca; }
+  a.send-rep-profile.dark {
+    background: #028163; }
+    a.send-rep-profile.dark:hover {
+      color: #fff;
+      background: #24a385; }
 
 div#modal_login div.modal-dialog {
   max-width: 400px; }
@@ -2538,7 +2634,8 @@ div.admin-header {
     div.admin-header section div.menu li.mail {
       background: url("../img/mail.png");
       background-position: center;
-      background-repeat: no-repeat; }
+      background-repeat: no-repeat;
+      position: relative; }
       div.admin-header section div.menu li.mail a {
         width: 54px;
         color: transparent; }
@@ -2547,6 +2644,21 @@ div.admin-header {
       div.admin-header section div.menu li.mail a:hover {
         color: transparent;
         background: url("../img/mail_green.png") center no-repeat; }
+      div.admin-header section div.menu li.mail span {
+        display: block;
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        border: 1px #ff5c39 solid;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        background: #fff;
+        font-family: "Arial Narrow", Arial, sans-serif;
+        color: #ff5c39;
+        font-size: 17px;
+        text-align: center;
+        line-height: 1; }
     div.admin-header section div.menu li#slide {
       margin-right: 0;
       position: relative; }
@@ -2584,7 +2696,8 @@ div.admin-header {
           div.admin-header section div.menu li#slide ul > li:nth-child(1), div.admin-header section div.menu li#slide ul > li:nth-child(2), div.admin-header section div.menu li#slide ul > li:nth-child(3), div.admin-header section div.menu li#slide ul > li:nth-child(4), div.admin-header section div.menu li#slide ul > li:nth-child(5), div.admin-header section div.menu li#slide ul > li:nth-child(6) {
             display: none; }
           div.admin-header section div.menu li#slide ul > li.mail {
-            background: #fff; }
+            background: #fff;
+            position: relative; }
             div.admin-header section div.menu li#slide ul > li.mail > a {
               color: transparent;
               background: url("../img/mail.png");
@@ -2595,6 +2708,21 @@ div.admin-header {
             div.admin-header section div.menu li#slide ul > li.mail > a:hover {
               color: transparent;
               background: url("../img/mail_green.png") center no-repeat; }
+            div.admin-header section div.menu li#slide ul > li.mail span {
+              display: block;
+              position: absolute;
+              top: 5px;
+              right: 15px;
+              border: 1px #ff5c39 solid;
+              border-radius: 50%;
+              width: 18px;
+              height: 18px;
+              background: #fff;
+              font-family: "Arial Narrow", Arial, sans-serif;
+              color: #ff5c39;
+              font-size: 17px;
+              text-align: center;
+              line-height: 1; }
       div.admin-header section div.menu li#slide:hover {
         background: #fff; }
         div.admin-header section div.menu li#slide:hover a {
@@ -2610,6 +2738,8 @@ main.student-profile {
   width: 100%;
   margin: 30px auto 100px auto;
   background: #fff; }
+  main.student-profile > h4 {
+    text-align: center; }
   main.student-profile section {
     margin: 0 auto;
     max-width: 830px;
@@ -2973,7 +3103,7 @@ main.rep_less_request {
     background: #fff;
     height: 120px;
     padding: 5px;
-    overflow: hidden; }
+    word-wrap: break-word; }
     main.rep_less_request section.table > aside > div p {
       font-size: 16px;
       padding: 0;
@@ -3074,32 +3204,37 @@ main.rep_history {
     background: #fff;
     height: 110px;
     padding: 5px;
-    overflow: hidden; }
+    word-wrap: break-word; }
     main.rep_history section.table > aside > div p {
       font-size: 16px;
       padding: 0;
       margin: 0; }
-    main.rep_history section.table > aside > div button {
+    main.rep_history section.table > aside > div a, main.rep_history section.table > aside > div button {
       width: 120px;
       border: none;
       display: block;
       margin: 5px auto;
       min-height: 25px;
-      font-family: "OpenSans Regular", Arial, sans-serif; }
-      main.rep_history section.table > aside > div button.ok {
+      font-family: "OpenSans Regular", Arial, sans-serif;
+      text-decoration: none;
+      text-align: center;
+      line-height: 1.7; }
+      main.rep_history section.table > aside > div a:hover, main.rep_history section.table > aside > div button:hover {
+        text-decoration: none; }
+      main.rep_history section.table > aside > div a.ok, main.rep_history section.table > aside > div button.ok {
         color: #fff;
         background: #07CA9A; }
-        main.rep_history section.table > aside > div button.ok:hover {
+        main.rep_history section.table > aside > div a.ok:hover, main.rep_history section.table > aside > div button.ok:hover {
           background: #29ecbc; }
-      main.rep_history section.table > aside > div button.del {
+      main.rep_history section.table > aside > div a.del, main.rep_history section.table > aside > div button.del {
         color: #fff;
         background: #FF5C39; }
-        main.rep_history section.table > aside > div button.del:hover {
+        main.rep_history section.table > aside > div a.del:hover, main.rep_history section.table > aside > div button.del:hover {
           background: #ff7e5b; }
-      main.rep_history section.table > aside > div button.mess {
+      main.rep_history section.table > aside > div a.mess, main.rep_history section.table > aside > div button.mess {
         color: #fff;
         background: #028163; }
-        main.rep_history section.table > aside > div button.mess:hover {
+        main.rep_history section.table > aside > div a.mess:hover, main.rep_history section.table > aside > div button.mess:hover {
           background: #24a385; }
   main.rep_history section.table > aside:last-of-type > div {
     border-bottom: 1px #666 solid; }
@@ -3176,32 +3311,34 @@ main.rep_free {
     background: #fff;
     height: 110px;
     padding: 5px;
-    overflow: hidden; }
+    word-wrap: break-word; }
     main.rep_free section.table > aside > div p {
       font-size: 16px;
       padding: 0;
       margin: 0; }
-    main.rep_free section.table > aside > div button {
+    main.rep_free section.table > aside > div a, main.rep_free section.table > aside > div button {
       width: 110px;
       border: none;
       display: block;
       margin: 5px auto;
       padding: 5px;
+      text-align: center;
+      text-decoration: none;
       font-family: "OpenSans Regular", Arial, sans-serif; }
-      main.rep_free section.table > aside > div button.ok {
+      main.rep_free section.table > aside > div a.ok, main.rep_free section.table > aside > div button.ok {
         color: #fff;
         background: #07CA9A; }
-        main.rep_free section.table > aside > div button.ok:hover {
+        main.rep_free section.table > aside > div a.ok:hover, main.rep_free section.table > aside > div button.ok:hover {
           background: #29ecbc; }
-      main.rep_free section.table > aside > div button.del {
+      main.rep_free section.table > aside > div a.del, main.rep_free section.table > aside > div button.del {
         color: #fff;
         background: #FF5C39; }
-        main.rep_free section.table > aside > div button.del:hover {
+        main.rep_free section.table > aside > div a.del:hover, main.rep_free section.table > aside > div button.del:hover {
           background: #ff7e5b; }
-      main.rep_free section.table > aside > div button.mess {
+      main.rep_free section.table > aside > div a.mess, main.rep_free section.table > aside > div button.mess {
         color: #fff;
         background: #028163; }
-        main.rep_free section.table > aside > div button.mess:hover {
+        main.rep_free section.table > aside > div a.mess:hover, main.rep_free section.table > aside > div button.mess:hover {
           background: #24a385; }
   main.rep_free section.table > aside:last-of-type > div {
     border-bottom: 1px #666 solid; }
@@ -3275,7 +3412,7 @@ main.rep_lessons {
     background: #fff;
     height: 110px;
     padding: 5px;
-    overflow: hidden; }
+    word-wrap: break-word; }
     main.rep_lessons section.table > aside > div p {
       font-size: 16px;
       padding: 0;
@@ -3365,7 +3502,7 @@ main.rep_balance {
     border-right: 1px #666 solid;
     border-bottom: 1px #666 solid;
     height: 70px;
-    overflow: hidden; }
+    word-wrap: break-word; }
     main.rep_balance section.in aside > div p {
       font-family: "Arial Narrow", Arial, sans-serif;
       font-size: 16px; }
@@ -3382,7 +3519,7 @@ main.rep_balance {
     border-right: 1px #666 solid;
     border-bottom: 1px #666 solid;
     height: 70px;
-    overflow: hidden; }
+    word-wrap: break-word; }
     main.rep_balance section.out aside > div p {
       font-family: "Arial Narrow", Arial, sans-serif;
       font-size: 16px; }
@@ -3846,7 +3983,7 @@ main.student_free {
     background: #fff;
     height: 130px;
     padding: 5px;
-    overflow: hidden; }
+    word-wrap: break-word; }
     main.student_free section.table > aside > div p {
       font-size: 16px;
       padding: 0;
@@ -3855,27 +3992,29 @@ main.student_free {
       margin: 0;
       text-align: center;
       padding: 5px; }
-    main.student_free section.table > aside > div button {
+    main.student_free section.table > aside > div a, main.student_free section.table > aside > div button {
       width: 110px;
       border: none;
       display: block;
       margin: 5px auto;
       padding: 5px;
+      text-align: center;
+      text-decoration: none;
       font-family: "OpenSans Regular", Arial, sans-serif; }
-      main.student_free section.table > aside > div button.ok {
+      main.student_free section.table > aside > div a.ok, main.student_free section.table > aside > div button.ok {
         color: #fff;
         background: #07CA9A; }
-        main.student_free section.table > aside > div button.ok:hover {
+        main.student_free section.table > aside > div a.ok:hover, main.student_free section.table > aside > div button.ok:hover {
           background: #29ecbc; }
-      main.student_free section.table > aside > div button.del {
+      main.student_free section.table > aside > div a.del, main.student_free section.table > aside > div button.del {
         color: #fff;
         background: #FF5C39; }
-        main.student_free section.table > aside > div button.del:hover {
+        main.student_free section.table > aside > div a.del:hover, main.student_free section.table > aside > div button.del:hover {
           background: #ff7e5b; }
-      main.student_free section.table > aside > div button.mess {
+      main.student_free section.table > aside > div a.mess, main.student_free section.table > aside > div button.mess {
         color: #fff;
         background: #028163; }
-        main.student_free section.table > aside > div button.mess:hover {
+        main.student_free section.table > aside > div a.mess:hover, main.student_free section.table > aside > div button.mess:hover {
           background: #24a385; }
   main.student_free section.table > aside:last-of-type > div {
     border-bottom: 1px #666 solid; }
@@ -4041,7 +4180,7 @@ main.admin-payback {
     background: #fff;
     height: 120px;
     padding: 5px;
-    overflow: hidden; }
+    word-wrap: break-word; }
     main.admin-payback section.table > aside > div p {
       font-size: 16px;
       padding: 0;
@@ -4050,27 +4189,29 @@ main.admin-payback {
         color: #07CA9A; }
       main.admin-payback section.table > aside > div p.repetitor {
         color: #FF5C39; }
-    main.admin-payback section.table > aside > div button {
+    main.admin-payback section.table > aside > div a, main.admin-payback section.table > aside > div button {
       width: 110px;
       border: none;
       display: block;
       margin: 5px auto;
       min-height: 25px;
-      font-family: "OpenSans Regular", Arial, sans-serif; }
-      main.admin-payback section.table > aside > div button.ok {
+      font-family: "OpenSans Regular", Arial, sans-serif;
+      text-align: center;
+      text-decoration: none; }
+      main.admin-payback section.table > aside > div a.ok, main.admin-payback section.table > aside > div button.ok {
         color: #fff;
         background: #07CA9A; }
-        main.admin-payback section.table > aside > div button.ok:hover {
+        main.admin-payback section.table > aside > div a.ok:hover, main.admin-payback section.table > aside > div button.ok:hover {
           background: #29ecbc; }
-      main.admin-payback section.table > aside > div button.del {
+      main.admin-payback section.table > aside > div a.del, main.admin-payback section.table > aside > div button.del {
         color: #fff;
         background: #FF5C39; }
-        main.admin-payback section.table > aside > div button.del:hover {
+        main.admin-payback section.table > aside > div a.del:hover, main.admin-payback section.table > aside > div button.del:hover {
           background: #ff7e5b; }
-      main.admin-payback section.table > aside > div button.mess {
+      main.admin-payback section.table > aside > div a.mess, main.admin-payback section.table > aside > div button.mess {
         color: #fff;
         background: #028163; }
-        main.admin-payback section.table > aside > div button.mess:hover {
+        main.admin-payback section.table > aside > div a.mess:hover, main.admin-payback section.table > aside > div button.mess:hover {
           background: #24a385; }
   main.admin-payback section.table > aside:last-of-type > div {
     border-bottom: 1px #666 solid; }
@@ -4112,7 +4253,18 @@ main.admin-chathistory {
     background: #fff;
     height: 120px;
     padding: 5px;
-    overflow: hidden; }
+    word-wrap: break-word; }
+    main.admin-chathistory section.table > aside > div div.stars {
+      width: 123px;
+      height: 20px; }
+      main.admin-chathistory section.table > aside > div div.stars span {
+        display: inline-block;
+        width: 22px;
+        height: 21px; }
+      main.admin-chathistory section.table > aside > div div.stars span.star1 {
+        background: url("../img/star1.png"); }
+      main.admin-chathistory section.table > aside > div div.stars span.star0 {
+        background: url("../img/star0.png"); }
     main.admin-chathistory section.table > aside > div p {
       font-size: 16px;
       padding: 0;
@@ -4121,27 +4273,29 @@ main.admin-chathistory {
         color: #07CA9A; }
       main.admin-chathistory section.table > aside > div p.repetitor {
         color: #FF5C39; }
-    main.admin-chathistory section.table > aside > div button {
+    main.admin-chathistory section.table > aside > div a, main.admin-chathistory section.table > aside > div button {
       width: 110px;
       border: none;
       display: block;
       margin: 5px auto;
       min-height: 25px;
-      font-family: "OpenSans Regular", Arial, sans-serif; }
-      main.admin-chathistory section.table > aside > div button.ok {
+      font-family: "OpenSans Regular", Arial, sans-serif;
+      text-align: center;
+      text-decoration: none; }
+      main.admin-chathistory section.table > aside > div a.ok, main.admin-chathistory section.table > aside > div button.ok {
         color: #fff;
         background: #07CA9A; }
-        main.admin-chathistory section.table > aside > div button.ok:hover {
+        main.admin-chathistory section.table > aside > div a.ok:hover, main.admin-chathistory section.table > aside > div button.ok:hover {
           background: #29ecbc; }
-      main.admin-chathistory section.table > aside > div button.del {
+      main.admin-chathistory section.table > aside > div a.del, main.admin-chathistory section.table > aside > div button.del {
         color: #fff;
         background: #FF5C39; }
-        main.admin-chathistory section.table > aside > div button.del:hover {
+        main.admin-chathistory section.table > aside > div a.del:hover, main.admin-chathistory section.table > aside > div button.del:hover {
           background: #ff7e5b; }
-      main.admin-chathistory section.table > aside > div button.mess {
+      main.admin-chathistory section.table > aside > div a.mess, main.admin-chathistory section.table > aside > div button.mess {
         color: #fff;
         background: #028163; }
-        main.admin-chathistory section.table > aside > div button.mess:hover {
+        main.admin-chathistory section.table > aside > div a.mess:hover, main.admin-chathistory section.table > aside > div button.mess:hover {
           background: #24a385; }
   main.admin-chathistory section.table > aside:last-of-type > div {
     border-bottom: 1px #666 solid; }
@@ -4203,7 +4357,7 @@ main.admin-lessonshistory {
     background: #fff;
     height: 120px;
     padding: 5px;
-    overflow: hidden; }
+    word-wrap: break-word; }
     main.admin-lessonshistory section.table aside > div p {
       font-size: 16px;
       padding: 0;
@@ -4262,7 +4416,9 @@ main.admin-repetitors {
     background: #fff;
     height: 120px;
     padding: 5px;
-    overflow: hidden; }
+    word-wrap: break-word; }
+    main.admin-repetitors section.table aside > div:last-child {
+      word-wrap: normal; }
     main.admin-repetitors section.table aside > div p {
       font-size: 16px;
       padding: 0;
@@ -4273,32 +4429,34 @@ main.admin-repetitors {
       main.admin-repetitors section.table aside > div p.del {
         text-align: center;
         color: #FF5C39; }
-    main.admin-repetitors section.table aside > div button {
+    main.admin-repetitors section.table aside > div a, main.admin-repetitors section.table aside > div button {
       width: 70px;
       border: none;
       display: block;
       margin: 2px auto;
       font-family: "Arial Narrow", Arial, sans-serif;
-      font-size: 14px; }
-      main.admin-repetitors section.table aside > div button.ok {
+      font-size: 14px;
+      text-align: center;
+      text-decoration: none; }
+      main.admin-repetitors section.table aside > div a.ok, main.admin-repetitors section.table aside > div button.ok {
         color: #fff;
         background: #6B7683; }
-        main.admin-repetitors section.table aside > div button.ok:hover {
+        main.admin-repetitors section.table aside > div a.ok:hover, main.admin-repetitors section.table aside > div button.ok:hover {
           color: #fff; }
-      main.admin-repetitors section.table aside > div button.off {
+      main.admin-repetitors section.table aside > div a.off, main.admin-repetitors section.table aside > div button.off {
         color: #fff;
         background: #00CC99; }
-        main.admin-repetitors section.table aside > div button.off:hover {
+        main.admin-repetitors section.table aside > div a.off:hover, main.admin-repetitors section.table aside > div button.off:hover {
           background: #22eebb; }
-      main.admin-repetitors section.table aside > div button.del {
+      main.admin-repetitors section.table aside > div a.del, main.admin-repetitors section.table aside > div button.del {
         color: #fff;
         background: #FF5C39; }
-        main.admin-repetitors section.table aside > div button.del:hover {
+        main.admin-repetitors section.table aside > div a.del:hover, main.admin-repetitors section.table aside > div button.del:hover {
           background: #ff7e5b; }
-      main.admin-repetitors section.table aside > div button.mess {
+      main.admin-repetitors section.table aside > div a.mess, main.admin-repetitors section.table aside > div button.mess {
         color: #fff;
         background: #028163; }
-        main.admin-repetitors section.table aside > div button.mess:hover {
+        main.admin-repetitors section.table aside > div a.mess:hover, main.admin-repetitors section.table aside > div button.mess:hover {
           background: #24a385; }
   main.admin-repetitors section.table aside:last-of-type > div {
     border-bottom: 1px #666 solid; }
@@ -4337,7 +4495,7 @@ main.admin-repetitors {
     background: #fff;
     height: 120px;
     padding: 5px;
-    overflow: hidden; }
+    word-wrap: break-word; }
     main.admin-repetitors section.table_kand aside > div p {
       font-size: 16px;
       padding: 0;
@@ -4404,7 +4562,7 @@ main.admin-students {
     text-align: center;
     height: 50px;
     background: #07CA9A;
-    overflow: hidden; }
+    word-wrap: break-word; }
     main.admin-students section.head aside > div p {
       display: table-cell;
       vertical-align: middle; }
@@ -4412,7 +4570,7 @@ main.admin-students {
     background: #fff;
     height: 120px;
     padding: 5px;
-    overflow: hidden; }
+    word-wrap: break-word; }
     main.admin-students section.table > aside > div p {
       font-size: 16px;
       padding: 0;
@@ -4421,32 +4579,36 @@ main.admin-students {
         color: #07CA9A; }
       main.admin-students section.table > aside > div p.repetitor {
         color: #FF5C39; }
-    main.admin-students section.table > aside > div button {
+    main.admin-students section.table > aside > div:last-child {
+      word-wrap: normal; }
+    main.admin-students section.table > aside > div a, main.admin-students section.table > aside > div button {
       width: 70px;
       border: none;
       display: block;
       margin: 5px auto;
       min-height: 25px;
-      font-family: "Arial Narrow", Arial, sans-serif; }
-      main.admin-students section.table > aside > div button.ok {
+      font-family: "Arial Narrow", Arial, sans-serif;
+      text-align: center;
+      text-decoration: none; }
+      main.admin-students section.table > aside > div a.ok, main.admin-students section.table > aside > div button.ok {
         color: #fff;
         background: #6B7683; }
-        main.admin-students section.table > aside > div button.ok:hover {
+        main.admin-students section.table > aside > div a.ok:hover, main.admin-students section.table > aside > div button.ok:hover {
           color: #fff; }
-      main.admin-students section.table > aside > div button.off {
+      main.admin-students section.table > aside > div a.off, main.admin-students section.table > aside > div button.off {
         color: #fff;
         background: #00CC99; }
-        main.admin-students section.table > aside > div button.off:hover {
+        main.admin-students section.table > aside > div a.off:hover, main.admin-students section.table > aside > div button.off:hover {
           background: #22eebb; }
-      main.admin-students section.table > aside > div button.del {
+      main.admin-students section.table > aside > div a.del, main.admin-students section.table > aside > div button.del {
         color: #fff;
         background: #FF5C39; }
-        main.admin-students section.table > aside > div button.del:hover {
+        main.admin-students section.table > aside > div a.del:hover, main.admin-students section.table > aside > div button.del:hover {
           background: #ff7e5b; }
-      main.admin-students section.table > aside > div button.mess {
+      main.admin-students section.table > aside > div a.mess, main.admin-students section.table > aside > div button.mess {
         color: #fff;
         background: #028163; }
-        main.admin-students section.table > aside > div button.mess:hover {
+        main.admin-students section.table > aside > div a.mess:hover, main.admin-students section.table > aside > div button.mess:hover {
           background: #24a385; }
   main.admin-students section.table > aside:last-of-type > div {
     border-bottom: 1px #666 solid; }
@@ -4496,7 +4658,7 @@ main.admin-free {
     text-align: center;
     height: 50px;
     background: #07CA9A;
-    overflow: hidden; }
+    word-wrap: break-word; }
     main.admin-free section.head aside > div p {
       display: table-cell;
       vertical-align: middle; }
@@ -4504,7 +4666,7 @@ main.admin-free {
     background: #fff;
     height: 120px;
     padding: 5px;
-    overflow: hidden; }
+    word-wrap: break-word; }
     main.admin-free section.table > aside > div p {
       font-size: 16px;
       padding: 0;
@@ -4522,10 +4684,10 @@ main.admin-free {
       margin: 5px auto;
       min-height: 25px;
       font-family: "Arial Regular", Arial, sans-serif; }
-      main.admin-free section.table > aside > div button.ok {
+      main.admin-free section.table > aside > div button.ok, main.admin-free section.table > aside > div button.show {
         color: #fff;
         background: #07CA9A; }
-        main.admin-free section.table > aside > div button.ok:hover {
+        main.admin-free section.table > aside > div button.ok:hover, main.admin-free section.table > aside > div button.show:hover {
           background: #29ecbc; }
       main.admin-free section.table > aside > div button.del {
         color: #fff;
@@ -4732,6 +4894,56 @@ div#deldialog {
     display: inline-block; }
   div#deldialog > button {
     float: right; }
+  div#deldialog textarea {
+    width: 100%;
+    resize: none; }
+  div#deldialog > a {
+    color: #222f3b !important; }
+
+main.stop {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1000px;
+  padding-bottom: 50px; }
+  main.stop h1 {
+    margin-top: 70px;
+    font-family: "Arial Regular", Arial, sans-serif;
+    font-size: 22px;
+    text-align: center; }
+  main.stop h2 {
+    line-height: 2;
+    font-family: "Arial Regular", Arial, sans-serif;
+    font-size: 20px;
+    text-align: center; }
+
+main.admin-prerep {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto; }
+  main.admin-prerep h1, main.admin-prerep h2 {
+    font-family: "Arial Regular", Arial, sans-serif;
+    font-size: 25px;
+    margin: 0; }
+  main.admin-prerep table {
+    margin-top: 20px;
+    width: 100%; }
+    main.admin-prerep table tr th {
+      font-family: "Arial Regular", Arial, sans-serif;
+      font-size: 16px;
+      width: 33%;
+      height: 35px;
+      text-align: center;
+      border: 1px #666 solid; }
+    main.admin-prerep table thead {
+      font-weight: 600;
+      background: #07CA9A; }
+    main.admin-prerep table tbody {
+      background: #fff; }
+      main.admin-prerep table tbody tr td {
+        font-family: "Arial Regular", Arial, sans-serif;
+        font-size: 14px;
+        padding: 5px 15px;
+        border: 1px #666 solid; }
 
 @media screen and (max-width: 1200px) {
   section.filter > div.row {
@@ -5070,7 +5282,8 @@ div#deldialog {
   main.filter section.result aside > div.info {
     float: none;
     margin: 0 auto;
-    padding-left: 10px; }
+    padding-left: 10px;
+    width: 100%; }
     main.filter section.result aside > div.info a.favorites {
       top: 10px;
       left: 50%;
@@ -5570,21 +5783,32 @@ div#deldialog {
   section.comfort aside {
     max-width: 286px; }
 
+  main.filter section.result aside > div.info h2 {
+    margin-top: 35px; }
   main.filter section.result aside > div.info div.stars {
-    position: static;
-    margin: 10px auto; }
+    position: absolute;
+    left: 50%;
+    top: 35px;
+    margin-left: -53px; }
   main.filter section.result aside > div.info a.lesson, main.filter section.result aside > div.info a.message, main.filter section.result aside > div.info a.sh {
     float: none;
     display: block;
     margin: 5px auto; }
+  main.filter section.result aside > div.info div.price {
+    top: 56px; }
 
+  main.rep-info section.result aside > div.info h2 {
+    margin-top: 35px; }
   main.rep-info section.result aside > div.info div.stars {
-    position: static;
-    margin: 10px auto; }
+    top: 35px;
+    left: 50%;
+    margin-left: -62px; }
   main.rep-info section.result aside > div.info a.lesson, main.rep-info section.result aside > div.info a.message, main.rep-info section.result aside > div.info a.sh {
     float: none;
     display: block;
     margin: 5px auto; }
+  main.rep-info section.result aside > div.info div.price {
+    top: 56px; }
   main.rep-info section.result aside.sh table span.hide {
     display: none; }
   main.rep-info section.result aside.sh table thead tr {
@@ -5738,7 +5962,14 @@ div#deldialog {
   main.step table tbody tr td.busy {
     font-size: 10px; }
   main.step table tbody tr td:first-of-type {
-    font-size: 12px; } }
+    font-size: 12px; }
+
+  main.rep-info section.result aside.feeds div.form form > div:first-child {
+    float: none;
+    margin: 0 auto;
+    width: 165px; }
+  main.rep-info section.result aside.feeds div.form form > div:last-child {
+    margin-left: 0; } }
 @media screen and (max-width: 416px) {
   section.lang {
     max-width: 300px; }

@@ -1,7 +1,7 @@
 <?php $this->load->view('main/header'); ?>
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.min.css">
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
-<title>Репетиторы по разным языкам. Уроки</title>
+<title>Репетиторы Real Language Club. Уроки</title>
 </head>
 <body>
 <?php $this->load->view('repetitor/header_menu'); ?>
@@ -12,8 +12,8 @@
             <h1>Уроки</h1>
         </div>
         <div>
-            <h3>18:20 (UTC+2)</h3>
-            <h4>23 сентября 2017,суббота</h4>
+            <h3><span id="local-time">18:20</span> (UTC <?php echo ($repetitor['tzone']>0) ? '+'.$repetitor['tzone'] : $repetitor['tzone']; ?>)</h3>
+            <h4 id="local-date">23 сентября 2017,суббота</h4>
         </div>
     </section>
     <section class="head">
@@ -43,73 +43,58 @@
         </div>
     </section>
     <section class="table">
-        <aside>
-            <div>
-                <p>23.09.2017</p>
-                <p>18:30 – 19:30</p>
-                <p>(UTC +2)</p>
-            </div>
-            <div>
-                <p>Мария</p>
-                <p>ID11111111</p>
-            </div>
-            <div>
-                <p>Английский язык</p>
-            </div>
-            <div>
-                <p>Maria78</p>
-            </div>
-            <div>
-                <p>Сдача экзамена B2</p>
-            </div>
-            <div>
-                <p>Повысить уровень понимания устной речи</p>
-            </div>
-            <div>
-                <p>1/50 мин.</p>
-            </div>
-            <div>
-                <button class="ok">Начать урок</button>
-                <button class="mess">Сообщение</button>
-                <button class="del">Отменить</button>
-            </div>
-        </aside>
-        <aside>
-            <div>
-                <p>23.09.2017</p>
-                <p>18:30 – 19:30</p>
-                <p>(UTC +2)</p>
-            </div>
-            <div>
-                <p>Мария</p>
-                <p>ID11111111</p>
-            </div>
-            <div>
-                <p>Английский язык</p>
-            </div>
-            <div>
-                <p>Maria78</p>
-            </div>
-            <div>
-                <p>Сдача экзамена B2</p>
-            </div>
-            <div>
-                <p>Повысить уровень понимания устной речи</p>
-            </div>
-            <div>
-                <p>1/50 мин.</p>
-            </div>
-            <div>
-                <button class="ok">Начать урок</button>
-                <button class="mess">Сообщение</button>
-                <button class="del">Отменить</button>
-            </div>
-        </aside>
+        <?php
+        foreach ($lessons as $lesson){
+            echo '<aside>';
+            echo '<div>';
+            $c = $lesson['date_from'];
+            $n = date('Y-m-d H:i:s', strtotime($lesson['date_from']) + 60*60);
+            echo '<p>'.substr($c,8,2).'.'.substr($c,5,2).'.'.substr($c,0,4).'</p>';
+            echo '<p>'.substr($c,11,2).':'.substr($c,14,2);
+            echo ' - '.substr($n,11,2).':'.substr($n,14,2).'</p>';
+            echo '<p>( UTC ';
+            echo ($repetitor['tzone']>0) ? '+'.$repetitor['tzone'] : $repetitor['tzone'];
+            echo ')</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>'.$lesson['student'].'</p>';
+            echo '<p>ID '.$lesson['student_id'].'</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>'.$lesson['subject'].'</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>'.$lesson['skype'].'</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>'.$lesson['specialization'].'</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>'.$lesson['about'].'</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>1 / 50 мин.</p>';
+            echo '</div>';
+            echo '<div>';
+            if ($lesson['active']){
+                echo '<button class="ok" lesson="'.$lesson['id'].'" skype="skype:'.$lesson['skype'].'?call&video=true">Начать урок</button>';
+            } else{
+                echo '<button class="ok" lesson=0>Начать урок</button>';
+            }
+            echo '<a class="mess" href="'.base_url().'index.php/repetitor/chat?id='.$lesson['student_id'].'">Сообщение</a>';
+            if ($lesson['calcel']){
+                echo '<button class="del" lesson="'.$lesson['id'].'">Отменить</button>';
+            }
+            echo '</div>';
+            echo '</aside>';
+        }
+         ?>
     </section>
 </main>
 
 <script>
     var baseUrl = '../';
 </script>
+<script src="<?php echo base_url(); ?>js/repetitor/lessons.js"></script>
 <script src="<?php echo base_url(); ?>js/repetitor/repetitor.js"></script>
 <?php $this->load->view('main/footer'); ?>

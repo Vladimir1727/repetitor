@@ -1,7 +1,7 @@
 <?php $this->load->view('main/header'); ?>
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.min.css">
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
-<title>Репетиторы по разным языкам. Баланс</title>
+<title>Репетиторы Real Language Club. Баланс ученика</title>
 </head>
 <body>
 <?php $this->load->view('student/header_menu'); ?>
@@ -85,15 +85,28 @@
             $c = $pay['created_at'];
             echo substr($c,8,2).'.'.substr($c,5,2).'.'.substr($c,0,4);
             echo '</p>';
+            if ($pay['status']==0){
+                echo '<p>Платёж не получен</p>';
+            } else{
+                echo '<p>Платёж успешно получен</p>';
+            }
             echo '</div>';
             echo '<div>';
             echo '<p>';
-            echo $pay['type'];
+            if ($pay['type'] == 1){
+                echo 'Visa/MasterCart';
+            } elseif($pay['type'] == 2){
+                echo 'ЯндексДеньги';
+            } elseif($pay['type'] == 3){
+                echo 'PayPal';
+            } else{
+                echo $pay['type'];
+            }
             echo '</p>';
             echo '</div>';
             echo '<div>';
             echo '<p>';
-            echo $lesson['cost'];
+            echo $pay['cost'];
             echo '</p>';
             echo '</div>';
             echo '</aside>';

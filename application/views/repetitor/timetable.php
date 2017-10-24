@@ -1,11 +1,12 @@
 <?php $this->load->view('main/header'); ?>
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.min.css">
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
-<title>Репетиторы по разным языкам. Рассписание</title>
+<title>Репетиторы Real Language Club. Рассписание</title>
 </head>
 <body>
 <?php $this->load->view('repetitor/header_menu'); ?>
 <input type="hidden" id="repetitor_id" value="<?php echo $repetitor['id']; ?>">
+<input type="hidden" value="<?php echo $repetitor['tzone']; ?>" id="zone">
 <main class="rep_timetable">
     <h1>Расписание</h1>
     <section class="start_time">

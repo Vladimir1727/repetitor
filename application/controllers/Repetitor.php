@@ -32,6 +32,10 @@ class Repetitor extends CI_Controller {
 		if (!$this->session->has_userdata('repetitor_id')){
 			 redirect('/main/rlogin');
 		}
+		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
+		if ($rep->repetitor['status']!=2){
+			 redirect('/repetitor/profile');
+		}
 		redirect('repetitor/lessonsrequests');
 	}
 
@@ -279,7 +283,7 @@ class Repetitor extends CI_Controller {
 			{
 				$data =  $this->upload->data();
 				$f = $data['raw_name'].'_thumb'.$data['file_ext'];
-				$path = 'images/'.$img["file_name"];
+				$path = 'images/'.$data["file_name"];
 				$image = $data['raw_name'].$data['file_ext'];
 				$size = getimagesize('images/'.$image);
 				$w = $size[0];
@@ -340,7 +344,11 @@ class Repetitor extends CI_Controller {
 		if (!$this->session->has_userdata('repetitor_id')){
 			 redirect('/main/rlogin');
 		}
-
+		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
+		$this->RepetitorModel->visit($this->session->repetitor_id);
+		// if ($rep->repetitor['status']!=2){
+		// 	 redirect('/repetitor/stop');
+		// }
 		$start_id = $this->input->get('id');
 		if (is_null($start_id)){
 			$start_id = -1;
@@ -353,8 +361,6 @@ class Repetitor extends CI_Controller {
 				$role = 2;
 			}
 		}
-		$this->RepetitorModel->visit($this->session->repetitor_id);
-		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
 		$data=array(
 			'repetitor'=> $rep->repetitor,
 			'start_id'=> $start_id,
@@ -370,10 +376,13 @@ class Repetitor extends CI_Controller {
 		}
 		$this->RepetitorModel->visit($this->session->repetitor_id);
 		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
+		if ($rep->repetitor['status']!=2){
+			 redirect('/repetitor/stop');
+		}
 		$lessons = $this->RepetitorModel->lessonsrequests($this->session->repetitor_id);
 		$data=array(
 			'repetitor'=> $rep->repetitor,
-			'lessons'=> $lessons,
+			'lessons'=> $this->sort($lessons, 'created_at')	,
 		);
 		$this->load->view('repetitor/lessonsrequests', $data);
 		// echo '<pre>';
@@ -388,8 +397,12 @@ class Repetitor extends CI_Controller {
 		}
 		$this->RepetitorModel->visit($this->session->repetitor_id);
 		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
+		if ($rep->repetitor['status']!=2){
+			 redirect('/repetitor/stop');
+		}
 		$data=array(
 			'repetitor'=> $rep->repetitor,
+			'lessons'=> $this->sort($this->RepetitorModel->history($this->session->repetitor_id), 'date_from'),
 		);
 		$this->load->view('repetitor/history', $data);
 	}
@@ -401,6 +414,9 @@ class Repetitor extends CI_Controller {
 		}
 		$this->RepetitorModel->visit($this->session->repetitor_id);
 		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
+		if ($rep->repetitor['status']!=2){
+			 redirect('/repetitor/stop');
+		}
 		$data=array(
 			'repetitor'=> $rep->repetitor,
 		);
@@ -412,10 +428,17 @@ class Repetitor extends CI_Controller {
 		if (!$this->session->has_userdata('repetitor_id')){
 			 redirect('/main/rlogin');
 		}
-		$this->RepetitorModel->visit($this->session->repetitor_id);
-		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
+		$repetitor_id = $this->session->repetitor_id;
+		$this->RepetitorModel->visit($repetitor_id);
+		$rep = $this->RepetitorModel->findOne($repetitor_id);
+		if ($rep->repetitor['status']!=2){
+			 redirect('/repetitor/stop');
+		}
 		$data=array(
 			'repetitor'=> $rep->repetitor,
+			'requests'=> $this->sort($this->RepetitorModel->getNewFreeRequests($repetitor_id), 'created_at'),
+			'subjects'=> $this->MainModel->getAll('subjects'),
+			'accepted'=> $this->RepetitorModel->getAcceptedFreeRequests($repetitor_id),
 		);
 		$this->load->view('repetitor/freerequests', $data);
 	}
@@ -427,8 +450,12 @@ class Repetitor extends CI_Controller {
 		}
 		$this->RepetitorModel->visit($this->session->repetitor_id);
 		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
+		if ($rep->repetitor['status']!=2){
+			 redirect('/repetitor/stop');
+		}
 		$data=array(
 			'repetitor'=> $rep->repetitor,
+			'lessons' => $this->sort($this->RepetitorModel->lessons($this->session->repetitor_id), 'created_at'),
 		);
 		$this->load->view('repetitor/lessons', $data);
 	}
@@ -438,12 +465,19 @@ class Repetitor extends CI_Controller {
 		if (!$this->session->has_userdata('repetitor_id')){
 			 redirect('/main/rlogin');
 		}
-		$this->RepetitorModel->visit($this->session->repetitor_id);
-		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
+		$repetitor_id = $this->session->repetitor_id;
+		$this->RepetitorModel->visit($repetitor_id);
+		$rep = $this->RepetitorModel->findOne($repetitor_id);
+		if ($rep->repetitor['status']!=2){
+			 redirect('/repetitor/stop');
+		}
 		$data=array(
 			'repetitor'=> $rep->repetitor,
+			'pays'=> $this->RepetitorModel->getStudentPays($repetitor_id),
+			'salaries' => $this->RepetitorModel->getSalaries($repetitor_id),
 		);
 		$this->load->view('repetitor/balance', $data);
+		//var_dump($data['salaries']);
 	}
 
 	public function plan()
@@ -453,6 +487,9 @@ class Repetitor extends CI_Controller {
 		}
 		$this->RepetitorModel->visit($this->session->repetitor_id);
 		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
+		if ($rep->repetitor['status']!=2){
+			 redirect('/repetitor/stop');
+		}
 		$student_id = $this->input->get('id');
 		$data=array(
 			'repetitor'=> $rep->repetitor,
@@ -468,6 +505,9 @@ class Repetitor extends CI_Controller {
 		}
 		$this->RepetitorModel->visit($this->session->repetitor_id);
 		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
+		if ($rep->repetitor['status']!=2){
+			 redirect('/repetitor/stop');
+		}
 		$data=array(
 			'repetitor'=> $rep->repetitor,
 		);
@@ -477,7 +517,7 @@ class Repetitor extends CI_Controller {
 	public function logout()
 	{
 		if ($this->session->has_userdata('repetitor_id')){
-			$this->RepetitorModel->setRepetitorStatus($this->session->repetitor_id, 0);
+			//$this->RepetitorModel->setRepetitorStatus($this->session->repetitor_id, 0);
 			$this->session->unset_userdata('repetitor_id');
 		}
 		redirect('/');
@@ -491,6 +531,17 @@ class Repetitor extends CI_Controller {
 		$this->RepetitorModel->visit($this->session->repetitor_id);
 		$data = $this->RepetitorModel->getTimeTable($this->session->repetitor_id);
 		echo json_encode($data);
+	}
+
+	public function saveFreeTable()
+	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 exit('репетитор на вошёл');
+		}else{
+			$this->RepetitorModel->visit($this->session->repetitor_id);
+			$table = json_decode($this->input->post('table'));
+			echo $this->RepetitorModel->saveFreeTable($table, $this->session->repetitor_id);
+		}
 	}
 
 	public function saveTimeTable()
@@ -588,5 +639,131 @@ class Repetitor extends CI_Controller {
 		$repetitor = 3;
 		$data = $this->RepetitorModel->newChats($repetitor);
 		var_dump($data);
+	}
+
+	public function cancelLesson()
+	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 exit('репетитор не вошёл');
+		} else{
+			$lesson_id = $this->input->post('id');
+			$data = $this->RepetitorModel->cancelLesson($lesson_id);
+			redirect('repetitor/lessonsrequests');
+		}
+	}
+
+	public function cancelLesson2()
+	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 exit('репетитор не вошёл');
+		} else{
+			$lesson_id = $this->input->post('id');
+			$data = $this->RepetitorModel->cancelLesson2($lesson_id);
+			redirect('repetitor/lessons');
+		}
+	}
+
+	public function acceptLesson()
+	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 exit('репетитор не вошёл');
+		} else{
+			$lesson_id = $this->input->post('id');
+			$data = $this->RepetitorModel->acceptLesson($lesson_id);
+			redirect('repetitor/lessonsrequests');
+		}
+	}
+
+	public function startLesson()
+	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 exit('репетитор не вошёл');
+		} else{
+			$lesson_id = $this->input->post('id');
+			$data = $this->RepetitorModel->startLesson($lesson_id);
+			redirect('repetitor/lessons');
+		}
+	}
+
+	public function delFree()
+	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 redirect('/main/rlogin');
+		}
+		$id = $this->input->post('id');
+		$this->RepetitorModel->delFree($id, $this->session->repetitor_id);
+		redirect('repetitor/freerequests');
+	}
+
+	public function acceptFree()
+	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 redirect('/main/rlogin');
+		}
+		$id = $this->input->post('id');
+		$this->RepetitorModel->acceptFree($id, $this->session->repetitor_id);
+		redirect('repetitor/freerequests');
+	}
+
+	public function getFree()
+	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 exit('репетитор не вошёл');
+		} else{
+			$subject_id = $this->input->post('subject_id');
+			$repetitor_id = $this->session->repetitor_id;
+			$data = array(
+				'requests'=> $this->RepetitorModel->getNewFreeRequests($repetitor_id, $subject_id),
+				'accepted'=> $this->RepetitorModel->getAcceptedFreeRequests($repetitor_id, $subject_id),
+			);
+			echo json_encode($data);
+		}
+	}
+
+	public function sendMoneyRequest()
+	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 redirect('/main/rlogin');
+		}
+		$data = array(
+			'created_at'=> date('Y-m-d H:i:s', time()),
+			'type' => $this->input->post('type'),
+			'cost' => $this->input->post('cost'),
+			'repetitor_id' => $this->session->repetitor_id
+		);
+		$this->RepetitorModel->sendMoneyRequest($data);
+		redirect('repetitor/balance');
+	}
+
+	public function sort($array, $key)
+	{
+		for ($i=0; $i < count($array); $i++) {
+			for ($j=0; $j < count($array); $j++) {
+				if (strtotime($array[$i][$key]) > strtotime($array[$j][$key])){
+					$temp = $array[$i];
+					$array[$i] = $array[$j];
+					$array[$j] = $temp;
+				}
+			}
+		}
+		return $array;
+	}
+
+	public function stop()
+	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 redirect('/main/rlogin');
+		}
+		$rep = $this->RepetitorModel->findOne($this->session->repetitor_id);
+		$data=array(
+			'repetitor'=> $rep->repetitor,
+		);
+		$this->load->view('repetitor/stop', $data);
+	}
+
+	public function forgot()
+	{
+		$email = $this->input->post('email');
+		echo $this->RepetitorModel->forgot($email);
 	}
 }

@@ -24,7 +24,7 @@
     	  <li><span class="icon"></span><a href="https://reallanguage.club/italyanskij-yazyk/">ИТАЛЬЯНСКИЙ</a></li>
     	  <li><span class="icon"></span><a href="https://reallanguage.club/russkij-yazyk/">РУССКИЙ</a></li>
     	  <li><span class="icon"></span><a href="https://reallanguage.club/o-nas/">О НАС</a></li>
-    	  <li><span class="icon"></span><a href="https://reallanguage.club/kontakt/">КОНТАКТ</a></li>
+    	  <li><span class="icon"></span><a href="https://reallanguage.club/kontakt/">КОНТАКТЫ</a></li>
       </ul>
     </div>
   </div>

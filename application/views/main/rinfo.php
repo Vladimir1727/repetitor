@@ -3,15 +3,17 @@
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.min.css">
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
 <script src="<?php echo base_url(); ?>js/datepicker-ru.js"></script>
-<title>Репетиторы по разным языкам. Информация о репетиторе.</title>
+<title>Репетиторы Real Language Club. Информация о репетиторе.</title>
 </head>
 <body>
 <?php $this->load->view('main/header_menu'); ?>
-<form class="hidden" id="step_form" action="<?php echo base_url(); ?>index.php/student/step2" method="post">
+<form class="hidden" id="step_form" action="<?php echo base_url(); ?>index.php/student/step2?subject=<?php echo $subject_id; ?>" method="post">
 	<input type="hidden" value="<?php echo $repetitor['id']; ?>" id="repetitor_id" name="repetitor_id">
 	<input type="hidden" value="<?php echo ($student) ? $student['id'] : 0; ?>" id="student_id">
-	<input type="hidden" value="<?php echo ($student) ? $student['zone_time'] : 0; ?>" id="student_zone">
+	<input type="hidden" value="<?php echo $zone; ?>" id="student_zone">
+	<input type="hidden" value="<?php echo $ztype; ?>" id="zone_type">
 	<input type="hidden" value="<?php echo ($student) ? $student['first_name'] : ''; ?>" id="student">
+	<input type="hidden" value="<?php echo $subject_id; ?>" id="subject_id" name="subject_id">
 </form>
 <main class="rep-info">
 	<section class="result">
@@ -46,15 +48,7 @@
 				</h2>
 				<p><strong>Преподаёт:</strong><span>
 					<?php
-					$first = true;
-					for ($k=1; $k <= $repetitor['sub_num']; $k++) {
-						if ($first == false){
-							echo ' / ';
-						} else{
-							$first = false;
-						}
-						echo $repetitor['sub'.$k.'_name'];
-					}
+						echo $repetitor['subject'];
 					 ?>
 					</span>
 				</p>
@@ -63,11 +57,15 @@
 					</span>
 				</p>
 				<div class="stars">
-					<span class="star1"></span>
-					<span class="star1"></span>
-					<span class="star1"></span>
-					<span class="star0"></span>
-					<span class="star0"></span>
+					<?php
+					$rating = $repetitor['reight'];
+					for ($i=1; $i <= $rating ; $i++) {
+						echo '<span class="star1"></span>';
+					}
+					for ($i=5; $i > $rating ; $i--) {
+						echo '<span class="star0"></span>';
+					}
+					 ?>
 				</div>
 				<p>
 					<strong>Специализация:</strong>
@@ -106,34 +104,24 @@
 				</p>
 				<?php
 				if ($student){
-					echo '<a href="'.base_url().'index.php/student/addrepetitor/'.$repetitor['id'].'" class="favorites"><span></span> В избранное</a>';
+					echo '<a href="'.base_url().'index.php/student/addrepetitor/'.$repetitor['id'].'?subject_id='.$subject_id.'" class="favorites"><span></span> В избранное</a>';
 				} else{
-					echo '<a href="'.base_url().'index.php/main/remember?link=student/addrepetitor/'.$repetitor['id'].'" class="favorites"><span></span> В избранное</a>';
+					echo '<a href="'.base_url().'index.php/main/remember?link=student/addrepetitor/'.$repetitor['id'].'?subject_id='.$subject_id.'" class="favorites"><span></span> В избранное</a>';
 				}
 				 ?>
 				<div class="price">
 					<span>
 					<?php
-					if (count($repetitor['cost'])==1){
-						echo $repetitor['cost'][0];
-					} elseif($repetitor['cost'][0] == $repetitor['cost'][1]){
-						echo $repetitor['cost'][0];
-					} else{
-						if ($repetitor['cost'][0]>$repetitor['cost'][1]){
-							echo $repetitor['cost'][1].'-'.$repetitor['cost'][0];
-						}else{
-							echo $repetitor['cost'][0].'-'.$repetitor['cost'][1];
-						}
-					}
+						echo round($repetitor['cost']);
 					 ?>
 					</span>$ <small>за час</small>
 				</div>
 				<?php
 				if ($student){
-					echo '<a href="'.base_url().'index.php/student/step1/'.$repetitor['id'].'" class="lesson">Записаться на урок</a>';
+					echo '<a href="'.base_url().'index.php/student/step1/'.$repetitor['id'].'?subject='.$subject_id.'" class="lesson"  id="step_one">Записаться на урок</a>';
 					echo '<a href="'.base_url().'index.php/student/chat?id='.$repetitor['id'].'" class="message">Написать сообщение</a>';
 				} else{
-					echo '<a href="'.base_url().'index.php/main/remember?link=student/step1/'.$repetitor['id'].'" class="lesson">Записаться на урок</a>';
+					echo '<a href="'.base_url().'index.php/main/remember?link=student/step1/'.$repetitor['id'].'?subject='.$subject_id.'" class="lesson" id="step_one">Записаться на урок</a>';
 					echo '<a href="'.base_url().'index.php/main/remember?link=student/chat?id='.$repetitor['id'].'" class="message">Написать сообщение</a>';
 				}
 				 ?>
@@ -234,6 +222,66 @@
 		<aside class="feeds">
 			<h2>Отзывы<span class="switch pull-right switch-down"></span></h2>
 			<div>
+				<?php if ($student && $can_feed): ?>
+			<div class="form">
+				<form action="../sendfeed" method="post">
+					<div>
+						<label>
+							<input type="radio" name="rating" value="1">
+							<span class="switch"></span>
+							<span class="star1"></span>
+							<span class="star0"></span>
+							<span class="star0"></span>
+							<span class="star0"></span>
+							<span class="star0"></span>
+						</label>
+						<label>
+							<input type="radio" name="rating" value="2">
+							<span class="switch"></span>
+							<span class="star1"></span>
+							<span class="star1"></span>
+							<span class="star0"></span>
+							<span class="star0"></span>
+							<span class="star0"></span>
+						</label>
+						<label>
+							<input type="radio" name="rating" value="3">
+							<span class="switch"></span>
+							<span class="star1"></span>
+							<span class="star1"></span>
+							<span class="star1"></span>
+							<span class="star0"></span>
+							<span class="star0"></span>
+						</label>
+						<label>
+							<input type="radio" name="rating" value="4">
+							<span class="switch"></span>
+							<span class="star1"></span>
+							<span class="star1"></span>
+							<span class="star1"></span>
+							<span class="star1"></span>
+							<span class="star0"></span>
+						</label>
+						<label>
+							<input type="radio" name="rating" value="5" checked="checked">
+							<span class="switch"></span>
+							<span class="star1"></span>
+							<span class="star1"></span>
+							<span class="star1"></span>
+							<span class="star1"></span>
+							<span class="star1"></span>
+						</label>
+					</div>
+					<div>
+						<textarea id="about" name="about"></textarea>
+						<button type="submit" id="send_feed">Оставить отзыв</button>
+						<input type="hidden" name="repetitor_id" value="<?php echo $repetitor['id']; ?>">
+						<input type="hidden" name="student_id" value="<?php echo $student['id']; ?>">
+						<input type="hidden" name="back" value="<?php echo '/main/rinfo/'.$repetitor['id'].'?subject='.$subject_id; ?>">
+					</div>
+				</form>
+			</div>
+		<?php endif; ?>
 				<!-- <div class="feed">
 					<h3>Anna</h3>
 					<p>
@@ -300,13 +348,38 @@
 						<span class="star0"></span>
 					</div>
 				</div> -->
+				<?php
+				foreach ($feeds as $feed) {
+					echo '<div class="feed">';
+					echo '<h3>';
+					if (is_null($feed['first_name'])){
+						echo 'Без имени';
+					} else{
+						echo $feed['first_name'];
+					}
+					if (!is_null($feed['father_name'])){
+						echo ' '.$feed['father_name'];
+					}
+					echo '</h3>';
+					echo '<p>'.$feed['about'].'</p>';
+					echo '<div class="stars">';
+					for ($i=1; $i <= $feed['rating'] ; $i++) {
+						echo '<span class="star1"></span>';
+					}
+					for ($i=5; $i > $feed['rating'] ; $i--) {
+						echo '<span class="star0"></span>';
+					}
+					echo '</div>';
+					echo '</div>';
+				}
+				 ?>
 			</div>
 		</aside>
 		<?php
 		if ($student){
-			echo '<a href="'.base_url().'index.php/student/step1/'.$repetitor['id'].'" class="lesson" id="next_step">Записаться на урок</a>';
+			echo '<a href="'.base_url().'index.php/student/step1/'.$repetitor['id'].'?subject='.$subject_id.'" class="lesson" id="next_step">Записаться на урок</a>';
 		} else{
-			echo '<a href="'.base_url().'index.php/main/main/remember?link=student/step1/'.$repetitor['id'].'" class="lesson">Записаться на урок</a>';
+			echo '<a href="'.base_url().'index.php/main/remember?link=student/step1/'.$repetitor['id'].'?subject='.$subject_id.'" class="lesson">Записаться на урок</a>';
 		}
 
 		?>

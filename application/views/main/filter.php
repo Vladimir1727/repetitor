@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.min.css">
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
 <script src="<?php echo base_url(); ?>js/datepicker-ru.js"></script>
-<title>Репетиторы по разным языкам. Найти репетитора</title>
+<title>Репетиторы Real Language Club</title>
 </head>
 <body>
 <?php $this->load->view('main/header_menu'); ?>
@@ -62,7 +62,7 @@
 									}
 									break;
 								default:
-									echo '<option value="'.$subject['id'].'">'.$subject['subject'].'</option>';
+									//echo '<option value="'.$subject['id'].'">'.$subject['subject'].'</option>';
 									break;
 							}
 							if ($find){
@@ -111,7 +111,7 @@
 					0
 				</div>
 				<div class="col-lg-4 col-md-4 col-sx-4 text-center">
-					<span id="time-range">10-18</span>
+					<span id="time-range">0-24</span>
 				</div>
 				<div class="col-lg-4  col-md-4 col-sx-4 text-right">
 					24
@@ -173,7 +173,7 @@
 					0
 				</div>
 				<div class="col-md-4 text-center">
-					<span id="cost-range">1-11</span>
+					<span id="cost-range">0-50</span>
 				</div>
 				<div class="col-md-4 text-right">
 					50
@@ -215,25 +215,19 @@
 				echo '<span>';
 			}
 
-			echo '</span><a href="'.base_url().'index.php/main/rinfo/'.$repetitor['id'].'">'.$repetitor['first_name'].'</a></h2>';
+			echo '</span><a href="'.base_url().'index.php/main/rinfo/'.$repetitor['id'].'?subject='.$repetitor['subject_id'].'">'.$repetitor['first_name'].'</a></h2>';
 			echo '<p><strong>Преподаёт: </strong><span>';
-			$first = true;
-			for ($k=0; $k < count($repetitor['subjects']) ; $k++) {
-				if ($first == false){
-					echo ' / ';
-				} else{
-					$first = false;
-				}
-				echo $repetitor['subjects'][$k];
-			}
+			echo $repetitor['subject'];
 			echo '</span></p>';
 			echo '<p class="lang_block"><strong>Родной язык:</strong> <span>'.$repetitor['language'].'</span></p>';
 			echo '<div class="stars">';
-			echo '<span class="star1"></span>';
-			echo '<span class="star1"></span>';
-			echo '<span class="star1"></span>';
-			echo '<span class="star0"></span>';
-			echo '<span class="star0"></span>';
+			$rating = $repetitor['reight'];
+			for ($i=1; $i <= $rating ; $i++) {
+				echo '<span class="star1"></span>';
+			}
+			for ($i=5; $i > $rating ; $i--) {
+				echo '<span class="star0"></span>';
+			}
 			echo '</div>';
 			echo '<p>';
 			echo '<strong>Специализация: </strong>';
@@ -264,33 +258,23 @@
 			echo $repetitor['about'];
 			echo '</span></p>';
 			if ($student){
-				echo '<a href="'.base_url().'index.php/student/addrepetitor/'.$repetitor['id'].'" class="favorites"><span></span> В избранное</a>';
+				echo '<a href="'.base_url().'index.php/student/addrepetitor/'.$repetitor['id'].'?subject='.$repetitor['subject_id'].'" class="favorites"><span></span> В избранное</a>';
 			} else{
-				echo '<a href="'.base_url().'index.php/main/remember?link=student/addrepetitor/'.$repetitor['id'].'" class="favorites"><span></span> В избранное</a>';
+				echo '<a href="'.base_url().'index.php/main/remember?link=student/addrepetitor/'.$repetitor['id'].'?subject='.$repetitor['subject_id'].'" class="favorites"><span></span> В избранное</a>';
 			}
 			echo '<div class="price">';
 			echo '<span>';
-			if (count($repetitor['cost'])==1){
-				echo $repetitor['cost'][0];
-			} elseif($repetitor['cost'][0] == $repetitor['cost'][1]){
-				echo $repetitor['cost'][0];
-			} else{
-				if ($repetitor['cost'][0]>$repetitor['cost'][1]){
-					echo $repetitor['cost'][1].'-'.$repetitor['cost'][0];
-				}else{
-					echo $repetitor['cost'][0].'-'.$repetitor['cost'][1];
-				}
-			}
+			echo $repetitor['cost'];
 			echo '</span>$ <small>за час</small>';
 			echo '</div>';
 			if ($student){
-				echo '<a href="'.base_url().'index.php/student/step1/'.$repetitor['id'].'" class="lesson">Записаться на урок</a>';
+				echo '<a href="'.base_url().'index.php/student/step1/'.$repetitor['id'].'?subject='.$repetitor['subject_id'].'" class="lesson">Записаться на урок</a>';
 				echo '<a href="'.base_url().'index.php/student/chat?id='.$repetitor['id'].'" class="message">Написать сообщение</a>';
 			} else{
-				echo '<a href="'.base_url().'index.php/main/remember?link=student/step1/'.$repetitor['id'].'" class="lesson">Записаться на урок</a>';
+				echo '<a href="'.base_url().'index.php/main/remember?link=student/step1/'.$repetitor['id'].'?subject='.$repetitor['subject_id'].'" class="lesson">Записаться на урок</a>';
 				echo '<a href="'.base_url().'index.php/main/remember?link=student/chat?id='.$repetitor['id'].'" class="message">Написать сообщение</a>';
 			}
-			echo '<a href="'.base_url().'index.php/main/rinfo/'.$repetitor['id'].'#table" class="sh">Расписание</a>';
+			echo '<a href="'.base_url().'index.php/main/rinfo/'.$repetitor['id'].'?subject='.$repetitor['subject_id'].'#table" class="sh">Расписание</a>';
 			echo '</div>';
 			echo '</aside>';
 		}

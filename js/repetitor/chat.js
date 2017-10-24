@@ -1,5 +1,5 @@
 (function($){$(function(){
-console.log('repetitor chat 5');
+console.log('repetitor chat 6');
 var repetitor_id = $('#repetitor_id').val();
 var repetitor_avatar = $('#repetitor_avatar').val();
 var repetitor_name = $('#repetitor_name').val();
@@ -10,6 +10,11 @@ var start_role = $('#start_role').val();
 if (start_role>0 && start_id>-1){
     to_role = start_role;
     to_id = start_id;
+    if (to_role!=3){
+        $('#plan').prop('href','/index.php/repetitor/plan?id='+to_id);
+    } else{
+        $('#plan').prop('href','#');
+    }
 }
 
 function getChat(){
@@ -30,10 +35,14 @@ function getChat(){
                     date = t;
                 }
                 if (chat.chat[i].from_role == 1){
-                    var d = repetitor_avatar.search(/\./i);
-    				var av = repetitor_avatar.substr(0,d)+'_thumb'+repetitor_avatar.substr(d);
-                    list += '<div class="list"><div class="avatar"><img src="../../images/';
-                    list += av;
+                    list += '<div class="list"><div class="avatar"><img src="';
+                    if (repetitor_avatar == null){
+                        list += '../../img/avatar2.png';
+                    } else{
+                        var d = repetitor_avatar.search(/\./i);
+        				var av = repetitor_avatar.substr(0,d)+'_thumb'+repetitor_avatar.substr(d);
+                        list += '../../images/'+ av;
+                    }
                     list += '" alt="avatar"></div><div class="name"><h3><span class="activity';
                     list +=  ' on';
                     list += '"></span> ';
@@ -98,6 +107,7 @@ function getChatList() {
         url: baseUrl+'repetitor/getChatList',
         type:'post',
         success: function(data){
+            console.log(data);
             var Chats = JSON.parse(data);
             var list = '';
             var main_list ='';
@@ -180,6 +190,15 @@ function getChatList() {
                 });
             }
             userClick();
+            if (to_id==0 && Chats.length>0 &&  start_id==-1){
+                to_role = Chats[0].from_role;
+                to_id = Chats[0].from_id;
+                if (to_role!=3){
+                    $('#plan').prop('href','/index.php/repetitor/plan?id='+to_id);
+                } else{
+                    $('#plan').prop('href','#');
+                }
+            }
         }
     });
 }
@@ -193,7 +212,11 @@ function userClick(){
             $(this).addClass('active');
             to_id = $(this).find('input[name="id"]').val();
             to_role = $(this).find('input[name="role"]').val();
-            $('#plan').prop('href','/index.php/repetitor/plan?id='+to_id);
+            if (to_role!=3){
+                $('#plan').prop('href','/index.php/repetitor/plan?id='+to_id);
+            } else{
+                $('#plan').prop('href','#');
+            }
             getChat();
         });
     });

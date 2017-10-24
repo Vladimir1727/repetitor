@@ -1,5 +1,5 @@
 (function($){$(function(){
-console.log('student registration 1');
+console.log('student registration 2');
 var baseUrl = '../';
 $('#regform').submit(function(){
     var form = $(this).serializeArray();

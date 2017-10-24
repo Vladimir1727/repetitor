@@ -1,6 +1,16 @@
 <?php $this->load->view('main/header'); ?>
 <title>Тестовая страница</title>
 </head>
+<style media="screen">
+.must{
+    /*position: relative;*/
+}
+.must::before{
+    content : 'Обязательно';
+}
+
+
+</style>
 <body>
 <?php $this->load->view('main/header_menu'); ?>
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.min.css">
@@ -8,19 +18,11 @@
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
 <h1 class="text-center">Добро пожаловать в тест</h1>
 
-<?php echo form_open_multipart('main/upload2', array('id' => 'file_form' ));?>
-    <input type="file" name="userfile" size="20" id="add-file" class="hidden">
-    <!-- <input type="submit" name="" value="отправить"> -->
-</form>
-<!-- <?php echo form_open('main/formtest');?>
-    <input type="text" name="name" placeholder="name...">
-    <input type="submit" name="" value="отправить">
-</form> -->
-<a href="#" id="add-photo-but">Добавить документ</a>
-<ul class="photos">
-</ul>
+<input type="text" name="" value="33" id="77">
 
+<script type="text/javascript">
+    var t = document.getElementById('77').value;
+    console.log('t=',t);
+</script>
 
-
-<script src="<?php echo base_url(); ?>js/test.js"></script>
 <?php $this->load->view('main/footer'); ?>

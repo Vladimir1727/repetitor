@@ -1,5 +1,5 @@
 (function($){$(function(){
-console.log('step 2.2');
+console.log('step 2');
 var baseUrl = '../';
 var repetitor_id = $('#repetitor_id').val();
 var student_id = $('#student_id').val();
@@ -41,10 +41,6 @@ $('#step3').click(function(){
 	var about = $('#about').val().trim();
 	if (about.length>1000){
 		errdiag('Предупреждение', 'Описание должно быть не более 1000 знаков');
-		return false;
-	}
-	if (about.length<=10){
-		errdiag('Предупреждение', 'Описание должно быть не менее 10 знаков');
 		return false;
 	}
 	$('#step_form').trigger('submit');

@@ -12,7 +12,13 @@
 				<li><a href="<?php echo base_url(); ?>index.php/admin/lessonshistory">История уроков</a></li>
 				<li><a href="<?php echo base_url(); ?>index.php/admin/payback">Запросы на вывод $</a></li>
 				<li><a href="<?php echo base_url(); ?>index.php/admin/freerequests">Свободные заявки</a></li>
-				<li><a href="<?php echo base_url(); ?>index.php/admin/chathistory">История чатов</a></li>
+				<li class="mail"><a href="<?php echo base_url(); ?>index.php/admin/chat">почта</a>
+				<?php if ($new_chat > 0) {
+					echo '<span>';
+					echo $new_chat;
+					echo '</span>';
+				} ?>
+				</li>
 				<li id="slide">
 					<a href="#">
 						<span class="s"></span>
@@ -25,8 +31,15 @@
 						<li><a href="<?php echo base_url(); ?>index.php/admin/lessonshistory">История уроков</a></li>
 						<li><a href="<?php echo base_url(); ?>index.php/admin/payback">Запросы на вывод $</a></li>
 						<li><a href="<?php echo base_url(); ?>index.php/admin/freerequests">Свободные заявки</a></li>
+						<li class="mail"><a href="<?php echo base_url(); ?>index.php/admin/chat">почта</a>
+						<?php if ($new_chat > 0) {
+							echo '<span>';
+							echo $new_chat;
+							echo '</span>';
+						} ?></li>
 						<li><a href="<?php echo base_url(); ?>index.php/admin/chathistory">История чатов</a></li>
-						<li class="mail"><a href="<?php echo base_url(); ?>index.php/admin/chat">почта</a></li>
+						<li><a href="<?php echo base_url(); ?>index.php/admin/feeds">Отзывы</a></li>
+						<li><a href="<?php echo base_url(); ?>index.php/admin/prerep">Кандидаты в репетиторы</a></li>
 						<li><a href="<?php echo base_url(); ?>index.php/admin/logout">Выйти</a></li>
 					</ul>
 				</li>

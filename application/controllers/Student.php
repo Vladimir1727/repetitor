@@ -37,11 +37,7 @@ class Student extends CI_Controller {
 			  try {
 			  	$this->StudentModel->addNew($this->input->post('email', TRUE), $this->input->post('pass', TRUE));
 				$login = $this->StudentModel->login($this->input->post('email', TRUE), $this->input->post('pass', TRUE));
-				/////
-				$mess = 'Приветствуем Вас на платформе «Репетиторы» Real Language Club!
-У нас есть отличная новость! Открытие платформы для учеников состоится 3 октября. Уже очень скоро Вы сможете выбрать для себя лучшего репетитора и заниматься с ним онлайн в удобное для Вас время.
-Будем рады видеть Вас среди наших учеников!
-Добро пожаловать к нам с 3 октября!';
+				$mess = 'Здравствуйте! Рады видеть Вас на платформе Real Language Club. Рекомендуем в первую очередь внимательно изучить Инструкцию по работе с платформой. Ссылку на Инструкцию Вы сможете найти в дополнительном меню личного кабинета. Если у Вас возникают вопросы – пишите нам в чат. Мы всегда рады ответить на них. Спасибо, что Вы с нами! Удачи!';
 				$dat = array(
 					'created_at' => date('Y-m-d H:i:s', time()),
 					'from_role' => 3,
@@ -50,7 +46,7 @@ class Student extends CI_Controller {
 					'to_id' => $this->session->student_id,
 					'message' =>$mess,
 				);
-				$this->MainModel->sendChat($dat);
+				$chat =$this->MainModel->sendChat($dat);
 				////
 			  } catch (Exception $e) {
 				  exit($e->getMessage());
@@ -238,7 +234,7 @@ class Student extends CI_Controller {
 			$data=array(
 				'student'=> $student->student,
 				'tzones'=> $this->MainModel->getAll('timezones'),
-				'lessons'=> $lessons,
+				'lessons'=> $this->sort($lessons, 'created_at'),
 			);
 			$this->load->view('student/lessonsrequests', $data);
 		}
@@ -269,6 +265,7 @@ class Student extends CI_Controller {
 			$student = $this->StudentModel->findOne($this->session->student_id);
 			$data=array(
 				'student'=> $student->student,
+				'lessons'=> $this->sort($this->StudentModel->history($this->session->student_id), 'date_from'),
 			);
 			$this->load->view('student/history', $data);
 		}
@@ -299,7 +296,9 @@ class Student extends CI_Controller {
 			$data=array(
 				'student'=> $student->student,
 				'subjects'=>$this->MainModel->getAll('subjects'),
+				'requests'=>$this->sort($this->StudentModel->getFreeRequests($this->session->student_id), 'created_at'),
 			);
+			//var_dump($data['requests']);
 			$this->load->view('student/freerequests', $data);
 		}
 	}
@@ -318,15 +317,115 @@ class Student extends CI_Controller {
 		}
 	}
 
+	public function pay2()
+	{
+		if (!$this->session->has_userdata('student_id')){
+			redirect('/main/slogin');
+		} else{
+			$this->StudentModel->visit($this->session->student_id);
+			$student = $this->StudentModel->findOne($this->session->student_id);
+			$data=array(
+				'student'=> $student->student,
+			);
+			$this->load->view('student/pay2', $data);
+		}
+	}
+
+	public function satPay()
+	{
+		$ex_id = $this->input->post('id');
+		$sum = $this->input->post('sum');
+		$student_id = $this->StudentModel->acceptPayHistory($ex_id);
+		if ($student_id>0){
+			echo $this->StudentModel->addBallance($student_id, $sum);
+		} else{
+			echo 'уже оплачено';
+		}
+
+	}
+
+	public function saveExercises()
+	{
+		if (!$this->session->has_userdata('student_id')){
+			 echo 'студент не вошел';
+		} else{
+			$this->StudentModel->visit($this->session->student_id);
+			$data = array(
+				'student_id' => $this->session->student_id,
+				'repetitor_id' => $this->input->post('repetitor_id'),
+				'specialization_id' => $this->input->post('specialization_id'),
+				'subject_id' => $this->input->post('subject_id'),
+				'about' => $this->input->post('about'),
+				'dates' => $this->input->post('date[]'),
+				'created_at' => date('Y-m-d H:i:s',time()),
+			);
+			$this->StudentModel->setExercises($data);
+			$this->StudentModel->addPayHistory($this->session->student_id, $sum, $this->input->post('pay_type'));
+
+			$sum = $this->input->post('sum');
+			$student_id = $this->session->student_id;
+			$pay_type = $this->input->post('pay_type');
+			echo $this->StudentModel->addPayHistory($student_id, $sum, $pay_type);
+		}
+	}
+
+	public function savePay()
+	{
+		if (!$this->session->has_userdata('student_id')){
+			 echo 'студент не вошел';
+		} else{
+			$sum = $this->input->post('sum');
+			$student_id = $this->session->student_id;
+			$pay_type = $this->input->post('pay_type');
+			echo $this->StudentModel->addPayHistory($student_id, $sum, $pay_type);
+		}
+	}
+
 	public function makePay()
 	{
 		if (!$this->session->has_userdata('student_id')){
-			 redirect('/main/slogin');
+			 //redirect('/main/slogin');
+			 echo 'студент не вошел';
 		} else{
 			$this->StudentModel->visit($this->session->student_id);
-			$this->StudentModel->addBallance($this->session->student_id, $this->input->post('sum'));
-			$this->StudentModel->addPayHistory($this->session->student_id, $this->input->post('sum'), $this->input->post('pay_type'));
-			redirect($this->input->post('go_to'));
+			$data = array(
+				'student_id' => $this->session->student_id,
+   			 	'repetitor_id' => $this->input->post('repetitor_id'),
+   			 	'specialization_id' => $this->input->post('specialization_id'),
+   			 	'subject_id' => $this->input->post('subject_id'),
+   			 	'about' => $this->input->post('about'),
+   			 	'dates' => $this->input->post('date[]'),
+   			 	'created_at' => date('Y-m-d H:i:s',time()),
+			);
+			$this->StudentModel->setExercises($data);
+			if ($this->input->post('pay_type') == 'paypal'){
+				// $postdata = http_build_query(
+				//     array(
+				//         'cmd' => '_xclick',
+				//         'business' => 'info@reallanguage.club',
+				// 		'amount' => $this->input->post('sum'),
+				// 		'return' => 'https://tutor.reallanguage.club/index.php/student/stepend',
+				// 		'currency_code' => 'USD',
+				// 		'lc' => 'US',
+				// 		'bn' => 'PP-BuyNowBF',
+				// 		'custom' => $this->session->student_id,
+				//     )
+				// );
+				// $opts = array('http' =>
+				//     array(
+				//         'method'  => 'POST',
+				//         'header'  => 'Content-type: application/x-www-form-urlencoded',
+				//         'content' => $postdata
+				//     )
+				// );
+				// $context  = stream_context_create($opts);
+				// $result = file_get_contents('https://www.sandbox.paypal.com/cgi-bin/websc', false, $context);
+			}
+			//
+
+			//
+			//redirect($this->input->post('go_to'));
+			echo 0;
 		}
 	}
 
@@ -334,7 +433,7 @@ class Student extends CI_Controller {
 	{
 
 		if ($this->session->has_userdata('student_id')){
-			$this->StudentModel->setStudentStatus($this->session->student_id, 0);
+			//$this->StudentModel->setStudentStatus($this->session->student_id, 0);
 			$this->session->unset_userdata('student_id');
 		}
 		redirect('/');
@@ -378,6 +477,7 @@ class Student extends CI_Controller {
 		$data=array(
 			'student' => $student->student,
 			'repetitor' => $repetitor,
+			'subject_id' => $this->input->get('subject'),
 		);
 		$this->load->view('student/step1', $data);
 	}
@@ -396,36 +496,36 @@ class Student extends CI_Controller {
 			'subjects'=> $repetitor['subjects'],
 			'repetitor' => $repetitor,
 			'dates' => $this->input->post('date[]'),
+			'subject_id'=> $this->input->get('subject'),
 		);
 		$this->load->view('student/step2', $data);
 	}
 
 	public function step3()
 	{
-		if (!$this->session->has_userdata('student_id')){
+		if (!$this->session->has_userdata('student_id') || count($_POST)==0){
 			 redirect('/main/slogin');
 		}
 		$this->StudentModel->visit($this->session->student_id);
-		$data = array(
+		$zone = $this->StudentModel->getStudentZone($this->session->student_id);
+		$data1 = array(
 			 'student_id' => $this->input->post('student_id'),
 			 'repetitor_id' => $this->input->post('repetitor_id'),
 			 'specialization_id' => $this->input->post('specialization_id'),
 			 'subject_id' => $this->input->post('subject_id'),
 			 'about' => $this->input->post('about'),
 			 'dates' => $this->input->post('date[]'),
-			 'created_at' => date('Y-m-d H:i:s',time()),
+			 'created_at' => date('Y-m-d H:i:s',time() - $zone*60*60),
 		);
-		//date('Y-m-d H:00:00', $this->input->post('date') / 1000),
 		$student = $this->StudentModel->findOne($this->session->student_id);
-		$pay = $this->StudentModel->setExercises($data);
+		$pay = $this->StudentModel->checkExPay($data1);
 		if ($pay === false){
+			$this->StudentModel->setExercises($data1);
 			redirect('/student/stepend');
 		} else{
-			$data=array(
-				'student'=> $student->student,
-				'sum'=> $pay,
-			);
-			$this->load->view('student/step3', $data);
+			$data1['student'] = $student->student;
+			$data1['sum'] = $pay;
+			$this->load->view('student/step3', $data1);
 		}
 	}
 
@@ -469,7 +569,7 @@ class Student extends CI_Controller {
 			 'specialization_id' => $this->input->post('specialization_id'),
 			 'subject_id' => $this->input->post('subject_id'),
 			 'about' => $this->input->post('about'),
-			 'date_from' => date('Y-m-d H:00:00', $this->input->post('date') / 1000),
+			 'date_from' => gmdate('Y-m-d H:00:00', $this->input->post('date') / 1000),
 			 'created_at' => date('Y-m-d H:i:s',time()),
 		);
 		$ex_id = $this->StudentModel->setExercise($data);
@@ -543,31 +643,147 @@ class Student extends CI_Controller {
 
 	public function payLessons()
 	{
-		$ids = $this->input->post('ids');
-		$str = implode(",", $ids);
-		$sel = 'select sum(cost) as s from exercises where id in ('.$str.')';
-		$q = $this->db->query($sel);
-		$r = $q->result_array();
-		$sum = $r[0]['s'];
-		$student = $this->StudentModel->findOne($this->session->student_id);
-		if ($student->student['balance'] >= $sum){
-			$balance = $student->student['balance'] - $sum;
-			$sel = 'update students set balance='.$balance.' where id='.$student->student['id'];
-			$q = $this->db->query($sel);
-			$sel = 'update exercises set pay_at="'.date('Y-m-d H:i:s',time()).'" where id in('.$str.')';
-			$q = $this->db->query($sel);
+		if (!$this->session->has_userdata('student_id')){
+			 redirect('/main/slogin');
 		}
+		$ids = $this->input->post('ids');
+		$this->StudentModel->payLessons($ids);
 		redirect('/student/lessonsrequest');
+	}
 
+	public function payLesson()
+	{
+		if (!$this->session->has_userdata('student_id')){
+			 redirect('/main/slogin');
+		}
+		$ids = $this->input->post('ids');
+		$this->StudentModel->payLesson($ids[0]);
+		redirect('/student/lessonsrequest');
 	}
 
 	public function delLessons()
 	{
+		if (!$this->session->has_userdata('student_id')){
+			 redirect('/main/slogin');
+		}
 		$ids = $this->input->post('ids');
-		$str = implode(",", $ids);
-		$sel = 'update exercises set deleted_at="'.date('Y-m-d H:i:s',time()).'" where id in('.$str.')';
-		$q = $this->db->query($sel);
+		$this->StudentModel->delLessons($ids);
 		redirect('/student/lessonsrequest');
 	}
 
+	public function delLesson()
+	{
+		if (!$this->session->has_userdata('student_id')){
+			 redirect('/main/slogin');
+		}
+		$ids = $this->input->post('ids');
+		$this->StudentModel->delLesson($ids[0]);
+		redirect('/student/lessonsrequest');
+	}
+
+	public function test()
+	{
+		$arr= array('id'=>4, 'sum'=>33);
+		log_message('error','POST='.json_encode($arr));
+	}
+
+	public function addfreerequest()
+	{
+		if (!$this->session->has_userdata('student_id')){
+			 redirect('/main/slogin');
+		}
+		$data = array(
+			'created_at'=> date('Y-m-d H:i:s', time()),
+			'subject_id'=> $this->input->post('subject_id'),
+			'about'=> $this->input->post('about'),
+			'about_time'=> $this->input->post('about_time'),
+			'student_id'=>  $this->session->student_id,
+		);
+		$this->StudentModel->addFreeRequest($data);
+		redirect('/student/freerequests');
+	}
+
+	public function getFreeRepetitors()
+	{
+		if (!$this->session->has_userdata('student_id')){
+			 exit('ученик на вошёл');
+		} else{
+			$free_id = $this->input->post('free_id');
+			//echo $free_id;
+			$data = $this->StudentModel->getFreeRepetitors($free_id);
+			echo json_encode($data);
+		}
+	}
+
+	public function sort($array, $key)
+	{
+		for ($i=0; $i < count($array); $i++) {
+			for ($j=0; $j < count($array); $j++) {
+				if (strtotime($array[$i][$key]) > strtotime($array[$j][$key])){
+					$temp = $array[$i];
+					$array[$i] = $array[$j];
+					$array[$j] = $temp;
+				}
+			}
+		}
+		return $array;
+	}
+
+	public function getpaypal()
+	{
+		if (count($_POST)>0){
+			log_message('error','POST PAYPAL='.json_encode($_POST));
+			# getting POST from paypal
+			$ipn = new PaypalIPN();
+			// Use the sandbox endpoint during testing.
+			$ipn->useSandbox();
+			$verified = $ipn->verifyIPN();
+			if ($verified) {
+				$ex_id = $this->input->post('custom');
+				$sum = round($this->input->post('mc_gross'));
+	 			$student_id = $this->StudentModel->acceptPayHistory($ex_id);
+				$this->StudentModel->addBallance($student_id, $sum);
+				header("HTTP 200 OK");
+			} else{
+				//error
+				log_message('error','ERROR POST='.json_encode($_POST));
+			}
+		} else{
+			redirect('main/filter');
+		}
+	}
+
+	public function getpaypal_old()
+	{
+		if (count($_POST)>0){
+				$ex_id = $this->input->post('custom');
+				$sum = round($this->input->post('mc_gross'));
+	 			$student_id = $this->StudentModel->acceptPayHistory($ex_id);
+				$this->StudentModel->addBallance($student_id, $sum);
+				header("HTTP 200 OK");
+		} else{
+			redirect('main/filter');
+		}
+	}
+
+	public function getYandex()
+	{
+		if (count($_POST)>0){
+			$secret = 'yYdgxWJ/SwWNm93bv5q3fOhu';
+			log_message('error','POST YANDEX='.json_encode($_POST));
+			$sum = $this->input->post('mc_gross');
+			$ex_id = $this->input->post('label');
+			$student_id = $this->StudentModel->acceptPayHistory($ex_id);
+			$this->StudentModel->addBallance($student_id, $sum);
+			header("HTTP 200 OK");
+		} else{
+			redirect('main/filter');
+		}
+	}
+
+	public function forgot()
+	{
+		$email = $this->input->post('email');
+		echo $this->StudentModel->forgot($email);
+	}
 }

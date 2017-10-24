@@ -41,7 +41,7 @@ $('#save_profile').click(function(){
         mess += 'Некорректная фамилия <br>';
     }
     console.log(tzone_id);
-    if (tzone_id <1){
+    if (tzone_id ==99){
         err = true;
         mess += 'Выберите часовой пояс <br>';
     }
@@ -91,6 +91,7 @@ $('#add-file').on('change',function(){//получена картинка
     $.each( files, function( key, value ){
         data.append( key, value );
     });
+    $('#avatar-profile').html('<img src="../../img/wait.gif" alt="avarat">');
     $.ajax({
 		url: baseUrl+'student/addavatar',
 		type: 'POST',
@@ -109,5 +110,51 @@ $('#add-file').on('change',function(){//получена картинка
         }
 	});
 });
+
+var tzone_start = false;
+var zones = [];
+$.ajax({
+    url: baseUrl+'main/getTimeZones',
+    type: 'POST',
+    success: function(data){
+        zones = JSON.parse(data);
+    },
+});
+$('#tzone_id').click(function(){
+    $('#tzone_id option').each(function(){
+        var rTime = new Date();
+        var utc = -rTime.getTimezoneOffset()/60;
+        var id = $(this).val();
+        var z = 0;
+        if (id<99){
+            for (var i = 0; i < zones.length; i++) {
+                if (zones[i].id == id){
+                    z = zones[i].zone_time;
+                }
+            }
+            var oTime = new Date(rTime.getTime()+(z-utc)*60*60*1000);
+            var span = '';
+            if (oTime.getHours()<10){
+                span += '0' + oTime.getHours() + ':';
+            } else{
+                span += oTime.getHours() + ':';
+            }
+            if (oTime.getMinutes()<10){
+                span += '0' + oTime.getMinutes();
+            } else{
+                span += oTime.getMinutes();
+            }
+            var text = span + ' ';
+            if (tzone_start){
+                text +=  $(this).text().substr(5);
+            } else{
+                text +=  $(this).text();
+            }
+            $(this).before().text(text);
+        }
+    });
+    tzone_start = true;
+});
+
 
 })})(jQuery)

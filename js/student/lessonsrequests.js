@@ -73,7 +73,7 @@ var timer = setInterval(function(){
 function deldiag(ids){
 	$( "#deldialog" ).remove();
 	var body = '<div id="deldialog" title="Удалить занятие?">';
-	body += '<form action="delLessons" method="post">';
+	body += '<form action="delLesson" method="post">';
 	body += '<button id="del" name="del" type="submit" class="ui-button ui-corner-all ui-widget">Удалить</button>';
 	for (var i = 0; i < ids.length; i++) {
 		body += '<input type="hidden" value='+ids[i]+' name="ids[]">';
@@ -98,7 +98,7 @@ function deldiag(ids){
 function paydiag(ids){
 	$( "#deldialog" ).remove();
 	var body = '<div id="deldialog" title="Оплатить занятие?">';
-	body += '<form action="payLessons" method="post">';
+	body += '<form action="payLesson" method="post">';
 	body += '<button id="del" name="del" type="submit" class="ui-button ui-corner-all ui-widget">Оплатить</button>';
 	for (var i = 0; i < ids.length; i++) {
 		body += '<input type="hidden" value='+ids[i]+' name="ids[]">';

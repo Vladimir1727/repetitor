@@ -1,4 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
+//use PaypalIPN;
 
 class Admin extends CI_Controller {
 
@@ -26,23 +27,26 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
-		$data = array('error'=>'');
+		$data = array(
+			'error'=>'',
+			'new'=>$this->AdminModel->newChats(),
+		);
 		$this->load->view('admin/login', $data);
 	}
 
 	public function createDB()
 	{
-		echo $this->AdminModel->createDB();
+		//echo $this->AdminModel->createDB();
 	}
 
 	public function createTable()
 	{
-		echo $this->AdminModel->createTable();
+		//echo $this->AdminModel->createTable();
 	}
 
 	public function seed()
 	{
-		echo $this->AdminModel->seed();
+		//echo $this->AdminModel->seed();
 	}
 
 	public function logout()
@@ -75,6 +79,7 @@ class Admin extends CI_Controller {
 		$repetitors = $this->AdminModel->getAllRepetitors();
 		$data = array(
 			'repetitors' => $repetitors,
+			'new_chat'=>$this->AdminModel->newChats(),
 		);
 		$this->load->view('admin/repetitors', $data);
 	}
@@ -84,7 +89,10 @@ class Admin extends CI_Controller {
 		if (!$this->session->has_userdata('admin')){
 			 redirect('/');
 		}
-		$data = array();
+		$data = array(
+			'requests'=> $this->AdminModel->getSalaryRequests(),
+			'new_chat'=>$this->AdminModel->newChats(),
+		);
 		$this->load->view('admin/payback', $data);
 	}
 
@@ -93,7 +101,10 @@ class Admin extends CI_Controller {
 		if (!$this->session->has_userdata('admin')){
 			 redirect('/');
 		}
-		$data = array();
+		$data = array(
+			'chats'=>$this->AdminModel->chathistory(),
+			'new_chat'=>$this->AdminModel->newChats(),
+		);
 		$this->load->view('admin/chathistory', $data);
 	}
 
@@ -102,7 +113,10 @@ class Admin extends CI_Controller {
 		if (!$this->session->has_userdata('admin')){
 			 redirect('/');
 		}
-		$data = array();
+		$data = array(
+			'lessons' => $this->AdminModel->history(),
+			'new_chat'=>$this->AdminModel->newChats(),
+		);
 		$this->load->view('admin/lessonshistory', $data);
 	}
 
@@ -114,6 +128,7 @@ class Admin extends CI_Controller {
 		$repetitors = $this->AdminModel->getAllRepetitors();
 		$data = array(
 			'repetitors' => $repetitors,
+			'new_chat'=>$this->AdminModel->newChats(),
 		);
 		$this->load->view('admin/repetitors', $data);
 	}
@@ -126,6 +141,7 @@ class Admin extends CI_Controller {
 		$students = $this->AdminModel->getAllStudents();
 		$data = array(
 			'students' => $students,
+			'new_chat'=>$this->AdminModel->newChats(),
 		);
 		$this->load->view('admin/students', $data);
 	}
@@ -135,8 +151,15 @@ class Admin extends CI_Controller {
 		if (!$this->session->has_userdata('admin')){
 			 redirect('/');
 		}
-		$data = array();
+		$data = array(
+			'requests'=>$this->AdminModel->getNewFreeRequests(),
+			'accepted'=>$this->AdminModel->getAcceptedFreeRequests(),
+			'new_chat'=>$this->AdminModel->newChats(),
+		);
 		$this->load->view('admin/freerequests', $data);
+		//echo '<pre>';
+		//var_dump($data);
+		//echo '</pre>';
 	}
 
 	public function chat()
@@ -159,6 +182,7 @@ class Admin extends CI_Controller {
 		$data = array(
 			'start_id'=> $start_id,
 			'role'=> $role,
+			'new_chat'=>$this->AdminModel->newChats(),
 		);
 		$this->load->view('admin/chat', $data);
 	}
@@ -265,8 +289,121 @@ class Admin extends CI_Controller {
 
 	public function getUsers()
 	{
-		$users = $this->AdminModel->getUsers();
-		echo json_encode($users);
+		if (!$this->session->has_userdata('admin')){
+			 exit('Админ не вошёл');
+		} else{
+			$users = $this->AdminModel->getUsers();
+			echo json_encode($users);
+		}
 	}
 
+	public function delFree()
+	{
+		if (!$this->session->has_userdata('admin')){
+			 redirect('main');
+		} else{
+			$id = $this->input->post('id');
+			$this->AdminModel->delFree($id);
+			redirect('admin/freerequests');
+		}
+	}
+
+	public function acceptFree()
+	{
+		if (!$this->session->has_userdata('admin')){
+			 redirect('main');
+		} else{
+			$id = $this->input->post('id');
+			$this->AdminModel->acceptFree($id);
+			redirect('admin/freerequests');
+		}
+	}
+
+	public function editFree()
+	{
+		if (!$this->session->has_userdata('admin')){
+			 redirect('main');
+		} else{
+			$id = $this->input->post('id');
+			$about = $this->input->post('about');
+			$about_time = $this->input->post('about_time');
+			$this->AdminModel->editFree($id, $about, $about_time);
+			redirect('admin/freerequests');
+		}
+	}
+
+	public function getFreeRepetitors()
+	{
+		if (!$this->session->has_userdata('admin')){
+			 exit('Админ не вошёл');
+		} else{
+			$free_id = $this->input->post('free_id');
+			$data = $this->AdminModel->getFreeRepetitors($free_id);
+			echo json_encode($data);
+		}
+	}
+
+	public function delSalary()
+	{
+		if (!$this->session->has_userdata('admin')){
+			 exit('Админ не вошёл');
+		} else{
+			$this->AdminModel->delSalary($this->input->post('id'));
+			redirect('admin/payback');
+		}
+	}
+
+	public function acceptSalary()
+	{
+		if (!$this->session->has_userdata('admin')){
+			 exit('Админ не вошёл');
+		} else{
+			$this->AdminModel->acceptSalary($this->input->post('id'));
+			redirect('admin/payback');
+		}
+	}
+
+	public function delChat()
+	{
+		if (!$this->session->has_userdata('admin')){
+			 exit('Админ не вошёл');
+		} else{
+			$this->AdminModel->delChat($this->input->post('id'));
+			redirect('admin/chathistory');
+		}
+	}
+
+	public function feeds()
+	{
+		if (!$this->session->has_userdata('admin')){
+			 redirect('main');
+		} else{
+			$data = array(
+				'feeds' => $this->AdminModel-> getFeeds(),
+				'new_chat'=>$this->AdminModel->newChats(),
+			);
+			$this->load->view('admin/feeds', $data);
+			//var_dump($data['feeds']);
+		}
+	}
+
+	public function clearFeed()
+	{
+		$this->AdminModel->clearFeed($this->input->post('id'));
+		redirect('admin/feeds');
+	}
+
+	public function prerep($value='')
+	{
+		if (!$this->session->has_userdata('admin')){
+			 redirect('main');
+		} else{
+			$data = array(
+				'repetitors' => $this->AdminModel->getPreRepetitors(),
+				'new_chat'=>$this->AdminModel->newChats(),
+			);
+			$this->load->view('admin/prerep', $data);
+			//var_dump($data['repetitors']);
+		}
+	}
 }

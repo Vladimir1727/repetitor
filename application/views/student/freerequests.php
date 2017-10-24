@@ -1,19 +1,23 @@
 <?php $this->load->view('main/header'); ?>
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.min.css">
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
-<title>Репетиторы по разным языкам. Свободные заявки</title>
+<title>Репетиторы Real Language Club. Свободные заявки</title>
 </head>
 <body>
 <?php $this->load->view('student/header_menu'); ?>
-
+<?php
+$zone = ' (UTC';
+$zone .= ($student['tzone']>0) ? '+'.$student['tzone'] : $student['tzone'];
+$zone .= ')';
+ ?>
 <main class="student_free">
     <section class="start_less">
         <div>
             <h1>Свободные заявки</h1>
         </div>
         <div>
-            <h3>18:20 (UTC+2)</h3>
-            <h4>23 сентября 2017,суббота</h4>
+            <h3><span id="local-time">18:20</span><?php echo $zone; ?></h3>
+            <h4 id="local-date">23 сентября 2017,суббота</h4>
         </div>
     </section>
     <h2 class="posted">Размещённые заявки</h2>
@@ -35,34 +39,48 @@
         </div>
     </section>
     <section class="table">
-        <aside>
-            <div>
-                <p>22.09.2017</p>
-                <p>22:45</p>
-
-            </div>
-            <div>
-                <p>Английский язык</p>
-            </div>
-            <div>
-                <p>Сдача экзамена B2</p>
-            </div>
-            <div>
-                <p>23.09.2017</p>
-                <p>18:30 - 19:30</p>
-            </div>
-            <div>
-                <h5>Откликнулись: 5</h5>
-                <button class="ok">Показать</button>
-                <button class="del">Удалить заявку</button>
-            </div>
-        </aside>
+        <?php
+        foreach ($requests as $request) {
+            echo '<aside>';
+            echo '<div>';
+            $c =  $request['created_at'];
+            echo '<p>'.substr($c,8,2).'.'.substr($c,5,2).'.'.substr($c,0,4).'</p>';
+            echo '<p>'.substr($c,11,2).':'.substr($c,14,2).'</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>';
+            echo $request['subject'];
+            echo '</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>';
+            echo $request['about'];
+            echo '</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>';
+            echo $request['about_time'];
+            echo '</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<h5>Откликнулись: '.$request['req'].'</h5>';
+            if ($request['req']>0){
+                echo '<button class="ok">Показать</button>';
+            }
+            //echo '<a class="ok" href="#">Показать</a>';
+            echo '<button class="del">Удалить заявку</button>';
+            echo '<input type="hidden" value='.$request['id'].' name="id">';
+            echo '</div>';
+            echo '</aside>';
+        }
+         ?>
     </section>
     <h2 class="new">Новая заявка</h2>
+    <form method="post" action="addfreerequest">
     <section class="new">
         <label>
             <h3>Предмет</h3>
-            <select>
+            <select id="subject_id" name="subject_id">
                 <option value="0">Выберите предмет</option>
                 <?php
                 foreach($subjects as $subject){
@@ -77,7 +95,7 @@
                 <h5>кратко изложите Вашу заявку</h5>
             </div>
             <div>
-                <textarea></textarea>
+                <textarea id="about" name="about"></textarea>
             </div>
         </label>
         <label>
@@ -86,16 +104,17 @@
                 <h5>Напишите удобное для Вас время и дни недели</h5>
             </div>
             <div>
-                <textarea></textarea>
+                <textarea id="dates" name="about_time"></textarea>
             </div>
         </label>
-        <button>Разместить</button>
+    </form>
+        <button id="add_but">Разместить</button>
     </section>
 </main>
 
-<script src="<?php echo base_url(); ?>js/repetitor/chat.js"></script>
 <script>
     var baseUrl = '../';
 </script>
+<script src="<?php echo base_url(); ?>js/student/freerequests.js"></script>
 <script src="<?php echo base_url(); ?>js/student/student.js"></script>
 <?php $this->load->view('main/footer'); ?>

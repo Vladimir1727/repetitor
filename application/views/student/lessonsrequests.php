@@ -1,7 +1,7 @@
 <?php $this->load->view('main/header'); ?>
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.min.css">
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
-<title>Репетиторы по разным языкам. Запросы на уроки</title>
+<title>Репетиторы Real Language Club. Запросы на уроки</title>
 </head>
 <body>
 <?php $this->load->view('student/header_menu'); ?>
@@ -70,28 +70,24 @@
             echo $lesson['about'];
             echo '</p></div>';
             echo '<div>';
-            foreach ($lesson['dates'] as $d) {
-                echo '<p>'.substr($d,8,2).'.'.substr($d,5,2).'.'.substr($d,0,4).'</p>';
-                echo '<p>'.substr($d,11,2).':'.substr($d,14,2).'</p>';
-            }
+            $d = $lesson['dates'];
+            echo '<p>'.substr($d,8,2).'.'.substr($d,5,2).'.'.substr($d,0,4).'</p>';
+            echo '<p>'.substr($d,11,2).':'.substr($d,14,2).'</p>';
             echo '</div>';
             echo '<div><p>';
             echo $lesson['count'].'/'.($lesson['count']*50).' мин';
             echo '</p></div>';
             echo '<div><p>';
-            echo $lesson['sum'];
+            echo round($lesson['sum']);
             echo '$</p></div>';
             echo '<div>';
             echo '<form>';
-            if (is_null($lesson['pay_at'])){
-                echo '<input class="ok pay" name="pay" type="submit" value="Оплатить">';
-            }else{
-                //echo '<input class="ok wait" name="wait" type="submit" value="На рассмотрении">';
+            if (is_null($lesson['date_accept'])){
                 echo '<button class="ok wait">На рассмотрении</button>';
+            } else{
+                echo '<input class="ok pay" name="pay" type="submit" value="Оплатить">';
             }
-            foreach ($lesson['ids'] as $ids) {
-                echo '<input name="ids[]" type="hidden" value="'.$ids.'">';
-            }
+            echo '<input name="ids" type="hidden" value="'.$lesson['id'].'">';
             echo '<a class="mess" href="'.base_url().'index.php/student/chat?id='.$lesson['repetitor_id'].'">Сообщение</a>';
             echo '<input class="del" name="del" type="submit" value="Удалить">';
             echo '</form>';

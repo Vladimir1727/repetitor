@@ -1,4 +1,5 @@
 <?php $this->load->view('main/header'); ?>
+<meta name = "robots" content = "noindex,nofollow">
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.min.css">
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
 <title>Репетиторы по разным языкам. Админ. возврат средств.</title>
@@ -28,28 +29,36 @@
         </aside>
     </section>
     <section class="table">
-        <aside>
-            <div>
-                <p>23.10.2017</p>
-                <p>14:35 UTC + 3</p>
-            </div>
-            <div>
-                <p>Светлана</p>
-                <p>ID 22222222</p>
-            </div>
-            <div>
-                <p>ЯндексДеньги</p>
-                <p>4546576444</p>
-            </div>
-            <div>
-                <p>100</p>
-            </div>
-            <div>
-                <button class="mess">Написать сообщение</button>
-                <button class="ok">В историю</button>
-                <button class="del">Удалить</button>
-            </div>
-        </aside>
+        <?php
+        foreach ($requests as $request) {
+            if (is_null($request['done_at'])){
+                echo '<aside>';
+                echo '<div>';
+                $c = $request['created_at'];
+                echo '<p>'.substr($c,8,2).'.'.substr($c,5,2).'.'.substr($c,0,4).'</p>';
+                echo '<p>'.substr($c,11,2).':'.substr($c,14,2).'</p>';
+                echo '</div>';
+                echo '<div>';
+                echo '<p>'.$request['repetitor'].'</p>';
+                echo '<p>ID '.$request['repetitor_id'].'</p>';
+                echo '</div>';
+                echo '<div>';
+                echo '<p>'.$request['type'].'</p>';
+                echo '<p>'.$request['req'].'</p>';
+                echo '</div>';
+                echo '<div>';
+                echo '<p>'.$request['cost'].'</p>';
+                echo '</div>';
+                echo '<div>';
+                echo '<a class="mess" href="chat?id='.$request['repetitor_id'].'&role=1">Написать сообщение</a>';
+                echo '<button class="ok">В историю</button>';
+                echo '<button class="del">Удалить</button>';
+                echo '<input type="hidden" value='.$request['id'].' name="id">';
+                echo '</div>';
+                echo '</aside>';
+            }
+        }
+         ?>
     </section>
     <h2>История запросов</h2>
     <section class="header">
@@ -72,29 +81,37 @@
         </aside>
     </section>
     <section class="table">
-        <aside>
-            <div>
-                <p>23.10.2017</p>
-                <p>14:35 UTC + 3</p>
-            </div>
-            <div>
-                <p>Светлана</p>
-                <p>ID 22222222</p>
-            </div>
-            <div>
-                <p>ЯндексДеньги</p>
-                <p>4546576444</p>
-            </div>
-            <div>
-                <p>100</p>
-            </div>
-            <div>
-                <button class="mess">Написать сообщение</button>
-                <button class="del">Удалить</button>
-            </div>
-        </aside>
+        <?php
+        foreach ($requests as $request) {
+            if (!is_null($request['done_at'])){
+                echo '<aside>';
+                echo '<div>';
+                $c = $request['created_at'];
+                echo '<p>'.substr($c,8,2).'.'.substr($c,5,2).'.'.substr($c,0,4).'</p>';
+                echo '<p>'.substr($c,11,2).':'.substr($c,14,2).'</p>';
+                echo '</div>';
+                echo '<div>';
+                echo '<p>'.$request['repetitor'].'</p>';
+                echo '<p>ID '.$request['repetitor_id'].'</p>';
+                echo '</div>';
+                echo '<div>';
+                echo '<p>'.$request['type'].'</p>';
+                echo '<p>'.$request['req'].'</p>';
+                echo '</div>';
+                echo '<div>';
+                echo '<p>'.$request['cost'].'</p>';
+                echo '</div>';
+                echo '<div>';
+                echo '<a class="mess" href="chat?id='.$request['repetitor_id'].'&role=1">Написать сообщение</a>';
+                echo '<button class="del">Удалить</button>';
+                echo '<input type="hidden" value='.$request['id'].' name="id">';
+                echo '</div>';
+                echo '</aside>';
+            }
+        }
+         ?>
     </section>
 </main>
 
-<script src="<?php echo base_url(); ?>js/repetitor/chat.js"></script>
+<script src="<?php echo base_url(); ?>js/admin/payback.js"></script>
 <?php $this->load->view('main/footer'); ?>

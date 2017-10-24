@@ -1,12 +1,12 @@
 (function($){$(function(){
-console.log('filter 4');
+console.log('filter 9');
 var baseUrl = '../';
 var isFilter = false;
 var filter = false;
-var time_from = 10;
-var time_to = 18;
-var cost_from = 1;
-var cost_to = 11;
+var time_from = 0;
+var time_to = 24;
+var cost_from = 0;
+var cost_to = 50;
 var page = 1;
 
 
@@ -39,13 +39,31 @@ $( "#cost-slider" ).slider({
  $( "#lesson-date" ).datepicker( "option", "dateFormat", "dd.mm.yy" );
 
 function setFilter(){
+	isFilter = true;
+	var Utc = new Date().getTimezoneOffset();
+	filter = {
+		'subject_id' : ($('#subject_select').val() > 0) ? $('#subject_select').val() : false,
+		'age_id' : ($('#age_select').val() > 0) ? $('#age_select').val() : false,
+		'spec_id' : ($('#spec_select').val() > 0) ? $('#spec_select').val() : false,
+		'date_from' : ($('#lesson-date').val() != '') ? $('#lesson-date').val() : false,
+		'time_from' : time_from,
+		'time_to' : time_to,
+		'cost_from' : cost_from,
+		'cost_to' : cost_to,
+		'lang_id' : ($('#lang_select').val() > 0) ? $('#lang_select').val() : false,
+		'level_id' : ($('#level_select').val() > 0) ? $('#level_select').val() : false,
+		'online' : ($('#online').prop('checked')) ? true : false,
+		'video' : ($('#video').prop('checked')) ? true : false,
+		'utc' : Utc/60,
+	};
+	console.log(filter);
 	$.ajax({
 		url: baseUrl+'main/getfilter',
 		type:'post',
 		data: 'filter='+ JSON.stringify(filter)+'&page='+page,
 		success: function(data){
-			console.log(data);
 			data = JSON.parse(data);
+			console.log(data);
 			var repetitor = data.repetitors;
 			var pagg = data.pagg;
 			var list = '';
@@ -65,7 +83,7 @@ function setFilter(){
 				list += '" alt="avatar">';
 				list += '</div>';
 				if (repetitor[i].link){
-					list += '<a href="rinfo/'+repetitor[i].id+'#video"><span></span> Видео</a>';
+					list += '<a href="rinfo/'+repetitor[i].id+'?subject='+repetitor[i].subject_id+'#video"><span></span> Видео</a>';
 				}
 				list += '</div>';
 				list += '<div class="info">';
@@ -75,25 +93,21 @@ function setFilter(){
 				} else{
 					list += '<span>';
 				}
-				list += '</span><a href="rinfo/'+repetitor[i].id+'">'+repetitor[i].first_name+'</a></h2>';
+				list += '</span><a href="rinfo/'+repetitor[i].id+'?subject='+repetitor[i].subject_id+'">'+repetitor[i].first_name+'</a></h2>';
 				list += '<p><strong>Преподаёт: </strong><span>';
 				var first = true;
-				for (k=0; k < repetitor[i].subjects.length ; k++) {
-					if (first == false){
-						list += ' / ';
-					} else{
-						first = false;
-					}
-					list += repetitor[i].subjects[k];
-				}
+				list += repetitor[i].subject;
 				list += '</span></p>';
 				list += '<p class="lang_block"><strong>Родной язык:</strong> <span>'+repetitor[i].language+'</span></p>';
 				list += '<div class="stars">';
-				list += '<span class="star1"></span>';
-				list += '<span class="star1"></span>';
-				list += '<span class="star1"></span>';
-				list += '<span class="star0"></span>';
-				list += '<span class="star0"></span>';
+				var rating = repetitor[i].reight;
+				for (j=1; j <= rating ; j++) {
+					list += '<span class="star1"></span>';
+				}
+				for (j=5; j > rating ; j--) {
+					list += '<span class="star0"></span>';
+				}
+
 				list += '</div>';
 				list += '<p>';
 				list += '<strong>Специализация: </strong>';
@@ -124,36 +138,24 @@ function setFilter(){
 				list += repetitor[i].about;
 				list += '</span></p>';
 				if ($('#student_id').val()==0){
-					list += '<a href="remember?link=student/addrepetitor/'+repetitor[i].id+'" class="favorites"><span></span> В избранное</a>';
+					list += '<a href="remember?link=student/addrepetitor/'+repetitor[i].id+'?subject='+repetitor[i].subject_id+'" class="favorites"><span></span> В избранное</a>';
 				} else{
-					list += '<a href="../student/addrepetitor/'+repetitor[i].id+'" class="favorites"><span></span> В избранное</a>';
+					list += '<a href="../student/addrepetitor/'+repetitor[i].id+'?subject='+repetitor[i].subject_id+'" class="favorites"><span></span> В избранное</a>';
 				}
 
 				list += '<div class="price">';
 				list += '<span>';
-				if (repetitor[i].cost.length == 1){
-					list += repetitor[i].cost[0];
-				} else{
-					if(repetitor[i].cost[0] == repetitor[i].cost[1]){
-						list += repetitor[i].cost[0];
-					} else{
-						if (repetitor[i].cost[0]>repetitor[i].cost[1]){
-							list += repetitor[i].cost[1]+'-'+repetitor[i].cost[0];
-						}else{
-							list += repetitor[i].cost[0]+'-'+repetitor[i].cost[1];
-						}
-					}
-				}
+				list += repetitor[i].cost;
 				list += '</span>$ <small>за час</small>';
 				list += '</div>';
 				if ($('#student_id').val()==0){
-					list += '<a href="remember?link=student/step1/'+repetitor[i].id+'" class="lesson">Записаться на урок</a>';
+					list += '<a href="remember?link=student/step1/'+repetitor[i].id+'?subject='+repetitor[i].subject_id+'" class="lesson">Записаться на урок</a>';
 					list += '<a href="remember?link=student/chat?id='+repetitor[i].id+'" class="message">Написать сообщение</a>';
 				} else{
-					list += '<a href="../student/step1/'+repetitor[i].id+'" class="lesson">Записаться на урок</a>';
+					list += '<a href="../student/step1/'+repetitor[i].id+'?subject='+repetitor[i].subject_id+'" class="lesson">Записаться на урок</a>';
 					list +=  '<a href="../student/chat?id='+repetitor[i].id+'" class="message">Написать сообщение</a>';
 				}
-				list += '<a href="rinfo/'+repetitor[i].id+'#table" class="sh">Расписание</a>';
+				list += '<a href="rinfo/'+repetitor[i].id+'?subject='+repetitor[i].subject_id+'#table" class="sh">Расписание</a>';
 				list += '</div>';
 				list += '</aside>';
 			}
@@ -180,27 +182,11 @@ function setFilter(){
 }
 
 $('#show_filter').click(function(){
-	isFilter = true;
-	var Utc = new Date().getTimezoneOffset();
-	filter = {
-		'subject_id' : ($('#subject_select').val() > 0) ? $('#subject_select').val() : false,
-		'age_id' : ($('#age_select').val() > 0) ? $('#age_select').val() : false,
-		'spec_id' : ($('#spec_select').val() > 0) ? $('#spec_select').val() : false,
-		'date_from' : ($('#lesson-date').val() != '') ? $('#lesson-date').val() : false,
-		'time_from' : time_from,
-		'time_to' : time_to,
-		'cost_from' : cost_from,
-		'cost_to' : cost_to,
-		'lang_id' : ($('#lang_select').val() > 0) ? $('#lang_select').val() : false,
-		'level_id' : ($('#level_select').val() > 0) ? $('#level_select').val() : false,
-		'online' : ($('#online').prop('checked')) ? true : false,
-		'video' : ($('#video').prop('checked')) ? true : false,
-		'utc' : Utc/60,
-	};
 	setFilter();
-
 });
 
+console.log('filter=',$('#filter').val());
+setFilter();
 if ($('#filter').val()==1){
 	setFilter();
 }

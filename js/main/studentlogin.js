@@ -28,4 +28,26 @@ $('#logform').submit(function(){
     return false;
 });
 
+$('#forgot').click(function(){
+    var email = $('#email').val().trim();
+    if (email.search(/\w+@+\w+\.\w{2,5}/i) == -1){
+        errdiag('Ошибка','Введите корректный пароль');
+    } else{
+        $.ajax({
+            url: baseUrl+'student/forgot',
+            type:'post',
+            data: 'email='+email,
+            success: function(data){
+                console.log('data=', data);
+                if (data=='0'){
+                    errdiag('Восстановление', 'Пароль отправлен на Ваш адрес электронной почты');
+                } else{
+                    errdiag('Ошибка', data);
+                }
+            },
+        });
+    }
+    return false;
+});
+
 })})(jQuery)

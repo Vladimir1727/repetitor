@@ -1,6 +1,6 @@
 (function($){$(function(){
 var baseUrl = '../';
-console.log('plan 8');
+console.log('plan 9');
 var table = 0;
 var monday =0;
 var week = 0;
@@ -182,10 +182,31 @@ function killDead(table){
     return temp;
 }
 
+function checkDate(checkTime){
+    var d = new Date();
+    var zone = $('#zone').val();
+    var utc = - d.getTimezoneOffset()/60;
+    var realTime = new Date(d.getTime() + (zone-utc)*60*60*1000);
+    var addDate = new Date(checkTime.getTime() + 60*60*24*1000);
+    if (addDate.getTime() < realTime.getTime()){
+        errdiag('Ошибка','Нельзя изменить прошлое');
+        return false;
+    } else{
+        return true;
+    }
+}
+
 function tableClick(){
     $('.planed').each(function(){
         $(this).unbind();
         $(this).click(function(){
+            var code = $(this).attr('id');
+            var wday = code.substr(0,1);
+            var hour = code.substr(1);
+            var addDate = new Date(monday.getTime()+60*60*1000*24*(wday-2)+60*60*1000*hour);
+            if (checkDate(addDate) == false){
+                return false;
+            }
             $(this).removeClass('planed');
             $(this).addClass('busy');
             $(this).text(student_name+' ID '+student_id);
@@ -203,6 +224,13 @@ function tableClick(){
     $('.free').each(function(){
         $(this).unbind();
         $(this).click(function(){
+            var code = $(this).attr('id');
+            var wday = code.substr(0,1);
+            var hour = code.substr(1);
+            var addDate = new Date(monday.getTime()+60*60*1000*24*(wday-2)+60*60*1000*hour);
+            if (checkDate(addDate) == false){
+                return false;
+            }
         $(this).removeClass('free');
         $(this).addClass('busy');
         $(this).text(student_name+' ID '+student_id);
@@ -227,6 +255,13 @@ function tableClick(){
     $('.busy').each(function(){
         $(this).unbind();
         $(this).click(function(){
+            var code = $(this).attr('id');
+            var wday = code.substr(0,1);
+            var hour = code.substr(1);
+            var addDate = new Date(monday.getTime()+60*60*1000*24*(wday-2)+60*60*1000*hour);
+            if (checkDate(addDate) == false){
+                return false;
+            }
             var find = false;
             for (var k = 0; k < table.length; k++) {
                 if (equalDates($(this).attr('id'),table[k].date_from) && table[k].student_id == student_id){

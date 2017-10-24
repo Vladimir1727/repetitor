@@ -1,6 +1,6 @@
 
 <?php $this->load->view('main/header'); ?>
-<title>Репетиторы по разным языкам</title>
+<title>Репетиторы Real Language Club</title>
 </head>
 <body class="start">
 <?php $this->load->view('main/header_menu'); ?>

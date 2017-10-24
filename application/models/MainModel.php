@@ -39,50 +39,99 @@ class MainModel extends CI_Model{
 			if ($filter->date_from){
 				$time_from = $filter->date_from;
 			}
-			$fil .= ' and rsp.cost>='.$filter->cost_from.' and rsp.cost<='.$filter->cost_to;
-			$sel = 'select DISTINCT r.activity, t.zone_time, r.id, r.avatar, r.lang_id, r.subject1, r.subject2, r.link, r.visit_at, r.first_name, r.about  from repetitors as r, rsa, rsp, rsl, rss, timezones as t where t.id=r.tzone_id and rsa.repetitor_id=r.id and rsl.repetitor_id=r.id and rsp.repetitor_id=r.id and rss.repetitor_id=r.id and r.status=2 '.$fil.' order by  r.reight DESC, r.visit_at DESC limit '.(($page-1)*$num).','.$num;
+			$fil .= ' and rsp.cost>='.($filter->cost_from*1.3).' and rsp.cost<='.($filter->cost_to*1.3);
+
 		} else{
-			$sel = 'select DISTINCT r.activity, t.zone_time, r.id, r.avatar, r.lang_id, r.subject1, r.subject2, r.link, r.visit_at, r.first_name, r.about  from repetitors as r, rsa, rsp, rsl, rss, timezones as t where t.id=r.tzone_id and rsa.repetitor_id=r.id and rsl.repetitor_id=r.id and rsp.repetitor_id=r.id and rss.repetitor_id=r.id and r.status=2 order by r.visit_at DESC, r.reight DESC limit '.(($page-1)*$num).','.$num;
+			//$time_from = date('Y-m-d H:i:s', time();
+			$fil ='';
 		}
+		$sel = 'select DISTINCT r.reight, r.activity, t.zone_time, r.id, r.avatar, r.lang_id, r.subject1, r.subject2, r.link, r.visit_at, r.first_name, r.about, r.father_name  from repetitors as r, rsa, rsp, rsl, rss, timezones as t where t.id=r.tzone_id and rsa.repetitor_id=r.id and rsl.repetitor_id=r.id and rsp.repetitor_id=r.id and rss.repetitor_id=r.id and r.status=2 '.$fil.' order by  r.reight DESC, r.visit_at DESC limit '.(($page-1)*$num).','.$num;
 		$q = $this->db->query($sel);
-		$repetitors = $q->result_array();
+		$temp = $q->result_array();
+		$repetitors = array();
+		$i = 0;
+		foreach ($temp as $t) {
+			$find = true;
+			if ($filter){
+				if ($filter->subject_id){
+					if ($filter->subject_id !=$t['subject1']){
+						$find = false;
+					}
+				}
+			}
+			//$find = true;
+			if ($find){
+				$repetitors[$i] = array(
+					'activity'=>$t['activity'],
+					'zone_time'=>$t['zone_time'],
+					'id'=>$t['id'],
+					'avatar'=>$t['avatar'],
+					'lang_id'=>$t['lang_id'],
+					'subject_id'=>$t['subject1'],
+					'link'=>$t['link'],
+					'visit_at'=>$t['visit_at'],
+					'first_name'=>$t['first_name'],
+					'about'=>$t['about'],
+					'father_name'=>$t['father_name'],
+					'reight'=>$t['reight'],
+				);
+				$i++;
+			}
+			$find = true;
+			if ($filter){
+				if ($filter->subject_id){
+					if ($filter->subject_id !=$t['subject2']){
+						$find = false;
+					}
+				}
+			}
+			//$find = true;
+			if (!is_null($t['subject2']) && $find){
+				$repetitors[$i] = array(
+					'activity'=>$t['activity'],
+					'zone_time'=>$t['zone_time'],
+					'id'=>$t['id'],
+					'avatar'=>$t['avatar'],
+					'lang_id'=>$t['lang_id'],
+					'subject_id'=>$t['subject2'],
+					'link'=>$t['link'],
+					'visit_at'=>$t['visit_at'],
+					'first_name'=>$t['first_name'],
+					'about'=>$t['about'],
+					'father_name'=>$t['father_name'],
+					'reight'=>$t['reight'],
+				);
+				$i++;
+			}
+		}
 		$temp = array();
 		for ($i=0; $i < count($repetitors); $i++) {
 			$sel = 'select language from languages where id='.$repetitors[$i]['lang_id'];
 			$q = $this->db->query($sel);
 			$r = $q->result_array();
 			$repetitors[$i]['language'] = $r[0]['language'];
-			$repetitors[$i]['subjects'] = array();
-			for ($k=1; $k <=2 ; $k++) {
-				if (!is_null($repetitors[$i]['subject'.$k])){
-					$sel = 'select subject from subjects where id='.$repetitors[$i]['subject'.$k];
-					$q = $this->db->query($sel);
-					$r = $q->result_array();
-					$repetitors[$i]['subjects'][] = $r[0]['subject'];
-				}
-			}
-			$sel = 'select DISTINCT s.specialization from specializations as s, rss where rss.specialization_id=s.id and rss.repetitor_id='.$repetitors[$i]['id'];
+			$sel = 'select subject from subjects where id='.$repetitors[$i]['subject_id'];
+			$q = $this->db->query($sel);
+			$r = $q->result_array();
+			$repetitors[$i]['subject'] = $r[0]['subject'];
+			$sel = 'select DISTINCT s.specialization from specializations as s, rss where rss.specialization_id=s.id and rss.repetitor_id='.$repetitors[$i]['id'].' and rss.subject_id='.$repetitors[$i]['subject_id'];
 			$q = $this->db->query($sel);
 			$r = $q->result_array();
 			$repetitors[$i]['spec'] = array();
-			for ($k=0; $k < count($r) ; $k++) {
-				$repetitors[$i]['spec'][] = $r[$k]['specialization'];
+			foreach ($r as $k) {
+				$repetitors[$i]['spec'][] = $k['specialization'];
 			}
-			$sel = 'select DISTINCT a.age from ages as a, rsa where rsa.age_id=a.id and rsa.repetitor_id='.$repetitors[$i]['id'];
+			$sel = 'select DISTINCT a.age from ages as a, rsa where rsa.age_id=a.id and rsa.repetitor_id='.$repetitors[$i]['id'].' and rsa.subject_id='.$repetitors[$i]['subject_id'];
 			$q = $this->db->query($sel);
 			$r = $q->result_array();
 			$repetitors[$i]['ages'] = array();
-			for ($k=0; $k < count($r) ; $k++) {
-				$repetitors[$i]['ages'][] = $r[$k]['age'];
+			foreach ($r as $k) {
+				$repetitors[$i]['ages'][] = $k['age'];
 			}
-			$sel = 'select DISTINCT cost from rsp where repetitor_id='.$repetitors[$i]['id'];
+			$sel = 'select DISTINCT cost from rsp where repetitor_id='.$repetitors[$i]['id'].' and rsp.subject_id='.$repetitors[$i]['subject_id'];
 			$q = $this->db->query($sel);
 			$r = $q->result_array();
-			$repetitors[$i]['cost'] = array();
-			for ($k=0; $k < count($r) ; $k++) {
-				$repetitors[$i]['cost'][] = $r[$k]['cost'];
-			}
-			//if (time() < (strtotime($repetitors[$i]['visit_at']))+60*5){
+			$repetitors[$i]['cost'] = round($r[0]['cost']*1.3);
 			if ( (time() < (strtotime($repetitors[$i]['visit_at'])+60*5)) && ($repetitors[$i]['activity'] >0)){
 				$repetitors[$i]['online'] = true;
 			} else{
@@ -211,43 +260,44 @@ class MainModel extends CI_Model{
 		return $pag;
 	}
 
-	public function getRepetitor($id){
+	public function getRepetitor($id, $subject_id = 0){
 		$q = $this->db->query('select * from repetitors where id='.$id);
 		$r = $q->result_array();
 		if (count($r)==0){
 			throw new Exception('нет такого id');
 		}
+		// if ($r[0]['status'] != 2){
+		// 	throw new Exception('репетитор заблокирован');
+		// }
 		$rep = $r[0];
-		$sub = 0;
-		for ($i=1; $i <=2 ; $i++) {
-			if (!is_null($rep['subject'.$i])){
-				$q = $this->db->query('select subject from subjects where id='.$rep['subject'.$i]);
-				$r = $q->result_array();
-				$rep['sub'.$i.'_name'] = $r['0']['subject'];
-				$sub++;
-			}
+		if ($subject_id == 0){
+			$subject_id = $rep['subject1'];
 		}
-		$rep['sub_num'] = $sub;
-		$sel = 'select DISTINCT s.specialization from specializations as s, rss where rss.specialization_id=s.id and rss.repetitor_id='.$id;
+		$rep['subject_id'] = $subject_id;
+		$q = $this->db->query('select subject from subjects where id='.$subject_id);
+		$r = $q->result_array();
+		$rep['subject'] = $r['0']['subject'];
+		$sel = 'select DISTINCT s.specialization from specializations as s, rss where rss.specialization_id=s.id and rss.repetitor_id='.$id.' and rss.subject_id='.$subject_id;
 		$q = $this->db->query($sel);
 		$r = $q->result_array();
 		$rep['spec'] = array();
 		for ($k=0; $k < count($r) ; $k++) {
 			$rep['spec'][] = $r[$k]['specialization'];
 		}
-		$sel = 'select DISTINCT a.age from ages as a, rsa where rsa.age_id=a.id and rsa.repetitor_id='.$id;
+		$sel = 'select DISTINCT a.age from ages as a, rsa where rsa.age_id=a.id and rsa.repetitor_id='.$id.' and rsa.subject_id='.$subject_id;
 		$q = $this->db->query($sel);
 		$r = $q->result_array();
 		$rep['ages'] = array();
 		for ($k=0; $k < count($r) ; $k++) {
 			$rep['ages'][] = $r[$k]['age'];
 		}
-		$sel = 'select DISTINCT cost from rsp where repetitor_id='.$id;
+		$sel = 'select DISTINCT cost from rsp where repetitor_id='.$id.' and subject_id='.$subject_id;
 		$q = $this->db->query($sel);
 		$r = $q->result_array();
-		$rep['cost'] = array();
-		for ($k=0; $k < count($r) ; $k++) {
-			$rep['cost'][] = $r[$k]['cost'];
+		if (count($r)==0){
+			$rep['cost'] = 0;
+		} else{
+			$rep['cost'] = $r[0]['cost']*1.3;
 		}
 		if ( (time() < (strtotime($rep['visit_at'])+60*5)) && ($rep['activity'] >0)){
 			$rep['online'] = true;
@@ -304,7 +354,13 @@ class MainModel extends CI_Model{
 	public function sendChat($chat)
 	{
 		$this->db->insert('chats', $chat);
-		echo 0;
+		return 0;
+	}
+
+	public function sendChat2($chat)
+	{
+		$this->db->insert('chats', $chat);
+		return 0;
 	}
 
 	public function getChat($chat)
@@ -404,7 +460,7 @@ class MainModel extends CI_Model{
 					$data[$i]['online'] = false;
 				}
 			} elseif($data[$i]['from_role'] == 2){
-				$sel = 'select first_name, avatar, visit_at, status from students where id='.$data[$i]['from_id'];
+				$sel = 'select first_name, avatar, visit_at, activity from students where id='.$data[$i]['from_id'];
 				$q = $this->db->query($sel);
 				$r = $q->result_array();
 				$data[$i]['first_name'] = $r[0]['first_name'];
@@ -413,7 +469,7 @@ class MainModel extends CI_Model{
 				} else{
 					$data[$i]['avatar'] = 'images/'.$r[0]['avatar'];
 				}
-				if ( (time() < (strtotime($r[0]['visit_at'])+60*5)) && ($r[0]['status'] >0)){
+				if ( (time() < (strtotime($r[0]['visit_at'])+60*5)) && ($r[0]['activity'] >0)){
 					$data[$i]['online'] = true;
 				} else{
 					$data[$i]['online'] = false;
@@ -465,7 +521,7 @@ class MainModel extends CI_Model{
 			} else{
 				$data['avatar'] = 'images/'.$r[0]['avatar'];
 			}
-			if ( (time() < (strtotime($r[0]['visit_at'])+60*5)) && ($r[0]['status'] >0)){
+			if ( (time() < (strtotime($r[0]['visit_at'])+60*5)) && ($r[0]['activity'] >0)){
 				$data['online'] = true;
 			} else{
 				$data['online'] = false;
@@ -488,5 +544,80 @@ class MainModel extends CI_Model{
 		$r = $q->result_array();
 		$data['new'] = $r[0]['c'];
 		return $data;
+	}
+
+	public function getTotalBalance()
+	{
+		$sel = 'select balance from balance limit 1';
+		$q = $this->db->query($sel);
+		$r = $q->result_array();
+		return $r[0]['balance'];
+	}
+
+	public function sendfeed($feed)
+	{
+		$q = $this->db->query('select id from ratings where student_id='.$feed['student_id'].' and repetitor_id='.$feed['repetitor_id']);
+		$r = $q->result_array();
+		if (count($r)>0){
+			return 1;
+		} else{
+			$this->db->insert('ratings', $feed);
+			$q = $this->db->query('select sum(rating) as s, count(student_id) as c from ratings where repetitor_id='.$feed['repetitor_id']);
+			$r = $q->result_array();
+			$reight = round($r[0]['s'] / $r[0]['c']);
+			$this->db->where('id', $feed['repetitor_id']);
+			$this->db->update('repetitors', array('reight'=> $reight));
+			return 0;
+		}
+	}
+
+	public function getFeeds($repetitor_id)
+	{
+		$q = $this->db->query('select r.rating, r.about, r.created_at, s.first_name, s.father_name from ratings as r, students as s where r.student_id=s.id and r.repetitor_id='.$repetitor_id.' order by created_at DESC');
+		$r = $q->result_array();
+		return $r;
+	}
+
+	public function canFeed($student_id, $repetitor_id)
+	{
+		$q = $this->db->query('select id from ratings where student_id='.$student_id.' and repetitor_id='.$repetitor_id);
+		$r = $q->result_array();
+		if (count($r)>0){
+			return false;
+		} else{
+			return true;
+		}
+	}
+
+	public function getRZone($repetitor_id)
+	{
+		$sel = 'select t.zone_time from timezones t, repetitors r where t.id=r.tzone_id and r.id='.$repetitor_id;
+		$q = $this->db->query($sel);
+		$r = $q->result_array();
+		if (count($r)==0){
+			return 0;
+		} else{
+			return $r[0]['zone_time'];
+		}
+	}
+
+	public function getSZone($student_id)
+	{
+		$sel = 'select t.zone_time from timezones t, students s where t.id=s.tzone_id and s.id='.$student_id;
+		$q = $this->db->query($sel);
+		$r = $q->result_array();
+		if (count($r)==0){
+			return 0;
+		} else{
+			return $r[0]['zone_time'];
+		}
+	}
+
+	public function getTimeZones()
+	{
+		$sel = 'select * from timezones';
+		$q = $this->db->query($sel);
+		$r = $q->result_array();
+		return $r;
 	}
 }

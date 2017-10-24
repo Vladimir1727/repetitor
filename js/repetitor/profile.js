@@ -1,7 +1,8 @@
 (function($){$(function(){
 var baseUrl = '../';
-console.log('repetitor profile 7');
+console.log('repetitor profile 10');
 var proc = 0.3;
+var can_mess = '';
 /*$('#slide').click(function(){
     $('#slide ul').slideToggle();
 });*/
@@ -74,26 +75,6 @@ $('#status-but').click(function(){
 });
 
 $('#save_personal').click(function(){
-    /*var ver = verify([
-        ['first_name', 'name'],
-        ['last_name', 'name'],
-        ['email', 'email'],
-        ['password', 'pass'],
-        ['password2', 'pass'],
-        ['skype', 'name']
-    ]);
-    if (ver){
-        rUpdate({
-            'first_name' : $('#first_name').val().trim(),
-            'last_name' : $('#last_name').val().trim(),
-            'father_name' : $('#father_name').val().trim(),
-            'phone': $('#phone').val().trim(),
-            'tzone_id' : $('#tzone_id').val(),
-            'skype' : $('#skype').val().trim(),
-            'email' : $('#email').val().trim(),
-            'password' : $('#password').val().trim(),
-        });
-    }*/
     var correct = true;
     var first_name = $('#first_name').val().trim();
     var last_name = $('#last_name').val().trim();
@@ -175,6 +156,7 @@ $('#save_subject').click(function(){
         if (sub == false) mess += "Выберите предмет <br>";
         errdiag("Предупреждение", mess);
     } else{
+        console.log($('#subject_form').serialize());
         $.ajax({
             url: baseUrl+'repetitor/updateSubject',
             type:'post',
@@ -216,6 +198,7 @@ function loadSubject(sub){
         type:'post',
         data: 'subject='+sub,
         success: function(data){
+            console.log(data);
             if (data != 'false'){
                 var d = JSON.parse(data);
                 $('#subject_id option').each(function(){
@@ -309,7 +292,7 @@ $('#save_present').click(function(){
         mess += 'Текст описания должен быть более пяти и до 400 символов <br>';
         err = true;
     }
-    if (link.substr(0,24)!='https://www.youtube.com/'){
+    if (link.substr(0,24)!='https://www.youtube.com/' && link!=''){
         mess += 'Ссылка должна быть на youtube <br>';
     }
     if (err){
@@ -334,6 +317,7 @@ $('#add-file').on('change',function(){//получена картинка
     $.each( files, function( key, value ){
         data.append( key, value );
     });
+    $('#avatar-profile').html('<img src="../../img/wait.gif" alt="avarat">');
     $.ajax({
 		url: baseUrl+'repetitor/addavatar',
 		type: 'POST',
@@ -384,6 +368,7 @@ $('#add-file2').on('change',function(){//получена картинка
 });
 
 function saveDoc(data, pos){
+    $('#load_block'+pos).html('<img src="../../img/wait.gif" alt="avarat">');
     $.ajax({
 		url: baseUrl+'repetitor/adddoc',
 		type: 'POST',
@@ -454,30 +439,23 @@ $('#save_edu').click(function(){
 $('#save_pay').click(function(){
     var paypal = $('#paypal').val().trim();
     var yandex = $('#yandex').val().trim();
+    var master = $('#master').val().trim();
     if (paypal.length>0){
         rUpdate({
             'paypal' : paypal
         });
     }
-    if (paypal.length>0){
+    if (yandex.length>0){
         rUpdate({
             'yandex' : yandex
         });
     }
-    if (paypal.length>0 && yandex.length>0){
+    if (master.length>0){
         rUpdate({
-            'yandex' : yandex,
-            'paypal' : paypal
+            'master' : master
         });
-    } else if (paypal.length>0) {
-        rUpdate({
-            'paypal' : paypal
-        });
-    } else if (yandex.length>0) {
-        rUpdate({
-            'yandex' : yandex
-        });
-    } else{
+    }
+    if (paypal.length==0 && yandex.length==0 && master.length==0){
         errdiag('Предупреждение', 'введите хотя бы один способ оплаты');
     }
     return false;
@@ -524,6 +502,7 @@ var checker = setInterval(function() {
     var lang_id = $('#lang_id').val();
     var price = $('#price').val().trim();
     var yandex = $('#yandex').val().trim();
+    var master = $('#master').val().trim();
     var paypal = $('#paypal').val().trim();
     var university = $('#university').val().trim();
     var specialty = $('#specialty').val().trim();
@@ -531,70 +510,92 @@ var checker = setInterval(function() {
     var experience = $('#experience').val();
     var degree_id = $('#degree_id').val();
     var exp_comment = $('#exp_comment').val().trim();
+    can_mess = '';
     //check
     if (first_name.search(/[a-zA-Z_0-9а-яА-Я]{3,16}/i) == -1){
         can_save = false;
         // console.log('first_name error');
+        can_mess += 'Некорректное имя репетитора <br>';
     }
     if (last_name.search(/[a-zA-Z_0-9а-яА-Я]{3,16}/i) == -1){
         can_save = false;
         // console.log('last_name error');
+        can_mess += 'Некорректная фамилия<br>';
     }
     if (skype.search(/[a-zA-Z_0-9]{2,}/i) == -1){
         can_save = false;
         // console.log('skype error');
+        can_mess += 'Некорректный skype<br>';
     }
     if (email.search(/\w+@+\w+\.\w{2,5}/i) == -1){
         can_save = false;
         // console.log('email error');
+        can_mess += 'Некорректный  e-mail<br>';
     }
-    if (password.search(/\w{3,}/) == -1 || password != password2){
+    if (password.search(/\w{3,}/) == -1){
         can_save = false;
         // console.log('password error');
+        can_mess += 'Некорректный пароль<br>';
+    }
+    if (password != password2){
+        can_save = false;
+        // console.log('password error');
+        can_mess += 'Пароли не совпадают<br>';
     }
     if (about.length < 3 || about.length > 400){
         can_save = false;
         // console.log('about error');
+        can_mess += 'Некорректное описание репетитора<br>';
     }
-    if (subject_id.search(/\d{1,3}/i) == -1){
+    if (subject_id == 0){
         can_save = false;
         // console.log('subject_id error');
+        can_mess += 'Не выбран предмет<br>';
     }
-    if (lang_id.search(/\d{1,3}/i) == -1){
+    if (lang_id == 0){
         can_save = false;
         // console.log('lang_id error');
+        can_mess += 'Не выбран родной язык репетитора<br>';
     }
     if (price.search(/\d{1,5}/i) == -1){
         can_save = false;
         // console.log('price error');
+        can_mess += 'Некорректная цена за урок<br>';
     }
-    if ( (yandex.length < 3 || yandex.length > 400) && (paypal.length < 3 || paypal.length > 400) ){
+    if ( (yandex.length < 3 || yandex.length > 400) && (paypal.length < 3 || paypal.length > 400) && (master.length < 3 || master.length > 400)){
         can_save = false;
         // console.log('pay error');
+        can_mess += 'Некорректные платёжные реквизиты <br>';
     }
     if (university.search(/[a-zA-Z_0-9а-яА-Я ]{3,16}/i) == -1){
         can_save = false;
         // console.log('university error');
+        can_mess += 'Некорректный ВУЗ <br>';
     }
     if (specialty.search(/[a-zA-Z_0-9а-яА-Я ]{3,16}/i) == -1){
         can_save = false;
         // console.log('specialty error');
+        can_mess += 'Некорректная Специальность <br>';
     }
     if (uni_year.search(/\d{1,3}/i) == -1){
         can_save = false;
         // console.log('uni_year error');
+        can_mess += 'Год окончания не выбран<br>';
     }
     if (experience.search(/\d{1,3}/i) == -1){
         can_save = false;
         // console.log('experience error');
+        can_mess += 'Опыт не выбран<br>';
     }
     if (degree_id.search(/\d{1,3}/i) == -1){
         can_save = false;
         // console.log('degree_id error');
+        can_mess += 'Не выбрана ученая степень <br>';
     }
     if (exp_comment.length < 3 || exp_comment.length > 400){
         can_save = false;
         // console.log('exp_comment error');
+        can_mess += 'Некорректное описание опыта работы<br>';
     }
     var f = $('#subject_form').serializeArray();
     var sp = false;
@@ -607,29 +608,81 @@ var checker = setInterval(function() {
     }
     if (sp == false || age == false || level == false){
         can_save = false;
+        can_mess += 'Не заполнены данные по предмету<br>';
     }
     //end check
     if (can_save){
         $('#send_profile').removeAttr('disabled');
         $('#send_profile').prop('disabled', false);
         clearInterval(checker);
+    } else{
+        //errdiag('Ошибка', mess);
     }
 }, 1000);
 
 $('#send_profile').click(function(){
+    if ($('#send_profile').hasClass('off')){
+        return false;
+    }
     if (can_save){
         rUpdate({
             'status' : 1
         });
         $('#send_profile').text('Профиль находится на рассмотрении');
-        $('#send_profile').attr('disabled','disabled');
-        $('#send_profile').prop('disabled', true);
+        $('#send_profile').addClass('off');
+        $('#send_profile').addClass('dark');
     } else{
         console.log('NO');
+        errdiag('Ошибка', can_mess);
     }
     return false;
 });
 
 //clearInterval(checker);
+
+var tzone_start = false;
+var zones = [];
+$.ajax({
+    url: baseUrl+'main/getTimeZones',
+    type: 'POST',
+    success: function(data){
+        zones = JSON.parse(data);
+    },
+});
+$('#tzone_id').click(function(){
+    $('#tzone_id option').each(function(){
+        var rTime = new Date();
+        var utc = -rTime.getTimezoneOffset()/60;
+        var id = $(this).val();
+        var z = 0;
+        if (id<99){
+            for (var i = 0; i < zones.length; i++) {
+                if (zones[i].id == id){
+                    z = zones[i].zone_time;
+                }
+            }
+            var oTime = new Date(rTime.getTime()+(z-utc)*60*60*1000);
+            var span = '';
+            if (oTime.getHours()<10){
+                span += '0' + oTime.getHours() + ':';
+            } else{
+                span += oTime.getHours() + ':';
+            }
+            if (oTime.getMinutes()<10){
+                span += '0' + oTime.getMinutes();
+            } else{
+                span += oTime.getMinutes();
+            }
+            var text = span + ' ';
+            if (tzone_start){
+                text +=  $(this).text().substr(5);
+            } else{
+                text +=  $(this).text();
+            }
+            $(this).before().text(text);
+        }
+    });
+    tzone_start = true;
+});
 
 })})(jQuery)

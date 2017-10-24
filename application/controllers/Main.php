@@ -27,7 +27,9 @@ class Main extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('main/start');
+		redirect('/main/filter');
+		//$this->load->view('main/start');
+		//$this->load->view('stop');
 	}
 
 	public function about()
@@ -45,7 +47,8 @@ class Main extends CI_Controller {
 
 	public function filter()
 	{
-		$page = (is_null($this->input->get('page'))) ? 1 : $this->input->get ('page');
+		$this->load->view('stop');
+		/*$page = (is_null($this->input->get('page'))) ? 1 : $this->input->get ('page');
 		if ($this->session->has_userdata('student_id')){
 			$student = $this->MainModel->getStudent($this->session->student_id);
 		} else{
@@ -72,7 +75,7 @@ class Main extends CI_Controller {
 			'student' => $student,
 			'filter' => $filter,
 		);
-		$this->load->view('main/filter', $data);
+		$this->load->view('main/filter', $data);*/
 	}
 
 	public function repetitorregistration(){
@@ -91,25 +94,54 @@ class Main extends CI_Controller {
 		$this->load->view('main/studentlogin');
 	}
 
-	public function rinfo($id)
+	public function rinfo($id=0)
 	{
-		$repetitor = $this->MainModel->getRepetitor($id);
+		if (is_null($id) || $id == 0){
+			redirect('/main/filter');
+		}
+		$subject_id = (is_null($this->input->get('subject'))) ? 0 : $this->input->get('subject');
+		try {
+			$repetitor = $this->MainModel->getRepetitor($id, $subject_id);
+		} catch (Exception $e) {
+			redirect('/main/filter');
+		}
+		if ($repetitor['status']!=2 && !$this->session->has_userdata('admin')){
+			redirect('/main/filter');
+		}
+		$zone = false;
+		$zone_type = 'none';
 		if ($this->session->has_userdata('student_id')){
-			$student = $this->MainModel->getStudent($this->session->student_id);
+			$student_id = $this->session->student_id;
+			$student = $this->MainModel->getStudent($student_id);
+			$zone = $this->MainModel->getSzone($student_id);
+			$zone_type = 'student';
 		} else{
 			$student = false;
+			$student_id = 0;
+			if ($this->session->has_userdata('repetitor_id')){
+				$zone = $this->MainModel->getRzone($this->session->repetitor_id);
+				$zone_type = 'repetitor';
+			}
 		}
 		$data =  array(
 			'repetitor' => $repetitor,
 			'student' => $student,
+			'subject_id' =>$subject_id,
+			'feeds'=>$this->MainModel->getFeeds($id),
+			'can_feed' => $this->MainModel->canFeed($student_id, $id),
+			'zone'=> $zone,
+			'ztype' => $zone_type,
 		);
 		$this->load->view('main/rinfo', $data);
 	}
 
 	public function test(){
-		$repetitor = 3;
-
-		var_dump($data);
+		echo '<pre>';
+		$zone = 2;
+		echo date('Y-m-d H:i:s',time() - $zone*60*60);
+		echo '<br>';
+		echo date('Y-m-d H:i:s',time());
+		echo '</pre>';
 	}
 
 	public function upload()
@@ -249,5 +281,22 @@ class Main extends CI_Controller {
 		$this->load->helper('cookie');
 		$link = get_cookie('link');
 		var_dump($link);
+	}
+
+	public function sendfeed()
+	{
+		$data = array(
+			'about' => $this->input->post('about'),
+			'rating' => $this->input->post('rating'),
+			'student_id' => $this->input->post('student_id'),
+			'repetitor_id' => $this->input->post('repetitor_id'),
+			'created_at' => date('Y-m-d H:i:s',time()),
+		);
+		redirect($this->input->post('back'));
+	}
+
+	public function getTimeZones()
+	{
+		echo json_encode($this->MainModel->getTimeZones());
 	}
 }

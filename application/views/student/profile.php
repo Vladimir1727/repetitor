@@ -1,7 +1,7 @@
 <?php $this->load->view('main/header'); ?>
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.min.css">
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
-<title>Репетиторы по разным языкам. Профиль репетитора</title>
+<title>Репетиторы Real Language Club. Профиль репетитора</title>
 </head>
 <body>
 <?php $this->load->view('student/header_menu'); ?>
@@ -14,6 +14,11 @@
     </ul>
 </section>
 <main class="student-profile">
+    <?php
+    if ($student['status']==0){
+        echo '<h4>Для дальнейшей работы в личном кабинете внесите данные в "Настройки профиля"</h4>';
+    }
+     ?>
     <section>
         <div class="avatar">
             <div class="img" id="avatar-profile">
@@ -41,7 +46,7 @@
             </div>
             <div>
                 <select name="tzone" id="tzone_id">
-                    <<option value="0">Выберите часовой пояс</option>
+                    <<option value="99">Выберите часовой пояс</option>
                     <?php
                         foreach ($tzones as $option) {
                             if ($option['id'] == $student['tzone_id']){

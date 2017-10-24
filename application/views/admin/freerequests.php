@@ -1,4 +1,5 @@
 <?php $this->load->view('main/header'); ?>
+<meta name = "robots" content = "noindex,nofollow">
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.min.css">
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
 <title>Репетиторы по разным языкам. Админ. Свободные заявки.</title>
@@ -8,7 +9,7 @@
 
 <main class="admin-free">
     <h1>Свободные заявки</h1>
-    <h2 class="new">Новые заявки (10)</h2>
+    <h2 class="new">Новые заявки (<?php echo count($requests); ?>)</h2>
     <section class="head">
         <aside>
             <div>
@@ -32,34 +33,52 @@
         </aside>
     </section>
     <section class="table">
-        <aside>
-            <div>
-                <p>22.09.2017</p>
-                <p>22:45</p>
-                <h5>Откликнулись: 5</h5>
-            </div>
-            <div>
-                <p>Английский язык</p>
-            </div>
-            <div>
-                <p>Мария</p>
-                <p>ID 11111111</p>
-            </div>
-            <div>
-                <p>Сдача экзамена B2</p>
-            </div>
-            <div>
-                <p>23.09.2017</p>
-                <p>18:30 – 19:30</p>
-            </div>
-            <div>
-                <button class="ok">Одобрить</button>
-                <button class="mess">Редактировать</button>
-                <button class="del">Удалить</button>
-            </div>
-        </aside>
+        <?php
+        foreach ($requests as $request) {
+            echo '<aside>';
+            echo '<div>';
+            echo '<p>';
+            $c = $request['created_at'];
+            echo '<p>'.substr($c,8,2).'.'.substr($c,5,2).'.'.substr($c,0,4).'</p>';
+            echo '<p>'.substr($c,11,2).':'.substr($c,14,2);
+            echo '</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>';
+            echo $request['subject'];
+            echo '</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>';
+            echo $request['student_name'];
+            echo '</p>';
+            echo '<p>';
+            echo 'ID '.$request['student_id'];
+            echo '</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>';
+            echo $request['about'];
+            echo '</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>';
+            echo $request['about_time'];
+            echo '</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<button class="ok">Одобрить</button>';
+            echo '<button class="mess">Редактировать</button>';
+            echo '<button class="del">Удалить</button>';
+            echo '<input type="hidden" value='.$request['id'].' name="id">';
+            echo '<input type="hidden" value="'.$request['about'].'" name="about">';
+            echo '<input type="hidden" value="'.$request['about_time'].'" name="about_time">';
+            echo '</div>';
+            echo '</aside>';
+        }
+         ?>
     </section>
-    <h2 class="ok">Одобренные (1)</h2>
+    <h2 class="ok">Одобренные (<?php echo count($accepted); ?>)</h2>
     <section class="head">
         <aside>
             <div>
@@ -83,34 +102,53 @@
         </aside>
     </section>
     <section class="table">
-        <aside>
-            <div>
-                <p>22.09.2017</p>
-                <p>22:45</p>
-                <h5>Откликнулись: 5</h5>
-            </div>
-            <div>
-                <p>Английский язык</p>
-            </div>
-            <div>
-                <p>Мария</p>
-                <p>ID 11111111</p>
-            </div>
-            <div>
-                <p>Сдача экзамена B2</p>
-            </div>
-            <div>
-                <p>23.09.2017</p>
-                <p>18:30 – 19:30</p>
-            </div>
-            <div>
-                <h5>Откликнулись: 5</h5>
-                <button class="mess">Показать</button>
-                <button class="del">Удалить</button>
-            </div>
-        </aside>
+        <?php
+        foreach ($accepted as $request) {
+            echo '<aside>';
+            echo '<div>';
+            echo '<p>';
+            $c = $request['created_at'];
+            echo '<p>'.substr($c,8,2).'.'.substr($c,5,2).'.'.substr($c,0,4).'</p>';
+            echo '<p>'.substr($c,11,2).':'.substr($c,14,2);
+            echo '</p>';
+            echo '<h5>Отозвались: '.$request['req'].'</h5>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>';
+            echo $request['subject'];
+            echo '</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>';
+            echo $request['student_name'];
+            echo '</p>';
+            echo '<p>';
+            echo 'ID '.$request['student_id'];
+            echo '</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>';
+            echo $request['about'];
+            echo '</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<p>';
+            echo $request['about_time'];
+            echo '</p>';
+            echo '</div>';
+            echo '<div>';
+            echo '<h5>Отозвались: '.$request['req'].'</h5>';
+            if ($request['req']>0){
+                echo '<button class="show">Показать</button>';
+            }
+            echo '<button class="del">Удалить</button>';
+            echo '<input type="hidden" value='.$request['id'].' name="id">';
+            echo '</div>';
+            echo '</aside>';
+        }
+         ?>
     </section>
 </main>
 
-<script src="<?php echo base_url(); ?>js/repetitor/chat.js"></script>
+<script src="<?php echo base_url(); ?>js/admin/freerequests.js"></script>
 <?php $this->load->view('main/footer'); ?>

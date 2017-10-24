@@ -6,6 +6,7 @@ var start_id = $('#start_id').val();
 var start_role = $('#start_role').val();
 var baseUrl = '../';
 var users = [];
+var firstStart = true;
 if (start_role>0 && start_id>-1){
     to_role = start_role;
     to_id = start_id;
@@ -172,6 +173,10 @@ function getChatList() {
                 });
             }
             userClick();
+            if (to_id==0 && Chats.length>0){
+                to_role = Chats[0].from_role;
+                to_id = Chats[0].from_id;
+            }
         }
     });
 }

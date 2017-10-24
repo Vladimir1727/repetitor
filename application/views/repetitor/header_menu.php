@@ -47,7 +47,7 @@
 			</h4>
 		</div>
 		<div class="balance">
-			<p>Баланс <span>0</span> $</p>
+			<p>Баланс <span><?php echo $repetitor['balance']; ?></span> $</p>
 		</div>
 		<div class="menu">
 			<ul>

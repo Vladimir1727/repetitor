@@ -1,4 +1,5 @@
 <?php $this->load->view('main/header'); ?>
+<meta name = "robots" content = "noindex,nofollow">
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.min.css">
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
 <title>Репетиторы по разным языкам. Админ. Ученики.</title>
@@ -74,14 +75,14 @@
                     echo '<div><p>'.$date.'</p></div>';
                     echo '<div><p>'.$student['email'].'</p></div>';
                     echo '<div><p>'.$student['skype'].'</p></div>';
-                    echo '<div><p>'.'0'.'</p></div>';
-                    echo '<div><p>'.'0'.'</p></div>';
-                    echo '<div><p>'.'0'.'</p></div>';
-                    echo '<div><p>'.'0'.'</p></div>';
+                    echo '<div><p>'.$student['req'].'</p></div>';
+                    echo '<div><p>'.$student['free'].'</p></div>';
+                    echo '<div><p>'.$student['buy'].'</p></div>';
+                    echo '<div><p>'.$student['adds'].'</p></div>';
                     echo '<div><p>'.$student['balance'].'</p></div>';
-                    echo '<div><p>'.'0'.'</p></div>';
+                    echo '<div><p>'.$student['sum'].'</p></div>';
                     echo '<div><form action="'.base_url().'index.php/admin/changeStudent" method="post">';
-                    echo '<button class="mess" name="mess" type="submit">Написать сообщение</button>';
+                    echo '<a class="mess" href="'.base_url().'index.php/admin/chat?id='.$student['id'].'&role=2">Написать сообщение</a>';
                     if ($student['status'] == 1){
                         echo '<button class="off" name="off" type="submit">Выключить</button>';
                     } else{
