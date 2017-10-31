@@ -208,6 +208,7 @@ popup: function(url) {
             © 2014-2017 Real Language Club
         </div>
     </div>
+    <!-- Your share button code -->
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript" >
         (function (d, w, c) {

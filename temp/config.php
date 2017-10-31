@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'https://tutor.reallanguage.club/';
+$config['base_url'] = '/';
 
 /*
 |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ $config['index_page'] = 'index.php';
 |
 | WARNING: If you set this to 'PATH_INFO', URIs will always be URL-decoded!
 */
-$config['uri_protocol']	= 'PASS_INFO';
+$config['uri_protocol']	= 'REQUEST_URI';
 
 /*
 |--------------------------------------------------------------------------
@@ -524,10 +524,10 @@ $config['proxy_ips'] = '';
 
 //mailer
 $config['protocol'] = 'smtp';
-$config['smtp_host'] = 'auth.smtp.1and1.fr';
-$config['smtp_user'] = 'info@reallanguage.club';
-$config['smtp_pass'] = 'molotok';
-$config['smtp_port'] = '465';
+$config['smtp_host'] = 'mail.ukraine.com.ua';
+$config['smtp_user'] = 'test@dvn125.xyz';
+$config['smtp_pass'] = 'Zx1290as';
+$config['smtp_port'] = '2525';
 $config['mailtype'] = 'text';
 $config['charset'] = 'utf-8';
 $config['wordwrap'] = 'TRUE';

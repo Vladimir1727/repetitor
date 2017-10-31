@@ -1,11 +1,30 @@
 (function($){$(function(){
 var baseUrl = '../';
-console.log('repetitor profile 10');
+console.log('repetitor profile 12');
 var proc = 0.3;
 var can_mess = '';
 /*$('#slide').click(function(){
     $('#slide ul').slideToggle();
 });*/
+
+function deldiag(){
+	$( "#deldialog" ).remove();
+	$('body').append('<div id="deldialog" title="Удалить профиль репетитора?"><form action="deleteRepetitor" method="post"><button id="del" name="del" type="submit" class="ui-button ui-corner-all ui-widget">Удалить</button></form><button id="cancel" class="ui-button ui-corner-all ui-widget">Отмена</button></div>');
+	$( "#deldialog" ).dialog({
+		  autoOpen: true,
+		  show: {
+			effect: "fade",
+			duration: 500
+		  },
+		  hide: {
+			  effect: "fade",
+			  duration: 500
+		  },
+     });
+     $('#cancel').click(function(){
+         $('#deldialog').dialog('close');
+     });
+}
 
 function warp(block){
     $('section.warp aside').each(function(){
@@ -417,7 +436,7 @@ $('#save_edu').click(function(){
         err = true;
         mess += 'Нужно выбрать ученую степень <br>';
     }
-    if (exp_comment.length<5 || exp_comment.length>256 ){
+    if (exp_comment.length<5 || exp_comment.length>400 ){
         err = true;
         mess += 'Неккоректное описание опыта <br>';
     }
@@ -466,23 +485,18 @@ mask('phone');
 $('#save_status').click(function(){
     var del = $('#delete_status').prop('checked');
     var pas = $('#passive_status').prop('checked');
-    if (pas == true){
-        rUpdate({
-            'activity' : 0
-        });
-    } else{
-        rUpdate({
-            'activity' : 1
-        });
-    }
     if (del == true){
-        rUpdate({
-            'status' : 3
-        });
+        deldiag();
     } else{
-        rUpdate({
-            'status' : 0
-        });
+        if (pas == true){
+            rUpdate({
+                'activity' : 0
+            });
+        } else{
+            rUpdate({
+                'activity' : 1
+            });
+        }
     }
     return false;
 });

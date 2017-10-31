@@ -1,7 +1,7 @@
 (function($){$(function(){
-console.log('lessons 2');
+console.log('lessons 4');
 var baseUrl = '../';
-
+var sskype = '';
 
 function MonthByNumber(number){
     switch(number){
@@ -114,9 +114,6 @@ function acceptdiag(id, skype){
 			  duration: 500
 		  },
      });
-    $('#del').click(function(){
-        window.open("skype:"+skype+"?call&video=true");
-    });
 }
 
 function addClick(){
@@ -139,12 +136,27 @@ function addClick(){
             if (id>0){
                 var skype = $(this).attr('skype');
                 acceptdiag(id, skype);
+            } else {
+                errdiag('Предупреждение', 'Урок не может начаться без оплаты его учеником или еще не наступило время урока');
             }
             $('#cancel').click(function(){
                 $('#deldialog').dialog('close');
             });
             $('#del').click(function(){
-                console.log('accept');
+                console.log('del.click');
+                $.ajax({
+                    url: baseUrl+'repetitor/startLesson',
+                    type:'post',
+                    data: 'id=' + id,
+                    success: function(data){
+                        console.log('del data=', data);
+                        if (data=='0'){
+                            window.open("skype:"+skype+"?call&video=true");
+                            document.location = '/index.php/repetitor/lessons';
+                        }
+                    }
+                });
+                return false;
             });
             return false;
         });

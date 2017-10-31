@@ -10,7 +10,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   	<meta property="og:image"         content="https://tutor.reallanguage.club/img/main_logo.png" />
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="interkassa-verification" content="637b57896f9b793297cb8955a6e1de3d" />
 	<link rel="stylesheet" href="<?php echo base_url(); ?>css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>css/style.css">
 	<script type="text/javascript"></script>

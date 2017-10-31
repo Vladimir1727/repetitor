@@ -34,7 +34,7 @@ class MainModel extends CI_Model{
 				$fil .= ' and activity=1 and r.visit_at>"'.$online.'"';
 			}
 			if ($filter->video){
-				$fil .= ' and r.link is not null';
+				$fil .= ' and r.link is not null and not link=""';
 			}
 			if ($filter->date_from){
 				$time_from = $filter->date_from;
@@ -145,7 +145,7 @@ class MainModel extends CI_Model{
 					$find = false;
 					$date_from = strtotime($filter->date_from)+$filter->utc*60*60;
 					$time_from = $date_from + $filter->time_from;
-					$time_to = $date_from + $filter->time_from;
+					$time_to = $date_from + $filter->time_to;
 					for ($k=0; $k < count($ex) ; $k++) {
 						$test = strtotime($ex[$k]['date_from']);
 						if ($test >= $time_from && $test <= $time_to){
@@ -187,6 +187,7 @@ class MainModel extends CI_Model{
 			}
 		}
 		$repetitors = $temp;
+
 		return $repetitors;
 	}
 
@@ -229,6 +230,66 @@ class MainModel extends CI_Model{
 			} else{
 				$end = $pages - $page;
 				echo ' end='.$end.' ';
+				if ($end >= 2){
+					$pag[] = $page-2;
+					$pag[] = $page-2;
+					$pag[] = $page-1;
+					$pag[] = $page;
+					$pag[] = $page+1;
+					$pag[] = $page+2;
+					$pag[] = $page+2;
+				} elseif ($end == 1){
+					$pag[] = $page-3;
+					$pag[] = $page-3;
+					$pag[] = $page-2;
+					$pag[] = $page-1;
+					$pag[] = $page;
+					$pag[] = $page+1;
+					$pag[] = $page+1;
+				} else{
+					$pag[] = $page-4;
+					$pag[] = $page-4;
+					$pag[] = $page-3;
+					$pag[] = $page-2;
+					$pag[] = $page-1;
+					$pag[] = $page;
+					$pag[] = $page;
+				}
+			}
+		}
+		$pages = ceil($all/$num);
+		return $pag;
+	}
+
+	public function repPagg2($page, $num, $all){
+		$pag = array();
+		$pages = ceil($all/$num);
+		if ($pages <6){
+			$pag[] = 1;
+			for ($i=1; $i <=$pages ; $i++) {
+				$pag[] = $i;
+			}
+			$pag[] = ($i-1);
+		}
+		else{
+			if ($page<4){
+				$pag[]=1;
+				$pag[]=1;
+				$pag[]=2;
+				$pag[]=3;
+				$pag[]=4;
+				$pag[]=5;
+				$pag[]=5;
+			} elseif($page == 4){
+				$pag[]=2;
+				$pag[]=2;
+				$pag[]=3;
+				$pag[]=4;
+				$pag[]=5;
+				$pag[]=6;
+				$pag[]=6;
+			} else{
+				$end = $pages - $page;
 				if ($end >= 2){
 					$pag[] = $page-2;
 					$pag[] = $page-2;
@@ -313,6 +374,30 @@ class MainModel extends CI_Model{
 		$r = $q->result_array();
 		$rep['zone_name'] = $r[0]['zone_name'];
 		$rep['zone_time'] = $r[0]['zone_time'];
+		if (!is_null($rep['avatar'])){
+			$filename = 'images/'.$rep['avatar'];
+			if (file_exists($filename)==false){
+				$this->db->where('id', $rep['id']);
+				$this->db->update('repetitors', array('avatar' => NULL));
+				$rep['avatar'] = NULL;
+			}
+		}
+		if (!is_null($rep['doc1'])){
+			$filename = 'images/'.$rep['doc1'];
+			if (file_exists($filename)==false){
+				$this->db->where('id', $rep['id']);
+				$this->db->update('repetitors', array('doc1' => NULL));
+				$rep['doc1'] = NULL;
+			}
+		}
+		if (!is_null($rep['doc2'])){
+			$filename = 'images/'.$rep['doc2'];
+			if (file_exists($filename)==false){
+				$this->db->where('id', $rep['id']);
+				$this->db->update('repetitors', array('doc2' => NULL));
+				$rep['doc2'] = NULL;
+			}
+		}
 		return $rep;
 	}
 
@@ -512,7 +597,7 @@ class MainModel extends CI_Model{
 				$data['online'] = false;
 			}
 		} elseif($from_role == 2){
-			$sel = 'select first_name, avatar, visit_at, status from students where id='.$from_id;
+			$sel = 'select first_name, avatar, visit_at, activity status from students where id='.$from_id;
 			$q = $this->db->query($sel);
 			$r = $q->result_array();
 			$data['first_name'] = $r[0]['first_name'];
@@ -582,11 +667,17 @@ class MainModel extends CI_Model{
 	{
 		$q = $this->db->query('select id from ratings where student_id='.$student_id.' and repetitor_id='.$repetitor_id);
 		$r = $q->result_array();
+		$can = true;
 		if (count($r)>0){
-			return false;
-		} else{
-			return true;
+			$can = false;
 		}
+		///
+		$q = $this->db->query('select rstart_at from exercises where student_id='.$student_id.' and repetitor_id='.$repetitor_id.' and rstart_at is not null');
+		$r = $q->result_array();
+		if (count($r)==0){
+			$can = false;
+		}
+		return $can;
 	}
 
 	public function getRZone($repetitor_id)
@@ -619,5 +710,215 @@ class MainModel extends CI_Model{
 		$q = $this->db->query($sel);
 		$r = $q->result_array();
 		return $r;
+	}
+
+	public function getOldLessons()
+	{
+		$date = date('Y-m-d H:i:s', time()-60*60);
+		$q = $this->db->query('select * from exercises where rstart_at is null and date_from<"'.$date.'" and pay_at is not null and deleted_at is null');
+		$r = $q->result_array();
+		return $r;
+	}
+
+	public function addStudentBalance($student_id, $sum)
+	{
+		$q = $this->db->query('select balance from students where id='.$student_id);
+		$r = $q->result_array();
+		$balance = $r[0]['balance'] + $sum;
+		$this->db->where('id', $student_id);
+		$this->db->update('students', array('balance'=>$balance));
+		return 0;
+	}
+
+	public function decRepetitorBalance($repetitor_id, $sum)
+	{
+		$q = $this->db->query('select balance from repetitors where id='.$repetitor_id);
+		$r = $q->result_array();
+		$balance = $r[0]['balance'] - $sum;
+		$this->db->where('id', $repetitor_id);
+		$this->db->update('repetitors', array('balance'=>$balance));
+		return 0;
+	}
+
+	public function setDeletedLesson($lesson_id)
+	{
+		$this->db->where('id', $lesson_id);
+		$this->db->update('exercises', array('deleted_at'=>date('Y-m-d H:i:s', time())));
+		return 0;
+	}
+
+	public function AllFiltered($filter)
+	{
+		$fil = '';
+		if ($filter->subject_id){
+			$fil .= ' and (r.subject1='.$filter->subject_id.' or r.subject2='.$filter->subject_id.')';
+		}
+		if ($filter->age_id){
+			$fil .=' and rsa.age_id='.$filter->age_id;
+		}
+		if ($filter->lang_id){
+			$fil .= ' and r.lang_id='.$filter->lang_id;
+		}
+		if ($filter->spec_id){
+			$fil .= ' and rss.specialization_id='.$filter->spec_id;
+		}
+		if ($filter->online){
+			$online = date('Y-m-d H:i:s', time()-60*5);
+			$fil .= ' and activity=1 and r.visit_at>"'.$online.'"';
+		}
+		if ($filter->video){
+			$fil .= ' and r.link is not null and not link=""';
+		}
+		if ($filter->date_from){
+			$time_from = $filter->date_from;
+		}
+		$fil .= ' and rsp.cost>='.round($filter->cost_from/1.3).' and rsp.cost<='.round($filter->cost_to/1.3);
+		log_message('error', 'FIL='.$fil);
+		$sel = 'select DISTINCT r.reight, r.activity, t.zone_time, r.id, r.avatar, r.lang_id, r.subject1, r.subject2, r.link, r.visit_at, r.first_name, r.about, r.father_name  from repetitors as r, rsa, rsp, rsl, rss, timezones as t where t.id=r.tzone_id and rsa.repetitor_id=r.id and rsl.repetitor_id=r.id and (rsp.subject_id=r.subject1 or rsp.subject_id=r.subject2)  and rsp.repetitor_id=r.id and rss.repetitor_id=r.id and r.status=2 '.$fil.' order by  r.reight DESC, r.visit_at DESC';
+		$q = $this->db->query($sel);
+		$temp = $q->result_array();
+		$repetitors = array();
+		$i = 0;
+		foreach ($temp as $t) {
+			$find = true;
+			if ($filter){
+				if ($filter->subject_id){
+					if ($filter->subject_id !=$t['subject1']){
+						$find = false;
+					}
+				}
+			}
+			//$find = true;
+			if ($find){
+				$repetitors[$i] = array(
+					'activity'=>$t['activity'],
+					'zone_time'=>$t['zone_time'],
+					'id'=>$t['id'],
+					'avatar'=>$t['avatar'],
+					'lang_id'=>$t['lang_id'],
+					'subject_id'=>$t['subject1'],
+					'link'=>$t['link'],
+					'visit_at'=>$t['visit_at'],
+					'first_name'=>$t['first_name'],
+					'about'=>$t['about'],
+					'father_name'=>$t['father_name'],
+					'reight'=>$t['reight'],
+				);
+				$i++;
+			}
+			$find = true;
+			if ($filter){
+				if ($filter->subject_id){
+					if ($filter->subject_id !=$t['subject2']){
+						$find = false;
+					}
+				}
+			}
+			//$find = true;
+			if (!is_null($t['subject2']) && $find){
+				$repetitors[$i] = array(
+					'activity'=>$t['activity'],
+					'zone_time'=>$t['zone_time'],
+					'id'=>$t['id'],
+					'avatar'=>$t['avatar'],
+					'lang_id'=>$t['lang_id'],
+					'subject_id'=>$t['subject2'],
+					'link'=>$t['link'],
+					'visit_at'=>$t['visit_at'],
+					'first_name'=>$t['first_name'],
+					'about'=>$t['about'],
+					'father_name'=>$t['father_name'],
+					'reight'=>$t['reight'],
+				);
+				$i++;
+			}
+		}
+		$temp = array();
+		for ($i=0; $i < count($repetitors); $i++) {
+			$sel = 'select language from languages where id='.$repetitors[$i]['lang_id'];
+			$q = $this->db->query($sel);
+			$r = $q->result_array();
+			$repetitors[$i]['language'] = $r[0]['language'];
+			$sel = 'select subject from subjects where id='.$repetitors[$i]['subject_id'];
+			$q = $this->db->query($sel);
+			$r = $q->result_array();
+			$repetitors[$i]['subject'] = $r[0]['subject'];
+			$sel = 'select DISTINCT s.specialization from specializations as s, rss where rss.specialization_id=s.id and rss.repetitor_id='.$repetitors[$i]['id'].' and rss.subject_id='.$repetitors[$i]['subject_id'];
+			$q = $this->db->query($sel);
+			$r = $q->result_array();
+			$repetitors[$i]['spec'] = array();
+			foreach ($r as $k) {
+				$repetitors[$i]['spec'][] = $k['specialization'];
+			}
+			$sel = 'select DISTINCT a.age from ages as a, rsa where rsa.age_id=a.id and rsa.repetitor_id='.$repetitors[$i]['id'].' and rsa.subject_id='.$repetitors[$i]['subject_id'];
+			$q = $this->db->query($sel);
+			$r = $q->result_array();
+			$repetitors[$i]['ages'] = array();
+			foreach ($r as $k) {
+				$repetitors[$i]['ages'][] = $k['age'];
+			}
+			$sel = 'select DISTINCT cost from rsp where repetitor_id='.$repetitors[$i]['id'].' and rsp.subject_id='.$repetitors[$i]['subject_id'];
+			$q = $this->db->query($sel);
+			$r = $q->result_array();
+			$repetitors[$i]['cost'] = round($r[0]['cost']*1.3);
+			if ( (time() < (strtotime($repetitors[$i]['visit_at'])+60*5)) && ($repetitors[$i]['activity'] >0)){
+				$repetitors[$i]['online'] = true;
+			} else{
+				$repetitors[$i]['online'] = false;
+			}
+			if($filter){
+				$sel = 'select date_from from exercises where date_from>=now() and student_id is null and repetitor_id='.$repetitors[$i]['id'];
+				$q = $this->db->query($sel);
+				$ex = $q->result_array();
+				if($filter->date_from){
+					$find = false;
+					$date_from = strtotime($filter->date_from)+$filter->utc*60*60;
+					$time_from = $date_from + $filter->time_from*60*60;
+					$time_to = $date_from + $filter->time_to*60*60;
+					log_message('error', 'FILTER TIME from='.date('Y-m-d H:i:s', $time_from));
+					log_message('error', 'FILTER TIME to='.date('Y-m-d H:i:s', $time_to));
+					$log_err = 'FILTER TIME from='.date('Y-m-d H:i:s', $time_from).' '.'FILTER TIME to='.date('Y-m-d H:i:s', $time_to);
+					for ($k=0; $k < count($ex) ; $k++) {
+						$test = strtotime($ex[$k]['date_from']);
+						if ($test >= $time_from && $test <= $time_to){
+							$find = true;
+						}
+					}
+					if ($find){
+						$temp[] = $repetitors[$i];
+					}
+				} else{
+					$find = false;
+					$date_from = strtotime("2017-01-01 00:00:01")+$filter->utc*60*60;
+
+					$time_from = date('G', $date_from + $filter->time_from*60*60);
+					$time_to = date('G', $date_from + $filter->time_to*60*60);
+					if ($filter->time_from == 0 && $filter->time_to == 24){
+						$time_from = 0;
+						$time_to = 24;
+					}
+					for ($k=0; $k < count($ex) ; $k++) {
+						$test = substr($ex[$k]['date_from'],11,2);
+						if ($time_from<=$time_to){
+							if ($test >= $time_from && $test <= $time_to){
+								$find = true;
+							}
+						} else{
+							if ($test<=$time_to || $test>=$time_from){
+								$find = true;
+							}
+						}
+
+					}
+					if ($find){
+						$temp[] = $repetitors[$i];
+					}
+				}
+			}else{
+				$temp[] = $repetitors[$i];
+			}
+		}
+		$repetitors = $temp;
+		return $repetitors;
 	}
 }

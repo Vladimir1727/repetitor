@@ -1,5 +1,5 @@
 (function($){$(function(){
-console.log('filter 9');
+console.log('filter 1');
 var baseUrl = '../';
 var isFilter = false;
 var filter = false;
@@ -54,16 +54,15 @@ function setFilter(){
 		'level_id' : ($('#level_select').val() > 0) ? $('#level_select').val() : false,
 		'online' : ($('#online').prop('checked')) ? true : false,
 		'video' : ($('#video').prop('checked')) ? true : false,
-		'utc' : Utc/60,
+		'utc' : -Utc/60,
 	};
 	console.log(filter);
 	$.ajax({
-		url: baseUrl+'main/getfilter',
+		url: baseUrl+'main/getfilter2',
 		type:'post',
 		data: 'filter='+ JSON.stringify(filter)+'&page='+page,
 		success: function(data){
 			data = JSON.parse(data);
-			console.log(data);
 			var repetitor = data.repetitors;
 			var pagg = data.pagg;
 			var list = '';
@@ -161,7 +160,7 @@ function setFilter(){
 			}
 			list += '<ul class="pagg"><li><a href="#" class="filter_pagg" title="'+pagg[0]+'"><</a></li>';
 			for (i=1; i <pagg.length-1; i++) {
-				list += '<li><a href="#" class="filter_pagg" title="'+pagg[0]+'">'+pagg[i]+'</a></li>';
+				list += '<li><a href="#" class="filter_pagg" title="'+pagg[i]+'">'+pagg[i]+'</a></li>';
 			}
 			list += '<li><a href="#" class="filter_pagg" title="'+pagg[pagg.length-1]+'">></a></li></ul>';
 			if (data.repetitors.length == 0){
@@ -182,6 +181,7 @@ function setFilter(){
 }
 
 $('#show_filter').click(function(){
+	page = 1;
 	setFilter();
 });
 

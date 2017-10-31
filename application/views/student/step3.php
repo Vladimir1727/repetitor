@@ -36,7 +36,7 @@
         <div class="green">
         </div>
     </section>
-    <section class="form">
+    <section class="form" id="main">
         <form action="<?php echo base_url(); ?>index.php/student/makePay" method="post" id="pay_form">
             <input type="hidden" name="go_to" value="student/stepend">
             <input type="hidden" name="repetitor_id" value="<?php echo $repetitor_id; ?>">

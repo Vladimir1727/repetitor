@@ -50,7 +50,11 @@
             echo '</div>';
             echo '<div>';
             echo '<p>';
-            echo $lesson['count'].' уроков по расписанию';
+            if ($lesson['sum'] <0){
+                echo 'Отмена урока';
+            } else{
+                echo $lesson['count'].' уроков по расписанию';
+            }
             echo '</p>';
             echo '</div>';
             echo '<div>';

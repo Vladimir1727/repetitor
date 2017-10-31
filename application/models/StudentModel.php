@@ -88,6 +88,14 @@ class StudentModel extends CI_Model{
 			$student['new'] = 0;
 		}
 		///
+		if (!is_null($student['avatar'])){
+			$filename = 'images/'.$student['avatar'];
+			if (file_exists($filename)==false){
+				$this->db->where('id', $student['id']);
+				$this->db->update('students', array('avatar' => NULL));
+				$student['avatar'] = NULL;
+			}
+		}
 		$this->student = $student;
 		return $this;
 	}
@@ -163,7 +171,7 @@ class StudentModel extends CI_Model{
 		$q = $this->db->query($sel);
 		$r = $q->result_array();
 		$price = $r[0]['c'];
-		$cost = $price  * 1.3 * count($data['dates']);
+		$cost = $price  * 1.3 * round($data['dates']);
 		//find balance of student
 		$sel = 'select balance from students where id='.$data['student_id'];
 		$q = $this->db->query($sel);
@@ -385,7 +393,7 @@ class StudentModel extends CI_Model{
 		return $lessons;
 	}
 
-	public function payedlessons($student_id)
+	public function payedlessons_old($student_id)
 	{
 		$zone = $this->getStudentZone($student_id);
 		$sel = 'select ex.created_at, ex.repetitor_id, ex.pay_at, r.first_name, r.father_name, ex.cost, ex.id, ex.about from repetitors r, exercises ex where ex.repetitor_id = r.id and pay_at is not null and ex.student_id ='.$student_id.' order by ex.created_at';
@@ -410,6 +418,45 @@ class StudentModel extends CI_Model{
 					$data[$i]['repetitor'] .= ' '.$r['father_name'];
 				}
 			}
+		}
+		return $data;
+	}
+
+	public function payedlessons($student_id)
+	{
+		$zone = $this->getStudentZone($student_id);
+		$sel = 'select rp.created_at, r.first_name as rname, r.father_name as rfname, rp.cost, s.first_name as sname, s.father_name as sfname, s.id as sid, r.id as rid from repetitors r, rep_pays rp, students s where rp.repetitor_id = r.id and rp.student_id ='.$student_id.' and rp.student_id=s.id order by rp.created_at DESC';
+		$q = $this->db->query($sel);
+		$row = $q->result_array();
+		$data = array();
+		$cr = '';
+		$i = -1;
+		foreach ($row as $r) {
+				$i++;
+				$data[$i] = array();
+				$data[$i]['pay_at'] = date('Y-m-d H:i:s', strtotime($r['created_at']) + $zone*60*60);
+				$data[$i]['count'] = 1;
+				$data[$i]['sum'] = $r['cost'];
+				$data[$i]['repetitor'] = '';
+				if (!is_null($r['rname'])){
+					$data[$i]['repetitor'] .= $r['rname'];
+				} else{
+					$data[$i]['repetitor'] .= 'Без имени';
+				}
+				if (!is_null($r['rname'])){
+					$data[$i]['repetitor'] .= ' '.$r['rfname'];
+				}
+				$data[$i]['student'] = '';
+				if (!is_null($r['sname'])){
+					$data[$i]['student'] .= $r['sname'];
+				}  else{
+					$data[$i]['student'] .= 'Без имени';
+				}
+				if (!is_null($r['sfname'])){
+					$data[$i]['student'] .= ' '.$r['sfname'];
+				}
+				$data[$i]['student_id'] = $r['sid'];
+				$data[$i]['repetitor_id'] = $r['rid'];
 		}
 		return $data;
 	}
@@ -486,6 +533,7 @@ class StudentModel extends CI_Model{
 		$q = $this->db->query($sel);
 		$r = $q->result_array();
 		$cost = $r[0]['cost'];
+		$student_id = $r[0]['student_id'];
 		$sum = round($cost*1.3);
 		$student = $this->findOne($r[0]['student_id']);
 		$repetitor_id = $r[0]['repetitor_id'];
@@ -500,6 +548,13 @@ class StudentModel extends CI_Model{
 			$repetitor_balance = $r[0]['balance'] + $cost;
 			$sel = 'update repetitors set balance='.$repetitor_balance.' where id='.$repetitor_id;
 			$q = $this->db->query($sel);
+			$this->db->insert('rep_pays', array(
+				'created_at' => date('Y-m-d H:i:s', time()),
+				'student_id' => $student_id,
+				'repetitor_id' => $repetitor_id,
+				'lessons' => 1,
+				'cost'=> $cost,
+			));
 		}
 		return 0;
 	}
@@ -531,8 +586,15 @@ class StudentModel extends CI_Model{
 		$repetitor_id = $r[0]['repetitor_id'];
 		$actual = $date_from-time();
 		if ($actual > 60*60){
-			$sel = 'update exercises set deleted_at="'.date('Y-m-d H:i:s',time()).'" where id='.$id;
+			$sel = 'update exercises set date_accept=NULL, deleted_at=NULL, pay_at=NULL, cancel_at=NULL, cost=0, student_id=NULL, subject_id=NULL, specialization_id=NULL, about=NULL, deleted=0 where id='.$id;
 			$q = $this->db->query($sel);
+			$this->db->insert('rep_pays', array(
+				'created_at' => date('Y-m-d H:i:s', time()),
+				'student_id' => $student_id,
+				'repetitor_id' => $repetitor_id,
+				'lessons' => 1,
+				'cost'=> (-$cost),
+			));
 			if ($cost>0){
 				$sel = 'select balance from students where id='.$student_id;
 				$q = $this->db->query($sel);
@@ -540,7 +602,14 @@ class StudentModel extends CI_Model{
 				$student_balance = $r[0]['balance'];
 				if ($actual > 12*60*60){
 					$student_balance += round($cost*1.3);
-					//$this->addTotalBalance(-round($cost*1.3));
+					$this->addTotalBalance(-round($cost*1.3));
+					$sel = 'select balance from repetitors where id='.$repetitor_id;
+					$q = $this->db->query($sel);
+					$r = $q->result_array();
+					$repetitor_balance = $r[0]['balance'];
+					$repetitor_balance -= $cost;
+					$sel = 'update repetitors set balance='.$repetitor_balance.' where id='.$repetitor_id;
+					$q = $this->db->query($sel);
 				} else{
 					$sel = 'select balance from repetitors where id='.$repetitor_id;
 					$q = $this->db->query($sel);
@@ -549,7 +618,7 @@ class StudentModel extends CI_Model{
 					$repetitor_balance += round($cost*0.5);
 					$sel = 'update repetitors set balance='.$repetitor_balance.' where id='.$repetitor_id;
 					$q = $this->db->query($sel);
-					$student_balance += round($cost*0.65);
+					$student_balance -= round($cost*0.65);
 					$this->addTotalBalance(round($cost*0.15));
 				}
 				$sel = 'update students set balance='.$student_balance.' where id='.$student_id;

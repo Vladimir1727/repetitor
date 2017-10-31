@@ -80,6 +80,17 @@
 								echo '</span>';
 							} ?>
 						</li>
+						<?php
+						$rpage = 0;
+						if (!is_null($repetitor['subject1'])){
+							$rpage ++;
+							echo '<li><a href="'.base_url().'index.php/main/rinfo/'.$repetitor['id'].'?subject='.$repetitor['subject1'].'">Моя страница '.$rpage.'</a></li>';
+						}
+						if (!is_null($repetitor['subject2'])){
+							$rpage ++;
+							echo '<li><a href="'.base_url().'index.php/main/rinfo/'.$repetitor['id'].'?subject='.$repetitor['subject2'].'">Моя страница '.$rpage.'</a></li>';
+						}
+						 ?>
 						<li><a href="<?php echo base_url(); ?>index.php/repetitor/history">История уроков</a></li>
 						<li><a href="<?php echo base_url(); ?>index.php/repetitor/balance">Баланс</a></li>
 						<li><a href="<?php echo base_url(); ?>index.php/repetitor/profile">Настройки Профиля</a></li>

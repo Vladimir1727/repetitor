@@ -35,13 +35,13 @@
             echo '<aside>';
             echo '<div>';
             echo '<p>';
-            $c = $pay['created_at'];
+            $c = $pay['pay_at'];
             echo substr($c,8,2).'.'.substr($c,5,2).'.'.substr($c,0,4);
             echo '</p>';
             echo '</div>';
             echo '<div>';
             echo '<p>';
-            echo $pay['student_name'];
+            echo $pay['student'];
             echo '</p>';
             echo '<p>ID';
             echo $pay['student_id'];
@@ -49,12 +49,16 @@
             echo '</div>';
             echo '<div>';
             echo '<p>';
-            echo '1 урок по расписанию';
+            if ($pay['sum'] <0){
+                echo 'Отмена урока';
+            } else{
+                echo '1 урок по расписанию';
+            }
             echo '</p>';
             echo '</div>';
             echo '<div>';
             echo '<p>';
-            echo $pay['cost'];
+            echo $pay['sum'];
             echo '</p>';
             echo '</div>';
             echo '</aside>';

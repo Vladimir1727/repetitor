@@ -2,12 +2,6 @@
 <title>Тестовая страница</title>
 </head>
 <style media="screen">
-.must{
-    /*position: relative;*/
-}
-.must::before{
-    content : 'Обязательно';
-}
 
 
 </style>
@@ -18,11 +12,18 @@
 <script src="<?php echo base_url(); ?>js/jquery-ui.min.js"></script>
 <h1 class="text-center">Добро пожаловать в тест</h1>
 
-<input type="text" name="" value="33" id="77">
+<a href="/" id="del">SKYPE</a>
 
 <script type="text/javascript">
-    var t = document.getElementById('77').value;
-    console.log('t=',t);
+(function($){$(function(){
+    console.log('start test');
+    $('#del').click(function(){
+        var skype= 'profalians.it';
+        window.open("skype:"+skype+"?call&video=true");
+        console.log('del');
+        return false;
+    });
+})})(jQuery)
 </script>
 
 <?php $this->load->view('main/footer'); ?>

@@ -23,7 +23,11 @@
             <li><a href="#" id="docs-but">Документы</a></li>
             <li><a href="#" id="present-but">Презентация</a></li>
             <li><a href="#" id="pay-but">Реквизиты</a></li>
-            <li><a href="#" id="status-but">Состояние профиля</a></li>
+            <?php
+            if ($repetitor['status']==2){
+                echo '<li><a href="#" id="status-but">Состояние профиля</a></li>';
+            }
+             ?>
         </ul>
     </section>
     <section class="warp">
@@ -381,11 +385,9 @@
         echo '<a href="#" class="send-rep-profile btn" disabled="disabled" id="send_profile">';
         echo 'Отправить запрос на активацию профиля';
     } elseif ($repetitor['status'] == 1){
-        echo '<a href="#" class="send-rep-profile btn dark off" disabled="disabled" id="send_profile">';
-        echo 'Профиль находится на рассмотрении';
+
     } else{
-        echo '<a href="#" class="send-rep-profile btn dark" disabled="disabled" id="send_profile">';
-        echo 'Изменить профиль';
+
     }
     echo '</a>';
  ?>

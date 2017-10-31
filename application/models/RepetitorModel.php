@@ -52,7 +52,10 @@ class RepetitorModel extends CI_Model{
 		$r = $q->result_array();
 		if (count($r)==0){
 			throw new Exception('неправильный логин/пароль');
-		} else{
+		} elseif ($r[0]['status'] == 3) {
+			throw new Exception('профиль удалён');
+		}
+		else{
 			$this->db->where('id', $r[0]['id']);
 			$this->db->update('repetitors', array('visit_at'=>date('Y-m-d H:i:s',time())));
 			$this->session->set_userdata('repetitor_id', $r[0]['id']);
@@ -91,6 +94,30 @@ class RepetitorModel extends CI_Model{
 			$rep['new'] = 0;
 		}
 		$rep['tzone'] = $this->getRepZone($id);
+		if (!is_null($rep['avatar'])){
+			$filename = 'images/'.$rep['avatar'];
+			if (file_exists($filename)==false){
+				$this->db->where('id', $rep['id']);
+				$this->db->update('repetitors', array('avatar' => NULL));
+				$rep['avatar'] = NULL;
+			}
+		}
+		if (!is_null($rep['doc1'])){
+			$filename = 'images/'.$rep['doc1'];
+			if (file_exists($filename)==false){
+				$this->db->where('id', $rep['id']);
+				$this->db->update('repetitors', array('doc1' => NULL));
+				$rep['doc1'] = NULL;
+			}
+		}
+		if (!is_null($rep['doc2'])){
+			$filename = 'images/'.$rep['doc2'];
+			if (file_exists($filename)==false){
+				$this->db->where('id', $rep['id']);
+				$this->db->update('repetitors', array('doc2' => NULL));
+				$rep['doc2'] = NULL;
+			}
+		}
 		$this->repetitor = $rep;
 		return $this;
 	}
@@ -381,12 +408,18 @@ class RepetitorModel extends CI_Model{
 		$lessons = array();
 		$i = -1;
 		$cr = '';
+		$szone= date('H', time()) - gmdate('H', time());
 		foreach ($row as $r) {
 			$i++;
 			$lessons[$i] = $r;
+			/////
+			$s_date = date('Y-m-d H:i:s', strtotime($lessons[$i]['date_from']) + $szone*60*60);
+			$actual = (time() - strtotime($s_date))/60/60;
+			////
+			//$actual = (time() - strtotime($lessons[$i]['date_from'])+ $szone*60*60)/60;
+			$lessons[$i]['actual'] = $actual*60;
 			$lessons[$i]['date_from'] = date('Y-m-d H:i:s', strtotime($lessons[$i]['date_from']) + $zone*60*60);
-			$actual = (time() - strtotime($lessons[$i]['date_from']))/60;
-			if ($actual > -15 && $actual < 60){
+			if ($actual > -15 && $actual < 60 && !is_null($r['pay_at'])){
 				$lessons[$i]['active'] = true;
 			} else{
 				$lessons[$i]['active'] = false;
@@ -430,14 +463,20 @@ class RepetitorModel extends CI_Model{
 		$cost = (is_null($r[0]['cost'])) ? 0 : $r[0]['cost'];
 		$student_id = $r[0]['student_id'];
 		$repetitor_id = $r[0]['repetitor_id'];
-		if ($actual > -15 && $actual < 60){
-			$sel = 'update exercises set cancel_at="'.date('Y-m-d H:i:s', time()).'" where id='.$lesson_id;
+		if ($actual < -15){
+			$sel = 'update exercises set date_accept=NULL, deleted_at=NULL, pay_at=NULL, cancel_at=NULL, cost=0, student_id=NULL, subject_id=NULL, specialization_id=NULL, about=NULL, deleted=0 where id='.$lesson_id;
 			$q = $this->db->query($sel);
 			$sel = 'select balance from students where id='.$student_id;
 			$q = $this->db->query($sel);
 			$r = $q->result_array();
 			$student_balance = $r[0]['balance'] + round($cost*1.3);
 			$sel = 'update students set balance='.$student_balance.' where id='.$student_id;
+			$q = $this->db->query($sel);
+			$sel = 'select balance from repetitors where id='.$repetitor_id;
+			$q = $this->db->query($sel);
+			$r = $q->result_array();
+			$repetitor_balance = $r[0]['balance'] - $cost;
+			$sel = 'update repetitors set balance='.$repetitor_balance.' where id='.$repetitor_id;
 			$q = $this->db->query($sel);
 			//$this->addTotalBalance(-round($cost*1.3));
 		}
@@ -480,7 +519,7 @@ class RepetitorModel extends CI_Model{
 		return 0;
 	}
 
-	public function startLesson($lesson_id)
+	public function startLesson_old($lesson_id)
 	{
 		$sel = 'select date_from, student_id, repetitor_id, cost from exercises where id='.$lesson_id;
 		$q = $this->db->query($sel);
@@ -495,6 +534,34 @@ class RepetitorModel extends CI_Model{
 			$this->addTotalBalance($cost*0.3);
 		}
 		return 0;
+	}
+
+	public function startLesson($lesson_id)
+	{
+		$sel = 'select date_from, student_id, repetitor_id, pay_at, rstart_at, cost from exercises where id='.$lesson_id;
+		$q = $this->db->query($sel);
+		$r = $q->result_array();
+		if (count($r) == 0){
+			return 'Урок не найден.';
+		}
+		if (is_null($r[0]['pay_at'])){
+			return 'Урок не оплачен. Свяжитесь с учеником через чат.';
+		}
+		if (!is_null($r[0]['rstart_at'])){
+			return 0;
+		}
+		$szone= date('H', time()) - gmdate('H', time());
+		$s_date = date('Y-m-d H:i:s', strtotime($r[0]['date_from']) + $szone*60*60);
+		$actual = (time() - strtotime($s_date))/60/60;
+		if ($actual > -15 && $actual < 60){
+			$cost = $r[0]['cost'];
+			$sel = 'update exercises set rstart_at="'.date('Y-m-d H:i:s', time()).'" where id='.$lesson_id;
+			$q = $this->db->query($sel);
+			$this->addTotalBalance($cost*0.3);
+			return 0;
+		} else{
+			return 'Урок можно начать за 15 минут до начала и в течение времени урока '.$s_date;
+		}
 	}
 
 	public function history($repetitor_id)
@@ -547,7 +614,7 @@ class RepetitorModel extends CI_Model{
 		return 0;
 	}
 
-	public function getStudentPays($repetitor_id)
+	public function getStudentPays_old($repetitor_id)
 	{
 		$zone = $this->getRepZone($repetitor_id);
 		$sel = 'select *,(select first_name from students where id=rp.student_id) as student_name from rep_pays as rp where rp.repetitor_id='.$repetitor_id;
@@ -557,6 +624,45 @@ class RepetitorModel extends CI_Model{
 			$r[$i]['created_at'] = date('Y-m-d H:i:s', strtotime($r[$i]['created_at'])+$zone*60*60);
 		}
 		return $r;
+	}
+
+	public function getStudentPays($repetitor_id)
+	{
+		$zone = $this->getRepZone($repetitor_id);
+		$sel = 'select rp.created_at, r.first_name as rname, r.father_name as rfname, rp.cost, s.first_name as sname, s.father_name as sfname, s.id as sid, r.id as rid from repetitors r, rep_pays rp, students s where rp.repetitor_id = r.id and rp.repetitor_id ='.$repetitor_id.' and rp.student_id=s.id order by rp.created_at DESC';
+		$q = $this->db->query($sel);
+		$row = $q->result_array();
+		$data = array();
+		$cr = '';
+		$i = -1;
+		foreach ($row as $r) {
+				$i++;
+				$data[$i] = array();
+				$data[$i]['pay_at'] = date('Y-m-d H:i:s', strtotime($r['created_at']) + $zone*60*60);
+				$data[$i]['count'] = 1;
+				$data[$i]['sum'] = $r['cost'];
+				$data[$i]['repetitor'] = '';
+				if (!is_null($r['rname'])){
+					$data[$i]['repetitor'] .= $r['rname'];
+				} else{
+					$data[$i]['repetitor'] .= 'Без имени';
+				}
+				if (!is_null($r['rname'])){
+					$data[$i]['repetitor'] .= ' '.$r['rfname'];
+				}
+				$data[$i]['student'] = '';
+				if (!is_null($r['sname'])){
+					$data[$i]['student'] .= $r['sname'];
+				}  else{
+					$data[$i]['student'] .= 'Без имени';
+				}
+				if (!is_null($r['sfname'])){
+					$data[$i]['student'] .= ' '.$r['sfname'];
+				}
+				$data[$i]['student_id'] = $r['sid'];
+				$data[$i]['repetitor_id'] = $r['rid'];
+		}
+		return $data;
 	}
 
 	public function getNewFreeRequests($repetitor_id, $subject_id = 0)
@@ -669,5 +775,12 @@ class RepetitorModel extends CI_Model{
 			$this->email->send();
 			return 0;
 		}
+	}
+
+	public function deleteRepetitor($id)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('repetitors', array('status'=>3));
+		return 0;
 	}
 }

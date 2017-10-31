@@ -683,8 +683,7 @@ class Student extends CI_Controller {
 
 	public function test()
 	{
-		$arr= array('id'=>4, 'sum'=>33);
-		log_message('error','POST='.json_encode($arr));
+
 	}
 
 	public function addfreerequest()
@@ -729,20 +728,21 @@ class Student extends CI_Controller {
 		return $array;
 	}
 
-	public function getpaypal()
+	public function getpaypal_old()
 	{
 		if (count($_POST)>0){
 			log_message('error','POST PAYPAL='.json_encode($_POST));
 			# getting POST from paypal
+			$ex_id = $this->input->post('custom');
+			$sum = round($this->input->post('mc_gross'));
 			$ipn = new PaypalIPN();
 			// Use the sandbox endpoint during testing.
 			$ipn->useSandbox();
 			$verified = $ipn->verifyIPN();
 			if ($verified) {
-				$ex_id = $this->input->post('custom');
-				$sum = round($this->input->post('mc_gross'));
 	 			$student_id = $this->StudentModel->acceptPayHistory($ex_id);
 				$this->StudentModel->addBallance($student_id, $sum);
+				log_message('error','SUCCESS POST='.json_encode($_POST));
 				header("HTTP 200 OK");
 			} else{
 				//error
@@ -753,9 +753,10 @@ class Student extends CI_Controller {
 		}
 	}
 
-	public function getpaypal_old()
+	public function getpaypal()
 	{
 		if (count($_POST)>0){
+				log_message('error','POST PAYPAL='.json_encode($_POST));
 				$ex_id = $this->input->post('custom');
 				$sum = round($this->input->post('mc_gross'));
 	 			$student_id = $this->StudentModel->acceptPayHistory($ex_id);
@@ -771,7 +772,11 @@ class Student extends CI_Controller {
 		if (count($_POST)>0){
 			$secret = 'yYdgxWJ/SwWNm93bv5q3fOhu';
 			log_message('error','POST YANDEX='.json_encode($_POST));
-			$sum = $this->input->post('mc_gross');
+			if ($this->input->post('currency') == 643){
+				$sum = round($this->input->post('amount')/59);
+			} elseif($this->input->post('currency') == 840){
+				$sum = round($this->input->post('amount'));
+			}
 			$ex_id = $this->input->post('label');
 			$student_id = $this->StudentModel->acceptPayHistory($ex_id);
 			$this->StudentModel->addBallance($student_id, $sum);

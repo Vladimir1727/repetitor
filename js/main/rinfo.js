@@ -28,10 +28,27 @@ if ($('#zone_type').val() == 'none'){
 	}
 }
 
-console.log('rinfo 1.8');
-console.log('UTC=', utc);
-console.log('student_zone=', student_zone);
-console.log('delta=', delta);
+function checkDate(i,j){
+	var wday = j;
+	var hour = i;
+	var cDate = new Date(monday.getTime()+60*60*1000*24*(wday-2)+60*60*1000*hour);
+    var d = new Date();
+    var zone = student_zone;
+    var utc = - d.getTimezoneOffset()/60;
+    var realTime = new Date(d.getTime() + (zone-utc)*60*60*1000);
+    var addDate = new Date(cDate.getTime() + 60*60*24*1000+ 1000*60*30);
+    if (addDate.getTime() < realTime.getTime()){
+		console.log('false', hour);
+		console.log('r=', realTime);
+		console.log('a=', addDate);
+		console.log('/////////////////');
+        return false;
+    } else{
+        return true;
+    }
+}
+
+console.log('rinfo 1.9');
 
 function stringToDate(s){
 	if ( s == null) return false;
@@ -284,7 +301,7 @@ function tableView(){
                 for (var k = 0; k < table.length; k++) {
 					var tDate = stringToDate(table[k].date_from);
 					/////////
-                    if (now.getTime() == tDate.getTime() && (now.getTime()+(delta+1)*60*60*1000) > realTime.getTime()){
+                    if (now.getTime() == tDate.getTime() && checkDate(i,j)==true){
                         find = true;
 						if (table[k].student_id>0){
                             busy = k;

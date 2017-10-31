@@ -562,11 +562,19 @@ class AdminModel extends CI_Model{
 		}
 	}
 
+	function serverZone($date)
+	{
+		$szone = date('H',time())-gmdate('H', time());
+		return date('Y-m-d H:i:s', strtotime($date) + $szone*60*60);
+	}
+
 	public function getAllRepetitors()
 	{
+
 		$q = $this->db->query('select * from repetitors');
 		$repetitors = $q->result_array();
 		for($i = 0; $i < count($repetitors); $i++){
+			//$repetitors[$i]['created_at'] = $this->serverZone($repetitors[$i]['created_at']);
 			if ($repetitors[$i]['subject1']){
 				$sub = $repetitors[$i]['subject1'];
 				$q = $this->db->query('select subject from subjects where id='.$sub);
@@ -631,6 +639,7 @@ class AdminModel extends CI_Model{
 		$students = $q->result_array();
 		for($i = 0; $i < count($students); $i++){
 			//запросов на уроки
+			//$students[$i]['created_at'] = $this->serverZone($students[$i]['created_at']);
 			$sel = 'select count(id) as c from exercises where deleted_at is null and cost>0 and cancel_at is null and student_id='.$students[$i]['id'].' and pay_at is null';
 			$q = $this->db->query($sel);
 			$row = $q->result_array();
@@ -721,6 +730,9 @@ class AdminModel extends CI_Model{
 		$sel = 'select *, (select first_name from students where id=f.student_id) as student_name, (select subject from subjects where id=f.subject_id) as subject from free_apps as f where f.admin is null and f.deleted_at is null';
 		$q = $this->db->query($sel);
 		$row = $q->result_array();
+		for ($i=0; $i < count($row); $i++) {
+			//$row[$i]['created_at'] = $this->serverZone($row[$i]['created_at']);
+		}
 		return $row;
 	}
 
@@ -730,6 +742,7 @@ class AdminModel extends CI_Model{
 		$q = $this->db->query($sel);
 		$row = $q->result_array();
 		for ($i=0; $i < count($row); $i++) {
+			//$row[$i]['created_at'] = $this->serverZone($row[$i]['created_at']);
 			$sel = 'select repetitor_id from free_rs where free_id='.$row[$i]['id'].' and accepted=1 group by repetitor_id';
 			$q = $this->db->query($sel);
 			$r = $q->result_array();
@@ -780,6 +793,7 @@ class AdminModel extends CI_Model{
 		$q = $this->db->query($sel);
 		$row = $q->result_array();
 		for ($i=0; $i < count($row); $i++) {
+			//$row[$i]['created_at'] = $this->serverZone($row[$i]['created_at']);
 			$q = $this->db->query('select first_name, father_name, yandex, paypal, master from repetitors where id='.$row[$i]['repetitor_id']);
 			$rep = $q->result_array();
 			if (is_null($rep[0]['first_name'])){
@@ -822,6 +836,7 @@ class AdminModel extends CI_Model{
 		$q = $this->db->query($sel);
 		$lessons = $q->result_array();
 		for ($i=0; $i < count($lessons); $i++) {
+			$lessons[$i]['date_from'] = $this->serverZone($lessons[$i]['date_from']);
 			$q = $this->db->query('select first_name from students where id='.$lessons[$i]['student_id']);
 			$r = $q->result_array();
 			if (is_null($r[0]['first_name'])){
@@ -893,7 +908,7 @@ class AdminModel extends CI_Model{
 		foreach ($row as $r) {
 			$chats[$i] = array(
 				'id' 			=> $r['id'],
-				'created_at' 	=> $r['created_at'],
+				'created_at' 	=> $r['created_at'],//$this->serverZone($r['created_at']),
 				'message' 		=> $r['message'],
 				'from_id' 		=> $r['from_id'],
 				'from_role' 		=> $r['from_role'],
@@ -956,6 +971,7 @@ class AdminModel extends CI_Model{
 		$q = $this->db->query('select r.id, r.rating, r.about, r.created_at, s.first_name as s_name, s.father_name as s_father, rep.first_name as r_name, rep.father_name as r_father, r.student_id, r.repetitor_id from ratings as r, students as s, repetitors as rep where r.student_id=s.id and r.repetitor_id=rep.id order by created_at DESC');
 		$r = $q->result_array();
 		for ($i=0; $i < count($r); $i++) {
+			//$r[$i]['created_at'] = $this->serverZone($r[$i]['created_at']);
 			if (is_null($r[$i]['s_name'])){
 				$r[$i]['student'] = 'Без имени';
 			} else{

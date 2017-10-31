@@ -680,8 +680,7 @@ class Repetitor extends CI_Controller {
 			 exit('репетитор не вошёл');
 		} else{
 			$lesson_id = $this->input->post('id');
-			$data = $this->RepetitorModel->startLesson($lesson_id);
-			redirect('repetitor/lessons');
+			echo $this->RepetitorModel->startLesson($lesson_id);
 		}
 	}
 
@@ -765,5 +764,16 @@ class Repetitor extends CI_Controller {
 	{
 		$email = $this->input->post('email');
 		echo $this->RepetitorModel->forgot($email);
+	}
+
+	public function deleteRepetitor()
+	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			 redirect('/main/rlogin');
+		}
+		$this->RepetitorModel->deleteRepetitor($this->session->repetitor_id);
+		$this->session->unset_userdata('repetitor_id');
+		//echo '0';
+		redirect('/main/filter');
 	}
 }

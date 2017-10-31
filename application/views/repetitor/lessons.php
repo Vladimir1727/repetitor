@@ -77,7 +77,7 @@
             echo '</div>';
             echo '<div>';
             if ($lesson['active']){
-                echo '<button class="ok" lesson="'.$lesson['id'].'" skype="skype:'.$lesson['skype'].'?call&video=true">Начать урок</button>';
+                echo '<button class="ok" lesson="'.$lesson['id'].'" skype="'.$lesson['skype'].'">Начать урок</button>';
             } else{
                 echo '<button class="ok" lesson=0>Начать урок</button>';
             }
@@ -85,6 +85,7 @@
             if ($lesson['calcel']){
                 echo '<button class="del" lesson="'.$lesson['id'].'">Отменить</button>';
             }
+            // echo '<input type="hidden" value="'.$lesson['actual'].'" name="actual">';
             echo '</div>';
             echo '</aside>';
         }

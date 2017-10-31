@@ -183,7 +183,7 @@ function tableClick(){
             var code = $(this).attr('id');
             var wday = code.substr(0,1);
             var hour = code.substr(1);
-            var addDate = new Date(monday.getTime()+60*60*1000*24*(wday-1)+60*60*1000*hour);
+            var addDate = new Date(monday.getTime()+60*60*1000*24*(wday-2)+60*60*1000*hour);
             if (checkDate(addDate) == false){
                 return false;
             }

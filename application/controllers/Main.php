@@ -47,8 +47,8 @@ class Main extends CI_Controller {
 
 	public function filter()
 	{
-		$this->load->view('stop');
-		/*$page = (is_null($this->input->get('page'))) ? 1 : $this->input->get ('page');
+		//$this->load->view('stop');
+		$page = (is_null($this->input->get('page'))) ? 1 : $this->input->get ('page');
 		if ($this->session->has_userdata('student_id')){
 			$student = $this->MainModel->getStudent($this->session->student_id);
 		} else{
@@ -75,7 +75,7 @@ class Main extends CI_Controller {
 			'student' => $student,
 			'filter' => $filter,
 		);
-		$this->load->view('main/filter', $data);*/
+		$this->load->view('main/filter', $data);
 	}
 
 	public function repetitorregistration(){
@@ -135,14 +135,7 @@ class Main extends CI_Controller {
 		$this->load->view('main/rinfo', $data);
 	}
 
-	public function test(){
-		echo '<pre>';
-		$zone = 2;
-		echo date('Y-m-d H:i:s',time() - $zone*60*60);
-		echo '<br>';
-		echo date('Y-m-d H:i:s',time());
-		echo '</pre>';
-	}
+
 
 	public function upload()
 	{
@@ -256,8 +249,32 @@ class Main extends CI_Controller {
 		$page = $this->input->post('page');
 		$filter = json_decode($this->input->post('filter'));
 		$repetitors = $this->MainModel->getRepetitors($page, $filter);
-		$pagg = $this->MainModel->repPagg($page, count($repetitors));
+		$pagg = $this->MainModel->repPagg2($page, $filter);
 		//var_dump($pagg);
+		echo json_encode(array('pagg'=>$pagg,'repetitors'=>$repetitors));
+	}
+
+	public function getfilter2()
+	{
+		$num = 6;
+		$page = $this->input->post('page');
+		$filter = json_decode($this->input->post('filter'));
+		$allRepetitors = $this->MainModel->AllFiltered($filter);
+		$pagg = $this->MainModel->repPagg2($page, $num, count($allRepetitors));
+		$repetitors = array();
+		$k = 0;
+		for ($i = ($page-1)*$num; $i < $page*$num; $i++) {
+			if (count($allRepetitors)>$i){
+				$repetitors[$k] = $allRepetitors[$i];
+				if (!is_null($repetitors[$k]['avatar'])){
+					$filename = 'images/'.$repetitors[$k]['avatar'];
+					if (file_exists($filename)==false){
+						$repetitors[$k]['avatar'] = NULL;
+					}
+				}
+				$k++;
+			}
+		}
 		echo json_encode(array('pagg'=>$pagg,'repetitors'=>$repetitors));
 	}
 
@@ -292,11 +309,26 @@ class Main extends CI_Controller {
 			'repetitor_id' => $this->input->post('repetitor_id'),
 			'created_at' => date('Y-m-d H:i:s',time()),
 		);
+		$this->MainModel->sendfeed($data);
 		redirect($this->input->post('back'));
 	}
 
 	public function getTimeZones()
 	{
 		echo json_encode($this->MainModel->getTimeZones());
+	}
+
+	public function returnOldLessons()
+	{
+		$lessons = $this->MainModel->getOldLessons();
+		foreach ($lessons as $lesson) {
+			$this->MainModel->addStudentBalance($lesson['student_id'], round($lesson['cost']*1.3));
+			$this->MainModel->decRepetitorBalance($lesson['repetitor_id'], round($lesson['cost']));
+			$this->MainModel->setDeletedLesson($lesson['id']);
+		}
+	}
+
+	public function test(){
+		echo $this->MainModel->setDeletedLesson(2);
 	}
 }
