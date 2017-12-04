@@ -19,7 +19,7 @@
             <label>
                 <input type="radio" name="pay_type" value="1" checked id="card">
                 <span></span>
-                Visa/MasterCart
+                Visa/MasterCard
             </label>
             <label>
                 <input type="radio" name="pay_type" value="2" id="money">

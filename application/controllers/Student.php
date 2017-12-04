@@ -521,6 +521,7 @@ class Student extends CI_Controller {
 		$pay = $this->StudentModel->checkExPay($data1);
 		if ($pay === false){
 			$this->StudentModel->setExercises($data1);
+			$this->MainModel->newReqMail($this->input->post('repetitor_id'));
 			redirect('/student/stepend');
 		} else{
 			$data1['student'] = $student->student;
@@ -573,6 +574,7 @@ class Student extends CI_Controller {
 			 'created_at' => date('Y-m-d H:i:s',time()),
 		);
 		$ex_id = $this->StudentModel->setExercise($data);
+		$this->MainModel->newReqMail($this->input->post('repetitor_id'));
 		echo $ex_id;
 	}
 

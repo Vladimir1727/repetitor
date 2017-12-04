@@ -529,7 +529,7 @@ class Repetitor extends CI_Controller {
 			 exit('репетитор на вошёл');
 		}
 		$this->RepetitorModel->visit($this->session->repetitor_id);
-		$data = $this->RepetitorModel->getTimeTable($this->session->repetitor_id);
+		$data = $this->RepetitorModel->getTimeTable($this->session->repetitor_id, $this->input->post('week'));
 		echo json_encode($data);
 	}
 
@@ -590,6 +590,9 @@ class Repetitor extends CI_Controller {
 				'to_id' => $this->input->post('to_id'),
 				'message' => $this->input->post('message'),
 			);
+			if ($this->input->post('to_role')==2){
+				$this->MainModel->newChatMail($this->input->post('to_role'), $this->input->post('to_id'));
+			}
 			echo $this->MainModel->sendChat($data);
 		}
 	}
@@ -669,7 +672,13 @@ class Repetitor extends CI_Controller {
 			 exit('репетитор не вошёл');
 		} else{
 			$lesson_id = $this->input->post('id');
-			$data = $this->RepetitorModel->acceptLesson($lesson_id);
+			$student_id = $this->RepetitorModel->acceptLesson($lesson_id);
+			$this->MainModel->newLessonMail($student_id);
+			//ЖУРНАЛ СОБЫТИЙ
+			//$l = $this->MainModel->getLessonInfo($lesson_id);
+			//$mess = 'Репетитор ID '.$l['repetitor_id'].' подтвердил урок на '.$l['date_from'].' ученику ID '.$l['student_id'];
+			//$type = 'репетитор подтвердил урок';
+			//$this->MainModel->addEvent($mess, $type);
 			redirect('repetitor/lessonsrequests');
 		}
 	}
@@ -775,5 +784,14 @@ class Repetitor extends CI_Controller {
 		$this->session->unset_userdata('repetitor_id');
 		//echo '0';
 		redirect('/main/filter');
+	}
+
+	public function addFreeEx()
+	{
+		if (!$this->session->has_userdata('repetitor_id')){
+			exit('пользователь не вошёл');
+		} else{
+			$this->RepetitorModel->addNewYear($this->session->repetitor_id);
+		}
 	}
 }

@@ -22,12 +22,12 @@ body {
   overflow-x: hidden;
   background: #E8EAEB; }
   body.start {
-    background: #fff; }
+    background: #FFFFFF; }
 
 div.main-header {
   height: 140px;
-  color: #fff;
-  background: #fff; }
+  color: #FFFFFF;
+  background: #FFFFFF; }
   div.main-header > div {
     max-width: 965px;
     height: inherit;
@@ -43,7 +43,7 @@ div.main-header {
       width: 170px;
       height: 33px;
       display: block;
-      color: #fff;
+      color: #FFFFFF;
       text-decoration: none; }
     div.main-header > div a:first-child {
       background: #028163;
@@ -57,7 +57,7 @@ div.main-header {
         background: #ff7e5b; }
 
 nav.main-menu {
-  background-color: #222f3b;
+  background-color: #222F3B;
   margin: 0 auto;
   float: none;
   min-height: 50px; }
@@ -74,7 +74,7 @@ nav.main-menu {
     nav.main-menu li > a {
       text-decoration: none;
       font-size: 18px;
-      color: #fff;
+      color: #FFFFFF;
       font-family: 'Arial Narrow', Arial;
       padding-left: 35px;
       line-height: 50px; }
@@ -87,7 +87,7 @@ nav.main-menu {
       display: inline-block;
       background-image: url("../img/lend_01.png"); }
   nav.main-menu li:hover > a {
-    color: #05a983; }
+    color: #05A983; }
   nav.main-menu li:hover > span.icon {
     position: absolute;
     top: 18px;
@@ -109,7 +109,7 @@ nav.main-menu {
     background-image: url("../img/lend_01.png"); }
   nav.main-menu li.active:hover > a {
     background-color: inherit;
-    color: #05a983;
+    color: #05A983;
     z-index: 1; }
   nav.main-menu li.active:hover > span.icon {
     z-index: 2;
@@ -122,7 +122,7 @@ nav.main-menu {
 
 footer {
   background-color: #12232F;
-  color: #fff;
+  color: #FFFFFF;
   font-size: 16px;
   line-height: 1.714; }
   footer div.row {
@@ -132,10 +132,10 @@ footer {
   footer div.col-md-2 {
     padding-left: 0; }
   footer a, footer a:visited {
-    color: #fff;
+    color: #FFFFFF;
     text-decoration: none; }
   footer a:hover, footer a:active {
-    color: #05a983;
+    color: #05A983;
     text-decoration: none; }
   footer div.mess img {
     padding: 5px; }
@@ -147,13 +147,13 @@ footer {
   footer div.big {
     font-size: 18px; }
   footer div.small span {
-    color: #05a983;
+    color: #05A983;
     font-size: 24px; }
   footer div.small a {
     color: #9A9A9A;
     line-height: 4; }
   footer div.small a:hover {
-    color: #05a983; }
+    color: #05A983; }
   footer div.f-end {
     color: #9A9A9A;
     padding-bottom: 15px;
@@ -164,7 +164,7 @@ section.one {
   background: url("../img/fon1_1.jpg");
   background-position: center;
   background-size: cover;
-  color: #fff; }
+  color: #FFFFFF; }
   section.one h1 {
     font-family: "Arial Bold", Arial, sans-serif;
     text-align: center;
@@ -196,26 +196,29 @@ section.one {
         height: 15px;
         background-color: #FF8449;
         border-radius: 50%; }
-  section.one a, section.one a:visited {
-    font-family: "Arial Bold", Arial, sans-serif;
-    display: block;
-    text-decoration: none;
-    width: 295px;
-    height: 60px;
-    background: #FF5C39;
-    border: none;
-    color: #fff;
-    text-align: right;
-    font-size: 24px;
-    font-weight: 900;
-    padding: 5px 20px 0 0;
-    line-height: 2;
-    margin: 0 auto; }
-  section.one a:hover {
+
+.btn-registration,
+.btn-registration:visited {
+  font-family: "Arial Bold", Arial, sans-serif;
+  display: block;
+  text-decoration: none;
+  width: 320px;
+  height: 60px;
+  background: #FF5C39;
+  border: none;
+  color: #FFFFFF;
+  text-align: right;
+  font-size: 24px;
+  font-weight: 900;
+  padding: 5px 20px 0 0;
+  line-height: 2;
+  margin: 0 auto; }
+  .btn-registration:hover,
+  .btn-registration:visited:hover {
     background: #ff7e5b; }
 
 section.start {
-  box-shadow: inset 0 5px 10px #777;
+  box-shadow: inset 0 5px 10px #777777;
   background-color: #E8E8E8;
   padding: 20px 10px 20px 10px; }
   section.start h2 {
@@ -252,7 +255,7 @@ section.start {
       section.start aside div.step p {
         font-family: "Arial Regular", Arial, sans-serif;
         font-size: 14px;
-        color: #666;
+        color: #666666;
         line-height: 1.2; }
     section.start aside div.arrow {
       width: 65px; }
@@ -264,16 +267,16 @@ section.light {
   min-height: 48px;
   background-color: #00CC99;
   font-size: 22px;
-  color: #fff;
+  color: #FFFFFF;
   text-align: center;
   line-height: 2.3;
-  box-shadow: 0 5px 10px #777;
+  box-shadow: 0 5px 10px #777777;
   padding: 0 10px; }
   section.light a, section.light a:visited {
-    color: #fff;
+    color: #FFFFFF;
     text-decoration: underline; }
   section.light a:hover {
-    color: #777; }
+    color: #777777; }
 
 section.instruction-about {
   padding: 0 10px; }
@@ -289,7 +292,7 @@ section.instruction-about {
     font-size: 24px;
     text-align: center;
     margin: 5px 0 30px 0;
-    color: #373c46; }
+    color: #373C46; }
   section.instruction-about ul {
     max-width: 1150px;
     margin: 0 auto; }
@@ -298,7 +301,7 @@ section.instruction-about {
       position: relative;
       list-style: none;
       font-size: 22px;
-      color: #373c46; }
+      color: #373C46; }
       section.instruction-about ul li:before {
         position: absolute;
         left: -20px;
@@ -320,8 +323,8 @@ section.comfort-head {
     font-weight: 600;
     line-height: 1.6;
     text-align: center;
-    color: #fff;
-    box-shadow: 0 5px 10px #777; }
+    color: #FFFFFF;
+    box-shadow: 0 5px 10px #777777; }
 
 section.comfort {
   padding: 0 10px; }
@@ -343,7 +346,7 @@ section.comfort {
         width: 235px;
         font-size: 16px;
         margin: 0 auto;
-        color: #32415c; }
+        color: #32415C; }
       section.comfort aside > div > div {
         height: 100px;
         width: 100px;
@@ -362,46 +365,31 @@ section.comfort {
         section.comfort aside > div > div img[alt="sertificate"] {
           margin-top: 22px;
           margin-left: 4px; }
-  section.comfort a, section.comfort a:visited {
-    font-family: "Arial Bold", Arial, sans-serif;
-    display: block;
-    text-decoration: none;
-    width: 295px;
-    height: 60px;
-    background: #FF5C39;
-    border: none;
-    color: #fff;
-    text-align: right;
-    font-size: 24px;
-    font-weight: 900;
-    padding: 5px 20px 0 0;
-    line-height: 2;
-    margin: 0 auto 20px auto; }
-  section.comfort a:hover {
-    background: #ff7e5b; }
+  section.comfort .btn-registration {
+    margin: 0 auto 55px; }
 
 section.light2 {
   font-family: "Arial Regular", Arial, sans-serif;
   min-height: 48px;
   background-color: #07CA9A;
   font-size: 22px;
-  color: #fff;
+  color: #FFFFFF;
   text-align: center;
   line-height: 2.3;
-  box-shadow: 0 5px 10px #777;
+  box-shadow: 0 5px 10px #777777;
   padding: 0 10px; }
   section.light2 a, section.light2 a:visited {
-    color: #fff;
+    color: #FFFFFF;
     text-decoration: underline; }
   section.light2 a:hover {
-    color: #777; }
+    color: #777777; }
 
 section.wellcome {
   background: url("../img/girl3.png");
   background-position-x: center;
   background-position-y: center;
   background-size: cover;
-  color: #fff;
+  color: #FFFFFF;
   padding: 20px 0 30px 0; }
   section.wellcome h1 {
     font-family: "Arial Bold", Arial, sans-serif;
@@ -440,9 +428,9 @@ section.wellcome {
 
 section.filter {
   max-width: 1200px;
-  background: #fff;
+  background: #FFFFFF;
   margin: 30px auto;
-  color: #222f3b;
+  color: #222F3B;
   padding-bottom: 10px; }
   section.filter h5 {
     font-size: 14px; }
@@ -450,7 +438,7 @@ section.filter {
     width: 170px;
     height: 30px;
     font-size: 18px;
-    border: 1px #999 solid; }
+    border: 1px #999999 solid; }
   section.filter > div.row {
     padding-top: 20px;
     margin: 0 auto; }
@@ -462,10 +450,10 @@ section.filter {
         width: 33%; }
         section.filter > div.row > div:last-child > div.row > div.col-md-4:first-child {
           text-align: left;
-          color: #999; }
+          color: #999999; }
         section.filter > div.row > div:last-child > div.row > div.col-md-4:last-child {
           text-align: right;
-          color: #999; }
+          color: #999999; }
   section.filter p {
     font-size: 12px;
     padding: 10px 0 0 70px; }
@@ -476,7 +464,7 @@ section.filter {
     height: 30px;
     margin: 25px auto 0 auto;
     background: #028163;
-    color: #fff;
+    color: #FFFFFF;
     border: 1px #028163 solid;
     padding: 3px; }
     section.filter button:hover {
@@ -509,11 +497,11 @@ main.filter {
     float: left; }
     main.filter section.result > h2 {
       font-family: "Arial Regular", Arial, sans-serif;
-      color: #222f3b;
+      color: #222F3B;
       width: 885px;
       text-align: center; }
     main.filter section.result aside {
-      background: #fff;
+      background: #FFFFFF;
       margin-bottom: 30px; }
       main.filter section.result aside:after {
         content: '';
@@ -538,7 +526,7 @@ main.filter {
           width: 100px;
           height: 30px;
           border: 1px #9A9A9A solid;
-          color: #999;
+          color: #999999;
           text-decoration: none;
           margin: 0 auto;
           line-height: 1.5;
@@ -553,7 +541,7 @@ main.filter {
             height: 17px;
             background: url("../img/arrow2.png"); }
         main.filter section.result aside div.avatar a:hover {
-          background: #eee; }
+          background: #EEEEEE; }
       main.filter section.result aside div.info {
         float: left;
         padding: 25px 10px 28px 0;
@@ -562,7 +550,7 @@ main.filter {
         main.filter section.result aside div.info h2 {
           font-size: 24px;
           font-family: "Arial Regular", Arial, sans-serif;
-          color: #222f3b; }
+          color: #222F3B; }
           main.filter section.result aside div.info h2 span {
             display: inline-block;
             width: 12px;
@@ -574,14 +562,14 @@ main.filter {
           main.filter section.result aside div.info h2 span.active {
             background: #07CA9A; }
           main.filter section.result aside div.info h2 a, main.filter section.result aside div.info h2 a:visited {
-            color: #222f3b; }
+            color: #222F3B; }
         main.filter section.result aside div.info p {
           color: #333333;
           font-size: 16px; }
           main.filter section.result aside div.info p strong {
             font-size: 18px;
             font-weight: normal;
-            color: #666; }
+            color: #666666; }
         main.filter section.result aside div.info a, main.filter section.result aside div.info a:visited {
           text-decoration: none; }
         main.filter section.result aside div.info a.favorites {
@@ -601,7 +589,7 @@ main.filter {
             height: 12px;
             background: url("../img/heart.png"); }
           main.filter section.result aside div.info a.favorites:hover {
-            background: #eee; }
+            background: #EEEEEE; }
         main.filter section.result aside div.info div.price {
           font-size: 24px;
           position: absolute;
@@ -631,7 +619,7 @@ main.filter {
           display: inline-block;
           width: 170px;
           height: 30px;
-          color: #fff;
+          color: #FFFFFF;
           font-size: 14px;
           text-align: center;
           margin-right: 15px;
@@ -653,7 +641,7 @@ main.filter {
   main.filter section.info {
     margin-left: 30px;
     padding: 25px 15px 30px 15px;
-    background: #fff;
+    background: #FFFFFF;
     float: left;
     max-width: 285px; }
     main.filter section.info:after {
@@ -693,19 +681,21 @@ ul.pagg {
       line-height: 2;
       font-weight: 600; }
     ul.pagg li a:hover {
-      background-color: #fff; }
+      background-color: #FFFFFF; }
     ul.pagg li a {
       display: inline-block;
       width: 30px;
       height: 30px;
       border: 1px #9A9A9A solid; }
+    ul.pagg li.active-page {
+      background: #fff; }
   ul.pagg li:first-child {
     margin: 0; }
     ul.pagg li:first-child a {
       border: none; }
   ul.pagg li:first-child a:hover, ul.pagg li:last-child a:hover {
     background: transparent;
-    color: #fff; }
+    color: #FFFFFF; }
   ul.pagg li:last-child a {
     border: none; }
 
@@ -722,10 +712,10 @@ ul.pagg {
   background: #07CA9A !important; }
 
 .ui-widget-content {
-  color: #333 !important; }
+  color: #333333 !important; }
 
 .ui-widget-content a {
-  color: #eee !important; }
+  color: #EEEEEE !important; }
 
 .ui-widget.ui-widget-content {
   z-index: 10 !important; }
@@ -741,7 +731,7 @@ main.rep-info {
     max-width: 885px;
     float: left; }
     main.rep-info section.result aside {
-      background: #fff;
+      background: #FFFFFF;
       margin: 0 0 10px 0; }
       main.rep-info section.result aside:after {
         content: '';
@@ -785,8 +775,8 @@ main.rep-info {
           display: block;
           width: 170px;
           height: 30px;
-          border: 1px #666 solid;
-          color: #666;
+          border: 1px #666666 solid;
+          color: #666666;
           margin: 0 auto 20px auto;
           line-height: 1.5;
           position: relative;
@@ -818,7 +808,7 @@ main.rep-info {
           main.rep-info section.result aside div.info p strong {
             font-size: 18px;
             font-weight: normal;
-            color: #666; }
+            color: #666666; }
         main.rep-info section.result aside div.info a, main.rep-info section.result aside div.info a:visited {
           text-decoration: none; }
         main.rep-info section.result aside div.info a.favorites {
@@ -838,7 +828,7 @@ main.rep-info {
             height: 12px;
             background: url("../img/heart.png"); }
           main.rep-info section.result aside div.info a.favorites:hover {
-            background: #eee; }
+            background: #EEEEEE; }
         main.rep-info section.result aside div.info div.price {
           font-size: 24px;
           position: absolute;
@@ -868,7 +858,7 @@ main.rep-info {
           display: inline-block;
           width: 170px;
           height: 30px;
-          color: #fff;
+          color: #FFFFFF;
           font-size: 14px;
           text-align: center;
           margin-right: 15px;
@@ -903,7 +893,7 @@ main.rep-info {
           float: right;
           font-family: "Open Sans Regular", "Arial Narrow", sans-serif;
           font-size: 14px;
-          color: #666; }
+          color: #666666; }
           main.rep-info section.result aside.sh header div.pagg a, main.rep-info section.result aside.sh header div.pagg a:visited {
             text-decoration: none; }
         main.rep-info section.result aside.sh header div.tzone {
@@ -912,8 +902,8 @@ main.rep-info {
           display: block;
           width: 170px;
           height: 30px;
-          border: 1px #666 solid;
-          color: #666;
+          border: 1px #666666 solid;
+          color: #666666;
           margin: 0 auto;
           line-height: 1.5;
           position: relative;
@@ -936,21 +926,21 @@ main.rep-info {
           border: 1px #9C9C9C solid;
           font-family: "Arial Regular", Arial, sans-serif;
           font-size: 14px;
-          color: #fff; }
+          color: #FFFFFF; }
           main.rep-info section.result aside.sh table tbody tr td.free {
             background: #00CC99;
             text-align: center;
-            border: 1px #fff solid; }
+            border: 1px #FFFFFF solid; }
             main.rep-info section.result aside.sh table tbody tr td.free:after {
               content: 'Свободен'; }
           main.rep-info section.result aside.sh table tbody tr td.busy {
             background: #4F81BD;
             text-align: center;
-            border: 1px #fff solid; }
+            border: 1px #FFFFFF solid; }
           main.rep-info section.result aside.sh table tbody tr td:first-of-type {
             text-align: center;
             border: none;
-            color: #666;
+            color: #666666;
             font-size: 16px; }
     main.rep-info section.result aside.video {
       position: relative;
@@ -978,10 +968,10 @@ main.rep-info {
     main.rep-info section.result aside.exp p {
       font-family: "Arial Narrow", Arial, sans-serif;
       font-size: 16px;
-      color: #333; }
+      color: #333333; }
       main.rep-info section.result aside.exp p strong {
         font-size: 18px;
-        color: #666;
+        color: #666666;
         font-weight: 500; }
     main.rep-info section.result aside.feeds div.form:after {
       content: '';
@@ -1029,7 +1019,7 @@ main.rep-info {
       border: none;
       width: 170px;
       height: 30px;
-      color: #fff;
+      color: #FFFFFF;
       font-family: "OpenSans Regular", Arial, sans-serif;
       font-size: 16px;
       text-align: center;
@@ -1044,7 +1034,7 @@ main.rep-info {
         color: #12232F; }
       main.rep-info section.result aside.feeds div.feed p {
         font-family: "Arial Narrow", Arial, sans-serif;
-        color: #666;
+        color: #666666;
         font-size: 16px; }
       main.rep-info section.result aside.feeds div.feed div.stars {
         position: absolute;
@@ -1066,7 +1056,7 @@ main.rep-info {
       margin: 30px auto 50px auto;
       width: 170px;
       height: 30px;
-      color: #fff;
+      color: #FFFFFF;
       font-size: 14px;
       text-align: center;
       text-shadow: 0.5px 0.866px 1px rgba(0, 0, 0, 0.34);
@@ -1079,7 +1069,7 @@ main.rep-info {
   main.rep-info section.info {
     margin-left: 30px;
     padding: 25px 15px 30px 15px;
-    background: #fff;
+    background: #FFFFFF;
     float: left;
     max-width: 285px; }
     main.rep-info section.info:after {
@@ -1109,7 +1099,7 @@ section.one-rep {
   background: url("../img/fon2.jpg");
   background-position: center;
   background-size: cover;
-  color: #fff;
+  color: #FFFFFF;
   text-align: center; }
   section.one-rep h1 {
     font-family: "Arial Bold", Arial, sans-serif;
@@ -1145,14 +1135,14 @@ section.reg {
       width: 170px;
       height: 30px;
       background: #FF5C39;
-      color: #fff;
+      color: #FFFFFF;
       border: none; }
       section.reg form input[type="submit"]:hover {
         background: #ff7e5b; }
 
 section.up {
   background-color: #00CC99;
-  box-shadow: 0 5px 10px #777; }
+  box-shadow: 0 5px 10px #777777; }
 
 section.work {
   padding: 0 10px 35px 10px; }
@@ -1195,10 +1185,10 @@ section.work {
 
 section.stream {
   background: #005842;
-  box-shadow: 0 5px 10px #777;
+  box-shadow: 0 5px 10px #777777;
   padding: 10px; }
   section.stream h2 {
-    color: #fff;
+    color: #FFFFFF;
     margin: 0 auto;
     text-align: center;
     font-family: "Arial Regular", Arial, sans-serif;
@@ -1206,7 +1196,7 @@ section.stream {
     font-weight: 400; }
 
 section.start-rep {
-  box-shadow: inset 0 5px 10px #777;
+  box-shadow: inset 0 5px 10px #777777;
   background-color: #E8E8E8;
   padding: 20px 10px 20px 10px; }
   section.start-rep h2 {
@@ -1252,11 +1242,11 @@ section.start-rep {
 
 section.popular {
   background: #07CA9A;
-  box-shadow: 0 5px 10px #777;
+  box-shadow: 0 5px 10px #777777;
   padding: 10px;
   text-transform: uppercase; }
   section.popular h2 {
-    color: #fff;
+    color: #FFFFFF;
     margin: 0 auto;
     text-align: center;
     font-family: "Arial Bold", Arial, sans-serif;
@@ -1290,7 +1280,7 @@ section.instruction {
         color: #3B4E68; }
       section.instruction aside div p {
         font-size: 14px;
-        color: #666;
+        color: #666666;
         padding: 0;
         margin: 0; }
 
@@ -1299,21 +1289,21 @@ section.more {
   section.more h2 {
     text-align: center;
     font-family: "Arial Regular", Arial, sans-serif;
-    color: #00475d;
+    color: #00475D;
     font-size: 22px;
     margin: 0; }
     section.more h2 a {
-      color: #72c99b;
+      color: #72C99B;
       text-decoration: underline; }
       section.more h2 a:hover {
         color: #94ebbd; }
 
 section.berep {
   background: #005842;
-  box-shadow: 0 5px 10px #777;
+  box-shadow: 0 5px 10px #777777;
   padding: 10px; }
   section.berep h2 {
-    color: #fff;
+    color: #FFFFFF;
     margin: 0 auto;
     font-family: "Arial Bold", Arial, sans-serif;
     text-align: center;
@@ -1322,7 +1312,7 @@ section.berep {
     font-weight: 500px; }
 
 section.down {
-  box-shadow: inset 0 5px 10px #777;
+  box-shadow: inset 0 5px 10px #777777;
   background: #E8E8E8;
   padding: 45px 10px 50px 10px; }
   section.down h2 {
@@ -1345,17 +1335,17 @@ form.rlogin {
   font-family: "Arial Regular", Arial, sans-serif;
   width: 300px; }
   form.rlogin h1 {
-    color: #222f3b;
+    color: #222F3B;
     font-size: 22px;
     margin: 0 auto; }
   form.rlogin h2 {
     margin: 5px auto 10px auto;
-    color: #222f3b;
+    color: #222F3B;
     font-size: 14px; }
   form.rlogin input[type="text"], form.rlogin input[type="password"] {
     width: 230px;
     height: 35px;
-    border: 1px #ddd solid;
+    border: 1px #DDDDDD solid;
     font-size: 16px;
     display: block;
     margin: 20px auto 0 auto;
@@ -1365,7 +1355,7 @@ form.rlogin {
     height: 35px;
     border: none;
     font-size: 16px;
-    color: #fff;
+    color: #FFFFFF;
     display: block;
     margin: 20px auto;
     background: #FF5C39; }
@@ -1375,7 +1365,7 @@ form.rlogin {
     margin: 0 auto 10px auto;
     text-align: center;
     font-size: 14px;
-    color: #222f3b; }
+    color: #222F3B; }
   form.rlogin > a, form.rlogin a:visited {
     display: block;
     margin: 0 auto;
@@ -1383,13 +1373,13 @@ form.rlogin {
     height: 30px;
     text-align: center;
     background: #00CC99;
-    color: #fff;
+    color: #FFFFFF;
     text-decoration: none;
     font-size: 16px;
     line-height: 1.9; }
     form.rlogin > a:hover, form.rlogin a:visited:hover {
       text-decoration: none;
-      color: #fff;
+      color: #FFFFFF;
       background: #22eebb; }
   form.rlogin div {
     margin: 10px auto 0 auto; }
@@ -1397,7 +1387,7 @@ form.rlogin {
       font-size: 12px;
       font-weight: 500;
       line-height: 1;
-      color: #666; }
+      color: #666666; }
       form.rlogin div label input {
         display: none; }
       form.rlogin div label input + span {
@@ -1415,8 +1405,8 @@ form.rlogin {
       width: 100px;
       height: 20px;
       text-decoration: none;
-      color: #666;
-      border: 1px #666 solid;
+      color: #666666;
+      border: 1px #666666 solid;
       background: #E8E8E8;
       font-size: 12px;
       padding: 2px;
@@ -1432,17 +1422,17 @@ form.slogin {
   form.slogin p.error {
     color: red; }
   form.slogin h1 {
-    color: #222f3b;
+    color: #222F3B;
     font-size: 22px;
     margin: 0 auto; }
   form.slogin h2 {
     margin: 5px auto 10px auto;
-    color: #222f3b;
+    color: #222F3B;
     font-size: 14px; }
   form.slogin input[type="text"], form.slogin input[type="password"] {
     width: 230px;
     height: 35px;
-    border: 1px #ddd solid;
+    border: 1px #DDDDDD solid;
     font-size: 16px;
     display: block;
     margin: 20px auto 0 auto;
@@ -1452,7 +1442,7 @@ form.slogin {
     height: 35px;
     border: none;
     font-size: 16px;
-    color: #fff;
+    color: #FFFFFF;
     display: block;
     margin: 20px auto;
     background: #FF5C39; }
@@ -1462,7 +1452,7 @@ form.slogin {
     margin: 0 auto 10px auto;
     text-align: center;
     font-size: 14px;
-    color: #222f3b; }
+    color: #222F3B; }
   form.slogin > a, form.slogin a:visited {
     display: block;
     margin: 0 auto 10px auto;
@@ -1470,7 +1460,7 @@ form.slogin {
     height: 30px;
     text-align: center;
     background: #00CC99;
-    color: #fff;
+    color: #FFFFFF;
     text-decoration: none;
     font-size: 16px;
     line-height: 1.9; }
@@ -1483,7 +1473,7 @@ form.slogin {
       font-size: 12px;
       font-weight: 500;
       line-height: 1;
-      color: #666; }
+      color: #666666; }
       form.slogin div label input {
         display: none; }
       form.slogin div label input + span {
@@ -1501,8 +1491,8 @@ form.slogin {
       width: 100px;
       height: 20px;
       text-decoration: none;
-      color: #666;
-      border: 1px #666 solid;
+      color: #666666;
+      border: 1px #666666 solid;
       background: #E8E8E8;
       font-size: 12px;
       padding: 2px;
@@ -1511,7 +1501,7 @@ form.slogin {
         background: white; }
 
 h1.start, h2.start, h3.start {
-  color: #434e5b;
+  color: #434E5B;
   text-align: center;
   max-width: 1180px;
   margin: 0 auto;
@@ -1547,7 +1537,7 @@ section.lang {
     border-radius: 10px;
     display: block;
     font-weight: 600;
-    color: #fff;
+    color: #FFFFFF;
     font-size: 36px;
     line-height: 42px;
     text-align: center;
@@ -1565,7 +1555,7 @@ section.lang {
       margin-right: 20px; }
   section.lang a:hover {
     text-decoration: none;
-    color: #aaa; }
+    color: #AAAAAA; }
   section.lang a.eng {
     background-image: linear-gradient(0deg, #c1171d 0px, #ed1c24 100%);
     margin-right: 30px; }
@@ -1573,24 +1563,24 @@ section.lang {
       background: url("../img/eng.png"); }
   section.lang a.det {
     margin-right: 30px;
-    background: linear-gradient(0deg, #1e2832 0, #384f66 100%); }
+    background: linear-gradient(0deg, #1E2832 0, #384F66 100%); }
     section.lang a.det span {
       background: url("../img/german.png"); }
   section.lang a.ita {
     margin-right: 30px;
-    background: linear-gradient(0deg, #009a67 0, #00db92 100%); }
+    background: linear-gradient(0deg, #009A67 0, #00DB92 100%); }
     section.lang a.ita span {
       background: url("../img/italy.png"); }
   section.lang a.fra {
-    background: linear-gradient(0deg, #083263 0, #0d509e 100%); }
+    background: linear-gradient(0deg, #083263 0, #0D509E 100%); }
     section.lang a.fra span {
       background: url("../img/french.png"); }
   section.lang a.isp {
-    background: linear-gradient(0deg, #905b18 0, #ffa531 100%); }
+    background: linear-gradient(0deg, #905B18 0, #FFA531 100%); }
     section.lang a.isp span {
       background: url("../img/spanish.png"); }
   section.lang a.rus {
-    background: linear-gradient(0deg, #333 0, #696969 100%); }
+    background: linear-gradient(0deg, #333333 0, #696969 100%); }
     section.lang a.rus span {
       background: url("../img/russian.png"); }
 
@@ -1610,7 +1600,7 @@ form.sreg {
   form.sreg input[type="text"], form.sreg input[type="password"] {
     width: 230px;
     height: 35px;
-    background: 1px #ddd solid;
+    background: 1px #DDDDDD solid;
     font-size: 16px;
     display: block;
     margin: 20px auto 0 auto;
@@ -1620,7 +1610,7 @@ form.sreg {
     height: 35px;
     border: none;
     font-size: 16px;
-    color: #fff;
+    color: #FFFFFF;
     display: block;
     margin: 0 auto;
     background: #FF5C39; }
@@ -1631,10 +1621,10 @@ form.sreg {
     margin: 15px auto 30px auto;
     text-align: center;
     font-size: 12px;
-    color: #666; }
+    color: #666666; }
 
 div.rep-header {
-  background: #fff;
+  background: #FFFFFF;
   margin: 0;
   padding: 0; }
   div.rep-header section {
@@ -1652,7 +1642,7 @@ div.rep-header {
     div.rep-header section div.logo img {
       margin: 10px 0 7px 5px; }
     div.rep-header section div.menu > ul {
-      color: #999;
+      color: #999999;
       font-family: "OpenSans Regular", Arial, sans-serif;
       font-size: 16px;
       margin: 90px 0 0 0;
@@ -1666,11 +1656,11 @@ div.rep-header {
           display: block;
           height: 30px;
           padding: 2px 10px;
-          color: #666;
+          color: #666666;
           text-decoration: none;
-          border: 1px #666 solid; }
+          border: 1px #666666 solid; }
           div.rep-header section div.menu > ul > li > a:hover {
-            background: #eee;
+            background: #EEEEEE;
             color: #028163;
             border-color: #028163;
             text-decoration: none; }
@@ -1678,7 +1668,7 @@ div.rep-header {
           display: block;
           width: 18px;
           height: 2px;
-          background: #666;
+          background: #666666;
           margin-bottom: 3px; }
           div.rep-header section div.menu > ul > li span.s:first-of-type {
             margin-top: 6px; }
@@ -1691,7 +1681,7 @@ div.rep-header {
         width: 54px;
         color: transparent; }
       div.rep-header section div.menu li.mail:hover {
-        background: #eee; }
+        background: #EEEEEE; }
       div.rep-header section div.menu li.mail a:hover {
         color: transparent;
         background: url("../img/mail_green.png") center no-repeat; }
@@ -1700,13 +1690,13 @@ div.rep-header {
         position: absolute;
         top: -10px;
         right: -10px;
-        border: 1px #ff5c39 solid;
+        border: 1px #FF5C39 solid;
         border-radius: 50%;
         width: 18px;
         height: 18px;
-        background: #fff;
+        background: #FFFFFF;
         font-family: "Arial Narrow", Arial, sans-serif;
-        color: #ff5c39;
+        color: #FF5C39;
         font-size: 17px;
         text-align: center;
         line-height: 1; }
@@ -1720,7 +1710,7 @@ div.rep-header {
         right: 0;
         top: 30px;
         list-style: none;
-        color: #666;
+        color: #666666;
         font-family: "OpenSans Regular", Arial, sans-serif;
         font-size: 16px;
         margin: 0;
@@ -1735,33 +1725,33 @@ div.rep-header {
             min-height: 30px;
             width: 170px;
             padding: 2px 10px;
-            color: #666;
+            color: #666666;
             text-decoration: none;
-            border: 1px #666 solid;
-            background: #fff; }
+            border: 1px #666666 solid;
+            background: #FFFFFF; }
             div.rep-header section div.menu li#slide ul > li > a:hover {
-              background: #eee;
+              background: #EEEEEE;
               text-decoration: none;
               color: #028163;
               border-color: #028163; }
           div.rep-header section div.menu li#slide ul > li:nth-child(1), div.rep-header section div.menu li#slide ul > li:nth-child(2), div.rep-header section div.menu li#slide ul > li:nth-child(3), div.rep-header section div.menu li#slide ul > li:nth-child(4), div.rep-header section div.menu li#slide ul > li:nth-child(5) {
             display: none; }
           div.rep-header section div.menu li#slide ul > li.mail {
-            background: #fff; }
+            background: #FFFFFF; }
             div.rep-header section div.menu li#slide ul > li.mail > a {
               color: transparent;
               background: url("../img/mail.png");
               background-position: center;
               background-repeat: no-repeat; }
             div.rep-header section div.menu li#slide ul > li.mail:hover {
-              background: #eee; }
+              background: #EEEEEE; }
             div.rep-header section div.menu li#slide ul > li.mail > a:hover {
               color: transparent;
               background: url("../img/mail_green.png") center no-repeat; }
       div.rep-header section div.menu li#slide:hover {
-        background: #fff; }
+        background: #FFFFFF; }
         div.rep-header section div.menu li#slide:hover a {
-          background: #fff; }
+          background: #FFFFFF; }
       div.rep-header section div.menu li#slide:hover ul {
         display: block; }
       div.rep-header section div.menu li#slide:hover > a > span {
@@ -1778,7 +1768,7 @@ div.rep-header {
     div.rep-header section div.avatar {
       margin-left: 30px;
       font-family: "Arial Narrow", Arial, sans-serif;
-      color: #999;
+      color: #999999;
       text-align: center;
       width: 70px; }
       div.rep-header section div.avatar h3, div.rep-header section div.avatar h4 {
@@ -1789,7 +1779,7 @@ div.rep-header {
         width: 50px;
         height: 50px;
         margin: 10px auto 0 auto;
-        border: 1px #999 solid;
+        border: 1px #999999 solid;
         border-radius: 50%;
         overflow: hidden; }
         div.rep-header section div.avatar div.img img {
@@ -1805,7 +1795,7 @@ div.rep-header {
 
 section.start-profile {
   padding: 25px 10px;
-  color: #fff;
+  color: #FFFFFF;
   background: #6B7683; }
   section.start-profile h1 {
     font-family: "Arial Bold", Arial, sans-serif;
@@ -1865,7 +1855,7 @@ main.rep-profile {
           main.rep-profile section.menu ul li a:hover, main.rep-profile section.menu ul li a:visited:hover {
             background: white; }
         main.rep-profile section.menu ul li a.active, main.rep-profile section.menu ul li a.active:visited {
-          color: #fff;
+          color: #FFFFFF;
           background: #008261; }
           main.rep-profile section.menu ul li a.active:hover, main.rep-profile section.menu ul li a.active:visited:hover {
             background: #22a483; }
@@ -1873,7 +1863,7 @@ main.rep-profile {
           margin-bottom: 0; }
   main.rep-profile section.warp {
     margin: 0 0 0 200px;
-    background: #fff; }
+    background: #FFFFFF; }
     main.rep-profile section.warp aside {
       height: 354px;
       overflow-y: auto; }
@@ -1920,14 +1910,14 @@ main.rep-profile {
       main.rep-profile section.warp aside#present p {
         font-family: "Arial Narrow", Arial, sans-serif;
         font-size: 16px;
-        color: #222f3b; }
+        color: #222F3B; }
       main.rep-profile section.warp aside#present button {
         font-family: "Arial Regular", Arial, sans-serif;
         font-size: 16px;
         width: 100%;
         height: 30px;
         background: #FF5C39;
-        color: #fff;
+        color: #FFFFFF;
         border: none; }
         main.rep-profile section.warp aside#present button:hover {
           background: #ff7e5b; }
@@ -1939,7 +1929,7 @@ main.rep-profile {
         main.rep-profile section.warp aside#present div.avatar div.img {
           width: 183px;
           height: 183px;
-          border: 1px #999 solid;
+          border: 1px #999999 solid;
           border-radius: 50%;
           overflow: hidden; }
           main.rep-profile section.warp aside#present div.avatar div.img img {
@@ -1957,8 +1947,8 @@ main.rep-profile {
         font-size: 16px;
         width: 100%;
         height: 100px;
-        color: #222f3b;
-        border: 1px #999 solid;
+        color: #222F3B;
+        border: 1px #999999 solid;
         padding: 5px 10px;
         resize: none; }
         main.rep-profile section.warp aside#present textarea:focus, main.rep-profile section.warp aside#present input:focus {
@@ -1981,8 +1971,8 @@ main.rep-profile {
         main.rep-profile section.warp form.personal > div input, main.rep-profile section.warp form.personal > div select {
           width: 170px;
           height: 30px;
-          border: 1px #999 solid;
-          color: #222f3b;
+          border: 1px #999999 solid;
+          color: #222F3B;
           font-family: "Arial Narrow", Arial, sans-serif;
           font-size: 16px;
           margin: 0 0 40px 0;
@@ -1996,7 +1986,7 @@ main.rep-profile {
         border: none;
         width: 170px;
         height: 30px;
-        color: #fff;
+        color: #FFFFFF;
         font-family: "OpenSans Regular", Arial, sans-serif;
         font-size: 16px;
         text-align: center; }
@@ -2005,7 +1995,7 @@ main.rep-profile {
     main.rep-profile section.warp aside#subject {
       display: none;
       padding: 20px 5px;
-      color: #222f3b;
+      color: #222F3B;
       font-size: 18px;
       font-family: "Arial Narrow", Arial, sans-serif; }
       main.rep-profile section.warp aside#subject:after {
@@ -2016,7 +2006,7 @@ main.rep-profile {
         margin: 0 auto;
         font-size: 18px; }
         main.rep-profile section.warp aside#subject h2 small {
-          color: #222f3b;
+          color: #222F3B;
           font-size: 12px; }
       main.rep-profile section.warp aside#subject label {
         font-size: 14px;
@@ -2053,8 +2043,8 @@ main.rep-profile {
       main.rep-profile section.warp aside#subject input, main.rep-profile section.warp aside#subject select {
         padding: 5px 5px;
         font-size: 14px;
-        color: #222f3b;
-        border: 1px #999 solid;
+        color: #222F3B;
+        border: 1px #999999 solid;
         height: 30px; }
       main.rep-profile section.warp aside#subject > div {
         width: 866px;
@@ -2089,7 +2079,7 @@ main.rep-profile {
             margin-bottom: 15px; }
           main.rep-profile section.warp aside#subject form > div:nth-child(2) input {
             width: 85px;
-            color: #222f3b; }
+            color: #222F3B; }
         main.rep-profile section.warp aside#subject form > div:nth-child(3) {
           width: 340px; }
           main.rep-profile section.warp aside#subject form > div:nth-child(3) > div {
@@ -2105,7 +2095,7 @@ main.rep-profile {
         border: none;
         width: 170px;
         height: 30px;
-        color: #fff;
+        color: #FFFFFF;
         font-family: "OpenSans Regular", Arial, sans-serif;
         font-size: 16px;
         text-align: center; }
@@ -2118,7 +2108,7 @@ main.rep-profile {
         font-family: "Arial Narrow", Arial, sans-serif;
         padding: 5px 15px 10px 15px; }
       main.rep-profile section.warp aside#pay h2, main.rep-profile section.warp aside#pay h3 {
-        color: #333;
+        color: #333333;
         text-align: center;
         margin: 0; }
       main.rep-profile section.warp aside#pay h2 {
@@ -2140,7 +2130,7 @@ main.rep-profile {
           margin-left: 15px;
           width: 270px;
           height: 30px;
-          color: #222f3b;
+          color: #222F3B;
           font-family: "Arial Narrow", Arial, sans-serif;
           font-size: 16px;
           text-indent: 10px;
@@ -2167,7 +2157,7 @@ main.rep-profile {
         border: none;
         width: 170px;
         height: 30px;
-        color: #fff;
+        color: #FFFFFF;
         font-family: "OpenSans Regular", Arial, sans-serif;
         font-size: 16px;
         text-align: center;
@@ -2203,8 +2193,8 @@ main.rep-profile {
         width: 100%;
         height: 96px;
         resize: none;
-        border: 1px #999 solid;
-        color: #222f3b;
+        border: 1px #999999 solid;
+        color: #222F3B;
         font-family: "Arial Narrow", Arial, sans-serif;
         font-size: 16px;
         text-indent: 10px;
@@ -2212,8 +2202,8 @@ main.rep-profile {
       main.rep-profile section.warp aside#edu input, main.rep-profile section.warp aside#edu select {
         width: 240px;
         height: 30px;
-        border: 1px #999 solid;
-        color: #222f3b;
+        border: 1px #999999 solid;
+        color: #222F3B;
         font-family: "Arial Narrow", Arial, sans-serif;
         font-size: 16px;
         text-indent: 10px;
@@ -2226,7 +2216,7 @@ main.rep-profile {
         border: none;
         width: 170px;
         height: 30px;
-        color: #fff;
+        color: #FFFFFF;
         font-family: "OpenSans Regular", Arial, sans-serif;
         font-size: 16px;
         text-align: center; }
@@ -2249,7 +2239,7 @@ main.rep-profile {
         border: none;
         width: 170px;
         height: 30px;
-        color: #fff;
+        color: #FFFFFF;
         font-family: "OpenSans Regular", Arial, sans-serif;
         font-size: 16px;
         text-align: center; }
@@ -2257,7 +2247,7 @@ main.rep-profile {
           background: #ff7e5b; }
       main.rep-profile section.warp aside#docs h3 {
         font-family: "Arial Narrow", Arial, sans-serif;
-        color: #333;
+        color: #333333;
         text-align: center;
         margin: 0 0 10px 0;
         font-size: 16px;
@@ -2275,7 +2265,7 @@ main.rep-profile {
         width: 250px;
         height: 160px;
         overflow: hidden;
-        background: #eee;
+        background: #EEEEEE;
         text-align: center; }
         main.rep-profile section.warp aside#docs div.img img {
           height: 160px; }
@@ -2284,13 +2274,13 @@ main.rep-profile {
       padding: 5px 10px; }
       main.rep-profile section.warp aside#status h3 {
         font-family: "Arial Narrow", Arial, sans-serif;
-        color: #333;
+        color: #333333;
         text-align: center;
         margin: 20px 0 10px 0;
         font-size: 22px; }
       main.rep-profile section.warp aside#status p {
         font-family: "Arial Narrow", Arial, sans-serif;
-        color: #333;
+        color: #333333;
         text-align: left;
         margin: 0 0 10px 0;
         font-size: 16px; }
@@ -2327,7 +2317,7 @@ main.rep-profile {
         border: none;
         width: 170px;
         height: 30px;
-        color: #fff;
+        color: #FFFFFF;
         font-family: "OpenSans Regular", Arial, sans-serif;
         font-size: 16px;
         text-align: center;
@@ -2340,7 +2330,7 @@ main.rep-profile {
         font-size: 16px;
         margin-top: 30px; }
         main.rep-profile section.warp aside#status div.link h4 span {
-          color: #666;
+          color: #666666;
           float: right;
           margin: 0 10px; }
 
@@ -2350,7 +2340,7 @@ a.send-rep-profile {
   min-height: 30px;
   margin: 0 auto 50px auto;
   padding: 5px;
-  color: #fff;
+  color: #FFFFFF;
   text-decoration: none;
   font-family: "Arial Regular", Arial, sans-serif;
   font-size: 16px;
@@ -2361,7 +2351,7 @@ a.send-rep-profile {
   a.send-rep-profile.dark {
     background: #028163; }
     a.send-rep-profile.dark:hover {
-      color: #fff;
+      color: #FFFFFF;
       background: #24a385; }
 
 div#modal_login div.modal-dialog {
@@ -2375,7 +2365,7 @@ div#modal_login h4 {
   text-align: center;
   font-family: "OpenSans Regular", Arial, sans-serif;
   font-size: 14px;
-  color: #48505b; }
+  color: #48505B; }
 div#modal_login a {
   display: block;
   margin: 15px auto;
@@ -2383,7 +2373,7 @@ div#modal_login a {
   height: 48px;
   text-decoration: none;
   font-family: "Arial Bold", Arial, sans-serif;
-  color: #fff;
+  color: #FFFFFF;
   font-size: 24px;
   text-align: center;
   line-height: 2; }
@@ -2397,7 +2387,7 @@ div#modal_login a {
       background: #ff7e5b; }
 
 div.student-header {
-  background: #fff;
+  background: #FFFFFF;
   margin: 0;
   padding: 0; }
   div.student-header section {
@@ -2415,7 +2405,7 @@ div.student-header {
     div.student-header section div.logo img {
       margin: 10px 0 7px 5px; }
     div.student-header section div.menu > ul {
-      color: #999;
+      color: #999999;
       font-family: "OpenSans Regular", Arial, sans-serif;
       font-size: 16px;
       margin: 90px 0 0 0;
@@ -2430,11 +2420,11 @@ div.student-header {
           display: block;
           height: 30px;
           padding: 2px 10px;
-          color: #666;
+          color: #666666;
           text-decoration: none;
-          border: 1px #666 solid; }
+          border: 1px #666666 solid; }
           div.student-header section div.menu > ul > li > a:hover {
-            background: #eee;
+            background: #EEEEEE;
             color: #028163;
             border-color: #028163;
             text-decoration: none; }
@@ -2442,7 +2432,7 @@ div.student-header {
           display: block;
           width: 18px;
           height: 2px;
-          background: #666;
+          background: #666666;
           margin-bottom: 3px; }
           div.student-header section div.menu > ul > li span.s:first-of-type {
             margin-top: 6px; }
@@ -2455,7 +2445,7 @@ div.student-header {
         width: 54px;
         color: transparent; }
       div.student-header section div.menu li.mail:hover {
-        background: #eee; }
+        background: #EEEEEE; }
       div.student-header section div.menu li.mail a:hover {
         color: transparent;
         background: url("../img/mail_green.png") center no-repeat; }
@@ -2464,13 +2454,13 @@ div.student-header {
         position: absolute;
         top: -10px;
         right: -10px;
-        border: 1px #ff5c39 solid;
+        border: 1px #FF5C39 solid;
         border-radius: 50%;
         width: 18px;
         height: 18px;
-        background: #fff;
+        background: #FFFFFF;
         font-family: "Arial Narrow", Arial, sans-serif;
-        color: #ff5c39;
+        color: #FF5C39;
         font-size: 17px;
         text-align: center;
         line-height: 1; }
@@ -2484,7 +2474,7 @@ div.student-header {
         right: 0;
         top: 30px;
         list-style: none;
-        color: #666;
+        color: #666666;
         font-family: "OpenSans Regular", Arial, sans-serif;
         font-size: 16px;
         margin: 0;
@@ -2499,33 +2489,33 @@ div.student-header {
             min-height: 30px;
             width: 170px;
             padding: 2px 10px;
-            color: #666;
+            color: #666666;
             text-decoration: none;
-            border: 1px #666 solid;
-            background: #fff; }
+            border: 1px #666666 solid;
+            background: #FFFFFF; }
             div.student-header section div.menu li#slide ul > li > a:hover {
-              background: #eee;
+              background: #EEEEEE;
               text-decoration: none;
               color: #028163;
               border-color: #028163; }
           div.student-header section div.menu li#slide ul > li:nth-child(1), div.student-header section div.menu li#slide ul > li:nth-child(2), div.student-header section div.menu li#slide ul > li:nth-child(3), div.student-header section div.menu li#slide ul > li:nth-child(4), div.student-header section div.menu li#slide ul > li:nth-child(5) {
             display: none; }
           div.student-header section div.menu li#slide ul > li.mail {
-            background: #fff; }
+            background: #FFFFFF; }
             div.student-header section div.menu li#slide ul > li.mail > a {
               color: transparent;
               background: url("../img/mail.png");
               background-position: center;
               background-repeat: no-repeat; }
             div.student-header section div.menu li#slide ul > li.mail:hover {
-              background: #eee; }
+              background: #EEEEEE; }
             div.student-header section div.menu li#slide ul > li.mail > a:hover {
               color: transparent;
               background: url("../img/mail_green.png") center no-repeat; }
       div.student-header section div.menu li#slide:hover {
-        background: #fff; }
+        background: #FFFFFF; }
         div.student-header section div.menu li#slide:hover a {
-          background: #fff; }
+          background: #FFFFFF; }
       div.student-header section div.menu li#slide:hover ul {
         display: block; }
       div.student-header section div.menu li#slide:hover > a > span {
@@ -2542,21 +2532,21 @@ div.student-header {
     div.student-header section div.balance a {
       display: block;
       margin: 10px 0 0 0;
-      color: #999;
-      border: 1px #999 solid;
+      color: #999999;
+      border: 1px #999999 solid;
       padding: 0 7px;
       height: 18px;
       font-family: "Arial Narrow", Arial, sans-serif;
       font-size: 16px;
       line-height: 1;
-      background: #fff;
+      background: #FFFFFF;
       text-decoration: none; }
       div.student-header section div.balance a:hover {
-        background: #eee; }
+        background: #EEEEEE; }
     div.student-header section div.avatar {
       margin-left: 30px;
       font-family: "Arial Narrow", Arial, sans-serif;
-      color: #999;
+      color: #999999;
       text-align: center;
       width: 70px; }
       div.student-header section div.avatar h3, div.student-header section div.avatar h4 {
@@ -2567,7 +2557,7 @@ div.student-header {
         width: 50px;
         height: 50px;
         margin: 10px auto 0 auto;
-        border: 1px #999 solid;
+        border: 1px #999999 solid;
         border-radius: 50%;
         overflow: hidden; }
         div.student-header section div.avatar div.img img {
@@ -2582,7 +2572,7 @@ div.student-header {
           background: url("../img/switch_off.png") no-repeat center; }
 
 div.admin-header {
-  background: #fff;
+  background: #FFFFFF;
   margin: 0;
   padding: 0; }
   div.admin-header section {
@@ -2600,7 +2590,7 @@ div.admin-header {
     div.admin-header section div.logo img {
       margin: 10px 0 7px 5px; }
     div.admin-header section div.menu > ul {
-      color: #999;
+      color: #999999;
       font-family: "OpenSans Regular", Arial, sans-serif;
       font-size: 16px;
       margin: 90px 0 0 0;
@@ -2615,11 +2605,11 @@ div.admin-header {
           display: block;
           height: 30px;
           padding: 2px 10px;
-          color: #666;
+          color: #666666;
           text-decoration: none;
-          border: 1px #666 solid; }
+          border: 1px #666666 solid; }
           div.admin-header section div.menu > ul > li > a:hover {
-            background: #eee;
+            background: #EEEEEE;
             color: #028163;
             border-color: #028163;
             text-decoration: none; }
@@ -2627,7 +2617,7 @@ div.admin-header {
           display: block;
           width: 18px;
           height: 2px;
-          background: #666;
+          background: #666666;
           margin-bottom: 3px; }
           div.admin-header section div.menu > ul > li span.s:first-of-type {
             margin-top: 6px; }
@@ -2640,7 +2630,7 @@ div.admin-header {
         width: 54px;
         color: transparent; }
       div.admin-header section div.menu li.mail:hover {
-        background: #eee; }
+        background: #EEEEEE; }
       div.admin-header section div.menu li.mail a:hover {
         color: transparent;
         background: url("../img/mail_green.png") center no-repeat; }
@@ -2649,13 +2639,13 @@ div.admin-header {
         position: absolute;
         top: -10px;
         right: -10px;
-        border: 1px #ff5c39 solid;
+        border: 1px #FF5C39 solid;
         border-radius: 50%;
         width: 18px;
         height: 18px;
-        background: #fff;
+        background: #FFFFFF;
         font-family: "Arial Narrow", Arial, sans-serif;
-        color: #ff5c39;
+        color: #FF5C39;
         font-size: 17px;
         text-align: center;
         line-height: 1; }
@@ -2669,7 +2659,7 @@ div.admin-header {
         right: 0;
         top: 30px;
         list-style: none;
-        color: #666;
+        color: #666666;
         font-family: "OpenSans Regular", Arial, sans-serif;
         font-size: 16px;
         margin: 0;
@@ -2684,19 +2674,19 @@ div.admin-header {
             min-height: 30px;
             width: 170px;
             padding: 2px 10px;
-            color: #666;
+            color: #666666;
             text-decoration: none;
-            border: 1px #666 solid;
-            background: #fff; }
+            border: 1px #666666 solid;
+            background: #FFFFFF; }
             div.admin-header section div.menu li#slide ul > li > a:hover {
-              background: #eee;
+              background: #EEEEEE;
               text-decoration: none;
               color: #028163;
               border-color: #028163; }
           div.admin-header section div.menu li#slide ul > li:nth-child(1), div.admin-header section div.menu li#slide ul > li:nth-child(2), div.admin-header section div.menu li#slide ul > li:nth-child(3), div.admin-header section div.menu li#slide ul > li:nth-child(4), div.admin-header section div.menu li#slide ul > li:nth-child(5), div.admin-header section div.menu li#slide ul > li:nth-child(6) {
             display: none; }
           div.admin-header section div.menu li#slide ul > li.mail {
-            background: #fff;
+            background: #FFFFFF;
             position: relative; }
             div.admin-header section div.menu li#slide ul > li.mail > a {
               color: transparent;
@@ -2704,7 +2694,7 @@ div.admin-header {
               background-position: center;
               background-repeat: no-repeat; }
             div.admin-header section div.menu li#slide ul > li.mail:hover {
-              background: #eee; }
+              background: #EEEEEE; }
             div.admin-header section div.menu li#slide ul > li.mail > a:hover {
               color: transparent;
               background: url("../img/mail_green.png") center no-repeat; }
@@ -2713,20 +2703,20 @@ div.admin-header {
               position: absolute;
               top: 5px;
               right: 15px;
-              border: 1px #ff5c39 solid;
+              border: 1px #FF5C39 solid;
               border-radius: 50%;
               width: 18px;
               height: 18px;
-              background: #fff;
+              background: #FFFFFF;
               font-family: "Arial Narrow", Arial, sans-serif;
-              color: #ff5c39;
+              color: #FF5C39;
               font-size: 17px;
               text-align: center;
               line-height: 1; }
       div.admin-header section div.menu li#slide:hover {
-        background: #fff; }
+        background: #FFFFFF; }
         div.admin-header section div.menu li#slide:hover a {
-          background: #fff; }
+          background: #FFFFFF; }
       div.admin-header section div.menu li#slide:hover ul {
         display: block; }
       div.admin-header section div.menu li#slide:hover > a > span {
@@ -2737,7 +2727,7 @@ main.student-profile {
   max-width: 1200px;
   width: 100%;
   margin: 30px auto 100px auto;
-  background: #fff; }
+  background: #FFFFFF; }
   main.student-profile > h4 {
     text-align: center; }
   main.student-profile section {
@@ -2756,7 +2746,7 @@ main.student-profile {
       main.student-profile section div.avatar div.img {
         width: 183px;
         height: 183px;
-        border: 1px #999 solid;
+        border: 1px #999999 solid;
         border-radius: 50%;
         overflow: hidden; }
         main.student-profile section div.avatar div.img img {
@@ -2771,7 +2761,7 @@ main.student-profile {
         border: none;
         width: 170px;
         height: 30px;
-        color: #fff;
+        color: #FFFFFF;
         font-family: "OpenSans Regular", Arial, sans-serif;
         font-size: 16px;
         text-align: center; }
@@ -2788,8 +2778,8 @@ main.student-profile {
           width: 170px;
           padding: 5px 5px;
           font-size: 14px;
-          color: #222f3b;
-          border: 1px #999 solid;
+          color: #222F3B;
+          border: 1px #999999 solid;
           height: 30px;
           margin-bottom: 35px; }
       main.student-profile section div.info button {
@@ -2799,7 +2789,7 @@ main.student-profile {
         border: none;
         width: 170px;
         height: 30px;
-        color: #fff;
+        color: #FFFFFF;
         font-family: "OpenSans Regular", Arial, sans-serif;
         font-size: 16px;
         text-align: center; }
@@ -2825,7 +2815,7 @@ main.chat {
       height: 80px;
       border: 1px #C6C6C6 solid;
       margin-bottom: 10px;
-      background: #fff;
+      background: #FFFFFF;
       padding: 12px 0 12px 12px;
       cursor: pointer; }
       main.chat section.users aside:after {
@@ -2835,7 +2825,7 @@ main.chat {
       main.chat section.users aside:last-of-type {
         margin-bottom: 0; }
       main.chat section.users aside:hover {
-        background: #eee; }
+        background: #EEEEEE; }
       main.chat section.users aside > div {
         float: left; }
       main.chat section.users aside div.avatar {
@@ -2852,27 +2842,27 @@ main.chat {
           font-family: "Arial Narrow", Arial, sans-serif;
           font-size: 18px;
           line-height: 1;
-          color: #666;
+          color: #666666;
           margin: 0 0 2px 10px; }
         main.chat section.users aside div.name span.activity {
           display: inline-block;
           width: 12px;
           height: 12px;
-          background: #ddd;
+          background: #DDDDDD;
           border-radius: 50%;
-          border: 1px #05a983 solid; }
+          border: 1px #05A983 solid; }
           main.chat section.users aside div.name span.activity.on {
-            background: #05a983; }
+            background: #05A983; }
         main.chat section.users aside div.name span.new {
           display: inline-block;
           margin-left: 10px;
-          border: 1px #ff5c39 solid;
+          border: 1px #FF5C39 solid;
           border-radius: 50%;
           width: 18px;
           height: 18px;
-          background: #fff;
+          background: #FFFFFF;
           font-family: "Arial Narrow", Arial, sans-serif;
-          color: #ff5c39;
+          color: #FF5C39;
           font-size: 17px;
           text-align: center;
           line-height: 1; }
@@ -2894,7 +2884,7 @@ main.chat {
   main.chat section.mess {
     margin-left: 315px; }
     main.chat section.mess aside.plan {
-      background: #fff;
+      background: #FFFFFF;
       border: 1px #C6C6C6 solid;
       text-align: right;
       padding: 10px 15px;
@@ -2905,7 +2895,7 @@ main.chat {
         font-size: 18px;
         display: inline-block;
         padding: 5px 15px;
-        color: #fff;
+        color: #FFFFFF;
         background: #FF5C39;
         text-decoration: none; }
         main.chat section.mess aside.plan a:hover {
@@ -2914,7 +2904,7 @@ main.chat {
         width: 170px;
         height: 30px;
         font-size: 18px;
-        border: 1px #999 solid;
+        border: 1px #999999 solid;
         padding-left: 5px;
         margin-right: 20px; }
       main.chat section.mess aside.plan div#students {
@@ -2923,11 +2913,11 @@ main.chat {
         top: 50px;
         right: 111px;
         width: 170px;
-        background: #fff;
-        border: 1px #666 solid;
+        background: #FFFFFF;
+        border: 1px #666666 solid;
         border-bottom: none; }
         main.chat section.mess aside.plan div#students > p {
-          border-bottom: 1px #666 solid;
+          border-bottom: 1px #666666 solid;
           padding: 5px;
           margin: 0; }
     main.chat section.mess aside.chat {
@@ -2935,12 +2925,12 @@ main.chat {
       margin-bottom: 15px;
       overflow-x: visible;
       overflow-y: scroll;
-      background: #fff;
+      background: #FFFFFF;
       border: 1px #C6C6C6 solid; }
       main.chat section.mess aside.chat div.date {
         font-family: "Arial Narrow", Arial, sans-serif;
         font-size: 14px;
-        color: #666;
+        color: #666666;
         padding: 5px 15px;
         border-bottom: 1px #C6C6C6 solid; }
       main.chat section.mess aside.chat div.list {
@@ -2966,26 +2956,26 @@ main.chat {
             font-family: "Arial Narrow", Arial, sans-serif;
             font-size: 14px;
             line-height: 1;
-            color: #05a983;
+            color: #05A983;
             margin: 0 0 2px 10px; }
           main.chat section.mess aside.chat div.list div.name h4 {
-            color: #666; }
+            color: #666666; }
           main.chat section.mess aside.chat div.list div.name span.activity {
             display: inline-block;
             width: 10px;
             height: 10px;
-            background: #ddd;
+            background: #DDDDDD;
             border-radius: 50%;
-            border: 1px #05a983 solid; }
+            border: 1px #05A983 solid; }
             main.chat section.mess aside.chat div.list div.name span.activity.on {
-              background: #05a983; }
+              background: #05A983; }
         main.chat section.mess aside.chat div.list div.mess {
           margin-left: 150px;
-          color: #333;
+          color: #333333;
           font-family: "Arial Narrow", Arial, sans-serif;
           font-size: 14px; }
     main.chat section.mess aside.send {
-      background: #fff;
+      background: #FFFFFF;
       border: 1px #C6C6C6 solid;
       width: 100%;
       height: 83px;
@@ -3000,7 +2990,7 @@ main.chat {
         font-size: 18px;
         display: block;
         padding: 5px 15px;
-        color: #fff;
+        color: #FFFFFF;
         background: #028163;
         text-decoration: none;
         margin-top: 5px; }
@@ -3041,12 +3031,12 @@ main.rep_less_request {
     display: block;
     clear: both; }
   main.rep_less_request section.head > div {
-    border-right: 1px #666 solid;
-    border-top: 1px #666 solid;
+    border-right: 1px #666666 solid;
+    border-top: 1px #666666 solid;
     width: 100px;
     float: left; }
     main.rep_less_request section.head > div:nth-child(1) {
-      border-left: 1px #666 solid; }
+      border-left: 1px #666666 solid; }
     main.rep_less_request section.head > div:nth-child(2) {
       width: 120px; }
     main.rep_less_request section.head > div:nth-child(3) {
@@ -3073,12 +3063,12 @@ main.rep_less_request {
       display: table-cell;
       vertical-align: middle; }
   main.rep_less_request section.table > aside > div {
-    border-right: 1px #666 solid;
-    border-top: 1px #666 solid;
+    border-right: 1px #666666 solid;
+    border-top: 1px #666666 solid;
     width: 100px;
     float: left; }
     main.rep_less_request section.table > aside > div:nth-child(1) {
-      border-left: 1px #666 solid; }
+      border-left: 1px #666666 solid; }
     main.rep_less_request section.table > aside > div:nth-child(2) {
       width: 120px; }
     main.rep_less_request section.table > aside > div:nth-child(3) {
@@ -3100,7 +3090,7 @@ main.rep_less_request {
     display: block;
     clear: both; }
   main.rep_less_request section.table > aside > div {
-    background: #fff;
+    background: #FFFFFF;
     height: 120px;
     padding: 5px;
     word-wrap: break-word; }
@@ -3112,7 +3102,7 @@ main.rep_less_request {
       width: 110px;
       border: none;
       display: block;
-      margin: 5px auto;
+      margin: 4px auto;
       min-height: 25px;
       font-family: "OpenSans Regular", Arial, sans-serif;
       text-align: center;
@@ -3122,22 +3112,22 @@ main.rep_less_request {
       main.rep_less_request section.table > aside > div button:hover, main.rep_less_request section.table > aside > div a:hover, main.rep_less_request section.table > aside > div input[type='submit']:hover {
         text-decoration: none; }
       main.rep_less_request section.table > aside > div button.ok, main.rep_less_request section.table > aside > div a.ok, main.rep_less_request section.table > aside > div input[type='submit'].ok {
-        color: #fff;
+        color: #FFFFFF;
         background: #07CA9A; }
         main.rep_less_request section.table > aside > div button.ok:hover, main.rep_less_request section.table > aside > div a.ok:hover, main.rep_less_request section.table > aside > div input[type='submit'].ok:hover {
           background: #29ecbc; }
       main.rep_less_request section.table > aside > div button.del, main.rep_less_request section.table > aside > div a.del, main.rep_less_request section.table > aside > div input[type='submit'].del {
-        color: #fff;
+        color: #FFFFFF;
         background: #FF5C39; }
         main.rep_less_request section.table > aside > div button.del:hover, main.rep_less_request section.table > aside > div a.del:hover, main.rep_less_request section.table > aside > div input[type='submit'].del:hover {
           background: #ff7e5b; }
       main.rep_less_request section.table > aside > div button.mess, main.rep_less_request section.table > aside > div a.mess, main.rep_less_request section.table > aside > div input[type='submit'].mess {
-        color: #fff;
+        color: #FFFFFF;
         background: #028163; }
         main.rep_less_request section.table > aside > div button.mess:hover, main.rep_less_request section.table > aside > div a.mess:hover, main.rep_less_request section.table > aside > div input[type='submit'].mess:hover {
           background: #24a385; }
   main.rep_less_request section.table > aside:last-of-type > div {
-    border-bottom: 1px #666 solid; }
+    border-bottom: 1px #666666 solid; }
 
 main.rep_history {
   width: 100%;
@@ -3166,12 +3156,12 @@ main.rep_history {
     display: block;
     clear: both; }
   main.rep_history section.head > div {
-    border-right: 1px #666 solid;
-    border-top: 1px #666 solid;
+    border-right: 1px #666666 solid;
+    border-top: 1px #666666 solid;
     width: 150px;
     float: left; }
     main.rep_history section.head > div:nth-child(1) {
-      border-left: 1px #666 solid; }
+      border-left: 1px #666666 solid; }
     main.rep_history section.head > div:nth-child(4) {
       width: 220px; }
     main.rep_history section.head > div:nth-child(5) {
@@ -3186,12 +3176,12 @@ main.rep_history {
       display: table-cell;
       vertical-align: middle; }
   main.rep_history section.table > aside > div {
-    border-right: 1px #666 solid;
-    border-top: 1px #666 solid;
+    border-right: 1px #666666 solid;
+    border-top: 1px #666666 solid;
     width: 150px;
     float: left; }
     main.rep_history section.table > aside > div:nth-child(1) {
-      border-left: 1px #666 solid; }
+      border-left: 1px #666666 solid; }
     main.rep_history section.table > aside > div:nth-child(4) {
       width: 220px; }
     main.rep_history section.table > aside > div:nth-child(5) {
@@ -3201,7 +3191,7 @@ main.rep_history {
     display: block;
     clear: both; }
   main.rep_history section.table > aside > div {
-    background: #fff;
+    background: #FFFFFF;
     height: 110px;
     padding: 5px;
     word-wrap: break-word; }
@@ -3222,22 +3212,22 @@ main.rep_history {
       main.rep_history section.table > aside > div a:hover, main.rep_history section.table > aside > div button:hover {
         text-decoration: none; }
       main.rep_history section.table > aside > div a.ok, main.rep_history section.table > aside > div button.ok {
-        color: #fff;
+        color: #FFFFFF;
         background: #07CA9A; }
         main.rep_history section.table > aside > div a.ok:hover, main.rep_history section.table > aside > div button.ok:hover {
           background: #29ecbc; }
       main.rep_history section.table > aside > div a.del, main.rep_history section.table > aside > div button.del {
-        color: #fff;
+        color: #FFFFFF;
         background: #FF5C39; }
         main.rep_history section.table > aside > div a.del:hover, main.rep_history section.table > aside > div button.del:hover {
           background: #ff7e5b; }
       main.rep_history section.table > aside > div a.mess, main.rep_history section.table > aside > div button.mess {
-        color: #fff;
+        color: #FFFFFF;
         background: #028163; }
         main.rep_history section.table > aside > div a.mess:hover, main.rep_history section.table > aside > div button.mess:hover {
           background: #24a385; }
   main.rep_history section.table > aside:last-of-type > div {
-    border-bottom: 1px #666 solid; }
+    border-bottom: 1px #666666 solid; }
 
 main.rep_free {
   width: 100%;
@@ -3262,7 +3252,7 @@ main.rep_free {
       width: 170px;
       height: 30px;
       font-size: 18px;
-      border: 1px #999 solid;
+      border: 1px #999999 solid;
       margin-left: 20px; }
     main.rep_free section.start_less > div:first-of-type {
       width: 415px;
@@ -3281,12 +3271,12 @@ main.rep_free {
     display: block;
     clear: both; }
   main.rep_free section.head > div {
-    border-right: 1px #666 solid;
-    border-top: 1px #666 solid;
+    border-right: 1px #666666 solid;
+    border-top: 1px #666666 solid;
     width: 16.6%;
     float: left; }
     main.rep_free section.head > div:nth-child(1) {
-      border-left: 1px #666 solid; }
+      border-left: 1px #666666 solid; }
   main.rep_free section.head > div {
     display: table;
     font-weight: 600;
@@ -3297,18 +3287,18 @@ main.rep_free {
       display: table-cell;
       vertical-align: middle; }
   main.rep_free section.table > aside > div {
-    border-right: 1px #666 solid;
-    border-top: 1px #666 solid;
+    border-right: 1px #666666 solid;
+    border-top: 1px #666666 solid;
     width: 16.6%;
     float: left; }
     main.rep_free section.table > aside > div:nth-child(1) {
-      border-left: 1px #666 solid; }
+      border-left: 1px #666666 solid; }
   main.rep_free section.table > aside:after {
     content: '';
     display: block;
     clear: both; }
   main.rep_free section.table > aside > div {
-    background: #fff;
+    background: #FFFFFF;
     height: 110px;
     padding: 5px;
     word-wrap: break-word; }
@@ -3326,22 +3316,22 @@ main.rep_free {
       text-decoration: none;
       font-family: "OpenSans Regular", Arial, sans-serif; }
       main.rep_free section.table > aside > div a.ok, main.rep_free section.table > aside > div button.ok {
-        color: #fff;
+        color: #FFFFFF;
         background: #07CA9A; }
         main.rep_free section.table > aside > div a.ok:hover, main.rep_free section.table > aside > div button.ok:hover {
           background: #29ecbc; }
       main.rep_free section.table > aside > div a.del, main.rep_free section.table > aside > div button.del {
-        color: #fff;
+        color: #FFFFFF;
         background: #FF5C39; }
         main.rep_free section.table > aside > div a.del:hover, main.rep_free section.table > aside > div button.del:hover {
           background: #ff7e5b; }
       main.rep_free section.table > aside > div a.mess, main.rep_free section.table > aside > div button.mess {
-        color: #fff;
+        color: #FFFFFF;
         background: #028163; }
         main.rep_free section.table > aside > div a.mess:hover, main.rep_free section.table > aside > div button.mess:hover {
           background: #24a385; }
   main.rep_free section.table > aside:last-of-type > div {
-    border-bottom: 1px #666 solid; }
+    border-bottom: 1px #666666 solid; }
 
 main.rep_lessons {
   width: 100%;
@@ -3370,12 +3360,12 @@ main.rep_lessons {
     display: block;
     clear: both; }
   main.rep_lessons section.head > div {
-    border-right: 1px #666 solid;
-    border-top: 1px #666 solid;
+    border-right: 1px #666666 solid;
+    border-top: 1px #666666 solid;
     width: 130px;
     float: left; }
     main.rep_lessons section.head > div:nth-child(1) {
-      border-left: 1px #666 solid; }
+      border-left: 1px #666666 solid; }
     main.rep_lessons section.head > div:nth-child(5) {
       width: 200px; }
     main.rep_lessons section.head > div:nth-child(6) {
@@ -3392,12 +3382,12 @@ main.rep_lessons {
       display: table-cell;
       vertical-align: middle; }
   main.rep_lessons section.table > aside > div {
-    border-right: 1px #666 solid;
-    border-top: 1px #666 solid;
+    border-right: 1px #666666 solid;
+    border-top: 1px #666666 solid;
     width: 130px;
     float: left; }
     main.rep_lessons section.table > aside > div:nth-child(1) {
-      border-left: 1px #666 solid; }
+      border-left: 1px #666666 solid; }
     main.rep_lessons section.table > aside > div:nth-child(5) {
       width: 200px; }
     main.rep_lessons section.table > aside > div:nth-child(6) {
@@ -3409,7 +3399,7 @@ main.rep_lessons {
     display: block;
     clear: both; }
   main.rep_lessons section.table > aside > div {
-    background: #fff;
+    background: #FFFFFF;
     height: 110px;
     padding: 5px;
     word-wrap: break-word; }
@@ -3422,30 +3412,30 @@ main.rep_lessons {
       border: none;
       display: block;
       margin: 5px auto;
-      height: 25px;
       text-decoration: none;
       text-align: center;
-      line-height: 1.7;
+      line-height: 1;
+      padding: 4px 0;
       font-family: "OpenSans Regular", Arial, sans-serif; }
       main.rep_lessons section.table > aside > div a:hover, main.rep_lessons section.table > aside > div input[type='submit']:hover, main.rep_lessons section.table > aside > div button:hover {
         text-decoration: none; }
       main.rep_lessons section.table > aside > div a.ok, main.rep_lessons section.table > aside > div input[type='submit'].ok, main.rep_lessons section.table > aside > div button.ok {
-        color: #fff;
+        color: #FFFFFF;
         background: #07CA9A; }
         main.rep_lessons section.table > aside > div a.ok:hover, main.rep_lessons section.table > aside > div input[type='submit'].ok:hover, main.rep_lessons section.table > aside > div button.ok:hover {
           background: #29ecbc; }
       main.rep_lessons section.table > aside > div a.del, main.rep_lessons section.table > aside > div input[type='submit'].del, main.rep_lessons section.table > aside > div button.del {
-        color: #fff;
+        color: #FFFFFF;
         background: #FF5C39; }
         main.rep_lessons section.table > aside > div a.del:hover, main.rep_lessons section.table > aside > div input[type='submit'].del:hover, main.rep_lessons section.table > aside > div button.del:hover {
           background: #ff7e5b; }
       main.rep_lessons section.table > aside > div a.mess, main.rep_lessons section.table > aside > div input[type='submit'].mess, main.rep_lessons section.table > aside > div button.mess {
-        color: #fff;
+        color: #FFFFFF;
         background: #028163; }
         main.rep_lessons section.table > aside > div a.mess:hover, main.rep_lessons section.table > aside > div input[type='submit'].mess:hover, main.rep_lessons section.table > aside > div button.mess:hover {
           background: #24a385; }
   main.rep_lessons section.table > aside:last-of-type > div {
-    border-bottom: 1px #666 solid; }
+    border-bottom: 1px #666666 solid; }
 
 main.rep_balance {
   width: 100%;
@@ -3469,7 +3459,7 @@ main.rep_balance {
       font-family: "OpenSans Regular", Arial, sans-serif;
       width: 170px;
       background: #FF5C39;
-      color: #fff;
+      color: #FFFFFF;
       padding: 6px;
       border: none;
       text-align: center;
@@ -3490,7 +3480,7 @@ main.rep_balance {
   main.rep_balance h3.in {
     color: #07CA9A; }
   main.rep_balance h3.out {
-    color: #222f3b; }
+    color: #222F3B; }
   main.rep_balance section.in aside:after {
     content: '';
     display: block;
@@ -3499,15 +3489,15 @@ main.rep_balance {
     float: left;
     width: 25%;
     padding: 5px;
-    border-right: 1px #666 solid;
-    border-bottom: 1px #666 solid;
+    border-right: 1px #666666 solid;
+    border-bottom: 1px #666666 solid;
     height: 70px;
     word-wrap: break-word; }
     main.rep_balance section.in aside > div p {
       font-family: "Arial Narrow", Arial, sans-serif;
       font-size: 16px; }
     main.rep_balance section.in aside > div:first-of-type {
-      border-left: 1px #666 solid; }
+      border-left: 1px #666666 solid; }
   main.rep_balance section.out aside:after {
     content: '';
     display: block;
@@ -3516,19 +3506,19 @@ main.rep_balance {
     float: left;
     width: 33.3%;
     padding: 5px;
-    border-right: 1px #666 solid;
-    border-bottom: 1px #666 solid;
+    border-right: 1px #666666 solid;
+    border-bottom: 1px #666666 solid;
     height: 70px;
     word-wrap: break-word; }
     main.rep_balance section.out aside > div p {
       font-family: "Arial Narrow", Arial, sans-serif;
       font-size: 16px; }
     main.rep_balance section.out aside > div:first-of-type {
-      border-left: 1px #666 solid; }
+      border-left: 1px #666666 solid; }
   main.rep_balance section.header-in {
-    color: #fff; }
+    color: #FFFFFF; }
     main.rep_balance section.header-in aside > div {
-      border-top: 1px #666 solid;
+      border-top: 1px #666666 solid;
       display: table;
       font-weight: 600;
       font-size: 16px;
@@ -3540,10 +3530,10 @@ main.rep_balance {
         vertical-align: middle;
         margin: 0; }
   main.rep_balance section.header-out {
-    color: #fff; }
+    color: #FFFFFF; }
     main.rep_balance section.header-out aside > div {
-      border-top: 1px #666 solid;
-      border-right: 1px #fff solid;
+      border-top: 1px #666666 solid;
+      border-right: 1px #FFFFFF solid;
       display: table;
       font-weight: 600;
       font-size: 16px;
@@ -3551,13 +3541,13 @@ main.rep_balance {
       height: 50px;
       background: #4F81BD; }
       main.rep_balance section.header-out aside > div:last-child {
-        border-right: 1px #666 solid; }
+        border-right: 1px #666666 solid; }
       main.rep_balance section.header-out aside > div p {
         display: table-cell;
         vertical-align: middle;
         margin: 0; }
   main.rep_balance section.table {
-    background: #fff; }
+    background: #FFFFFF; }
     main.rep_balance section.table p {
       margin: 0; }
 
@@ -3584,14 +3574,14 @@ main.rep_timetable {
       border: none;
       height: 30px;
       background: #07CA9A;
-      color: #fff; }
+      color: #FFFFFF; }
       main.rep_timetable div.form button:hover {
         background: #29ecbc; }
     main.rep_timetable div.form input {
       width: 170px;
       height: 30px;
       font-size: 18px;
-      border: 1px #999 solid;
+      border: 1px #999999 solid;
       float: right;
       padding: 5px; }
     main.rep_timetable div.form div#students {
@@ -3599,11 +3589,11 @@ main.rep_timetable {
       top: 40px;
       right: 20px;
       width: 170px;
-      background: #fff;
-      border: 1px #666 solid;
+      background: #FFFFFF;
+      border: 1px #666666 solid;
       border-bottom: none; }
       main.rep_timetable div.form div#students > p {
-        border-bottom: 1px #666 solid;
+        border-bottom: 1px #666666 solid;
         padding: 5px;
         margin: 0; }
   main.rep_timetable div.green {
@@ -3636,25 +3626,25 @@ main.rep_timetable {
       border: 1px #9C9C9C solid;
       font-family: "Arial Regular", Arial, sans-serif;
       font-size: 14px;
-      background: #fff;
+      background: #FFFFFF;
       text-align: center; }
       main.rep_timetable table tbody tr td:after {
         content: 'открыть'; }
       main.rep_timetable table tbody tr td.free {
         background: #00CC99;
-        border: 1px #fff solid; }
+        border: 1px #FFFFFF solid; }
         main.rep_timetable table tbody tr td.free:after {
-          color: #fff;
+          color: #FFFFFF;
           content: 'Принимаю заявки'; }
       main.rep_timetable table tbody tr td.busy {
         background: #4F81BD;
-        color: #fff; }
+        color: #FFFFFF; }
         main.rep_timetable table tbody tr td.busy:after {
           content: ''; }
       main.rep_timetable table tbody tr td:first-of-type {
         text-align: center;
         border: none;
-        color: #666;
+        color: #666666;
         font-size: 16px;
         background: transparent; }
         main.rep_timetable table tbody tr td:first-of-type:after {
@@ -3682,14 +3672,14 @@ main.rep_plan {
       border: none;
       height: 30px;
       background: #07CA9A;
-      color: #fff; }
+      color: #FFFFFF; }
       main.rep_plan div.form button:hover {
         background: #29ecbc; }
     main.rep_plan div.form input {
       width: 170px;
       height: 30px;
       font-size: 18px;
-      border: 1px #999 solid;
+      border: 1px #999999 solid;
       float: right;
       padding: 5px; }
     main.rep_plan div.form select {
@@ -3697,7 +3687,7 @@ main.rep_plan {
       width: 170px;
       height: 30px;
       font-size: 16px;
-      border: 1px #999 solid;
+      border: 1px #999999 solid;
       float: right;
       margin-right: 30px; }
   main.rep_plan div.green {
@@ -3730,25 +3720,25 @@ main.rep_plan {
       border: 1px #9C9C9C solid;
       font-family: "Arial Regular", Arial, sans-serif;
       font-size: 14px;
-      background: #fff;
+      background: #FFFFFF;
       text-align: center; }
       main.rep_plan table tbody tr td:after {
         content: 'открыть'; }
       main.rep_plan table tbody tr td.free {
         background: #00CC99;
-        border: 1px #fff solid; }
+        border: 1px #FFFFFF solid; }
         main.rep_plan table tbody tr td.free:after {
-          color: #fff;
+          color: #FFFFFF;
           content: 'Принимаю заявки'; }
       main.rep_plan table tbody tr td.busy {
         background: #4F81BD;
-        color: #fff; }
+        color: #FFFFFF; }
         main.rep_plan table tbody tr td.busy:after {
           content: ''; }
       main.rep_plan table tbody tr td:first-of-type {
         text-align: center;
         border: none;
-        color: #666;
+        color: #666666;
         font-size: 16px;
         background: transparent; }
         main.rep_plan table tbody tr td:first-of-type:after {
@@ -3766,7 +3756,7 @@ main.rep_plan {
     margin: 0 0 -20px 82%;
     font-family: "Arial Regular", Arial, sans-serif; }
     main.rep_plan section.plan aside h3, main.rep_plan section.plan aside h4, main.rep_plan section.plan aside p {
-      background: #fff;
+      background: #FFFFFF;
       margin: 0;
       padding: 10px; }
     main.rep_plan section.plan aside h3 {
@@ -3788,13 +3778,13 @@ main.rep_getmoney {
       width: 170px;
       height: 30px;
       font-size: 18px;
-      border: 1px #999 solid;
+      border: 1px #999999 solid;
       float: right;
       padding: 5px; }
     main.rep_getmoney h2 span.total {
       float: right; }
   main.rep_getmoney div.pay_type {
-    background: #fff;
+    background: #FFFFFF;
     padding: 10px; }
   main.rep_getmoney label {
     display: block;
@@ -3830,7 +3820,7 @@ main.rep_getmoney {
     border: none;
     width: 170px;
     height: 30px;
-    color: #fff;
+    color: #FFFFFF;
     font-family: "OpenSans Regular", Arial, sans-serif;
     font-size: 16px;
     text-align: center; }
@@ -3866,15 +3856,15 @@ main.student_favorites {
     main.student_favorites table thead {
       background: #4F81BD; }
       main.student_favorites table thead tr th {
-        color: #fff;
+        color: #FFFFFF;
         width: 33.3%;
         text-align: center;
-        border: 1px #666 solid;
+        border: 1px #666666 solid;
         padding: 5px; }
     main.student_favorites table tbody {
-      background: #fff; }
+      background: #FFFFFF; }
       main.student_favorites table tbody tr td {
-        border: 1px #666 solid;
+        border: 1px #666666 solid;
         padding: 5px; }
         main.student_favorites table tbody tr td p {
           font-size: 15px; }
@@ -3888,17 +3878,17 @@ main.student_favorites {
           text-decoration: none;
           font-family: "OpenSans Regular", Arial, sans-serif; }
           main.student_favorites table tbody tr td a.ok, main.student_favorites table tbody tr td button.ok {
-            color: #fff;
+            color: #FFFFFF;
             background: #07CA9A; }
             main.student_favorites table tbody tr td a.ok:hover, main.student_favorites table tbody tr td button.ok:hover {
               background: #29ecbc; }
           main.student_favorites table tbody tr td a.del, main.student_favorites table tbody tr td button.del {
-            color: #fff;
+            color: #FFFFFF;
             background: #FF5C39; }
             main.student_favorites table tbody tr td a.del:hover, main.student_favorites table tbody tr td button.del:hover {
               background: #ff7e5b; }
           main.student_favorites table tbody tr td a.mess, main.student_favorites table tbody tr td button.mess {
-            color: #fff;
+            color: #FFFFFF;
             background: #028163; }
             main.student_favorites table tbody tr td a.mess:hover, main.student_favorites table tbody tr td button.mess:hover {
               background: #24a385; }
@@ -3937,11 +3927,11 @@ main.student_free {
     display: block;
     clear: both; }
   main.student_free section.head > div {
-    border-right: 1px #666 solid;
-    border-top: 1px #666 solid;
+    border-right: 1px #666666 solid;
+    border-top: 1px #666666 solid;
     float: left; }
     main.student_free section.head > div:nth-child(1) {
-      border-left: 1px #666 solid;
+      border-left: 1px #666666 solid;
       width: 10%; }
     main.student_free section.head > div:nth-child(2) {
       width: 20%; }
@@ -3961,11 +3951,11 @@ main.student_free {
       display: table-cell;
       vertical-align: middle; }
   main.student_free section.table > aside > div {
-    border-right: 1px #666 solid;
-    border-top: 1px #666 solid;
+    border-right: 1px #666666 solid;
+    border-top: 1px #666666 solid;
     float: left; }
     main.student_free section.table > aside > div:nth-child(1) {
-      border-left: 1px #666 solid;
+      border-left: 1px #666666 solid;
       width: 10%; }
     main.student_free section.table > aside > div:nth-child(2) {
       width: 20%; }
@@ -3980,7 +3970,7 @@ main.student_free {
     display: block;
     clear: both; }
   main.student_free section.table > aside > div {
-    background: #fff;
+    background: #FFFFFF;
     height: 130px;
     padding: 5px;
     word-wrap: break-word; }
@@ -4002,22 +3992,22 @@ main.student_free {
       text-decoration: none;
       font-family: "OpenSans Regular", Arial, sans-serif; }
       main.student_free section.table > aside > div a.ok, main.student_free section.table > aside > div button.ok {
-        color: #fff;
+        color: #FFFFFF;
         background: #07CA9A; }
         main.student_free section.table > aside > div a.ok:hover, main.student_free section.table > aside > div button.ok:hover {
           background: #29ecbc; }
       main.student_free section.table > aside > div a.del, main.student_free section.table > aside > div button.del {
-        color: #fff;
+        color: #FFFFFF;
         background: #FF5C39; }
         main.student_free section.table > aside > div a.del:hover, main.student_free section.table > aside > div button.del:hover {
           background: #ff7e5b; }
       main.student_free section.table > aside > div a.mess, main.student_free section.table > aside > div button.mess {
-        color: #fff;
+        color: #FFFFFF;
         background: #028163; }
         main.student_free section.table > aside > div a.mess:hover, main.student_free section.table > aside > div button.mess:hover {
           background: #24a385; }
   main.student_free section.table > aside:last-of-type > div {
-    border-bottom: 1px #666 solid; }
+    border-bottom: 1px #666666 solid; }
   main.student_free section.new {
     width: 100%;
     max-width: 600px;
@@ -4046,8 +4036,8 @@ main.student_free {
         width: 100%;
         height: 96px;
         resize: none;
-        border: 1px #999 solid;
-        color: #222f3b;
+        border: 1px #999999 solid;
+        color: #222F3B;
         font-family: "Arial Narrow", Arial, sans-serif;
         font-size: 16px;
         text-indent: 10px;
@@ -4066,7 +4056,7 @@ main.student_free {
           font-weight: 400;
           width: 170px;
           height: 30px;
-          border: 1px #999 solid;
+          border: 1px #999999 solid;
           float: right; }
   main.student_free button {
     display: block;
@@ -4075,7 +4065,7 @@ main.student_free {
     border: none;
     width: 170px;
     height: 30px;
-    color: #fff;
+    color: #FFFFFF;
     font-family: "OpenSans Regular", Arial, sans-serif;
     font-size: 16px;
     text-align: center; }
@@ -4120,7 +4110,7 @@ main.student_pay {
         width: 170px;
         height: 30px;
         font-size: 18px;
-        border: 1px #999 solid;
+        border: 1px #999999 solid;
         margin-left: 20px;
         padding-left: 7px; }
   main.student_pay h3 {
@@ -4133,7 +4123,7 @@ main.student_pay {
     font-family: "OpenSans Regular", Arial, sans-serif;
     width: 170px;
     background: #FF5C39;
-    color: #fff;
+    color: #FFFFFF;
     padding: 6px;
     border: none;
     text-align: center;
@@ -4157,12 +4147,12 @@ main.admin-payback {
   main.admin-payback h2 {
     color: #FF5C39; }
   main.admin-payback section.header aside > div, main.admin-payback section.table aside > div {
-    border-right: 1px #666 solid;
-    border-top: 1px #666 solid;
+    border-right: 1px #666666 solid;
+    border-top: 1px #666666 solid;
     width: 20%;
     float: left; }
     main.admin-payback section.header aside > div:nth-child(1), main.admin-payback section.table aside > div:nth-child(1) {
-      border-left: 1px #666 solid; }
+      border-left: 1px #666666 solid; }
   main.admin-payback section.header aside:after, main.admin-payback section.table aside:after {
     content: '';
     display: block;
@@ -4177,7 +4167,7 @@ main.admin-payback {
       display: table-cell;
       vertical-align: middle; }
   main.admin-payback section.table > aside > div {
-    background: #fff;
+    background: #FFFFFF;
     height: 120px;
     padding: 5px;
     word-wrap: break-word; }
@@ -4199,22 +4189,22 @@ main.admin-payback {
       text-align: center;
       text-decoration: none; }
       main.admin-payback section.table > aside > div a.ok, main.admin-payback section.table > aside > div button.ok {
-        color: #fff;
+        color: #FFFFFF;
         background: #07CA9A; }
         main.admin-payback section.table > aside > div a.ok:hover, main.admin-payback section.table > aside > div button.ok:hover {
           background: #29ecbc; }
       main.admin-payback section.table > aside > div a.del, main.admin-payback section.table > aside > div button.del {
-        color: #fff;
+        color: #FFFFFF;
         background: #FF5C39; }
         main.admin-payback section.table > aside > div a.del:hover, main.admin-payback section.table > aside > div button.del:hover {
           background: #ff7e5b; }
       main.admin-payback section.table > aside > div a.mess, main.admin-payback section.table > aside > div button.mess {
-        color: #fff;
+        color: #FFFFFF;
         background: #028163; }
         main.admin-payback section.table > aside > div a.mess:hover, main.admin-payback section.table > aside > div button.mess:hover {
           background: #24a385; }
   main.admin-payback section.table > aside:last-of-type > div {
-    border-bottom: 1px #666 solid; }
+    border-bottom: 1px #666666 solid; }
 
 main.admin-chathistory {
   width: 100%;
@@ -4228,12 +4218,12 @@ main.admin-chathistory {
   main.admin-chathistory h2 {
     color: #FF5C39; }
   main.admin-chathistory section.header aside > div, main.admin-chathistory section.table aside > div {
-    border-right: 1px #666 solid;
-    border-top: 1px #666 solid;
+    border-right: 1px #666666 solid;
+    border-top: 1px #666666 solid;
     width: 17.5%;
     float: left; }
     main.admin-chathistory section.header aside > div:nth-child(1), main.admin-chathistory section.table aside > div:nth-child(1) {
-      border-left: 1px #666 solid; }
+      border-left: 1px #666666 solid; }
     main.admin-chathistory section.header aside > div:nth-child(4), main.admin-chathistory section.table aside > div:nth-child(4) {
       width: 30%; }
   main.admin-chathistory section.header aside:after, main.admin-chathistory section.table aside:after {
@@ -4250,7 +4240,7 @@ main.admin-chathistory {
       display: table-cell;
       vertical-align: middle; }
   main.admin-chathistory section.table > aside > div {
-    background: #fff;
+    background: #FFFFFF;
     height: 120px;
     padding: 5px;
     word-wrap: break-word; }
@@ -4283,22 +4273,22 @@ main.admin-chathistory {
       text-align: center;
       text-decoration: none; }
       main.admin-chathistory section.table > aside > div a.ok, main.admin-chathistory section.table > aside > div button.ok {
-        color: #fff;
+        color: #FFFFFF;
         background: #07CA9A; }
         main.admin-chathistory section.table > aside > div a.ok:hover, main.admin-chathistory section.table > aside > div button.ok:hover {
           background: #29ecbc; }
       main.admin-chathistory section.table > aside > div a.del, main.admin-chathistory section.table > aside > div button.del {
-        color: #fff;
+        color: #FFFFFF;
         background: #FF5C39; }
         main.admin-chathistory section.table > aside > div a.del:hover, main.admin-chathistory section.table > aside > div button.del:hover {
           background: #ff7e5b; }
       main.admin-chathistory section.table > aside > div a.mess, main.admin-chathistory section.table > aside > div button.mess {
-        color: #fff;
+        color: #FFFFFF;
         background: #028163; }
         main.admin-chathistory section.table > aside > div a.mess:hover, main.admin-chathistory section.table > aside > div button.mess:hover {
           background: #24a385; }
   main.admin-chathistory section.table > aside:last-of-type > div {
-    border-bottom: 1px #666 solid; }
+    border-bottom: 1px #666666 solid; }
 
 main.admin-lessonshistory {
   width: 100%;
@@ -4327,12 +4317,12 @@ main.admin-lessonshistory {
     display: block;
     clear: both; }
   main.admin-lessonshistory section.head aside > div {
-    border-right: 1px #666 solid;
-    border-top: 1px #666 solid;
+    border-right: 1px #666666 solid;
+    border-top: 1px #666666 solid;
     width: 150px;
     float: left; }
     main.admin-lessonshistory section.head aside > div:nth-child(1) {
-      border-left: 1px #666 solid; }
+      border-left: 1px #666666 solid; }
   main.admin-lessonshistory section.head aside > div {
     display: table;
     font-weight: 600;
@@ -4343,18 +4333,18 @@ main.admin-lessonshistory {
       display: table-cell;
       vertical-align: middle; }
   main.admin-lessonshistory section.table aside > div {
-    border-right: 1px #666 solid;
-    border-top: 1px #666 solid;
+    border-right: 1px #666666 solid;
+    border-top: 1px #666666 solid;
     width: 150px;
     float: left; }
     main.admin-lessonshistory section.table aside > div:nth-child(1) {
-      border-left: 1px #666 solid; }
+      border-left: 1px #666666 solid; }
   main.admin-lessonshistory section.table:after {
     content: '';
     display: block;
     clear: both; }
   main.admin-lessonshistory section.table aside > div {
-    background: #fff;
+    background: #FFFFFF;
     height: 120px;
     padding: 5px;
     word-wrap: break-word; }
@@ -4369,7 +4359,7 @@ main.admin-lessonshistory {
         text-align: center;
         color: #FF5C39; }
   main.admin-lessonshistory section.table aside:last-of-type > div {
-    border-bottom: 1px #666 solid; }
+    border-bottom: 1px #666666 solid; }
 
 main.admin-repetitors {
   width: 100%;
@@ -4386,12 +4376,12 @@ main.admin-repetitors {
     display: block;
     clear: both; }
   main.admin-repetitors section.head aside > div {
-    border-right: 1px #666 solid;
-    border-top: 1px #666 solid;
+    border-right: 1px #666666 solid;
+    border-top: 1px #666666 solid;
     width: 80px;
     float: left; }
     main.admin-repetitors section.head aside > div:nth-child(1) {
-      border-left: 1px #666 solid; }
+      border-left: 1px #666666 solid; }
   main.admin-repetitors section.head aside > div {
     display: table;
     font-weight: 600;
@@ -4402,18 +4392,18 @@ main.admin-repetitors {
       display: table-cell;
       vertical-align: middle; }
   main.admin-repetitors section.table aside > div {
-    border-right: 1px #666 solid;
-    border-top: 1px #666 solid;
+    border-right: 1px #666666 solid;
+    border-top: 1px #666666 solid;
     width: 80px;
     float: left; }
     main.admin-repetitors section.table aside > div:nth-child(1) {
-      border-left: 1px #666 solid; }
+      border-left: 1px #666666 solid; }
   main.admin-repetitors section.table:after {
     content: '';
     display: block;
     clear: both; }
   main.admin-repetitors section.table aside > div {
-    background: #fff;
+    background: #FFFFFF;
     height: 120px;
     padding: 5px;
     word-wrap: break-word; }
@@ -4439,38 +4429,38 @@ main.admin-repetitors {
       text-align: center;
       text-decoration: none; }
       main.admin-repetitors section.table aside > div a.ok, main.admin-repetitors section.table aside > div button.ok {
-        color: #fff;
+        color: #FFFFFF;
         background: #6B7683; }
         main.admin-repetitors section.table aside > div a.ok:hover, main.admin-repetitors section.table aside > div button.ok:hover {
-          color: #fff; }
+          color: #FFFFFF; }
       main.admin-repetitors section.table aside > div a.off, main.admin-repetitors section.table aside > div button.off {
-        color: #fff;
+        color: #FFFFFF;
         background: #00CC99; }
         main.admin-repetitors section.table aside > div a.off:hover, main.admin-repetitors section.table aside > div button.off:hover {
           background: #22eebb; }
       main.admin-repetitors section.table aside > div a.del, main.admin-repetitors section.table aside > div button.del {
-        color: #fff;
+        color: #FFFFFF;
         background: #FF5C39; }
         main.admin-repetitors section.table aside > div a.del:hover, main.admin-repetitors section.table aside > div button.del:hover {
           background: #ff7e5b; }
       main.admin-repetitors section.table aside > div a.mess, main.admin-repetitors section.table aside > div button.mess {
-        color: #fff;
+        color: #FFFFFF;
         background: #028163; }
         main.admin-repetitors section.table aside > div a.mess:hover, main.admin-repetitors section.table aside > div button.mess:hover {
           background: #24a385; }
   main.admin-repetitors section.table aside:last-of-type > div {
-    border-bottom: 1px #666 solid; }
+    border-bottom: 1px #666666 solid; }
   main.admin-repetitors section.head_kand:after {
     content: '';
     display: block;
     clear: both; }
   main.admin-repetitors section.head_kand aside > div {
-    border-right: 1px #666 solid;
-    border-top: 1px #666 solid;
+    border-right: 1px #666666 solid;
+    border-top: 1px #666666 solid;
     width: 200px;
     float: left; }
     main.admin-repetitors section.head_kand aside > div:nth-child(1) {
-      border-left: 1px #666 solid; }
+      border-left: 1px #666666 solid; }
   main.admin-repetitors section.head_kand aside > div {
     display: table;
     font-weight: 600;
@@ -4481,19 +4471,19 @@ main.admin-repetitors {
       display: table-cell;
       vertical-align: middle; }
   main.admin-repetitors section.table_kand aside > div {
-    border-right: 1px #666 solid;
-    border-top: 1px #666 solid;
+    border-right: 1px #666666 solid;
+    border-top: 1px #666666 solid;
     width: 200px;
     float: left; }
     main.admin-repetitors section.table_kand aside > div:nth-child(1) {
-      border-left: 1px #666 solid; }
+      border-left: 1px #666666 solid; }
   main.admin-repetitors section.table_kand:after {
     content: '';
     display: block;
     clear: both; }
   main.admin-repetitors section.table_kand aside > div {
-    background: #fff;
-    height: 120px;
+    background: #FFFFFF;
+    height: 145px;
     padding: 5px;
     word-wrap: break-word; }
     main.admin-repetitors section.table_kand aside > div p {
@@ -4514,27 +4504,32 @@ main.admin-repetitors {
       font-family: "Arial Narrow", Arial, sans-serif;
       font-size: 14px; }
       main.admin-repetitors section.table_kand aside > div button.ok {
-        color: #fff;
+        color: #FFFFFF;
         background: #6B7683; }
         main.admin-repetitors section.table_kand aside > div button.ok:hover {
           background: #8d98a5; }
       main.admin-repetitors section.table_kand aside > div button.off {
-        color: #fff;
+        color: #FFFFFF;
         background: #00CC99; }
         main.admin-repetitors section.table_kand aside > div button.off:hover {
           background: #22eebb; }
       main.admin-repetitors section.table_kand aside > div button.del {
-        color: #fff;
+        color: #FFFFFF;
         background: #FF5C39; }
         main.admin-repetitors section.table_kand aside > div button.del:hover {
           background: #ff7e5b; }
+      main.admin-repetitors section.table_kand aside > div button.back {
+        border: #777 1px solid; }
+        main.admin-repetitors section.table_kand aside > div button.back:hover {
+          background: #666;
+          color: #fff; }
       main.admin-repetitors section.table_kand aside > div button.mess {
-        color: #fff;
+        color: #FFFFFF;
         background: #028163; }
         main.admin-repetitors section.table_kand aside > div button.mess:hover {
           background: #24a385; }
   main.admin-repetitors section.table_kand aside:last-of-type > div {
-    border-bottom: 1px #666 solid; }
+    border-bottom: 1px #666666 solid; }
 
 main.admin-students {
   width: 100%;
@@ -4546,12 +4541,12 @@ main.admin-students {
     color: #12232F;
     margin: 0 0 10px 0; }
   main.admin-students section.head aside > div, main.admin-students section.table aside > div {
-    border-right: 1px #666 solid;
-    border-top: 1px #666 solid;
+    border-right: 1px #666666 solid;
+    border-top: 1px #666666 solid;
     width: 91px;
     float: left; }
     main.admin-students section.head aside > div:nth-child(1), main.admin-students section.table aside > div:nth-child(1) {
-      border-left: 1px #666 solid; }
+      border-left: 1px #666666 solid; }
   main.admin-students section.head aside:after, main.admin-students section.table aside:after {
     content: '';
     display: block;
@@ -4567,7 +4562,7 @@ main.admin-students {
       display: table-cell;
       vertical-align: middle; }
   main.admin-students section.table > aside > div {
-    background: #fff;
+    background: #FFFFFF;
     height: 120px;
     padding: 5px;
     word-wrap: break-word; }
@@ -4591,27 +4586,27 @@ main.admin-students {
       text-align: center;
       text-decoration: none; }
       main.admin-students section.table > aside > div a.ok, main.admin-students section.table > aside > div button.ok {
-        color: #fff;
+        color: #FFFFFF;
         background: #6B7683; }
         main.admin-students section.table > aside > div a.ok:hover, main.admin-students section.table > aside > div button.ok:hover {
-          color: #fff; }
+          color: #FFFFFF; }
       main.admin-students section.table > aside > div a.off, main.admin-students section.table > aside > div button.off {
-        color: #fff;
+        color: #FFFFFF;
         background: #00CC99; }
         main.admin-students section.table > aside > div a.off:hover, main.admin-students section.table > aside > div button.off:hover {
           background: #22eebb; }
       main.admin-students section.table > aside > div a.del, main.admin-students section.table > aside > div button.del {
-        color: #fff;
+        color: #FFFFFF;
         background: #FF5C39; }
         main.admin-students section.table > aside > div a.del:hover, main.admin-students section.table > aside > div button.del:hover {
           background: #ff7e5b; }
       main.admin-students section.table > aside > div a.mess, main.admin-students section.table > aside > div button.mess {
-        color: #fff;
+        color: #FFFFFF;
         background: #028163; }
         main.admin-students section.table > aside > div a.mess:hover, main.admin-students section.table > aside > div button.mess:hover {
           background: #24a385; }
   main.admin-students section.table > aside:last-of-type > div {
-    border-bottom: 1px #666 solid; }
+    border-bottom: 1px #666666 solid; }
 
 main.admin-free {
   width: 100%;
@@ -4631,12 +4626,12 @@ main.admin-free {
   main.admin-free h2.ok {
     color: #07CA9A; }
   main.admin-free section.head aside > div, main.admin-free section.table aside > div {
-    border-right: 1px #666 solid;
-    border-top: 1px #666 solid;
+    border-right: 1px #666666 solid;
+    border-top: 1px #666666 solid;
     width: 16%;
     float: left; }
     main.admin-free section.head aside > div:nth-child(1), main.admin-free section.table aside > div:nth-child(1) {
-      border-left: 1px #666 solid;
+      border-left: 1px #666666 solid;
       width: 150px; }
     main.admin-free section.head aside > div:nth-child(2), main.admin-free section.table aside > div:nth-child(2) {
       width: 200px; }
@@ -4663,7 +4658,7 @@ main.admin-free {
       display: table-cell;
       vertical-align: middle; }
   main.admin-free section.table > aside > div {
-    background: #fff;
+    background: #FFFFFF;
     height: 120px;
     padding: 5px;
     word-wrap: break-word; }
@@ -4685,22 +4680,22 @@ main.admin-free {
       min-height: 25px;
       font-family: "Arial Regular", Arial, sans-serif; }
       main.admin-free section.table > aside > div button.ok, main.admin-free section.table > aside > div button.show {
-        color: #fff;
+        color: #FFFFFF;
         background: #07CA9A; }
         main.admin-free section.table > aside > div button.ok:hover, main.admin-free section.table > aside > div button.show:hover {
           background: #29ecbc; }
       main.admin-free section.table > aside > div button.del {
-        color: #fff;
+        color: #FFFFFF;
         background: #FF5C39; }
         main.admin-free section.table > aside > div button.del:hover {
           background: #ff7e5b; }
       main.admin-free section.table > aside > div button.mess {
-        color: #fff;
+        color: #FFFFFF;
         background: #028163; }
         main.admin-free section.table > aside > div button.mess:hover {
           background: #24a385; }
   main.admin-free section.table > aside:last-of-type > div {
-    border-bottom: 1px #666 solid; }
+    border-bottom: 1px #666666 solid; }
 
 main.step {
   width: 100%;
@@ -4711,21 +4706,21 @@ main.step {
     margin: 0 auto; }
     main.step section.form p {
       font-size: 18px;
-      color: #222f3b;
+      color: #222F3B;
       margin: 20px 0 5px 0; }
     main.step section.form select {
-      color: #222f3b;
+      color: #222F3B;
       font-family: "Arial Narrow", Arial, sans-serif;
       width: 300px;
       height: 30px;
       font-size: 18px;
-      border: 1px #999 solid; }
+      border: 1px #999999 solid; }
     main.step section.form textarea {
       font-size: 16px;
       width: 100%;
       height: 200px;
-      color: #222f3b;
-      border: 1px #999 solid;
+      color: #222F3B;
+      border: 1px #999999 solid;
       padding: 5px 10px;
       resize: none; }
     main.step section.form label {
@@ -4738,7 +4733,7 @@ main.step {
         width: 170px;
         height: 30px;
         font-size: 18px;
-        border: 1px #999 solid;
+        border: 1px #999999 solid;
         margin-left: 30px;
         padding-left: 10px; }
       main.step section.form label input[type='radio'] {
@@ -4759,7 +4754,7 @@ main.step {
       margin: 5px auto;
       min-height: 25px;
       font-family: "OpenSans Regular", Arial, sans-serif;
-      color: #fff;
+      color: #FFFFFF;
       text-align: center;
       padding: 5px;
       text-decoration: none;
@@ -4836,25 +4831,25 @@ main.step {
       border: 1px #9C9C9C solid;
       font-family: "Arial Regular", Arial, sans-serif;
       font-size: 14px;
-      background: #fff;
+      background: #FFFFFF;
       text-align: center; }
       main.step table tbody tr td:after {
         content: 'занято'; }
       main.step table tbody tr td.free {
         background: #00CC99;
-        border: 1px #fff solid; }
+        border: 1px #FFFFFF solid; }
         main.step table tbody tr td.free:after {
-          color: #fff;
+          color: #FFFFFF;
           content: 'свободно'; }
       main.step table tbody tr td.busy {
         background: #4F81BD;
-        color: #fff; }
+        color: #FFFFFF; }
         main.step table tbody tr td.busy:after {
           content: ''; }
       main.step table tbody tr td:first-of-type {
         text-align: center;
         border: none;
-        color: #666;
+        color: #666666;
         font-size: 16px;
         background: transparent; }
         main.step table tbody tr td:first-of-type:after {
@@ -4867,7 +4862,7 @@ main.step {
     width: 170px;
     margin: 25px auto;
     background: #028163;
-    color: #fff;
+    color: #FFFFFF;
     border: 1px #028163 solid;
     padding: 5px;
     text-decoration: none; }
@@ -4881,7 +4876,7 @@ main.step {
     display: block;
     margin: 25px auto;
     background: #028163;
-    color: #fff;
+    color: #FFFFFF;
     border: 1px #028163 solid;
     padding: 5px;
     text-decoration: none; }
@@ -4898,7 +4893,7 @@ div#deldialog {
     width: 100%;
     resize: none; }
   div#deldialog > a {
-    color: #222f3b !important; }
+    color: #222F3B !important; }
 
 main.stop {
   margin: 0 auto;
@@ -4933,17 +4928,22 @@ main.admin-prerep {
       width: 33%;
       height: 35px;
       text-align: center;
-      border: 1px #666 solid; }
+      border: 1px #666666 solid; }
     main.admin-prerep table thead {
       font-weight: 600;
       background: #07CA9A; }
     main.admin-prerep table tbody {
-      background: #fff; }
+      background: #FFFFFF; }
       main.admin-prerep table tbody tr td {
         font-family: "Arial Regular", Arial, sans-serif;
         font-size: 14px;
         padding: 5px 15px;
-        border: 1px #666 solid; }
+        border: 1px #666666 solid; }
+
+.main-comment {
+  font-family: "Arial Regular", Arial, sans-serif;
+  margin: 5px 0 0 0;
+  font-size: 15px; }
 
 @media screen and (max-width: 1200px) {
   section.filter > div.row {
@@ -5071,12 +5071,12 @@ main.admin-prerep {
     width: 500px;
     margin: 0 auto; }
     main.admin-payback section.header aside > div, main.admin-payback section.table aside > div {
-      border-right: 1px #666 solid;
-      border-top: 1px #666 solid;
+      border-right: 1px #666666 solid;
+      border-top: 1px #666666 solid;
       width: 20%;
       float: left; }
       main.admin-payback section.header aside > div:nth-child(1), main.admin-payback section.table aside > div:nth-child(1) {
-        border-left: 1px #666 solid;
+        border-left: 1px #666666 solid;
         width: 100px; }
       main.admin-payback section.header aside > div:nth-child(2), main.admin-payback section.table aside > div:nth-child(2) {
         width: 100px; }
@@ -5126,14 +5126,14 @@ main.admin-prerep {
       height: auto;
       padding: 5px 15px;
       width: 100%;
-      border-left: 1px #666 solid;
+      border-left: 1px #666666 solid;
       border-bottom: none; }
       main.admin-repetitors section.table aside > div > p, main.admin-repetitors section.table_kand aside > div > p {
         text-align: center; }
       main.admin-repetitors section.table aside > div h5, main.admin-repetitors section.table_kand aside > div h5 {
         text-align: center; }
       main.admin-repetitors section.table aside > div:last-child, main.admin-repetitors section.table_kand aside > div:last-child {
-        border-bottom: 1px #666 solid; }
+        border-bottom: 1px #666666 solid; }
       main.admin-repetitors section.table aside > div > button, main.admin-repetitors section.table_kand aside > div > button {
         width: 270px; }
 
@@ -5146,14 +5146,14 @@ main.admin-prerep {
       height: auto;
       padding: 5px 15px;
       width: 100%;
-      border-left: 1px #666 solid;
+      border-left: 1px #666666 solid;
       border-bottom: none; }
       main.admin-students section.table aside > div > p {
         text-align: center; }
       main.admin-students section.table aside > div h5 {
         text-align: center; }
       main.admin-students section.table aside > div:last-child {
-        border-bottom: 1px #666 solid; }
+        border-bottom: 1px #666666 solid; }
       main.admin-students section.table aside > div > button {
         width: 270px; }
 
@@ -5234,12 +5234,12 @@ main.admin-prerep {
         display: block;
         width: 22px;
         height: 2px;
-        background: #fff;
+        background: #FFFFFF;
         border-radius: 1px;
         margin-top: 5px; }
 
   .navbar-collapse.collapse {
-    display: none  !important; }
+    display: none !important; }
 
   .navbar-toggle {
     display: block;
@@ -5379,10 +5379,10 @@ main.admin-prerep {
         text-align: center; }
       main.rep_less_request section.table aside > div:nth-child(1), main.rep_less_request section.table aside > div:nth-child(2), main.rep_less_request section.table aside > div:nth-child(3), main.rep_less_request section.table aside > div:nth-child(4), main.rep_less_request section.table aside > div:nth-child(5), main.rep_less_request section.table aside > div:nth-child(6), main.rep_less_request section.table aside > div:nth-child(7), main.rep_less_request section.table aside > div:nth-child(8), main.rep_less_request section.table aside > div:nth-child(9) {
         width: 100%;
-        border-left: 1px #666 solid;
+        border-left: 1px #666666 solid;
         border-bottom: none; }
       main.rep_less_request section.table aside > div:nth-child(9) {
-        border-bottom: 1px #666 solid; }
+        border-bottom: 1px #666666 solid; }
       main.rep_less_request section.table aside > div > button {
         width: 270px; }
 
@@ -5404,10 +5404,10 @@ main.admin-prerep {
         text-align: center; }
       main.rep_lessons section.table aside > div:nth-child(1), main.rep_lessons section.table aside > div:nth-child(2), main.rep_lessons section.table aside > div:nth-child(3), main.rep_lessons section.table aside > div:nth-child(4), main.rep_lessons section.table aside > div:nth-child(5), main.rep_lessons section.table aside > div:nth-child(6), main.rep_lessons section.table aside > div:nth-child(7), main.rep_lessons section.table aside > div:nth-child(8), main.rep_lessons section.table aside > div:nth-child(9) {
         width: 100%;
-        border-left: 1px #666 solid;
+        border-left: 1px #666666 solid;
         border-bottom: none; }
       main.rep_lessons section.table aside > div:last-child {
-        border-bottom: 1px #666 solid; }
+        border-bottom: 1px #666666 solid; }
       main.rep_lessons section.table aside > div > button {
         width: 270px; } }
 @media screen and (max-width: 801px) {
@@ -5487,10 +5487,10 @@ main.admin-prerep {
         text-align: center; }
       main.admin-lessonshistory section.table aside > div:nth-child(1), main.admin-lessonshistory section.table aside > div:nth-child(2), main.admin-lessonshistory section.table aside > div:nth-child(3), main.admin-lessonshistory section.table aside > div:nth-child(4), main.admin-lessonshistory section.table aside > div:nth-child(5), main.admin-lessonshistory section.table aside > div:nth-child(6), main.admin-lessonshistory section.table aside > div:nth-child(7), main.admin-lessonshistory section.table aside > div:nth-child(8) {
         width: 100%;
-        border-left: 1px #666 solid;
+        border-left: 1px #666666 solid;
         border-bottom: none; }
       main.admin-lessonshistory section.table aside > div:last-child {
-        border-bottom: 1px #666 solid; } }
+        border-bottom: 1px #666666 solid; } }
 @media screen and (max-width: 720px) {
   main.rep-profile section.menu {
     width: 140px; }
@@ -5620,10 +5620,10 @@ main.admin-prerep {
         text-align: center; }
       main.rep_history section.table aside > div:nth-child(1), main.rep_history section.table aside > div:nth-child(2), main.rep_history section.table aside > div:nth-child(3), main.rep_history section.table aside > div:nth-child(4), main.rep_history section.table aside > div:nth-child(5), main.rep_history section.table aside > div:nth-child(6), main.rep_history section.table aside > div:nth-child(7), main.rep_history section.table aside > div:nth-child(8), main.rep_history section.table aside > div:nth-child(9) {
         width: 100%;
-        border-left: 1px #666 solid;
+        border-left: 1px #666666 solid;
         border-bottom: none; }
       main.rep_history section.table aside > div:last-child {
-        border-bottom: 1px #666 solid; }
+        border-bottom: 1px #666666 solid; }
       main.rep_history section.table aside > div > button {
         width: 270px; }
 
@@ -5640,7 +5640,7 @@ main.admin-prerep {
     float: none;
     width: 100%;
     text-align: center;
-    border-left: 1px #666 solid;
+    border-left: 1px #666666 solid;
     height: auto; }
   main.admin-free section.table aside > div > p {
     text-align: center; }
@@ -5690,10 +5690,10 @@ main.admin-prerep {
         text-align: center; }
       main.rep_free section.table aside > div:nth-child(1), main.rep_free section.table aside > div:nth-child(2), main.rep_free section.table aside > div:nth-child(3), main.rep_free section.table aside > div:nth-child(4), main.rep_free section.table aside > div:nth-child(5), main.rep_free section.table aside > div:nth-child(6), main.rep_free section.table aside > div:nth-child(7), main.rep_free section.table aside > div:nth-child(8), main.rep_free section.table aside > div:nth-child(9) {
         width: 100%;
-        border-left: 1px #666 solid;
+        border-left: 1px #666666 solid;
         border-bottom: none; }
       main.rep_free section.table aside > div:last-child {
-        border-bottom: 1px #666 solid; }
+        border-bottom: 1px #666666 solid; }
       main.rep_free section.table aside > div > button {
         width: 270px; }
 
@@ -5741,7 +5741,7 @@ main.admin-prerep {
       padding: 5px 15px; }
       main.student_free section.table aside > div:nth-child(1), main.student_free section.table aside > div:nth-child(2), main.student_free section.table aside > div:nth-child(3), main.student_free section.table aside > div:nth-child(4), main.student_free section.table aside > div:nth-child(5) {
         width: 100%;
-        border-left: 1px #666 solid;
+        border-left: 1px #666666 solid;
         border-bottom: none; }
       main.student_free section.table aside > div > p {
         text-align: center; }
@@ -5773,10 +5773,10 @@ main.admin-prerep {
         text-align: center; }
       main.admin-chathistory section.table aside > div:nth-child(1), main.admin-chathistory section.table aside > div:nth-child(2), main.admin-chathistory section.table aside > div:nth-child(3), main.admin-chathistory section.table aside > div:nth-child(4), main.admin-chathistory section.table aside > div:nth-child(5) {
         width: 100%;
-        border-left: 1px #666 solid;
+        border-left: 1px #666666 solid;
         border-bottom: none; }
       main.admin-chathistory section.table aside > div:last-child {
-        border-bottom: 1px #666 solid; }
+        border-bottom: 1px #666666 solid; }
       main.admin-chathistory section.table aside > div > button {
         width: 270px; } }
 @media screen and (max-width: 591px) {
@@ -5868,11 +5868,11 @@ main.admin-prerep {
     main.rep_balance section.out aside > div, main.rep_balance section.in aside > div {
       float: none;
       width: 100%;
-      border-left: 1px #666 solid;
+      border-left: 1px #666666 solid;
       height: auto;
       text-align: center; }
       main.rep_balance section.out aside > div:first-child, main.rep_balance section.in aside > div:first-child {
-        border-top: 1px #666 solid; } }
+        border-top: 1px #666666 solid; } }
 @media screen and (max-width: 510px) {
   div.admin-header section div.menu ul li:nth-child(2) {
     display: none; }
@@ -5904,10 +5904,10 @@ main.admin-prerep {
         text-align: center; }
       main.admin-payback section.table aside > div:nth-child(1), main.admin-payback section.table aside > div:nth-child(2), main.admin-payback section.table aside > div:nth-child(3), main.admin-payback section.table aside > div:nth-child(4), main.admin-payback section.table aside > div:nth-child(5) {
         width: 100%;
-        border-left: 1px #666 solid;
+        border-left: 1px #666666 solid;
         border-bottom: none; }
       main.admin-payback section.table aside > div:last-child {
-        border-bottom: 1px #666 solid; }
+        border-bottom: 1px #666666 solid; }
       main.admin-payback section.table aside > div > button {
         width: 270px; }
 
@@ -6023,5 +6023,44 @@ main.admin-prerep {
   div.main-header div a {
     width: auto;
     padding: 5px 10px; } }
+#gift {
+  display: block;
+  max-width: 845px;
+  width: 75%;
+  margin: 0 auto 16px auto;
+  font-size: 25px;
+  font-family: "Arial Bold", Arial, sans-serif;
+  position: relative;
+  text-align: center;
+  color: #FF5C39;
+  background-color: white;
+  padding: 10px 15px 10px 65px;
+  text-decoration: none; }
+
+#gift::before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 30px;
+  height: 30px;
+  background: url("../img/gift.png") no-repeat center center;
+  left: 30px;
+  top: 50%;
+  margin-top: -17px; }
+
+@media only screen and (max-width: 400px) {
+  #gift {
+    padding: 55px 15px 10px 15px; }
+
+  #gift::before {
+    left: 50%;
+    top: 10px;
+    margin-top: 5px;
+    margin-left: -20px; } }
+body > section.filter > div:nth-child(2) > div:nth-child(3) {
+  display: none; }
+
+body > section.filter > div:nth-child(2) > div.col-lg-3.col-md-12.col-sm-12 {
+  float: right; }
 
 /*# sourceMappingURL=style.css.map */

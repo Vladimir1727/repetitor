@@ -76,16 +76,23 @@
             echo '<p>1 / 50 мин.</p>';
             echo '</div>';
             echo '<div>';
-            if ($lesson['active']){
-                echo '<button class="ok" lesson="'.$lesson['id'].'" skype="'.$lesson['skype'].'">Начать урок</button>';
+            // if ($lesson['active']){
+            //     echo '<button class="ok" lesson="'.$lesson['id'].'" skype="'.$lesson['skype'].'">Начать урок</button>';
+            // } elseif(is_null($lesson['pay_at'])){
+            //     echo '<button class="ok" lesson="'.$lesson['id'].'" skype="'.$lesson['skype'].'">В ожидании оплаты</button>';
+            // } else{
+            //     echo '<button class="ok" lesson=0>Начать урок</button>';
+            // }
+            if(is_null($lesson['pay_at'])){
+                echo '<button class="ok" lesson="'.$lesson['id'].'" skype="'.$lesson['skype'].'">В ожидании оплаты</button>';
             } else{
-                echo '<button class="ok" lesson=0>Начать урок</button>';
+                echo '<button class="ok" lesson="'.$lesson['id'].'" skype="'.$lesson['skype'].'">Начать урок</button>';
             }
             echo '<a class="mess" href="'.base_url().'index.php/repetitor/chat?id='.$lesson['student_id'].'">Сообщение</a>';
             if ($lesson['calcel']){
                 echo '<button class="del" lesson="'.$lesson['id'].'">Отменить</button>';
             }
-            // echo '<input type="hidden" value="'.$lesson['actual'].'" name="actual">';
+            echo '<input type="hidden" value="'.$lesson['actual'].'" name="actual">';
             echo '</div>';
             echo '</aside>';
         }

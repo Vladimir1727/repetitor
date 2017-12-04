@@ -14,31 +14,38 @@ var old = 0;
 $('#next').click(function(){
     week++;
     weekHeader();
-    tableView();
+    saveTimeTable(true);
+    getTimeTable(week);
     return false;
 });
 
 $('#prev').click(function(){
     week = (week>0) ? week-1 : 0;
     weekHeader();
-    tableView();
+    saveTimeTable(true);
+    getTimeTable(week);
     return false;
 });
 
-$('#save').click(function(){
-    console.log(JSON.stringify(table));
+function saveTimeTable(silent=false) {
     $.ajax({
         url: baseUrl+'repetitor/saveTimeTable',
         type:'post',
         data: 'table=' + JSON.stringify(table) + '&subject_id=' + $('#subject').val(),
         success: function(data){
             if (data == 0){
-                errdiag('Сохранение', 'Расписание сохранено');
+                if (silent==false){
+                    errdiag('Сохранение', 'Расписание сохранено');
+                }
             } else{
                 errdiag('Ошибка', data);
             }
         },
     });
+}
+
+$('#save').click(function(){
+    saveTimeTable();
 });
 
 function MonthByNumber(number){
@@ -315,7 +322,7 @@ function tableView(){
                 var r = false;
                 for (var k = 0; k < table.length; k++) {
                     var tDate = stringToDate(table[k]['date_from']);
-                    if (now.getDate() == tDate.getDate() && now.getHours() == tDate.getHours() && now.getMonth() == tDate.getMonth()){
+                    if (now.getDate() == tDate.getDate() && now.getHours() == tDate.getHours() && now.getMonth() == tDate.getMonth() && checkRealTime(i,j)==true){
                         find = true;
                         if (table[k].student_id>0){
                             busy = k;
@@ -342,19 +349,39 @@ function tableView(){
     tableClick();
 }
 
-$.ajax({
-    url: baseUrl+'repetitor/getTimeTable',
-    type:'post',
-    success: function(data){
-        table = JSON.parse(data);
-        if (table.length == 0){
-            console.log('empty');
-        } else{
+getTimeTable();
 
-        }
-        tableView();
+function getTimeTable(week = 0){
+    $.ajax({
+        url: baseUrl+'repetitor/getTimeTable',
+        type:'post',
+        data:'week=' + week,
+        success: function(data){
+            table = JSON.parse(data);
+            if (table.length == 0){
+                console.log('empty');
+            } else{
 
-    },
-});
+            }
+            tableView();
+        },
+    });
+}
+
+function checkRealTime(i,j){
+	var wday = j;
+	var hour = i;
+	var cDate = new Date(monday.getTime()+60*60*1000*24*(wday-2)+60*60*1000*hour);
+    var d = new Date();
+    var zone = $('#zone').val();
+    var utc = - d.getTimezoneOffset()/60;
+    var realTime = new Date(d.getTime() + (zone-utc)*60*60*1000);
+    var addDate = new Date(cDate.getTime() + 60*60*24*1000+ 1000*60*30);
+    if (addDate.getTime() < realTime.getTime()){
+        return false;
+    } else{
+        return true;
+    }
+}
 
 })})(jQuery)

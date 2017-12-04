@@ -48,7 +48,7 @@ function checkDate(i,j){
     }
 }
 
-console.log('rinfo 1.9');
+console.log('rinfo 1.1');
 
 function stringToDate(s){
 	if ( s == null) return false;
@@ -59,32 +59,49 @@ function stringToDate(s){
 	}
 }
 
-$('.switch').each(function(){
-	$(this).parent().next('div').hide();
-	$(this).click(function(){
-		if ($(this).hasClass('switch-down')){
-			$(this).removeClass('switch-down');
-			$(this).addClass('switch-up');
-			$(this).parent().next('div').slideDown();
-		} else{
-			$(this).removeClass('switch-up');
-			$(this).addClass('switch-down');
-			$(this).parent().next('div').slideUp();
-		}
-	})
-});
+getTimeTable();
+
+function getTimeTable(week = 0){
+    $.ajax({
+        url: baseUrl+'main/getTimeTable',
+        type:'post',
+        data:'repetitor_id='+repetitor_id+'&week=' + week,
+        success: function(data){
+            table = JSON.parse(data);
+            if (table.length == 0){
+                console.log('empty');
+            } else{
+				for (var i = 0; i < table.length; i++) {
+					if(table[i].date_from.length > 19){
+						var s = table[i].date_from;
+						table[i].date_from = s.substr(0,5) + s.substr(6);
+					}
+					var r = table[i].date_from;
+					var d = stringToDate(table[i].date_from);
+					var t = new Date(d.getTime()+1000*60*60*student_zone);
+					var tM = (parseInt(t.getMonth()+1)>9) ? t.getMonth()+1 : '0'+(t.getMonth()+1);
+		            var tD = (parseInt(t.getDate())>9) ? t.getDate() : '0'+(t.getDate());
+		            var tH = (parseInt(t.getHours())>9) ? t.getHours() : '0'+t.getHours();
+		            var tmin = (parseInt(t.getMinutes())>9) ? t.getMinutes() : '0'+t.getMinutes();
+					table[i].date_from = t.getFullYear()+'-'+tM+'-'+tD+' '+tH+':'+tmin+':00';
+				}
+            }
+            tableView();
+        },
+    });
+}
 
 $('#next').click(function(){
     week++;
     weekHeader();
-    tableView();
+    getTimeTable(week);
     return false;
 });
 
 $('#prev').click(function(){
     week = (week>0) ? week-1 : 0;
     weekHeader();
-    tableView();
+    getTimeTable(week);
     return false;
 });
 
@@ -200,7 +217,7 @@ function tableClick(){
 			}else{
 				var id = $(this).attr('id');
 				var d = getDateByid(id);
-				var t = d.getTime()-1000*60*60*student_zone;
+				var t = d.getTime()-1000*60*60-1000*60*60*student_zone;
 				dates.push(t);
 				$(this).removeClass('free');
 				$(this).addClass('busy');
@@ -336,32 +353,32 @@ function tableView(){
 }
 
 
-$.ajax({
-    url: baseUrl+'main/getTimeTable',
-    type:'post',
-	data: 'repetitor_id=' + repetitor_id,
-    success: function(data){
-        table = JSON.parse(data);
-        if (table.length == 0){
-        } else{
-			for (var i = 0; i < table.length; i++) {
-				if(table[i].date_from.length > 19){
-					var s = table[i].date_from;
-					table[i].date_from = s.substr(0,5) + s.substr(6);
-				}
-				var r = table[i].date_from;
-				var d = stringToDate(table[i].date_from);
-				var t = new Date(d.getTime()+1000*60*60*student_zone);
-				var tM = (parseInt(t.getMonth()+1)>9) ? t.getMonth()+1 : '0'+(t.getMonth()+1);
-	            var tD = (parseInt(t.getDate())>9) ? t.getDate() : '0'+(t.getDate());
-	            var tH = (parseInt(t.getHours())>9) ? t.getHours() : '0'+t.getHours();
-	            var tmin = (parseInt(t.getMinutes())>9) ? t.getMinutes() : '0'+t.getMinutes();
-				table[i].date_from = t.getFullYear()+'-'+tM+'-'+tD+' '+tH+':'+tmin+':00';
-			}
-        }
-        tableView();
-    },
-});
+// $.ajax({
+//     url: baseUrl+'main/getTimeTable',
+//     type:'post',
+// 	data: 'repetitor_id=' + repetitor_id,
+//     success: function(data){
+//         table = JSON.parse(data);
+//         if (table.length == 0){
+//         } else{
+// 			for (var i = 0; i < table.length; i++) {
+// 				if(table[i].date_from.length > 19){
+// 					var s = table[i].date_from;
+// 					table[i].date_from = s.substr(0,5) + s.substr(6);
+// 				}
+// 				var r = table[i].date_from;
+// 				var d = stringToDate(table[i].date_from);
+// 				var t = new Date(d.getTime()+1000*60*60*student_zone);
+// 				var tM = (parseInt(t.getMonth()+1)>9) ? t.getMonth()+1 : '0'+(t.getMonth()+1);
+// 	            var tD = (parseInt(t.getDate())>9) ? t.getDate() : '0'+(t.getDate());
+// 	            var tH = (parseInt(t.getHours())>9) ? t.getHours() : '0'+t.getHours();
+// 	            var tmin = (parseInt(t.getMinutes())>9) ? t.getMinutes() : '0'+t.getMinutes();
+// 				table[i].date_from = t.getFullYear()+'-'+tM+'-'+tD+' '+tH+':'+tmin+':00';
+// 			}
+//         }
+//         tableView();
+//     },
+// });
 
 $('#next_step, #step_one').click(function(){
 	if (dates.length >0){

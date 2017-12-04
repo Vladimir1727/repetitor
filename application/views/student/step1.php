@@ -70,17 +70,17 @@
             <tr> <td>8:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
             <tr> <td>9:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
             <tr> <td>10:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
-            <tr> <td>11:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="free"></td> </tr>
-            <tr> <td>12:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="free"></td> </tr>
-            <tr> <td>13:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="free"></td> </tr>
-            <tr> <td>14:00</td><td class="free"></td><td class="free"></td><td class="free"></td><td></td><td></td><td></td><td></td> </tr>
-            <tr> <td>15:00</td><td class="free"></td><td class="free"></td><td class="free"></td><td></td><td></td><td></td><td></td> </tr>
-            <tr> <td>16:00</td><td class="free"></td><td class="free"></td><td class="free"></td><td></td><td></td><td></td><td></td> </tr>
+            <tr> <td>11:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
+            <tr> <td>12:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
+            <tr> <td>13:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
+            <tr> <td>14:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
+            <tr> <td>15:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
+            <tr> <td>16:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
             <tr> <td>17:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
             <tr> <td>18:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
             <tr> <td>19:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
-            <tr> <td>20:00</td><td class="free"></td><td class="free"></td><td class="free"></td><td></td><td></td><td></td><td></td> </tr>
-            <tr> <td>21:00</td><td class="free"></td><td class="free"></td><td></td><td></td><td></td><td></td><td></td> </tr>
+            <tr> <td>20:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
+            <tr> <td>21:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
             <tr> <td>22:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
             <tr> <td>23:00</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td> </tr>
         </tbody>

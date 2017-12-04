@@ -49,9 +49,9 @@
 		</div>
 		<div class="menu">
 			<ul>
+				<li><a href="<?php echo base_url(); ?>index.php/main/filter?lang=all#result">Выбрать репетитора</a></li>
 				<li><a href="<?php echo base_url(); ?>index.php/student/lessonsrequest">Запросы на уроки</a></li>
 				<li><a href="<?php echo base_url(); ?>index.php/student/lessons">Уроки</a></li>
-				<li><a href="<?php echo base_url(); ?>index.php/main/filter?lang=all">Найти репетитора</a></li>
 				<li><a href="<?php echo base_url(); ?>index.php/student/freerequests">Свободные заявки</a></li>
 				<li class="mail"><a href="<?php echo base_url(); ?>index.php/student/chat">почта</a>
 					<?php if ($student['new'] > 0) {
@@ -67,9 +67,9 @@
 						<span class="s"></span>
 					</a>
 					<ul>
+						<li><a href="<?php echo base_url(); ?>index.php/main/filter?lang=all#result">Выбрать репетитора</a></li>
 						<li><a href="<?php echo base_url(); ?>index.php/student/lessonsrequest">Запросы на уроки</a></li>
 						<li><a href="#">Уроки</a></li>
-						<li><a href="<?php echo base_url(); ?>index.php/main/filter?lang=all">Найти репетитора</a></li>
 						<li><a href="<?php echo base_url(); ?>index.php/student/freerequests">Свободные заявки</a></li>
 						<li class="mail"><a href="<?php echo base_url(); ?>index.php/student/chat">почта</a>
 							<?php if ($student['new'] > 0) {
@@ -78,7 +78,7 @@
 								echo '</span>';
 							} ?>
 						</li>
-						<li><a href="<?php echo base_url(); ?>index.php/main/filter?lang=all&free=1">Репетиторы сейчас онлайн</a></li>
+						<!-- <li><a href="<?php echo base_url(); ?>index.php/main/filter?lang=all&free=1">Репетиторы сейчас онлайн</a></li> -->
 						<li><a href="<?php echo base_url(); ?>index.php/student/favorites">Избранные Репетиторы</a></li>
 						<li><a href="<?php echo base_url(); ?>index.php/student/history">История уроков</a></li>
 						<li><a href="<?php echo base_url(); ?>index.php/student/balance">Баланс кошелька</a></li>

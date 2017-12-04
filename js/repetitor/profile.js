@@ -1,6 +1,6 @@
 (function($){$(function(){
 var baseUrl = '../';
-console.log('repetitor profile 12');
+console.log('repetitor profile 3');
 var proc = 0.3;
 var can_mess = '';
 /*$('#slide').click(function(){
@@ -37,7 +37,7 @@ function warp(block){
     $(block+'-but').addClass('active');
 }
 
-function rUpdate(data){
+function rUpdate(data, silent = false){
     $.ajax({
         url: baseUrl+'repetitor/update',
         type:'post',
@@ -45,7 +45,9 @@ function rUpdate(data){
         success: function(data){
             console.log(data);
             if (data=='0'){
-                errdiag('Сохранение', 'профиль обновлён');
+				if (silent == false){
+					errdiag('Сохранение', 'профиль обновлён');
+				}
             } else{
                 errdiag('Ошибка', data);
             }
@@ -148,50 +150,56 @@ $('#price').on('keyup',function(){
     }
 });
 
-$('#save_subject').click(function(){
-    var f = $('#subject_form').serializeArray();
-    var sp = false;
-    var age = false;
-    var level = false;
-    var price = false;
-    var lang = false;
-    var sub = false;
-    for (i = 0; i < f.length; i++){
-        if (f[i].name == "specialization_id[]") sp = true;
-        if (f[i].name == "age_id[]") age = true;
-        if (f[i].name == "level_id[]") level = true;
-        if (f[i].name == "price" && parseInt(f[i].value)>0) price = true;
-        if (f[i].name == "lang_id" && parseInt(f[i].value)>0) lang = true;
-        if (f[i].name == "subject_id" && parseInt(f[i].value)>0)  sub = true;
-    }
+function saveSubject(silent = false) {
+	var f = $('#subject_form').serializeArray();
+	var sp = false;
+	var age = false;
+	var level = false;
+	var price = false;
+	var lang = false;
+	var sub = false;
+	for (i = 0; i < f.length; i++){
+		if (f[i].name == "specialization_id[]") sp = true;
+		if (f[i].name == "age_id[]") age = true;
+		if (f[i].name == "level_id[]") level = true;
+		if (f[i].name == "price" && parseInt(f[i].value)>0) price = true;
+		if (f[i].name == "lang_id" && parseInt(f[i].value)>0) lang = true;
+		if (f[i].name == "subject_id" && parseInt(f[i].value)>0)  sub = true;
+	}
 
-    if (sp == false || age == false || level == false || price == false || lang == false || sub == false){
-        var mess = "";
-        if (sp == false) mess += "Выберите хотя бы одну специализацию <br>";
-        if (age == false) mess += "Выберите хотя бы одну возрастную категорию <br>";
-        if (level == false) mess += "Выберите хотя бы один уровень <br>";
-        if (price == false) mess += "Цена указана неверно <br>";
-        if (lang == false) mess += "Выберите родной язык <br>";
-        if (sub == false) mess += "Выберите предмет <br>";
-        errdiag("Предупреждение", mess);
-    } else{
-        console.log($('#subject_form').serialize());
-        $.ajax({
-            url: baseUrl+'repetitor/updateSubject',
-            type:'post',
-            data: $('#subject_form').serialize(),
-            success: function(data){
-                if (data=='0'){
-                    errdiag('Сохранение', 'профиль обновлён');
-                } else{
-                    errdiag('Ошибка', data);
-                }
-            },
-            error: function(data){
-                console.log(data);
-            }
-        });
-    }
+	if (sp == false || age == false || level == false || price == false || lang == false || sub == false){
+		var mess = "";
+		if (sp == false) mess += "Выберите хотя бы одну специализацию <br>";
+		if (age == false) mess += "Выберите хотя бы одну возрастную категорию <br>";
+		if (level == false) mess += "Выберите хотя бы один уровень <br>";
+		if (price == false) mess += "Цена указана неверно <br>";
+		if (lang == false) mess += "Выберите родной язык <br>";
+		if (sub == false) mess += "Выберите предмет <br>";
+		errdiag("Предупреждение", mess);
+	} else{
+		console.log($('#subject_form').serialize());
+		$.ajax({
+			url: baseUrl+'repetitor/updateSubject',
+			type:'post',
+			data: $('#subject_form').serialize(),
+			success: function(data){
+				if (data=='0'){
+					if (silent == false){
+						errdiag('Сохранение', 'профиль обновлён');
+					}
+				} else{
+					errdiag('Ошибка', data);
+				}
+			},
+			error: function(data){
+				console.log(data);
+			}
+		});
+	}
+}
+
+$('#save_subject').click(function(){
+	saveSubject();
     return false;
 });
 
@@ -307,12 +315,13 @@ $('#save_present').click(function(){
     var about = $('#about').val().trim();
     var link = $('#link').val();
     var mess = '';
-    if (about.length<5 || about.length>400){
-        mess += 'Текст описания должен быть более пяти и до 400 символов <br>';
+    if (about.length<5 || about.length>2000){
+        mess += 'Текст описания должен быть более пяти и до 2000 символов <br>';
         err = true;
     }
-    if (link.substr(0,24)!='https://www.youtube.com/' && link!=''){
-        mess += 'Ссылка должна быть на youtube <br>';
+    if (link.substr(0,29)!='https://www.youtube.com/embed' && link!=''){
+        mess += 'Ссылка на youtube некорректная<br>';
+		err = true;
     }
     if (err){
         errdiag('Предупреждение', mess);
@@ -416,11 +425,11 @@ $('#save_edu').click(function(){
     var err = false;
     var mess = '';
     console.log(university.length);
-    if (university.length<3 || university.length>256 ){
+    if (university.length<3 || university.length>500 ){
         err = true;
         mess += 'Некорректное название ВУЗа <br>';
     }
-    if (specialty.length<3 || specialty.length>256 ){
+    if (specialty.length<3 || specialty.length>500 ){
         err = true;
         mess += 'Некорректное название специальности <br>';
     }
@@ -436,7 +445,7 @@ $('#save_edu').click(function(){
         err = true;
         mess += 'Нужно выбрать ученую степень <br>';
     }
-    if (exp_comment.length<5 || exp_comment.length>400 ){
+    if (exp_comment.length<5 || exp_comment.length>2000 ){
         err = true;
         mess += 'Неккоректное описание опыта <br>';
     }
@@ -524,6 +533,7 @@ var checker = setInterval(function() {
     var experience = $('#experience').val();
     var degree_id = $('#degree_id').val();
     var exp_comment = $('#exp_comment').val().trim();
+	var link = $('#link').val().trim();
     can_mess = '';
     //check
     if (first_name.search(/[a-zA-Z_0-9а-яА-Я]{3,16}/i) == -1){
@@ -556,7 +566,7 @@ var checker = setInterval(function() {
         // console.log('password error');
         can_mess += 'Пароли не совпадают<br>';
     }
-    if (about.length < 3 || about.length > 400){
+    if (about.length < 3 || about.length > 2000){
         can_save = false;
         // console.log('about error');
         can_mess += 'Некорректное описание репетитора<br>';
@@ -575,6 +585,10 @@ var checker = setInterval(function() {
         can_save = false;
         // console.log('price error');
         can_mess += 'Некорректная цена за урок<br>';
+    }
+	if (link.substr(0,29)!='https://www.youtube.com/embed' && link!=''){
+        can_mess += 'Ссылка на YouTube некорректная<br>';
+		can_save = false;
     }
     if ( (yandex.length < 3 || yandex.length > 400) && (paypal.length < 3 || paypal.length > 400) && (master.length < 3 || master.length > 400)){
         can_save = false;
@@ -601,12 +615,11 @@ var checker = setInterval(function() {
         // console.log('experience error');
         can_mess += 'Опыт не выбран<br>';
     }
-    if (degree_id.search(/\d{1,3}/i) == -1){
-        can_save = false;
-        // console.log('degree_id error');
-        can_mess += 'Не выбрана ученая степень <br>';
-    }
-    if (exp_comment.length < 3 || exp_comment.length > 400){
+	if (degree_id == 0){
+		can_save = false;
+		can_mess += 'Нужно выбрать ученую степень <br>';
+	}
+    if (exp_comment.length < 3 || exp_comment.length > 2000){
         can_save = false;
         // console.log('exp_comment error');
         can_mess += 'Некорректное описание опыта работы<br>';
@@ -639,12 +652,47 @@ $('#send_profile').click(function(){
         return false;
     }
     if (can_save){
+		var pas = $('#passive_status').prop('checked');
+		var act = 1;
+		if (pas == true){
+			act = 0;
+		}
+		saveSubject(true);
         rUpdate({
-            'status' : 1
-        });
+			'first_name' : $('#first_name').val().trim(),
+            'last_name' : $('#last_name').val().trim(),
+            'father_name' : $('#father_name').val().trim(),
+            'phone': $('#phone').val().trim(),
+            'tzone_id' : $('#tzone_id').val(),
+            'skype' : $('#skype').val().trim(),
+            'email' : $('#email').val().trim(),
+            'password' : $('#password').val().trim(),
+			'about' : $('#about').val().trim(),
+            'link' : $('#link').val().trim(),
+			'university' : $('#university').val().trim(),
+            'specialty' : $('#specialty').val().trim(),
+            'uni_year' : $('#uni_year').val(),
+            'experience' : $('#experience').val(),
+            'degree_id' : $('#degree_id').val(),
+            'exp_comment' : $('#exp_comment').val().trim(),
+			'paypal' : $('#paypal').val().trim(),
+			'yandex' : $('#yandex').val().trim(),
+			'master' : $('#master').val().trim(),
+            'status' : 1,
+			'activity' : act,
+        }, true);
         $('#send_profile').text('Профиль находится на рассмотрении');
         $('#send_profile').addClass('off');
         $('#send_profile').addClass('dark');
+		///
+		$.ajax({
+		    url: baseUrl+'repetitor/addFreeEx',
+		    type: 'POST',
+		    success: function(data){
+		        console.log(data);
+		    },
+		});
+		///
     } else{
         console.log('NO');
         errdiag('Ошибка', can_mess);

@@ -259,14 +259,17 @@ class RepetitorModel extends CI_Model{
 		return $data;
 	}
 
-	public function getTimeTable($repetitor_id)
+	public function getTimeTable($repetitor_id, $week=0)
 	{
 		$szone = date('H',time())-gmdate('H', time());
 		//log_message('error','SERVER ZONE='.$szone);
 		$q = $this->db->query('select z.zone_time from repetitors r, timezones z where r.tzone_id=z.id and r.id='.$repetitor_id);
 		$r = $q->result_array();
 		$z = $r[0]['zone_time'];
-		$q = $this->db->query('select * from exercises where repetitor_id='.$repetitor_id);
+		$now = date('w', time());
+		$start_date = date('Y-m-d H:i:s', time()+7*24*60*60*($week-1));
+		$finish_date = date('Y-m-d H:i:s', time()+7*24*60*60*($week+1));
+		$q = $this->db->query('select * from exercises where repetitor_id='.$repetitor_id.' and date_from>"'.$start_date.'" and date_from<"'.$finish_date.'"');
 		$table = $q->result_array();
 		for ($i=0; $i < count($table); $i++) {
 			if (!is_null($table[$i]['student_id'])){
@@ -299,19 +302,27 @@ class RepetitorModel extends CI_Model{
 
 	public function saveTimeTable($table, $repetitor_id, $subject_id=0)
 	{
+		$szone = date('H',time())-gmdate('H', time());
 		$z= $this->getRepZone($repetitor_id);
 		$sel = 'select cost from rsp where subject_id='.$subject_id.' and repetitor_id='.$repetitor_id;
 		$q = $this->db->query($sel);
 		$r = $q->result_array();
 		$cost = $r[0]['cost'];
 		foreach ($table as $tab) {
+			if (is_null($tab->date_from) && $tab->date_from==""){
+				$q = $this->db->query('delete from exercises where id='.$tab->id);
+				continue;
+			}
+			if (strtotime($tab->date_from) < (time() - ($szone+60/10)*60*60)){
+			 	continue;
+			}
 			if ($tab->id == 0){
 				$tab->date_from = date('Y-m-d H:i:s', strtotime($tab->date_from)-$z*60*60);
 				if ($tab->student_id >0){
 					$del = 'delete from exercises where repetitor_id='.$tab->repetitor_id.' and student_id='.$tab->student_id.' and date_from="'.$tab->date_from.'"';
 					$q = $this->db->query($del);
-					$ins = 'insert into exercises(repetitor_id, date_from, created_at, student_id, subject_id, cost)
-					values('.$repetitor_id.',"'.$tab->date_from.'","'.date('Y-m-d H:i:s',time()).'", '.$tab->student_id.', '.$tab->subject_id.', '.$cost.')';
+					$ins = 'insert into exercises(repetitor_id, date_from, created_at, student_id, subject_id, cost, date_accept)
+					values('.$repetitor_id.',"'.$tab->date_from.'","'.date('Y-m-d H:i:s',time()).'", '.$tab->student_id.', '.$tab->subject_id.', '.$cost.',"'.date('Y-m-d H:i:s',time()).'")';
 					$q = $this->db->query($ins);
 				}else{
 					$ins = 'insert into exercises(repetitor_id, date_from, created_at)
@@ -368,9 +379,11 @@ class RepetitorModel extends CI_Model{
 
 	public function lessonsrequests($repetitor_id)
 	{
+		$szone = date('H',time())-gmdate('H', time());
 		$zone = $this->getRepZone($repetitor_id);
-		$ndate = date('Y-m-d H:i:s', time() - ($zone+1)*60*60);
-		$sel = 'select * from exercises where deleted_at is null and date_from>"'.$ndate.'" and date_accept is null and cost>0 and cancel_at is null and repetitor_id='.$repetitor_id.' and student_id is not null order by created_at';
+		//$ndate = date('Y-m-d H:i:s', time() - ($zone+1)*60*60);
+		$ndate = date('Y-m-d H:i:s', time() - $szone*60*60);
+		$sel = 'select * from exercises where deleted_at is null and date_from>"'.$ndate.'" and date_accept is null and cost>0 and cancel_at is null and repetitor_id='.$repetitor_id.' and student_id is not null order by date_from asc';
 		$q = $this->db->query($sel);
 		$row = $q->result_array();
 		$lessons = array();
@@ -400,8 +413,10 @@ class RepetitorModel extends CI_Model{
 
 	public function lessons($repetitor_id)
 	{
+		$szone = date('H',time())-gmdate('H', time());
 		$zone = $this->getRepZone($repetitor_id);
-		$date = date('Y-m-d H:i:s', time()-($zone+1)*60*60);
+		//$date = date('Y-m-d H:i:s', time()-($zone+1)*60*60);
+		$date = date('Y-m-d H:i:s', time()-$szone*60*60);
 		$sel = 'select * from exercises where deleted_at is null and date_accept is not null and date_from>"'.$date.'" and cost>0 and cancel_at is null and repetitor_id='.$repetitor_id.' and student_id is not null order by created_at';
 		$q = $this->db->query($sel);
 		$row = $q->result_array();
@@ -414,16 +429,16 @@ class RepetitorModel extends CI_Model{
 			$lessons[$i] = $r;
 			/////
 			$s_date = date('Y-m-d H:i:s', strtotime($lessons[$i]['date_from']) + $szone*60*60);
-			$actual = (time() - strtotime($s_date))/60/60;
+			$actual = (time() - strtotime($s_date))/60;
 			////
 			//$actual = (time() - strtotime($lessons[$i]['date_from'])+ $szone*60*60)/60;
-			$lessons[$i]['actual'] = $actual*60;
 			$lessons[$i]['date_from'] = date('Y-m-d H:i:s', strtotime($lessons[$i]['date_from']) + $zone*60*60);
 			if ($actual > -15 && $actual < 60 && !is_null($r['pay_at'])){
 				$lessons[$i]['active'] = true;
 			} else{
 				$lessons[$i]['active'] = false;
 			}
+			$lessons[$i]['actual'] = $actual;
 			if ($actual <= -30){
 				$lessons[$i]['calcel'] = true;
 			} else{
@@ -449,18 +464,22 @@ class RepetitorModel extends CI_Model{
 
 	public function cancelLesson($lesson_id)
 	{
-		$sel = 'update exercises set cancel_at="'.date('Y-m-d H:i:s', time()).'" where id='.$lesson_id;
+		//$sel = 'update exercises set cancel_at="'.date('Y-m-d H:i:s', time()).'" where id='.$lesson_id;
+		$sel = 'update exercises set date_accept=NULL, deleted_at=NULL, pay_at=NULL, cancel_at=NULL, cost=0, student_id=NULL, subject_id=NULL, specialization_id=NULL, about=NULL, deleted=0 where id='.$lesson_id;
 		$q = $this->db->query($sel);
 		return 0;
 	}
 
 	public function cancelLesson2($lesson_id)
 	{
-		$sel = 'select date_from, cost, student_id, repetitor_id from exercises where id='.$lesson_id;
+		$sel = 'select date_from, cost, pay_at, student_id, repetitor_id from exercises where id='.$lesson_id;
 		$q = $this->db->query($sel);
 		$r = $q->result_array();
 		$actual = (time() - strtotime($r[0]['date_from']))/60;
 		$cost = (is_null($r[0]['cost'])) ? 0 : $r[0]['cost'];
+		if (is_null($r[0]['pay_at'])){
+			$cost =0;
+		}
 		$student_id = $r[0]['student_id'];
 		$repetitor_id = $r[0]['repetitor_id'];
 		if ($actual < -15){
@@ -516,7 +535,7 @@ class RepetitorModel extends CI_Model{
 			$sel = 'insert into rep_pays(created_at,student_id,lessons,cost, repetitor_id) values("'.date('Y-m-d H:i:s', time()).'",'.$student_id.',1,'.$cost.','.$repetitor_id.')';
 			$q = $this->db->query($sel);
 		}
-		return 0;
+		return $student_id;
 	}
 
 	public function startLesson_old($lesson_id)
@@ -548,11 +567,11 @@ class RepetitorModel extends CI_Model{
 			return 'Урок не оплачен. Свяжитесь с учеником через чат.';
 		}
 		if (!is_null($r[0]['rstart_at'])){
-			return 0;
+			//return 0;
 		}
 		$szone= date('H', time()) - gmdate('H', time());
 		$s_date = date('Y-m-d H:i:s', strtotime($r[0]['date_from']) + $szone*60*60);
-		$actual = (time() - strtotime($s_date))/60/60;
+		$actual = (time() - strtotime($s_date))/60;
 		if ($actual > -15 && $actual < 60){
 			$cost = $r[0]['cost'];
 			$sel = 'update exercises set rstart_at="'.date('Y-m-d H:i:s', time()).'" where id='.$lesson_id;
@@ -560,7 +579,29 @@ class RepetitorModel extends CI_Model{
 			$this->addTotalBalance($cost*0.3);
 			return 0;
 		} else{
-			return 'Урок можно начать за 15 минут до начала и в течение времени урока '.$s_date;
+			$mess = 'Урок можно начать за 15 минут до начала и в течение времени урока. <br>';
+			$time_val = (int)ceil(abs($actual));
+			$time_mess = '';
+			if ($time_val%(24*60)>=0){
+				if (floor($time_val/(24*60))>0){
+					$time_mess .= floor($time_val/(24*60)).' дней ';
+					$time_val -= floor($time_val/(24*60))*24*60;
+				}
+			}
+			if ($time_val%(60)>=0){
+				if (floor($time_val/60)>0){
+		        	$time_mess .= floor($time_val/60).' часов ';
+					$time_val -= floor($time_val/60)*60;
+				}
+			}
+			$time_mess .= $time_val.' минут';
+
+			if ($actual<0){
+				$mess .= 'До начала урока осталось '.$time_mess.' ';
+			} else{
+				$mess .= 'Урок начался '.$time_mess.' назад';
+			}
+			return $mess;
 		}
 	}
 
@@ -782,5 +823,39 @@ class RepetitorModel extends CI_Model{
 		$this->db->where('id', $id);
 		$this->db->update('repetitors', array('status'=>3));
 		return 0;
+	}
+
+	public function addNewYear($repetitor_id)
+	{
+		$sel = 'select t.zone_time from repetitors r, timezones t where r.tzone_id=t.id and r.id='.$repetitor_id;
+		$q = $this->db->query($sel);
+		$r = $q->result_array();
+		if (count($r)==0){
+			$zone = 0;
+		} else{
+			$zone = $r[0]['zone_time'];
+		}
+		$today =  date('Y-m-d 00:00:00',time());
+		$startTime = strtotime($today);
+		$data = array();
+		for ($i=0; $i <= 90; $i++) {
+			$day = $startTime + 60*60*24*$i;
+			for ($k=6; $k < 22; $k++) {
+				$hour = date('Y-m-d H:00:00', $day + 60*60*($k-$zone));
+				$sel = 'select * from exercises where date_from="'.$hour.'" and repetitor_id='.$repetitor_id;
+				$data[] = $sel;
+				$q = $this->db->query($sel);
+				$r = $q->result_array();
+				if (count($r)==0){
+					$ins = array(
+						'created_at'=> date('Y-m-d H:i:s',time()),
+						'date_from'=> $hour,
+						'repetitor_id'=>$repetitor_id
+					);
+					$this->db->insert('exercises', $ins);
+				}
+			}
+		}
+		return '0';
 	}
 }

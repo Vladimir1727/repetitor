@@ -418,12 +418,15 @@ class MainModel extends CI_Model{
 		return $student;
 	}
 
-	public function getTimeTable($repetitor_id)
+	public function getTimeTable($r_id, $week=0)
 	{
 		//$q = $this->db->query('select z.zone_time from repetitors r, timezones z where r.tzone_id=z.id and r.id='.$repetitor_id);
 		//$r = $q->result_array();
 		//$z = $r[0]['zone_time'];
-		$q = $this->db->query('select * from exercises where repetitor_id='.$repetitor_id);
+		$start_date = date('Y-m-d H:i:s', time()+7*24*60*60*($week-1));
+		$finish_date = date('Y-m-d H:i:s', time()+7*24*60*60*($week+1));
+		$q = $this->db->query('select * from exercises where repetitor_id='.$r_id.' and date_from>"'.$start_date.'" and date_from<"'.$finish_date.'"');
+		//$q = $this->db->query('select * from exercises where repetitor_id='.$repetitor_id);
 		$table = $q->result_array();
 		for ($i=0; $i < count($table); $i++) {
 			if (!is_null($table[$i]['student_id'])){
@@ -432,6 +435,21 @@ class MainModel extends CI_Model{
 				$table[$i]['student'] = $r[0]['first_name'];
 			}
 			//$table[$i]['date_from'] = date('Y-m-d H:i:s', strtotime($table[$i]['date_from'])+$z*60*60);
+		}
+		return $table;
+	}
+
+	public function getAllTimeTable($r_id)
+	{
+		$start_date = date('Y-m-d H:i:s', time()-7*24*60*60);
+		$q = $this->db->query('select * from exercises where repetitor_id='.$r_id.' and date_from>"'.$start_date.'"');
+		$table = $q->result_array();
+		for ($i=0; $i < count($table); $i++) {
+			if (!is_null($table[$i]['student_id'])){
+				$q = $this->db->query('select first_name from students where id='.$table[$i]['student_id']);
+				$r = $q->result_array();
+				$table[$i]['student'] = $r[0]['first_name'];
+			}
 		}
 		return $table;
 	}
@@ -597,7 +615,7 @@ class MainModel extends CI_Model{
 				$data['online'] = false;
 			}
 		} elseif($from_role == 2){
-			$sel = 'select first_name, avatar, visit_at, activity status from students where id='.$from_id;
+			$sel = 'select first_name, avatar, visit_at, activity, status from students where id='.$from_id;
 			$q = $this->db->query($sel);
 			$r = $q->result_array();
 			$data['first_name'] = $r[0]['first_name'];
@@ -920,5 +938,123 @@ class MainModel extends CI_Model{
 		}
 		$repetitors = $temp;
 		return $repetitors;
+	}
+
+	public function newChatMail($role, $id)
+	{
+		$now = time();
+		if ($role == 1){
+			$sel = 'select email, visit_at from repetitors where id='.$id;
+		} elseif ($role == 2){
+			$sel = 'select email, visit_at from students where id='.$id;
+		}
+		$q = $this->db->query($sel);
+		$r = $q->result_array();
+		if (count($r)==0){
+			return 1;
+		}
+		$visit = strtotime($r[0]['visit_at']) + 60*5;
+		if ($now < $visit){
+			$email = $r[0]['email'];
+			$this->load->library('email');
+			$this->email->from('info@reallanguage.club', 'RealLanguage.Club');
+			$this->email->to($email);
+			$this->email->subject('Новое сообщение на RealLanguage.Club');
+			$mess = "Здравствуйте.<br><br>";
+			$mess .= "У Вас новое сообщение в Чате Личного кабинета платформы «Репетиторы» RealLanguage.Club<br><br>";
+			$mess .= 'Перейти в Личный кабинет можете по ссылке здесь: <a href="https://reallanguage.club">RealLanguage.Club</a><br><br>';
+			$mess .= "С уважением, <br><br>";
+			$mess .= "администрация RealLanguage.Club <br>";
+			$this->email->message($mess)->set_mailtype('html');
+			$this->email->send();
+			return $email;
+		}
+		return 0;
+	}
+
+	public function newReqMail($repetitor_id)
+	{
+		$sel = 'select email from repetitors where id='.$repetitor_id;
+		$q = $this->db->query($sel);
+		$r = $q->result_array();
+		$email = $r[0]['email'];
+		$this->load->library('email');
+		$this->email->from('info@reallanguage.club', 'RealLanguage.Club');
+		$this->email->to($email);
+		$this->email->subject('Новая заявка на урок');
+		$mess = "Здравствуйте.<br><br>";
+		$mess .= 'У Вас новая заявка на проведение урока на платформе «Репетиторы» RealLanguage.Club<br><br>';
+		$mess .= 'Рекомендуем перейти в Личный кабинет и ознакомиться с заявкой на странице «Заявки на уроки».<br>';
+		$mess .= 'Перейти в Личный кабинет можете по ссылке здесь: <a href="https://tutor.reallanguage.club/index.php/main/rlogin">RealLanguage.Club</a><br><br>';
+		$mess .= "С уважением, <br><br>";
+		$mess .= "администрация RealLanguage.Club <br>";
+		$this->email->message($mess)->set_mailtype('html');
+		$this->email->send();
+		return 0;
+	}
+
+	public function newLessonMail($student_id)
+	{//tested
+		$sel = 'select email from students where id='.$student_id;
+		$q = $this->db->query($sel);
+		$r = $q->result_array();
+		$email = $r[0]['email'];
+		$this->load->library('email');
+		$this->email->from('info@reallanguage.club', 'RealLanguage.Club');
+		$this->email->to($email);
+		$this->email->subject('Урок одобрен репетитором');
+		$mess = "Здравствуйте.<br><br>";
+		$mess .= 'Ваша заявка на урок была одобрена выбранным репетитором.<br><br>';
+		$mess .= 'Сейчас данный урок отображается на странице «Уроки» . Не опоздайте на урок!<br>';
+		$mess .= 'Перейти в Личный кабинет можете по ссылке здесь: <a href="https://tutor.reallanguage.club/index.php/main/slogin">RealLanguage.Club</a><br><br>';
+		$mess .= "С уважением, <br><br>";
+		$mess .= "администрация RealLanguage.Club <br>";
+		$this->email->message($mess)->set_mailtype('html');
+		$this->email->send();
+		return 0;
+	}
+
+	public function storeRepetitorPays($repetitor_id, $student_id, $cost)
+	{
+		$ins =  array(
+			'repetitor_id' => $repetitor_id,
+			'created_at' => date('Y-m-d H:i:s', time()),
+			'student_id' => $student_id,
+			'lessons' =>1,
+			'cost'=>$cost,
+		);
+		$this->db->insert('rep_pays', $ins);
+		return 0;
+	}
+
+	public function addEvent($event, $type)
+	{
+		$ins =  array(
+			'created_at' => date('Y-m-d H:i:s', time()),
+			'event' => $event,
+			'type'=>$type,
+		);
+		$this->db->insert('events', $ins);
+		return 0;
+	}
+
+	public function getLessonInfo($lesson_id)
+	{
+		$sel = 'select * from exercises where id='.$lesson_id;
+		$q = $this->db->query($sel);
+		$r = $q->result_array();
+		if (count($r)>0){
+			return $r[0];
+		} else{
+			return false;
+		}
+	}
+
+	public function repLangs()
+	{
+		$sel = 'select DISTINCT l.id, l.language from languages l, repetitors r where r.lang_id=l.id and r.lang_id is not null and r.status=2';
+		$q = $this->db->query($sel);
+		$r = $q->result_array();
+		return $r;
 	}
 }

@@ -290,9 +290,9 @@
                         <?php
                         foreach ($uni_degrees as $option) {
                             if ($repetitor['degree_id'] == $option['id']){
-                                echo '<option value="'.$option['id'].'" selected="selected">'.$option['uni_degree'].'</option>';
+                             echo '<option value='.$option['id'].' selected="selected">'.$option['uni_degree'].'</option>';
                             }else{
-                                echo '<option value="'.$option['id'].'">'.$option['uni_degree'].'</option>';
+                                echo '<option value='.$option['id'].'>'.$option['uni_degree'].'</option>';
                             }
                         }
                         ?>

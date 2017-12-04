@@ -10,10 +10,10 @@
 		<h1>Регистрация нового ученика</h1>
 		<h2>Введите email и пароль, которые будете  использовать при входе</h2>
 		<input type="text" placeholder="Введите e-mail" name="email">
-		<input type="password" placeholder="Введите пароль" name="pass">
+		<input type="password" placeholder="Пароль не менее 4 знаков" name="pass">
 		<p>
 			Регистрируясь, Вы принимаете условия
-			"Пользовательского соглашения".
+			<a href="https://reallanguage.club/polzovatelskoe-soglashenie/">"Пользовательского соглашения"</a>.
 		</p>
 		<input type="submit" value="Зарегистрироваться">
 	</form>

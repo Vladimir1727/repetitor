@@ -158,11 +158,19 @@ function setFilter(){
 				list += '</div>';
 				list += '</aside>';
 			}
-			list += '<ul class="pagg"><li><a href="#" class="filter_pagg" title="'+pagg[0]+'"><</a></li>';
+			list += '<ul class="pagg"><li><a href="#result" class="filter_pagg" title="'+pagg[0]+'"><</a></li>';
 			for (i=1; i <pagg.length-1; i++) {
-				list += '<li><a href="#" class="filter_pagg" title="'+pagg[i]+'">'+pagg[i]+'</a></li>';
+				if (pagg[i] == page){
+					list += '<li class="active-page"><a href="#result" class="filter_pagg" title="'+pagg[i]+'">'+pagg[i]+'</a></li>';
+				} else{
+					list += '<li><a href="#result" class="filter_pagg" title="'+pagg[i]+'">'+pagg[i]+'</a></li>';
+				}
 			}
-			list += '<li><a href="#" class="filter_pagg" title="'+pagg[pagg.length-1]+'">></a></li></ul>';
+			var next_page = parseInt(page)+1;
+			if (next_page > pagg[pagg.length-1]){
+				next_page = page;
+			}
+			list += '<li><a href="#result" class="filter_pagg" title="'+next_page+'">></a></li></ul>';
 			if (data.repetitors.length == 0){
 				$('#result').html('<h2 style="text-align:center">Упс..Попробуйте ввести другие параметры в поиск.</h2>');
 			}else{
@@ -173,7 +181,7 @@ function setFilter(){
 					page = $(this).attr('title');
 					console.log($(this).attr('title'));
 					setFilter();
-					return false;
+					//return false;
 				});
 			});
 		},

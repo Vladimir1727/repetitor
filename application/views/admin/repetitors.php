@@ -33,10 +33,10 @@
                 <p>Skype</p>
             </div>
             <div>
-                <p>Кол-во учеников</p>
+                <p>Получил заявок</p>
             </div>
             <div>
-                <p>Получил заявок</p>
+                <p>Кол-во учеников</p>
             </div>
             <div>
                 <p>Провёл уроков</p>
@@ -90,8 +90,8 @@
                     echo '<div><p>'.'0'.'</p></div>';
                     echo '<div><p>'.$repetitor['email'].'</p></div>';
                     echo '<div><p>'.$repetitor['skype'].'</p></div>';
-                    echo '<div><p>'.$repetitor['students'].'</p></div>';
                     echo '<div><p>'.$repetitor['req'].'</p></div>';
+                    echo '<div><p>'.$repetitor['students'].'</p></div>';
                     echo '<div><p>'.$repetitor['lessons'].'</p></div>';
                     echo '<div><p>'.$repetitor['ls'].'</p></div>';
                     echo '<div><p>'.$repetitor['pay'].'</p></div>';
@@ -159,6 +159,7 @@
                         echo '<button class="mess" name="view" type="submit">Просмотреть профиль</button>';
                         echo '<button class="ok" name="ok" type="submit">Включить</button>';
                         echo '<button class="del" name="del" type="submit">Удалить</button>';
+                        echo '<button class="back" name="back" type="submit">Сбросить</button>';
                         echo '<input type="hidden" value="'.$repetitor['id'].'" name="id">';
                         echo '</form></div></aside>';
                     }

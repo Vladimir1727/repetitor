@@ -1,5 +1,5 @@
 (function($){$(function(){
-console.log('lessons 4');
+console.log('lessons 7');
 var baseUrl = '../';
 var sskype = '';
 
@@ -151,11 +151,17 @@ function addClick(){
                     success: function(data){
                         console.log('del data=', data);
                         if (data=='0'){
-                            window.open("skype:"+skype+"?call&video=true");
-                            document.location = '/index.php/repetitor/lessons';
+                            //window.open("skype:"+skype+"?call&video=true");
+                            var loc = "skype:"+skype+"?call&video=true";
+                            console.log('start_skype');
+                            //document.location = '/index.php/repetitor/lessons';
+                            document.location = loc;
+                        } else{
+                            errdiag('Предупреждение', data);
                         }
                     }
                 });
+                $('#deldialog').dialog('close');
                 return false;
             });
             return false;

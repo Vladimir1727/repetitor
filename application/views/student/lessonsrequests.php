@@ -16,6 +16,7 @@
             <h3><span id="local-time">18:20</span> (UTC <?php echo ($student['tzone']>0) ? '+'.$student['tzone'] : $student['tzone']; ?>)</h3>
             <h4 id="local-date">23 сентября 2017,суббота</h4>
         </div>
+    <h3 class="main-comment">Здесь отображаются Ваши запросы на уроки, ожидающие согласования у выбранного репетитора</h3>
     </section>
     <section class="head">
         <div>

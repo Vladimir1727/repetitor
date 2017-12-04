@@ -9,9 +9,9 @@
 			<ul>
 				<li><a href="<?php echo base_url(); ?>index.php/admin/repetitors">Репетиторы</a></li>
 				<li><a href="<?php echo base_url(); ?>index.php/admin/students">Ученики</a></li>
+				<li><a href="<?php echo base_url(); ?>index.php/admin/requests">Запросы на уроки</a></li>
 				<li><a href="<?php echo base_url(); ?>index.php/admin/lessonshistory">История уроков</a></li>
-				<li><a href="<?php echo base_url(); ?>index.php/admin/payback">Запросы на вывод $</a></li>
-				<li><a href="<?php echo base_url(); ?>index.php/admin/freerequests">Свободные заявки</a></li>
+								<li><a href="<?php echo base_url(); ?>index.php/admin/freerequests">Свободные заявки</a></li>
 				<li class="mail"><a href="<?php echo base_url(); ?>index.php/admin/chat">почта</a>
 				<?php if ($new_chat > 0) {
 					echo '<span>';
@@ -28,8 +28,8 @@
 					<ul>
 						<li><a href="<?php echo base_url(); ?>index.php/admin/repetitors">Репетиторы</a></li>
 						<li><a href="<?php echo base_url(); ?>index.php/admin/students">Ученики</a></li>
+						<li><a href="<?php echo base_url(); ?>index.php/admin/requests">Запросы на уроки</a></li>
 						<li><a href="<?php echo base_url(); ?>index.php/admin/lessonshistory">История уроков</a></li>
-						<li><a href="<?php echo base_url(); ?>index.php/admin/payback">Запросы на вывод $</a></li>
 						<li><a href="<?php echo base_url(); ?>index.php/admin/freerequests">Свободные заявки</a></li>
 						<li class="mail"><a href="<?php echo base_url(); ?>index.php/admin/chat">почта</a>
 						<?php if ($new_chat > 0) {
@@ -37,6 +37,7 @@
 							echo $new_chat;
 							echo '</span>';
 						} ?></li>
+						<li><a href="<?php echo base_url(); ?>index.php/admin/payback">Запросы <br>на вывод $</a></li>
 						<li><a href="<?php echo base_url(); ?>index.php/admin/chathistory">История чатов</a></li>
 						<li><a href="<?php echo base_url(); ?>index.php/admin/feeds">Отзывы</a></li>
 						<li><a href="<?php echo base_url(); ?>index.php/admin/prerep">Кандидаты в репетиторы</a></li>

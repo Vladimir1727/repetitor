@@ -531,14 +531,28 @@ class AdminModel extends CI_Model{
 					cost int
 				)default charset=utf8';
 			$this->db->query($table);
+			$table = 'CREATE TABLE events(
+					id int not null auto_increment primary key,
+					created_at datetime,
+					event varchar(2048),
+					type varchar(128)
+				)default charset=utf8';
+			$this->db->query($table);
 		return 'DB created';
     }
 
 	public function createTable()
 	{
-		$str = 'ALTER TABLE chats
-			ADD read_at datetime default null';
-			$this->db->query($str);
+		// $str = 'ALTER TABLE chats
+		// 	ADD read_at datetime default null';
+		// 	$this->db->query($str);
+		$table = 'CREATE TABLE events(
+				id int not null auto_increment primary key,
+				created_at datetime,
+				event varchar(2048),
+				type varchar(128)
+			)default charset=utf8';
+		$this->db->query($table);
 		return 'table created';
 	}
 
@@ -588,18 +602,20 @@ class AdminModel extends CI_Model{
 				$repetitors[$i]['subject2_name'] = $row[0]['subject'];
 			}
 			//кол-во учеников
-			$sel = 'select student_id from exercises where repetitor_id='.$repetitors[$i]['id'].' and student_id is not null group by student_id';
+			$sel = 'select student_id from exercises where repetitor_id='.$repetitors[$i]['id'].' and student_id is not null and pay_at is not null and date_accept is not null and cancel_at is null group by student_id ';
 			$q = $this->db->query($sel);
 			$row = $q->result_array();
 			$repetitors[$i]['students'] = count($row);
 			//кол-во заявок
 			$date = date('Y-m-d H:i:s', time());
-			$sel = 'select date_from from exercises where deleted_at is null and date_from>"'.$date.'" and date_accept is null and cost>0 and cancel_at is null and repetitor_id='.$repetitors[$i]['id'].' and student_id is not null group by date_from';
+			$sel = 'select date_from from exercises where deleted_at is null and date_accept is null and cost>0 and cancel_at is null and repetitor_id='.$repetitors[$i]['id'].' and student_id is not null group by date_from';
+			//$sel = 'select date_from from exercises where deleted_at is null and date_from>"'.$date.'" and date_accept is null and cost>0 and cancel_at is null and repetitor_id='.$repetitors[$i]['id'].' and student_id is not null group by date_from';
 			$q = $this->db->query($sel);
 			$row = $q->result_array();
 			$repetitors[$i]['req'] = count($row);
 			//кол-во уроков
-			$sel = 'select * from exercises where deleted_at is null and date_accept is not null and date_from>"'.$date.'" and cost>0 and cancel_at is null and repetitor_id='.$repetitors[$i]['id'].' and student_id is not null and rstart_at is not null';
+			$sel = 'select * from exercises where deleted_at is null and date_accept is not null and cost>0 and cancel_at is null and repetitor_id='.$repetitors[$i]['id'].' and student_id is not null and rstart_at is not null';
+			//$sel = 'select * from exercises where deleted_at is null and date_accept is not null and date_from>"'.$date.'" and cost>0 and cancel_at is null and repetitor_id='.$repetitors[$i]['id'].' and student_id is not null and rstart_at is not null';
 			$q = $this->db->query($sel);
 			$row = $q->result_array();
 			$repetitors[$i]['lessons'] = count($row);
@@ -669,7 +685,7 @@ class AdminModel extends CI_Model{
 				$students[$i]['sum'] = round($row[0]['s']*0.3);
 			}
 			//общая сумма пополнений
-			$sel = 'select sum(cost) as c from balance_adds where student_id='.$students[$i]['id'];
+			$sel = 'select sum(cost) as c from balance_adds where status=1 and student_id='.$students[$i]['id'];
 			$q = $this->db->query($sel);
 			$row = $q->result_array();
 			if (is_null($row[0]['c'])){
@@ -950,8 +966,8 @@ class AdminModel extends CI_Model{
 				} else{
 					$chats[$i]['student_name'] = $stu[0]['first_name'];
 				}
-				$chats[$i]['student_id'] = $r['to_id'];
-				$chats[$i]['repetitor_id'] = $r['from_id'];
+				$chats[$i]['student_id'] = $r['from_id'];
+				$chats[$i]['repetitor_id'] = $r['to_id'];
 				//$chats[$i]['chat_about'] = $chats[$i]['student_name'];
 			}
 			$i++;
@@ -1017,5 +1033,65 @@ class AdminModel extends CI_Model{
 			$new = 0;
 		}
 		return $new;
+	}
+
+	public function getRequests()
+	{
+		$sel = 'select student_id,repetitor_id,created_at,pay_at,date_from from exercises where date_accept is null and student_id is not null order by created_at desc';
+		$q = $this->db->query($sel);
+		$req = $q->result_array();
+		for ($i=0; $i < count($req); $i++) {
+			$sel = 'select first_name from students where id='.$req[$i]['student_id'];
+			$q = $this->db->query($sel);
+			$r = $q->result_array();
+			if (is_null($r[0]['first_name'])){
+				$req[$i]['student_name'] = 'Без имени';
+			} else{
+				$req[$i]['student_name'] = $r[0]['first_name'];
+			}
+			$sel = 'select first_name, father_name from repetitors where id='.$req[$i]['repetitor_id'];
+			$q = $this->db->query($sel);
+			$r = $q->result_array();
+			if (is_null($r[0]['first_name'])){
+				$req[$i]['repetitor_name'] = 'Без имени';
+			} else{
+				$req[$i]['repetitor_name'] = $r[0]['first_name'];
+			}
+			if (!is_null($r[0]['father_name'])){
+				$req[$i]['repetitor_name'] .= ' '.$r[0]['father_name'];
+			}
+		}
+		return $req;
+	}
+
+	public function getEvents($page, $type = null)
+	{
+		$num = 10;//записей на странице
+		if (is_null($type)){
+			$filter  = '';
+		} else{
+			$filter = ' where type="'.$type.'"';
+		}
+		$sel = 'select count(id) as c from events '.$filter;
+		$q = $this->db->query($sel);
+		$r = $q->result_array();
+		$all = $r[0]['c'];//всего записей
+		$pages = (int)ceil($all/$num); //всего страниц
+		$sel = 'select * from events '.$filter.' order by created_at DESC limit '.(($page-1)*$num).','.$num;
+		$q = $this->db->query($sel);
+		$r = $q->result_array();
+		$data = array(
+			'page' => $page,
+			'pages' => $pages,
+			'events' => $r
+		);
+		return $data;
+	}
+
+	public function delEvent($id)
+	{
+		$this->db->where('id', $id);
+		$this->db->delete('events');
+		return 0;
 	}
 }

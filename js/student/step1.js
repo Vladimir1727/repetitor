@@ -1,5 +1,5 @@
 (function($){$(function(){
-console.log('step 2.1');
+console.log('step 1 1');
 var baseUrl = '../../';
 var table = 0;
 var monday =0;
@@ -176,7 +176,8 @@ function tableClick(){
         $(this).click(function(){
 			var id = $(this).attr('id');
 	        var d = getDateByid($(this).attr('id'));
-			var t = d.getTime()-1000*60*60*student_zone;
+			//var t = d.getTime()-1000*60*60*(1+student_zone);
+			var t = d.getTime()-1000*60*60-1000*60*60*student_zone;
 			dates.push(t);
 			$(this).removeClass('free');
 			$(this).addClass('busy');
@@ -315,7 +316,7 @@ function tableView(){
 
 
 $.ajax({
-    url: baseUrl+'main/getTimeTable',
+    url: baseUrl+'main/getAllTimeTable',
     type:'post',
 	data: 'repetitor_id=' + repetitor_id,
     success: function(data){

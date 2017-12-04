@@ -68,7 +68,8 @@ class Main extends CI_Controller {
 			'subjects'=>$this->MainModel->getAll('subjects'),
 			'ages'=>$this->MainModel->getAll('ages'),
 			'specializations'=>$this->MainModel->getAll('specializations'),
-			'languages'=>$this->MainModel->getAll('languages'),
+			//'languages'=>$this->MainModel->getAll('languages'),
+			'languages'=>$this->MainModel->repLangs(),
 			'levels'=>$this->MainModel->getAll('levels'),
 			'repetitors'=>$this->MainModel->getRepetitors($page),
 			'pagg'=>$this->MainModel->repPagg($page),
@@ -281,7 +282,14 @@ class Main extends CI_Controller {
 	public function getTimeTable()
 	{
 		$repetitor_id = $this->input->post('repetitor_id');
-		$data = $this->MainModel->getTimeTable($repetitor_id);
+		$data = $this->MainModel->getTimeTable($repetitor_id, $this->input->post('week'));
+		echo json_encode($data);
+	}
+
+	public function getAllTimeTable()
+	{
+		$repetitor_id = $this->input->post('repetitor_id');
+		$data = $this->MainModel->getAllTimeTable($repetitor_id);
 		echo json_encode($data);
 	}
 
@@ -320,15 +328,21 @@ class Main extends CI_Controller {
 
 	public function returnOldLessons()
 	{
+		//echo 'start<br>';
 		$lessons = $this->MainModel->getOldLessons();
 		foreach ($lessons as $lesson) {
+			//echo $lesson['cost'].'<br>';
 			$this->MainModel->addStudentBalance($lesson['student_id'], round($lesson['cost']*1.3));
 			$this->MainModel->decRepetitorBalance($lesson['repetitor_id'], round($lesson['cost']));
 			$this->MainModel->setDeletedLesson($lesson['id']);
+			$this->MainModel->storeRepetitorPays($lesson['repetitor_id'], $lesson['student_id'], -round($lesson['cost']));
 		}
+		//echo 'end<br>';
+		log_message('ERROR','deleted old lessons');
 	}
 
-	public function test(){
-		echo $this->MainModel->setDeletedLesson(2);
+	public function test()
+	{
+
 	}
 }

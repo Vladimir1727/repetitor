@@ -19,6 +19,7 @@ $zone .= ')';
             <h3><span id="local-time">18:20</span><?php echo $zone; ?></h3>
             <h4 id="local-date">23 сентября 2017,суббота</h4>
         </div>
+        <h3 class="main-comment">Если Вы не нашли подходящего репетитора, здесь Вы можете оставить заявку, и репетиторы сами предложат Вам свои услуги</h3>
     </section>
     <h2 class="posted">Размещённые заявки</h2>
     <section class="head">

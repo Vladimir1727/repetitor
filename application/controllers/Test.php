@@ -24,22 +24,24 @@ class Test extends CI_Controller {
 		 $this->load->helper(array('form', 'url'));
 		 $this->load->library('session');
 		 $this->load->model('RepetitorModel');
+		 $this->load->model('MainModel');
+		 $this->load->model('AdminModel');
 		 $this->load->database();
 	 }
 
 	public function index()
 	{
-		$this->load->view('test');
-	}
-
-	public function test()
-	{
-		print_r("test PHP\n");
-	}
-
-	public function test2()
-	{
-		log_message('error', 'test CRON');
+		//$this->load->view('test');
+		//echo $this->MainModel->addEvent('Убежала собака','собака');
+		//$data = $this->AdminModel->delEvent(1);
+		//var_dump($time_val);
+		// $data = $this->MainModel->repLangs();
+		// var_dump($data);
+		$r = '2009-12-01';
+		$birth = substr($r, 0, 4);
+		$ytime = date('Y', time());
+		$y = $ytime - $birth;
+		echo $y;
 	}
 
 	public function single()
@@ -93,6 +95,5 @@ class Test extends CI_Controller {
 		} catch (Exception $e) {
 			throw new Exception($e->getMessage());
 		}
-
 	}
 }

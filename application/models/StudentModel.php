@@ -19,6 +19,7 @@ class StudentModel extends CI_Model{
 				'created_at'=>date('Y-m-d H:i:s',time()),
 				'status'=>0,
 				'activity'=>1,
+				'balance'=>15,
 			);
 			$this->db->insert('students', $ins);
 			//sending e-mail
@@ -203,24 +204,26 @@ class StudentModel extends CI_Model{
 		//save exersizes to DB
 		foreach ($data['dates'] as $date) {
 			$d = date('Y-m-d H:i:s', $date/1000);
+			log_message('error', 'find date='.$d);
 			$sel = 'select id from exercises where date_from="'.$d.'"';
 			$q = $this->db->query($sel);
 			$r = $q->result_array();
 			if (count($r) == 0){
 				return 'did not find date='.$d.' in exersize';
+				continue;
 			}
 			$id = $r[0]['id'];
-			$ins =  array(
-				'student_id' => $data['student_id'],
-   			 	'repetitor_id' => $data['repetitor_id'],
-   			 	'specialization_id' => $data['specialization_id'],
-   			 	'subject_id' => $data['subject_id'],
-   			 	'about' => $data['about'],
-   			 	'created_at' => $data['created_at'],
-				'cost' => $price,
-			);
-			$this->db->where('id', $id);
-			$this->db->update('exercises', $ins);
+			log_message('error', 'find id='.$id);
+			$ins = 'update exercises set ';
+			$ins .= 'student_id='.$data['student_id'].', ';
+			$ins .= 'repetitor_id='.$data['repetitor_id'].', ';
+			$ins .= 'specialization_id='.$data['specialization_id'].', ';
+			$ins .= 'subject_id='.$data['subject_id'].', ';
+			$ins .= 'about="'.$data['about'].'", ';
+			$ins .= 'created_at="'.$data['created_at'].'", ';
+			$ins .= 'cost='.$price.' ';
+			$ins .= 'where id='.$id;
+			$this->db->query($ins);
 		}
 		//check if student cn pay
 		if ($student_balance-$cost>=0){
@@ -316,7 +319,8 @@ class StudentModel extends CI_Model{
 	{
 		$zone = $this->getStudentZone($student_id);
 		$szone = date('H',time())-gmdate('H', time());
-		$ndate = date('Y-m-d H:i:s', time() - ($zone+1)*60*60);
+		//$ndate = date('Y-m-d H:i:s', time() - ($zone+1)*60*60);
+		$ndate = date('Y-m-d H:i:s', time() - 60*60*$szone);
 		$sel = 'select * from exercises where deleted_at is null and cost>0 and cancel_at is null and student_id='.$student_id.' and pay_at is null and date_from>"'.$ndate.'" order by created_at';
 		//$sel = 'select * from exercises where deleted_at is null and cost>0 and cancel_at is null and student_id='.$student_id.' and pay_at is null order by created_at';
 		//log_message('error', $sel);
@@ -353,7 +357,9 @@ class StudentModel extends CI_Model{
 	{
 		//$sel = 'select * from exercises where student_id='.$student_id.' and date_accept is not null and pay_at is not null';
 		$zone = $this->getStudentZone($student_id);
-		$date = date('Y-m-d H:i:s', time()-($zone+1)*60*60);
+		$szone = date('H',time())-gmdate('H', time());
+		//$date = date('Y-m-d H:i:s', time()-($zone+1)*60*60);
+		$date = date('Y-m-d H:i:s', time()-$szone*60*60);
 		$sel = 'select * from exercises where deleted_at is null and pay_at is not null and date_accept is not null and date_from>"'.$date.'" and cost>0 and cancel_at is null and date_accept is not null and student_id='.$student_id.' order by date_from ASC';
 		$q = $this->db->query($sel);
 		$r = $q->result_array();
@@ -577,11 +583,15 @@ class StudentModel extends CI_Model{
 
 	public function delLesson($id)
 	{
-		$sel = 'select date_from, cost, student_id, repetitor_id from exercises where id='.$id;
+		$sel = 'select date_from, cost, student_id, repetitor_id, pay_at from exercises where id='.$id;
 		$q = $this->db->query($sel);
 		$r = $q->result_array();
 		$date_from = strtotime($r[0]['date_from']);
-		$cost = (is_null($r[0]['cost'])) ? 0 : $r[0]['cost'];
+		if (is_null($r[0]['pay_at']) || is_null($r[0]['cost'])){
+			$cost = 0;
+		} else{
+			$cost = $r[0]['cost'];
+		}
 		$student_id = $r[0]['student_id'];
 		$repetitor_id = $r[0]['repetitor_id'];
 		$actual = $date_from-time();
@@ -618,7 +628,7 @@ class StudentModel extends CI_Model{
 					$repetitor_balance += round($cost*0.5);
 					$sel = 'update repetitors set balance='.$repetitor_balance.' where id='.$repetitor_id;
 					$q = $this->db->query($sel);
-					$student_balance -= round($cost*0.65);
+					$student_balance += round($cost*0.65);
 					$this->addTotalBalance(round($cost*0.15));
 				}
 				$sel = 'update students set balance='.$student_balance.' where id='.$student_id;

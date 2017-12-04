@@ -19,6 +19,7 @@ $zone .= ')';
             <h3><span id="local-time">18:20</span><?php echo $zone; ?></h3>
             <h4 id="local-date">23 сентября 2017,суббота</h4>
         </div>
+    <h3 class="main-comment">Здесь отображаются Ваши уроки, одобренные репетитором для проведения</h3>
     </section>
     <section class="head">
         <div>
@@ -80,7 +81,7 @@ $zone .= ')';
             echo '<div>';
             echo '<form>';
             if ($lesson['active']){
-                echo '<button class="ok">Начать урок</button>';
+                //echo '<button class="ok">Начать урок</button>';
             }
             echo '<input name="id" type="hidden" value="'.$lesson['id'].'">';
             echo '<a class="mess" href="'.base_url().'index.php/student/chat?id='.$lesson['repetitor_id'].'">Сообщение</a>';

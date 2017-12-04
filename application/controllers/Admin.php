@@ -41,7 +41,7 @@ class Admin extends CI_Controller {
 
 	public function createTable()
 	{
-		//echo $this->AdminModel->createTable();
+		echo $this->AdminModel->createTable();
 	}
 
 	public function seed()
@@ -206,6 +206,10 @@ class Admin extends CI_Controller {
 		}
 		if (!is_null($this->input->post('mess'))){
 			redirect('admin/chat');
+		}
+		if (!is_null($this->input->post('back'))){
+			$this->AdminModel->setRepetitorStatus($this->input->post('id'), 0);
+			redirect('admin/repetitors');
 		}
 	}
 
@@ -404,6 +408,22 @@ class Admin extends CI_Controller {
 			);
 			$this->load->view('admin/prerep', $data);
 			//var_dump($data['repetitors']);
+		}
+	}
+
+	public function requests()
+	{
+		if (!$this->session->has_userdata('admin')){
+			 redirect('main');
+		} else{
+			$data = array(
+				'requests' => $this->AdminModel->getRequests(),
+				'new_chat'=>$this->AdminModel->newChats(),
+			);
+			$this->load->view('admin/requests', $data);
+			// echo '<pre>';
+			// var_dump($data['requests'][0]);
+			// echo '</pre>';
 		}
 	}
 }

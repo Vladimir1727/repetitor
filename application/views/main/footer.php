@@ -59,9 +59,12 @@
         </div>
         <div class="col-sx-12 col-sm-3 col-md-2  col-lg-2 mess">
             <a href="https://reallanguage.club/voprosy-i-otvety-po-rabote-s-platformoj-repetitory-real-language-club/">Вопросы и ответы</a>
-            <br><br>
+            <br>
             <a href="https://reallanguage.club/kontakt/">Контакты</a>
-            <br><br>
+            <br>
+            Real Language Club<br>
+            24B Rue René Cornelis<br>
+            51200 Epernay, France<br>
             Отвечаем в мессенжерах:<br>
             <a href="https://www.messenger.com/t/adminRealLanguageClub"><img src="<?php  echo base_url(); ?>img/fb.png" alt="facebook"></a>
             <a href="skype:live:b79d2994b5024754">
